@@ -5,14 +5,16 @@
 <!-- project philosophy -->
 <img src="./readme/title2.svg"/>
 
-> A mobile app for ordering coffee on-the-go, making it easier for coffee lovers to get their favorite beverages without waiting in line.
+> A mobile app for connecting lovers together and assisting them through a fun and harmonious relationship.
 >
-> Coffee Express aims to streamline the coffee-ordering process by providing a user-friendly platform for customers to place orders and pick up their coffee at their convenience. We believe in enhancing the coffee experience by saving time and ensuring customer satisfaction.
+> Bound Harmony first requires the users, who probably are in a relationship, to connect their accounts and fill a survey. To make their relationship smoother, Bound Harmony will provide the couple with date suggestions, bonding activities and gift ideas. To make it even better, our cupid will be ready to give advice at any time!
 
 ### User Stories
-- As a user, I want to browse the menu, so I can find my favorite coffee drinks.
-- As a user, I want to customize my order, so I can add or remove ingredients according to my preferences.
-- As a user, I want to pay for my order through the app, so I can avoid waiting in line at the store.
+- As an admin, I want a tool that helps me understand what my users are interested in. 
+- As a user, I'm too busy to plan ahead of every date.
+- As a user, I would like to spend some quality time with my partner and enhance our relationship.
+- As a user, sometimes I need help with taking decisions and solving my relationship problems.
+- As a user, I find it difficult to come up with gift ideas.
 
 <br><br>
 
