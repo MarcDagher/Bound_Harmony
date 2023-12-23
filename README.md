@@ -10,11 +10,10 @@
 > Bound Harmony first requires the users, who probably are in a relationship, to connect their accounts and fill a survey. To make their relationship smoother, Bound Harmony will provide the couple with date suggestions, bonding activities and gift ideas. To make it even better, our cupid will be ready to give advice at any time!
 
 ### User Stories
-- As an admin, I want a tool that helps me understand what my users are interested in. 
-- As a user, I'm too busy to plan ahead of every date.
-- As a user, I would like to spend some quality time with my partner and enhance our relationship.
-- As a user, sometimes I need help with taking decisions and solving my relationship problems.
-- As a user, I find it difficult to come up with gift ideas.
+- There's nothing I love more than going out on a calm and romantic date with my partner, but I need help finding a good place to go to.
+- In my curent relationship, I'm going through many challenges and I need some advice on what to do.
+- Quality time is necessary for our relationship. Yet, we struggle to find nice and fun places to go to.  
+- I am someone who loves to get my partner gifts, but sometimes I find it difficult to come up with a good idea!
 
 <br><br>
 
