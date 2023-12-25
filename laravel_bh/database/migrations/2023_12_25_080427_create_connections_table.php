@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('connections', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
-            $table->bigInteger('requester');
-            $table->bigInteger('responder')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('requester');
+            $table->unsignedBigInteger('responder')->nullable();
             $table->enum('status', ['pending', 'accepted', 'rejected', 'disconnected'])->default('pending');
             $table->timestamps();
 

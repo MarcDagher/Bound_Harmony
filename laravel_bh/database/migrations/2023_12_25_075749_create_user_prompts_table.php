@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_prompts', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
-            $table->bigInteger('user_id');
+            $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->text('prompt');
             $table->timestamps();
 

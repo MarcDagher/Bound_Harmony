@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('options', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->id();
             $table->string('option');
-            $table->bigInteger('question_id');
-            $table->foreign('question_id')->references('id')->on('questions');
+            $table->unsignedBigInteger('question_id');
             $table->timestamps();
+
+            $table->foreign('question_id')->references('id')->on('questions');
         });
     }
 
