@@ -117,6 +117,26 @@ class ConnectionsController extends Controller
 
 
     public function respond_to_request(Request $request){
-        
+        // receiving end of a request
+        // accept - reject a request (Change the value of status to [accepted, rejected])
+        $request -> validate([
+            'request_id' => 'required|integer', // on display of requests we will also have the details  of each request
+            'response' => 'required|in: rejected, accepted'
+        ]);
+
+        $pending_request = Connection::find($request->request_id);
+        $pending_request -> status = $request -> response;
+        $pending_request -> save();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Request updated',
+            'request' => $pending_request, 
+        ]);
+
     }
+
+    public function disconnect(){
+        //
+    }
+
 }
