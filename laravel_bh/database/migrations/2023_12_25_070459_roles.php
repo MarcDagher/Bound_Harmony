@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // username - email - password - location - virthdate - image - connection_status - couple_survey_status - Roles_id - created_at
+ 
         Schema::create('roles', function(Blueprint $table){
             $table -> bigInteger('id') -> primary();
             $table -> string('role');
