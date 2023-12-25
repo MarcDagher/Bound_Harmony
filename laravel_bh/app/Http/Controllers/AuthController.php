@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Carbon\Carbon;
-use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -29,6 +28,7 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'birthdate' => Carbon::createFromFormat('d-m-Y', $request->birthdate) -> format('Y-m-d') 
+            // Carbon is a class that handles date type
         ]);
 
         $token = Auth::login($user);
