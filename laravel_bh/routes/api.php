@@ -21,4 +21,5 @@ Route::controller(ProfileController::class)->group(function () {
 
 Route::controller(ConnectionsController::class)->group(function () {
     Route::get('/display_history', 'display_history');
+    Route::post('/send_request', 'send_request');
 });

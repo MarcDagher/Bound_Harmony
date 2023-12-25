@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Connection;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class ConnectionsController extends Controller
 {
@@ -28,6 +30,38 @@ class ConnectionsController extends Controller
                 "message" => "You don't have any past or current connections"
             ]);
         } 
+
+    }
+
+    public function send_request(Request $request){
+
+        $request -> validate([
+            "email" => "required|max:100"
+        ]);
+
+        $email_exists = User::where('email', $request->email)->get();
+        if (isset($email_exists[0])){
+            $token = Auth::user();
+            $requester_id = $token->id;
+            $responder_id = $email_exists[0]->id;
+            
+            $connection = Connection::create([
+                "requester" => $requester_id,
+                "responder" => $responder_id,
+            ]);
+
+            return response()->json([
+                "status" => "success",
+                "message" =>  "Request has been sent. Good Luck!",
+                "connection" => $connection
+            ]);
+            
+        } else {
+            return response()->json([
+                "status" => "failed",
+                "message" => "Request failed. User doesn't exist"
+            ]);
+        }
 
     }
 }
