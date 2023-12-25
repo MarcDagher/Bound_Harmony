@@ -117,6 +117,10 @@ class ConnectionsController extends Controller
 
 
     public function respond_to_request(Request $request){
+        // NOTE I WANT TO SEND THE RESPONSE FROM THE REQUEST RECEIVER'S SIDE. RESPONSE CAN BE ACCEPTED OR REJECTED
+        // WE STILL HAVE A DISCONNECT API TO CHANGE TO DISCONNET
+        // MAYBE CREATE A SWITCH CASE WHERE IS RESPONSE IS ACCEPTED - REJECTED - DISCONNECT
+
         // receiving end of a request
         // accept - reject a request (Change the value of status to [accepted, rejected])
         $request -> validate([
