@@ -11,7 +11,6 @@ class ConnectionsController extends Controller
 {
     public function display_history (){
         // query the records with accepted or disconnected related to the user
-        
         $token = Auth::user();
         
         // records where status is [accepted or disconnected] and requester or responder are the current user
@@ -79,6 +78,45 @@ class ConnectionsController extends Controller
                 "message" => "Request failed. User doesn't exist"
             ]);
         }
+    }
 
+
+    public function display_requests() {
+        // receiving end of a request
+        // query connections where user is the responder and status is pending 
+
+        $token = Auth::user();
+        $incoming_requests = Connection::where(['status'=>'pending', 'responder'=>$token->id])->get();
+
+        if (isset($incoming_requests[0])){
+            $response_array = [];
+
+            foreach($incoming_requests as $request){
+                $requester_email = User::find($incoming_requests[0]->requester)->email;
+                $responder_email = User::find($incoming_requests[0]->responder)->email;
+                $response_array[] = [
+                    "id" => $request -> id,
+                    "requester" => $requester_email,
+                    "responder" => $responder_email,
+                    "status" => $request->status
+                ]; 
+            }
+
+            return response() -> json([
+                "status" => "success",
+                "requests" => $response_array
+            ]); 
+
+        } else {
+            return response() -> json([
+                "status" => "No requests",
+                "message" => "You don't have any new requests"
+            ]);
+        }
+    }
+
+
+    public function respond_to_request(Request $request){
+        
     }
 }
