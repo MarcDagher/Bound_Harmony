@@ -6,9 +6,9 @@ use App\Http\Controllers\AuthController;
 
 
 Route::controller(AuthController::class)->group(function () {
-    Route::post('login', 'login');
-    Route::post('register', 'register');
-    Route::post('logout', 'logout');
-    Route::post('refresh', 'refresh');
+    Route::post('/login', 'login');
+    Route::post('/register', 'register');
+    Route::post('/logout', 'logout');
+    Route::post('/refresh', 'refresh');
 
 });

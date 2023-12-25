@@ -14,7 +14,7 @@ return new class extends Migration
         // username - email - password - location - virthdate - image - connection_status - couple_survey_status - Roles_id - created_at
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('role_id');
+            $table->unsignedBigInteger('role_id')->default(2);
             $table->string('username');
             $table->string('email');
             $table->string('password');
