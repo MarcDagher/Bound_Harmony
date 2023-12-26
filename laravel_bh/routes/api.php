@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ConnectionsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SurveysController;
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login');
@@ -25,4 +26,8 @@ Route::controller(ConnectionsController::class)->group(function () {
     Route::get('/display_requests', 'display_requests');
     Route::post('/respond_to_request', 'respond_to_request');
     Route::post('/disconnect', 'disconnect');
+});
+
+Route::controller(SurveysController::class)->group(function (){
+    Route::get('/get_survey', 'get_survey');
 });
