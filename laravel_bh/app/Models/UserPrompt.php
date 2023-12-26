@@ -9,7 +9,7 @@ class UserPrompt extends Model
 {
     use HasFactory;
 
-    protected $hidden = [
+    protected $fillable = [
         'user_id',
         'prompt'
     ];

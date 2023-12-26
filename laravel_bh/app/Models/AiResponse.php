@@ -9,7 +9,7 @@ class AiResponse extends Model
 {
     use HasFactory;
 
-    protected $hidden = [
+    protected $filable = [
         'user_prompt_id',
         'response'   
     ];

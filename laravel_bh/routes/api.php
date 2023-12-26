@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChatBotController;
 use App\Http\Controllers\ConnectionsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SurveysController;
@@ -31,4 +32,8 @@ Route::controller(ConnectionsController::class)->group(function () {
 Route::controller(SurveysController::class)->group(function (){
     Route::get('/get_survey', 'get_survey');
     Route::post('/save_responses', 'save_responses');
+});
+
+Route::controller(ChatBotController::class) -> group (function (){
+    Route::post('/save_user_prompt', 'save_user_prompt');
 });
