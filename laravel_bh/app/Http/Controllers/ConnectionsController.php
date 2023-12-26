@@ -116,7 +116,7 @@ class ConnectionsController extends Controller
     }
 
 
-    public function respond_to_request(Request $request){
+    public function respond_to_request(Request $request){ 
         // receiving end of a request
         // accept - reject a request (Change the value of status to [accepted, rejected])
         $request -> validate([
@@ -138,13 +138,12 @@ class ConnectionsController extends Controller
                 $responder -> save();
             }
 
-            
+            // update the status of the connection 
             $pending_request -> status = $request -> response;
             $pending_request -> save();
             return response()->json([
                 'status' => 'success',
                 'message' => 'Request updated',
-                // 'message2' => 'Connection status updated',
                 'request' => $pending_request, 
             ]);
         } else {
@@ -156,9 +155,36 @@ class ConnectionsController extends Controller
 
     }
 
-    public function disconnect(){
-        // WE STILL HAVE A DISCONNECT API TO CHANGE TO DISCONNET
-        // MAYBE CREATE A SWITCH CASE WHERE IS RESPONSE IS ACCEPTED - REJECTED - DISCONNECT
+    public function disconnect(Request $request){
+        // Change connection status to disconnected
+        // Change user's connection_status to false
+        $request -> validate([
+            'connection_id' => 'required|integer', // on display of requests we will also have the details  of each request
+            'status' => 'required|in:disconnected'
+        ]);
+        $token = Auth::user();
+        $connection = Connection::find($request->connection_id);
+        
+        if ($connection && ($connection->requester === $token->id || $connection->responder === $token->id)){
+
+            $user1 = User::find($connection -> responder);
+            $user2 = User::find($connection -> requester);
+            
+            $connection -> status = "disconnected";
+            $user1 -> connection_status = 'false';
+            $user2 -> connection_status = 'false';
+
+            $connection -> save();
+            $user1 -> save();
+            $user2 -> save();
+
+        } else {
+            return response() -> json([
+                "status" => "failed",
+                "message" => "Error finding your connection",
+                "connection" => $connection
+            ]);
+        }
     }
 
 }

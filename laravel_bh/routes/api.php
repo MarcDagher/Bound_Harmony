@@ -24,4 +24,5 @@ Route::controller(ConnectionsController::class)->group(function () {
     Route::post('/send_request', 'send_request');
     Route::get('/display_requests', 'display_requests');
     Route::post('/respond_to_request', 'respond_to_request');
+    Route::post('/disconnect', 'disconnect');
 });
