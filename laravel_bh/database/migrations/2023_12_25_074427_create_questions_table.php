@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->string('quesion');
+            $table->string('question');
             $table->unsignedBigInteger('survey_id');
             $table->timestamps();
 
