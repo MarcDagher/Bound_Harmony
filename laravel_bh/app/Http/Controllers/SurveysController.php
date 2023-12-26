@@ -13,7 +13,7 @@ class SurveysController extends Controller
 
     public function send_responses () {
         // send user's responses
-        
+        // array of objects {user_id, question_id, response}
         
     }
 }
