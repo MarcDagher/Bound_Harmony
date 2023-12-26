@@ -19,10 +19,22 @@ class ConnectionsController extends Controller
         })->get();
 
         if (isset($connections[0])) {
+            $response_array = [];
+
+            foreach ($connections as $connection){
+                $requester_email = User::find($connection->requester)->email;
+                $responder_email = User::find($connection->responder)->email;
+                $response_array[] = [
+                    "id" => $connection -> id,
+                    "requester" => $requester_email,
+                    "responder" => $responder_email,
+                    "status" => $connection->status
+                ]; 
+            }
+
             return response()->json([
                 "status" => 'success',
-                "connections" => $connections
-                // then display connections in frontend
+                "connections" => $response_array
             ]);
         } else {
             return response()->json([
@@ -57,7 +69,7 @@ class ConnectionsController extends Controller
             if (isset($connection_exists[0])) {
                 return response()->json([
                     "status" => "failed",
-                    "message" =>  "You can only send a request if you were rejected or disconncted",
+                    "message" =>  "Connection already exists",
                 ]);
             } else {
                 $connection = Connection::create([
