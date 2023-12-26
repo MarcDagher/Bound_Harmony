@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Option;
 use App\Models\Question;
+use App\Models\SurveyResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SurveysController extends Controller
 {
@@ -37,9 +39,44 @@ class SurveysController extends Controller
         }
     }
 
-    public function send_responses () {
-        // send user's responses
+    public function send_responses (Request $request) {
+        // save user's responses 
+
+        // expecting an array of json objects - *. is a wildcard that validates the values of each key
         // array of objects {user_id, question_id, response}
-        
+        $request -> validate([ 
+            "*.question_id" => "required|integer",
+             "*.response" => "required|string"
+             ]);
+
+        $jsonData = $request->json()->all();
+
+        $token = Auth::user();
+
+        foreach($jsonData as $data){
+            $questionId = $data['question_id'];
+            $response = $data['response'];
+    
+            $response_validation = Option::where(["question_id" => $questionId, "option" => $response]) -> get();
+    
+            if ( isset($response_validation[0])){
+                SurveyResponse::create([
+                    "user_id" => $token->id,
+                    "question_id" => $questionId,
+                    "response" => $response
+                ]);
+            } else {
+                return response() -> json([
+                    "status" => "failed",
+                    "message" => "Invalid response"
+                ]);
+            }
+
+        }
+
+        return response() -> json([
+            "status" => "success",
+            "message" => "Your responses have been saved"
+        ]);
     }
 }
