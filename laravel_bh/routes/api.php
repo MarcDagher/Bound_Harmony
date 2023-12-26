@@ -30,5 +30,5 @@ Route::controller(ConnectionsController::class)->group(function () {
 
 Route::controller(SurveysController::class)->group(function (){
     Route::get('/get_survey', 'get_survey');
-    Route::post('/send_responses', 'send_responses');
+    Route::post('/save_responses', 'save_responses');
 });

@@ -39,7 +39,7 @@ class SurveysController extends Controller
         }
     }
 
-    public function send_responses (Request $request) {
+    public function save_responses (Request $request) {
         // save user's responses 
 
         // expecting an array of json objects - *. is a wildcard that validates the values of each key
