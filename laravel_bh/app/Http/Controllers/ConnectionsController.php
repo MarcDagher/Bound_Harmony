@@ -117,30 +117,48 @@ class ConnectionsController extends Controller
 
 
     public function respond_to_request(Request $request){
-        // NOTE I WANT TO SEND THE RESPONSE FROM THE REQUEST RECEIVER'S SIDE. RESPONSE CAN BE ACCEPTED OR REJECTED
-        // WE STILL HAVE A DISCONNECT API TO CHANGE TO DISCONNET
-        // MAYBE CREATE A SWITCH CASE WHERE IS RESPONSE IS ACCEPTED - REJECTED - DISCONNECT
-
         // receiving end of a request
         // accept - reject a request (Change the value of status to [accepted, rejected])
         $request -> validate([
             'request_id' => 'required|integer', // on display of requests we will also have the details  of each request
-            'response' => 'required|in: rejected, accepted'
+            'response' => 'required|in:rejected,accepted'
         ]);
 
         $pending_request = Connection::find($request->request_id);
-        $pending_request -> status = $request -> response;
-        $pending_request -> save();
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Request updated',
-            'request' => $pending_request, 
-        ]);
+        if ($pending_request){
+            if ($request -> response === "accepted"){
+                // update user's connection status
+                
+                $requester = User::find($pending_request -> requester);
+                $responder = User::find($pending_request -> responder);
+                $requester -> connection_status = 'true';
+                $responder -> connection_status = 'true';
+
+                $requester -> save();
+                $responder -> save();
+            }
+
+            
+            $pending_request -> status = $request -> response;
+            $pending_request -> save();
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Request updated',
+                // 'message2' => 'Connection status updated',
+                'request' => $pending_request, 
+            ]);
+        } else {
+            return response() -> json([
+                "status" => "failed",
+                "message" => "Error finding connection"
+            ]);
+        }
 
     }
 
     public function disconnect(){
-        //
+        // WE STILL HAVE A DISCONNECT API TO CHANGE TO DISCONNET
+        // MAYBE CREATE A SWITCH CASE WHERE IS RESPONSE IS ACCEPTED - REJECTED - DISCONNECT
     }
 
 }
