@@ -1,3 +1,4 @@
+import 'package:bound_harmony/reusables/navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -30,13 +31,20 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
         ),
         toolbarHeight: 100,
       ),
+
+      //// END OF APPBAR /////
+
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
+        ////// Closes a slide when another is open
         child: SlidableAutoCloseBehavior(
           closeWhenOpened: true,
           child: ListView.builder(
+            // itemBuiler is a callback function called for each item in the in the list (BuildContext, indeex of the item in the list)
+            // It returns the widget for the corresponding list item. This depends on the itemCount.
             itemBuilder: (context, index) {
               final user = requests[index];
+              //// EACH BOX IS A SLIDABLE WITH A STARTACTIONN AND AN ENDACTION
               return Slidable(
                 startActionPane: ActionPane(
                   motion: const StretchMotion(),
@@ -46,6 +54,7 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
                       icon: Icons.check,
                       label: 'Accept',
                       onPressed: (context) => handleRequest(index, 'Accept'),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ],
                 ),
@@ -57,9 +66,13 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
                       backgroundColor: Colors.red,
                       icon: Icons.cancel,
                       label: 'Reject',
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ],
                 ),
+
+                // the child represents the design of each individual listTile
+
                 child: buildUserListTile(user),
               );
             },
@@ -67,6 +80,7 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
           ),
         ),
       ),
+      bottomNavigationBar: MyNavigationBar(),
     );
   }
 
@@ -91,6 +105,7 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
     }
   }
 
+// I did it here to avoid creating a separate file for only a one time import
   Widget buildUserListTile(user) => Column(
         children: [
           Container(
@@ -106,7 +121,7 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           )
         ],
