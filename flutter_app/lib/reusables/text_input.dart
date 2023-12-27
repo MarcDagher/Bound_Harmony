@@ -15,7 +15,7 @@ class TextInputField extends StatelessWidget {
               border: InputBorder.none,
               hintText: placeholder,
               contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 15, vertical: 17))),
+                  const EdgeInsets.symmetric(horizontal: 15, vertical: 18))),
     );
   }
 }

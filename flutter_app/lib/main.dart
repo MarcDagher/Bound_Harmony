@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/login_screen.dart';
+import 'package:flutter_app/screens/onBoarding_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         fontFamily: "Nunito",
         useMaterial3: true,
       ),
-      home: const LogInScreen(),
+      home: const OnBoardingScreen(),
     );
   }
 }

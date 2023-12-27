@@ -27,7 +27,7 @@ class _LogInScreenState extends State<LogInScreen> {
               children: [
                 if (!isKeyboard)
                   Image.asset(
-                      "assets/login_logo.png"), // when keyboard appears hide logo
+                      "assets/logo.png"), // when keyboard appears hide logo
                 Padding(
                   padding: const EdgeInsets.only(top: 30),
                   child: Text(
@@ -58,7 +58,7 @@ class _LogInScreenState extends State<LogInScreen> {
                 Row(
                   children: [
                     Button(
-                      text: 'hello',
+                      text: 'Log In',
                       handlePressed: () {},
                     )
                   ],
