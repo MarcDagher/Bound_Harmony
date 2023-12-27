@@ -49,7 +49,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Column(
                 children: [
                   const TextInputField(placeholder: 'Username'),
-
                   const SizedBox(height: 5),
 
                   // this will be a text. email is displayed from token
@@ -58,20 +57,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Expanded(child: DisplayBox(text: 'My-Email@123.com')),
                     ],
                   ),
-
                   const SizedBox(height: 5),
 
                   const TextInputField(
                       placeholder:
                           'Location'), // Figure out how to do that... depends on google api
-
                   const SizedBox(height: 5),
 
                   // Custom Navigation button
-                  Row(children: [
-                    Button(text: 'Incoming Requests', handlePressed: () {})
-                  ]),
-
+                  MaterialButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          side: BorderSide(color: Theme.of(context).hintColor)),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 18, horizontal: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Incoming Requests',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Theme.of(context).hintColor),
+                          ),
+                          Icon(
+                            Icons.navigate_next,
+                            color: Theme.of(context).hintColor,
+                          )
+                        ],
+                      ),
+                      onPressed: () {}),
                   const SizedBox(height: 5),
 
                   // Custom Navigation button
