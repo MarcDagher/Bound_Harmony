@@ -14,11 +14,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Bound Harmony',
       theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
-          primaryColor: const Color(0xFFF03E3F),
-          hintColor: const Color(0xFF544B4C)
-          // useMaterial3: true,
-          ),
+        scaffoldBackgroundColor: Colors.white,
+        primaryColor: const Color(0xFFF03E3F),
+        hintColor: const Color(0xFF544B4C),
+        fontFamily: "Nunito",
+        useMaterial3: true,
+      ),
       home: const LogInScreen(),
     );
   }

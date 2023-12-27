@@ -12,7 +12,10 @@ class LogInScreen extends StatelessWidget {
           Image.asset("assets/login_logo.png"),
           Text(
             'Log In',
-            style: TextStyle(fontSize: 45, color: Theme.of(context).hintColor),
+            style: TextStyle(
+                fontSize: 45,
+                color: Theme.of(context).hintColor,
+                fontWeight: FontWeight.w700),
           ),
         ],
       )),
