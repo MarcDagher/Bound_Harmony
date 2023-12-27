@@ -29,6 +29,7 @@ class SurveysScreen extends StatelessWidget {
           const SizedBox(height: 30),
           Column(
             children: [
+              //////// PERSONAL SURVEY - ON CLICK - GO TO QUESTIONS
               Row(
                 children: [
                   Expanded(
@@ -36,6 +37,13 @@ class SurveysScreen extends StatelessWidget {
                       height: 250,
                       width: 200,
                       decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Color.fromARGB(255, 226, 217, 215),
+                              Color(0xFF5CD3FF)
+                            ]),
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.grey,
                       ),
@@ -43,13 +51,17 @@ class SurveysScreen extends StatelessWidget {
                           child: Text(
                         'Personal Survey',
                         style: TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.w600),
+                            fontSize: 25,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600),
                       )),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 25),
+
+              //////// Couples SURVEY - ON CLICK - GO TO QUESTIONS
               Row(
                 children: [
                   Expanded(
@@ -57,13 +69,22 @@ class SurveysScreen extends StatelessWidget {
                       height: 250,
                       width: 200,
                       decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Color.fromARGB(255, 241, 214, 174),
+                              Color.fromARGB(255, 236, 55, 70)
+                            ]),
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.grey,
                       ),
                       child: const Center(
                           child: Text("Couple's Survey",
                               style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.w600))),
+                                  fontSize: 25,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600))),
                     ),
                   ),
                 ],
