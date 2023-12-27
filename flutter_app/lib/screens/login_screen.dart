@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/reusables/button.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
@@ -73,24 +74,10 @@ class _LogInScreenState extends State<LogInScreen> {
               children: [
                 Row(
                   children: [
-                    Expanded(
-                      child: MaterialButton(
-                        color: Theme.of(context).primaryColor,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        onPressed: () {},
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 17),
-                          child: Text(
-                            'Login',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 20),
-                          ),
-                        ),
-                      ),
-                    ),
+                    Button(
+                      text: 'hello',
+                      handlePressed: () {},
+                    )
                   ],
                 ),
                 Padding(
