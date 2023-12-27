@@ -2,14 +2,14 @@ import 'package:bound_harmony/reusables/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:bound_harmony/reusables/button.dart';
 
-class LogInScreen extends StatefulWidget {
-  const LogInScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LogInScreen> createState() => _LogInScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LogInScreenState extends State<LogInScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     final isKeyboard = MediaQuery.of(context).viewInsets.bottom !=
@@ -27,11 +27,14 @@ class _LogInScreenState extends State<LogInScreen> {
               children: [
                 if (!isKeyboard)
                   Image.asset(
-                      "assets/logo.png"), // when keyboard appears hide logo
+                    "assets/logo.png",
+                    height: 170,
+                    width: 170,
+                  ), // when keyboard appears hide logo
                 Padding(
-                  padding: const EdgeInsets.only(top: 30),
+                  padding: const EdgeInsets.only(top: 20),
                   child: Text(
-                    'Log In',
+                    'Sign Up',
                     style: TextStyle(
                         fontSize: 45,
                         color: Theme.of(context).hintColor,
@@ -44,11 +47,13 @@ class _LogInScreenState extends State<LogInScreen> {
             ///////////////////// Column: INPUT FIELDs  ///////////////////////
             const Column(
               children: [
+                TextInputField(placeholder: 'Username'),
+                SizedBox(height: 5),
                 TextInputField(placeholder: 'Email'),
-                SizedBox(
-                  height: 5,
-                ),
-                TextInputField(placeholder: 'Password')
+                SizedBox(height: 5),
+                TextInputField(placeholder: 'Password'),
+                SizedBox(height: 5),
+                TextInputField(placeholder: 'Birthdate'),
               ],
             ),
 
