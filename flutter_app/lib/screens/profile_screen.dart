@@ -1,7 +1,6 @@
 import 'package:bound_harmony/reusables/display_box.dart';
 import 'package:bound_harmony/reusables/navigation_bar.dart';
 import 'package:bound_harmony/reusables/text_input.dart';
-import 'package:bound_harmony/reusables/button.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
