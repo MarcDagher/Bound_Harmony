@@ -1,5 +1,5 @@
-import 'package:bound_harmony/reusables/text_input.dart';
 import 'package:flutter/material.dart';
+import 'package:bound_harmony/reusables/text_input.dart';
 import 'package:bound_harmony/reusables/button.dart';
 
 class SignUpScreen extends StatefulWidget {
