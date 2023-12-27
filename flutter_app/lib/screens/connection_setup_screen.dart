@@ -25,14 +25,16 @@ class ConnectionSetupScreen extends StatelessWidget {
             Column(
               children: [
                 if (!isKeyboard)
-                  const Text(
+                  Text(
                     'Welcome To Bound Harmony!',
-                    style: TextStyle(fontSize: 26),
+                    style: TextStyle(
+                        fontSize: 26, color: Theme.of(context).hintColor),
                   ),
                 const SizedBox(height: 10),
-                const Text(
-                  "Here you will connect with your partner",
-                  style: TextStyle(fontSize: 15),
+                Text(
+                  "Here you will connect to your partner",
+                  style: TextStyle(
+                      fontSize: 15, color: Theme.of(context).hintColor),
                 )
               ],
             ),
