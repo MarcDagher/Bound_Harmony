@@ -90,9 +90,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const SizedBox(height: 5),
 
                   // Custom Navigation button
-                  Row(children: [
-                    Button(text: 'Partners', handlePressed: () {})
-                  ])
+                  MaterialButton(
+                      color: Theme.of(context).primaryColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 18, horizontal: 15),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'My Partners',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w800,
+                                color: Colors.white),
+                          ),
+                          Icon(
+                            Icons.navigate_next,
+                            color: Colors.white,
+                          )
+                        ],
+                      ),
+                      onPressed: () {})
                 ],
               ),
             ],
