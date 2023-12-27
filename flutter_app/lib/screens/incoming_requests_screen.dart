@@ -91,11 +91,24 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
     }
   }
 
-  Widget buildUserListTile(user) => ListTile(
-        // contentPadding: EdgeInsets.all(16),
-        title: Text(
-          user,
-          style: TextStyle(fontSize: 16),
-        ),
+  Widget buildUserListTile(user) => Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+                border: Border.all(color: Theme.of(context).hintColor),
+                borderRadius: BorderRadius.circular(10)),
+            child: ListTile(
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
+              title: Text(
+                user,
+                style: const TextStyle(fontSize: 18),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 5,
+          )
+        ],
       );
 }
