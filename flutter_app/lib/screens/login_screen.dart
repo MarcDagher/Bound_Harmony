@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/reusables/button.dart';
+import 'package:flutter_app/reusables/text_input.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
@@ -38,33 +39,13 @@ class _LogInScreenState extends State<LogInScreen> {
             ),
 
             ///////////////////// Column: INPUT FIELDs  ///////////////////////
-            Column(
+            const Column(
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Theme.of(context).hintColor)),
-                  child: TextFormField(
-                      decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Email',
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 17))),
-                ),
-                const SizedBox(
+                TextInputField(placeholder: 'Email'),
+                SizedBox(
                   height: 5,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Theme.of(context).hintColor)),
-                  child: TextFormField(
-                      decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Password',
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 17))),
-                ),
+                TextInputField(placeholder: 'Password')
               ],
             ),
 
