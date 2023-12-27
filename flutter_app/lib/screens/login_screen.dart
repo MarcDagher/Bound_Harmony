@@ -12,7 +12,8 @@ class LogInScreen extends StatefulWidget {
 class _LogInScreenState extends State<LogInScreen> {
   @override
   Widget build(BuildContext context) {
-    final isKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
+    final isKeyboard = MediaQuery.of(context).viewInsets.bottom !=
+        0; // check if keyboard is in the UI
     return Scaffold(
       body: SafeArea(
           child: Padding(
@@ -24,7 +25,9 @@ class _LogInScreenState extends State<LogInScreen> {
             ///////////////////// Column: Logo + Title ///////////////////////
             Column(
               children: [
-                if (!isKeyboard) Image.asset("assets/login_logo.png"),
+                if (!isKeyboard)
+                  Image.asset(
+                      "assets/login_logo.png"), // when keyboard appears hide logo
                 Padding(
                   padding: const EdgeInsets.only(top: 30),
                   child: Text(
@@ -50,7 +53,6 @@ class _LogInScreenState extends State<LogInScreen> {
             ),
 
             ///////////////////// Column: BUTTON + Text ///////////////////////
-
             Column(
               children: [
                 Row(
