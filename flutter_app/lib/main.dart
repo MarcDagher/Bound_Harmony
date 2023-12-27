@@ -1,4 +1,5 @@
 import 'package:bound_harmony/screens/connection_setup_screen.dart';
+import 'package:bound_harmony/screens/incoming_requests_screen.dart';
 import 'package:bound_harmony/screens/login_screen.dart';
 import 'package:bound_harmony/screens/my_partners_screen.dart';
 import 'package:bound_harmony/screens/onBoarding_screen.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         fontFamily: "Nunito",
         useMaterial3: true,
       ),
-      home: const MyPartnersScreen(),
+      home: const IncomingRequestsScreen(),
     );
   }
 }

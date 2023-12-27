@@ -13,7 +13,12 @@ class MyPartnersScreen extends StatefulWidget {
 
 class _MyPartnersScreenState extends State<MyPartnersScreen> {
   //fetch partner history from the data base
-  List partners = [];
+  List partners = [
+    'first@123.com',
+    'first@123.com',
+    'first@123.com',
+    'first@123.com'
+  ];
   bool currentPartner = true;
 
   @override
