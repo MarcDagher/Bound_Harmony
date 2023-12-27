@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:bound_harmony/screens/connection_setup_screen.dart';
 import 'package:bound_harmony/screens/login_screen.dart';
 import 'package:bound_harmony/screens/onBoarding_screen.dart';
 import 'package:bound_harmony/screens/signup_screen.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         fontFamily: "Nunito",
         useMaterial3: true,
       ),
-      home: const SignUpScreen(),
+      home: const ConnectionSetupScreen(),
     );
   }
 }

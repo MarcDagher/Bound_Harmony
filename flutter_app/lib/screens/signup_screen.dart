@@ -28,8 +28,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 if (!isKeyboard)
                   Image.asset(
                     "assets/logo.png",
-                    height: 170,
-                    width: 170,
                   ), // when keyboard appears hide logo
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
