@@ -1,4 +1,5 @@
 // import 'package:bound_harmony/screens/connection_setup_screen.dart';
+import 'package:bound_harmony/screens/connection_setup_screen.dart';
 import 'package:bound_harmony/screens/login_screen.dart';
 import 'package:bound_harmony/screens/signup_screen.dart';
 // import 'package:bound_harmony/screens/my_partners_screen.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
         fontFamily: "Nunito",
         useMaterial3: true,
       ),
-      home: const SignUpScreen(),
+      home: const ConnectionSetupScreen(),
     );
   }
 }
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
 //MyPartnersScreen, [  Needs ListView Builder maybe  ]
 //OnBoardingScreen, [ Looks Good ]
 //ProfileScreen, [ Looks Good ]
-//SignUpScreen, [ ------------- Not Loading ---------------- ]
+//SignUpScreen, [ Looks Good ] 
 //SuggestionsScreen, [ Looks Good ]
 //SurveysScreen, [ Looks Good ]
 //TakeSurveyScreen [ Looks Good ]

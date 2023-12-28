@@ -43,15 +43,11 @@ class ConnectionSetupScreen extends StatelessWidget {
             Column(
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TextInputField(placeholder: "Enter your partner's email"),
+                const TextInputField(placeholder: "Enter your partner's email"),
                 const SizedBox(height: 25),
-                Row(
-                  children: [
-                    Button(
-                      text: 'Send Request',
-                      handlePressed: () {},
-                    )
-                  ],
+                Button(
+                  text: 'Send Request',
+                  handlePressed: () {},
                 ),
               ],
             ),
