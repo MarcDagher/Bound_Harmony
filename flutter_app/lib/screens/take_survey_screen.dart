@@ -53,12 +53,16 @@ class TakeSurveyScreen extends StatelessWidget {
                 },
               ),
             ),
-            Button(text: 'Submit', handlePressed: () {}),
+            Button(
+                text: 'Submit',
+                handlePressed: () {},
+                // When all questions are answered change color to primary red
+                color: Theme.of(context).hintColor),
             const SizedBox(height: 10)
           ],
         ),
       ),
-      bottomNavigationBar: MyNavigationBar(),
+      bottomNavigationBar: const MyNavigationBar(),
     );
   }
 
