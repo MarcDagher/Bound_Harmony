@@ -1,18 +1,12 @@
-import 'package:bound_harmony/screens/advice_screen.dart';
-import 'package:bound_harmony/screens/advice_screen.dart';
-import 'package:bound_harmony/screens/bonding_activities_screen.dart';
-import 'package:bound_harmony/screens/connection_setup_screen.dart';
-import 'package:bound_harmony/screens/date_builder_screen.dart';
-import 'package:bound_harmony/screens/gift_ideas_screen.dart';
-import 'package:bound_harmony/screens/incoming_requests_screen.dart';
+// import 'package:bound_harmony/screens/connection_setup_screen.dart';
 import 'package:bound_harmony/screens/login_screen.dart';
-import 'package:bound_harmony/screens/my_partners_screen.dart';
-import 'package:bound_harmony/screens/onBoarding_screen.dart';
-import 'package:bound_harmony/screens/profile_screen.dart';
-import 'package:bound_harmony/screens/signup_screen.dart';
-import 'package:bound_harmony/screens/suggestions_screen.dart';
-import 'package:bound_harmony/screens/surveys_screen.dart';
-import 'package:bound_harmony/screens/take_survey_screen.dart';
+// import 'package:bound_harmony/screens/my_partners_screen.dart';
+// import 'package:bound_harmony/screens/onBoarding_screen.dart';
+// import 'package:bound_harmony/screens/profile_screen.dart';
+// import 'package:bound_harmony/screens/signup_screen.dart';
+// import 'package:bound_harmony/screens/suggestions_screen.dart';
+// import 'package:bound_harmony/screens/surveys_screen.dart';
+// import 'package:bound_harmony/screens/take_survey_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -39,7 +33,24 @@ class MyApp extends StatelessWidget {
         fontFamily: "Nunito",
         useMaterial3: true,
       ),
-      home: AdviceScreen(),
+      home: const LogInScreen(),
     );
   }
 }
+
+// Screens [ 
+//AdviceScreen,  [ Looks Good ] 
+//BondingActivitiesScreen, [ Looks Good ]
+//ConnectionSetupScreen, [ ------------- Not Loading ---------------- ]
+//DateBuilderScreen,  [ Looks Good ]
+//GiftIdeasScreen, [ Looks Good ]
+//IncomingRequestsScreen, [ Needs ListView Builder maybe ]
+//LogInScreen,  [ ------------- Not Loading ---------------- ]
+//MyPartnersScreen, [  Needs ListView Builder maybe  ]
+//OnBoardingScreen, [ Looks Good ]
+//ProfileScreen, [ Looks Good ]
+//SignUpScreen, [ ------------- Not Loading ---------------- ]
+//SuggestionsScreen, [ Looks Good ]
+//SurveysScreen, [ Looks Good ]
+//TakeSurveyScreen [ Looks Good ]
+//] 
