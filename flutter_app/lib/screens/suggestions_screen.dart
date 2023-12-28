@@ -10,7 +10,7 @@ class SuggestionsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Padding(
           padding: EdgeInsets.only(left: 10),
-          child: Text('Surveys'),
+          child: Text('Suggestions For You'),
         ),
       ),
 
@@ -21,78 +21,35 @@ class SuggestionsScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
         child: Column(children: [
-          const Row(
-            children: [
-              Text(
-                'Pick a survey',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-              ),
-            ],
+          const Text(
+            'Check your personalized suggestions:',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 20),
           Expanded(
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                //////// PERSONAL SURVEY - ON CLICK - GO TO QUESTIONS
-                Expanded(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                                colors: [
-                                  Color.fromARGB(255, 226, 217, 215),
-                                  Color(0xFF5CD3FF)
-                                ]),
-                            borderRadius: BorderRadius.circular(15),
-                            color: Colors.grey,
-                          ),
-                          child: const Center(
-                              child: Text(
-                            'Personal Survey',
-                            style: TextStyle(
-                                fontSize: 25,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600),
-                          )),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 25),
+                //////// ON CLICK - GO TO Date Builder
 
-                //////// Couples SURVEY - ON CLICK - GO TO QUESTIONS
-                Expanded(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                                colors: [
-                                  Color.fromARGB(255, 241, 214, 174),
-                                  Color.fromARGB(255, 236, 55, 70)
-                                ]),
-                            borderRadius: BorderRadius.circular(15),
-                            color: Colors.grey,
-                          ),
-                          child: const Center(
-                              child: Text("Couple's Survey",
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600))),
-                        ),
-                      ),
-                    ],
-                  ),
+                buildSurveyBox(
+                    'Date Builder',
+                    const Color.fromARGB(255, 226, 217, 215),
+                    const Color(0xFF5CD3FF)),
+                const SizedBox(height: 5),
+
+                //////// ON CLICK - GO TO Date Bonding Activities
+                buildSurveyBox(
+                    'Bonding Activities',
+                    const Color.fromARGB(255, 241, 214, 174),
+                    const Color.fromARGB(255, 236, 55, 70)),
+                const SizedBox(height: 5),
+
+                //////// ON CLICK - GO TO Date Bonding Activities
+                buildSurveyBox(
+                  'Gift Ideas',
+                  const Color.fromARGB(255, 150, 200, 180),
+                  const Color.fromARGB(255, 50, 120, 150),
                 ),
               ],
             ),
@@ -100,6 +57,35 @@ class SuggestionsScreen extends StatelessWidget {
         ]),
       ),
       bottomNavigationBar: const MyNavigationBar(),
+    );
+  }
+
+  buildSurveyBox(String text, Color color1, Color color2) {
+    return Expanded(
+      child: Row(
+        children: [
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [color1, color2]),
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.grey,
+              ),
+              child: Center(
+                  child: Text(
+                text,
+                style: const TextStyle(
+                    fontSize: 25,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600),
+              )),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
