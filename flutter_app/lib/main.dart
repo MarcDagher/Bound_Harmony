@@ -1,5 +1,6 @@
-import 'package:bound_harmony/screens/bonding_activities.dart';
+import 'package:bound_harmony/screens/bonding_activities_screen.dart';
 import 'package:bound_harmony/screens/connection_setup_screen.dart';
+import 'package:bound_harmony/screens/date_builder_screen.dart';
 import 'package:bound_harmony/screens/incoming_requests_screen.dart';
 import 'package:bound_harmony/screens/login_screen.dart';
 import 'package:bound_harmony/screens/my_partners_screen.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         fontFamily: "Nunito",
         useMaterial3: true,
       ),
-      home: BondingActivitiesScreen(),
+      home: DateBuilderScreen(),
     );
   }
 }

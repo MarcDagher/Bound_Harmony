@@ -1,41 +1,41 @@
 import 'package:bound_harmony/reusables/navigation_bar.dart';
 import 'package:flutter/material.dart';
 
-class BondingActivitiesScreen extends StatelessWidget {
-  const BondingActivitiesScreen({super.key});
+class DateBuilderScreen extends StatelessWidget {
+  const DateBuilderScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     Map<String, List<String>> places = {
-      "place1": [
+      "date1": [
         "assets/logo.png",
-        "Activity Name",
-        "This is the description of the place nvrjkevkjrevkjbekjgkjerjgbrkgbgk"
+        "Place/Activity Name",
+        "This is the description of the date"
       ],
-      "place2": [
+      "date2": [
         "assets/logo.png",
-        "Activity Name",
-        "This is the description of the place"
+        "Place/Activity Name",
+        "This is the description of the date"
       ],
-      "place3": [
+      "date3": [
         "assets/logo.png",
-        "Activity Name",
-        "This is the description of the place"
+        "Place/Activity Name",
+        "This is the description of the date"
       ],
-      "place4": [
+      "date4": [
         "assets/logo.png",
-        "Activity Name",
-        "This is the description of the place"
+        "Place/Activity Name",
+        "This is the description of the date"
       ],
-      "place5": [
+      "date5": [
         "assets/logo.png",
-        "Activity Name",
-        "This is the description of the place"
+        "Place/Activity Name",
+        "This is the description of the date"
       ],
-      "place6": [
+      "date6": [
         "assets/logo.png",
-        "Activity Name",
-        "This is the description of the place"
+        "Place/Activity Name",
+        "This is the description of the date"
       ],
     };
 
@@ -43,7 +43,7 @@ class BondingActivitiesScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Padding(
           padding: EdgeInsets.only(left: 10),
-          child: Text('Suggestions For You'),
+          child: Text('Date Builder'),
         ),
       ),
 
@@ -111,7 +111,7 @@ class BondingActivitiesScreen extends StatelessWidget {
                         Text(
                           name,
                           style: TextStyle(
-                              fontWeight: FontWeight.w800,
+                              fontWeight: FontWeight.w700,
                               fontSize: 16,
                               color: nameColor),
                         ),
