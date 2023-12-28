@@ -10,7 +10,7 @@ class BondingActivitiesScreen extends StatelessWidget {
       "place1": [
         "assets/logo.png",
         "Activity Name",
-        "This is the description of the place"
+        "This is the description of the place nvrjkevkjrevkjbekjgkjerjgbrkgbgk"
       ],
       "place2": [
         "assets/logo.png",
@@ -59,8 +59,8 @@ class BondingActivitiesScreen extends StatelessWidget {
 
                 /////// CARD BUILDER METHOD
                 ///
-                return cardBuilder(
-                    place.value[0], place.value[1], place.value[2]);
+                return cardBuilder(place.value[0], place.value[1],
+                    place.value[2], Theme.of(context).hintColor);
               })),
       bottomNavigationBar: const MyNavigationBar(),
     );
@@ -68,17 +68,17 @@ class BondingActivitiesScreen extends StatelessWidget {
 
   //////// CARD BUILDER METHOD
   ///
-  cardBuilder(String image, String name, String description) {
+  cardBuilder(String image, String name, String description, Color nameColor) {
     //// Padding between boxes
     ///
     return Padding(
       padding: const EdgeInsets.only(top: 10, bottom: 10),
       child: Container(
         decoration: BoxDecoration(
-            color: Colors.blue, borderRadius: BorderRadius.circular(15)),
+            color: Colors.grey[300], borderRadius: BorderRadius.circular(15)),
         child: Column(
           children: [
-            //// this padding is for the grey box to not take the full space
+            //// this padding is for the white box to not take the full space
             ///
             Padding(
               padding: const EdgeInsets.only(
@@ -88,7 +88,7 @@ class BondingActivitiesScreen extends StatelessWidget {
               child: Container(
                 height: 150,
                 decoration: BoxDecoration(
-                    color: Colors.grey,
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(15)),
                 //// should be a real image
                 ///
@@ -103,12 +103,26 @@ class BondingActivitiesScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 15, bottom: 10),
               child: Row(
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(name),
-                      Text(description),
-                    ],
+                  ////// THE FLEXIBLE WIDGET ALLOWS THE TEXT TO WRAP AND TAKE THE SPACE NECESSARY
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          name,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w800,
+                              fontSize: 16,
+                              color: nameColor),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8),
+                          child: Text(
+                            description,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
