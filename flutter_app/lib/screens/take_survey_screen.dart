@@ -33,11 +33,16 @@ class TakeSurveyScreen extends StatelessWidget {
           child: Text("Couple's Survey"),
         ),
       ),
+      //////////// END OF APPBAR
+
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
         child: Column(
           children: [
             Expanded(
+              ///////// BUILDING SURVEY'S QUESTIONS AND LOOPING OVER OPTIONS
+              ///
+              ///
               child: ListView.builder(
                 itemCount: questions.length,
                 itemBuilder: (context, index) {
@@ -53,6 +58,10 @@ class TakeSurveyScreen extends StatelessWidget {
                 },
               ),
             ),
+
+            /////// REUSABLE SUBMIT BUTTON
+            ///
+            ///
             Button(
                 text: 'Submit',
                 handlePressed: () {},
@@ -66,6 +75,9 @@ class TakeSurveyScreen extends StatelessWidget {
     );
   }
 
+  /////// BUILDER METHODS
+  ///
+  ///
   Widget buildQuestion(question, textColor) {
     return Row(
       children: [
