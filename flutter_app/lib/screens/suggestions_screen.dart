@@ -36,14 +36,14 @@ class SuggestionsScreen extends StatelessWidget {
                     'Date Builder',
                     const Color.fromARGB(255, 226, 217, 215),
                     const Color(0xFF5CD3FF)),
-                const SizedBox(height: 5),
+                const SizedBox(height: 15),
 
                 //////// ON CLICK - GO TO Date Bonding Activities
                 buildSurveyBox(
                     'Bonding Activities',
                     const Color.fromARGB(255, 241, 214, 174),
                     const Color.fromARGB(255, 236, 55, 70)),
-                const SizedBox(height: 5),
+                const SizedBox(height: 15),
 
                 //////// ON CLICK - GO TO Date Bonding Activities
                 buildSurveyBox(
