@@ -111,7 +111,7 @@ class BondingActivitiesScreen extends StatelessWidget {
                         Text(
                           name,
                           style: TextStyle(
-                              fontWeight: FontWeight.w800,
+                              fontWeight: FontWeight.w700,
                               fontSize: 16,
                               color: nameColor),
                         ),
