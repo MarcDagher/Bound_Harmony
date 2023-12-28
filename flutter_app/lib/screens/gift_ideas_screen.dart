@@ -72,7 +72,7 @@ class GiftIdeasScreen extends StatelessWidget {
         children: [
           Padding(
             padding:
-                const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 5),
+                const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 10),
             child: Row(
               ////// Expanded row to give full width to image frame
               ///
