@@ -8,8 +8,6 @@ class SurveysScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        shape:
-            const Border.symmetric(horizontal: BorderSide(color: Colors.black)),
         title: const Padding(
           padding: EdgeInsets.only(left: 10),
           child: Text('Surveys'),

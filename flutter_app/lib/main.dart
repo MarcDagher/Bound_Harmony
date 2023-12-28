@@ -22,6 +22,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Bound Harmony',
       theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.white,
+            scrolledUnderElevation: 0,
+            shape: Border.symmetric(
+                horizontal: BorderSide(width: 0.2, color: Color(0xFF544B4C)))),
         scaffoldBackgroundColor: Colors.white,
         primaryColor: const Color(0xFFF03E3F),
         hintColor: const Color(0xFF544B4C),

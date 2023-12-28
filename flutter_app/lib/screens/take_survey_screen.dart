@@ -27,8 +27,12 @@ class TakeSurveyScreen extends StatelessWidget {
     };
 
     return Scaffold(
-      // floatingActionButton: Button(text: 'Submit', handlePressed: () {}),
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Padding(
+          padding: EdgeInsets.only(left: 10),
+          child: Text("Couple's Survey"),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
         child: Column(
@@ -41,13 +45,16 @@ class TakeSurveyScreen extends StatelessWidget {
                   return Column(
                     children: [
                       buildQuestion(entry.key, Theme.of(context).hintColor),
-                      for (String option in entry.value) buildOption(option),
+                      for (String option in entry.value)
+                        buildOption(option, Theme.of(context).hintColor,
+                            Theme.of(context).primaryColor),
                     ],
                   );
                 },
               ),
             ),
-            Button(text: 'Submit', handlePressed: () {})
+            Button(text: 'Submit', handlePressed: () {}),
+            const SizedBox(height: 10)
           ],
         ),
       ),
@@ -59,23 +66,36 @@ class TakeSurveyScreen extends StatelessWidget {
     return Row(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15),
+          padding: const EdgeInsets.only(bottom: 10, top: 30),
           child: Text(
             question,
             style: TextStyle(
-                color: textColor, fontSize: 18, fontWeight: FontWeight.w700),
+                color: textColor, fontSize: 20, fontWeight: FontWeight.w700),
           ),
         ),
       ],
     );
   }
 
-  Widget buildOption(option) {
-    return Container(
-      child: Text(
-        option,
-        style: TextStyle(color: Colors.red),
-      ),
+  Widget buildOption(option, grey, red) {
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 3),
+          decoration: BoxDecoration(
+              border: Border.all(color: grey),
+              borderRadius: BorderRadius.circular(5)),
+          child: ListTile(
+            title: Text(
+              option,
+              style: TextStyle(color: grey),
+            ),
+            leading: Icon(size: 15, Icons.radio_button_off, color: red),
+            horizontalTitleGap: 0.5,
+          ),
+        ),
+        const SizedBox(height: 5)
+      ],
     );
   }
 }
