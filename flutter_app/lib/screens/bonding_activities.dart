@@ -72,7 +72,7 @@ class BondingActivitiesScreen extends StatelessWidget {
     //// Padding between boxes
     ///
     return Padding(
-      padding: const EdgeInsets.only(top: 15),
+      padding: const EdgeInsets.only(top: 10, bottom: 10),
       child: Container(
         decoration: BoxDecoration(
             color: Colors.blue, borderRadius: BorderRadius.circular(15)),
