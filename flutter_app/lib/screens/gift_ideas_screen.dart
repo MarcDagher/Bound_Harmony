@@ -34,97 +34,97 @@ class GiftIdeasScreen extends StatelessWidget {
       ///
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 1, mainAxisSpacing: 10),
-            itemCount: gifts.length,
-            itemBuilder: (contex, index) {
-              final gift = gifts.entries.elementAt(index);
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 1, mainAxisSpacing: 10),
+          itemCount: gifts.length,
+          itemBuilder: (contex, index) {
+            final gift = gifts.entries.elementAt(index);
 
-              return giftCardBuilder(gift.value[1], gift.value[0],
-                  gift.value[2], Theme.of(context).hintColor);
-            },
-          ),
+            return giftCardBuilder(gift.value[1], gift.value[0], gift.value[2],
+                Theme.of(context).hintColor);
+          },
         ),
       ),
       bottomNavigationBar: const MyNavigationBar(),
     );
   }
 
-  //////// Builder method
+  //////// Card Builder method
   ///
   ///
   Widget giftCardBuilder(
       String image, String name, String description, Color nameColor) {
     //// main card container
     ///
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: Colors.grey[300],
-      ),
+    return Padding(
+      padding: const EdgeInsets.only(top: 10, bottom: 10),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: Colors.grey[300],
+        ),
 
-      /////// Column joining the three (image frame, name, description)
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding:
-                const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 10),
-            child: Row(
-              ////// Expanded row to give full width to image frame
-              ///
+        /////// Column joining the three (image frame, name, description)
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                  top: 15, left: 15, right: 15, bottom: 10),
+              child: Row(
+                ////// Expanded row to give full width to image frame
+                ///
+                children: [
+                  Expanded(
+                    child: Container(
+                        height: 200,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Center(child: Text(image))),
+                  ),
+                ],
+              ),
+            ),
+
+            ///// Row to align the texts to start
+            ///
+            ///
+            Row(
               children: [
-                Expanded(
-                  child: Container(
-                      height: 200,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15)),
-                      child: Center(child: Text(image))),
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 15),
+
+                    ////// Column of texts
+                    ///
+                    ///
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          name,
+                          style: TextStyle(
+                              color: nameColor,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                          child: Text(
+                            description,
+                            style: TextStyle(color: nameColor),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
-          ),
-
-          ///// Row to align the texts to start
-          ///
-          ///
-          Row(
-            children: [
-              Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15),
-
-                  ////// Column of texts
-                  ///
-                  ///
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        name,
-                        style: TextStyle(
-                            color: nameColor,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                        child: Text(
-                          description,
-                          style: TextStyle(color: nameColor),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
