@@ -36,7 +36,7 @@ class GiftIdeasScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 25),
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 1, mainAxisSpacing: 10),
+              crossAxisCount: 1, crossAxisSpacing: 5),
           itemCount: gifts.length,
           itemBuilder: (contex, index) {
             final gift = gifts.entries.elementAt(index);
