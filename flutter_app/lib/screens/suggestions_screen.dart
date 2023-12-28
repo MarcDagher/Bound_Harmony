@@ -1,8 +1,9 @@
 import 'package:bound_harmony/reusables/navigation_bar.dart';
 import 'package:flutter/material.dart';
 
-class SurveysScreen extends StatelessWidget {
-  const SurveysScreen({super.key});
+class SuggestionsScreen extends StatelessWidget {
+  const SuggestionsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

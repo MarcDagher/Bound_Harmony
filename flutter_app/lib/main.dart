@@ -5,6 +5,7 @@ import 'package:bound_harmony/screens/my_partners_screen.dart';
 import 'package:bound_harmony/screens/onBoarding_screen.dart';
 import 'package:bound_harmony/screens/profile_screen.dart';
 import 'package:bound_harmony/screens/signup_screen.dart';
+import 'package:bound_harmony/screens/suggestions_screen.dart';
 import 'package:bound_harmony/screens/surveys_screen.dart';
 import 'package:bound_harmony/screens/take_survey_screen.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         fontFamily: "Nunito",
         useMaterial3: true,
       ),
-      home: const TakeSurveyScreen(),
+      home: const SuggestionsScreen(),
     );
   }
 }
