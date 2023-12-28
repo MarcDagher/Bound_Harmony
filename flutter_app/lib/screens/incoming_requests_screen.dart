@@ -14,7 +14,18 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
     'first@123.com',
     'second@123.com',
     'third@123.com',
-    'fourth@123.com'
+    'fourth@123.com',
+    'fourth@123.com',
+    'fourth@123.com',
+    'fourth@123.com',
+    'fourth@123.com',
+    'fourth@123.com',
+    'fourth@123.com',
+    'fourth@123.com',
+    'fourth@123.com',
+    'fourth@123.com',
+    'fourth@123.com',
+    'fourth@123.com',
   ];
 
   @override
@@ -29,7 +40,6 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
             style: TextStyle(fontWeight: FontWeight.w600),
           ),
         ),
-        toolbarHeight: 100,
       ),
 
       //// END OF APPBAR /////
@@ -80,7 +90,7 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: MyNavigationBar(),
+      bottomNavigationBar: const MyNavigationBar(),
     );
   }
 
