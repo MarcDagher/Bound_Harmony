@@ -58,13 +58,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ///////////////////// Column: BUTTON + Text ///////////////////////
             Column(
               children: [
-                Row(
-                  children: [
-                    Button(
-                      text: 'Log In',
-                      handlePressed: () {},
-                    )
-                  ],
+                Button(
+                  text: 'Log In',
+                  handlePressed: () {},
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 30, bottom: 0),
