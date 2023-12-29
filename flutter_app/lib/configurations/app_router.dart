@@ -69,6 +69,8 @@ class AppNavigation {
                     );
                   },
                   routes: [
+                    /// Surveys sub-route Take Survey
+                    ///
                     GoRoute(
                       path: 'takeSurvey',
                       name: 'Take Survey',
