@@ -21,14 +21,9 @@ class AppNavigation {
   ///
   AppNavigation._();
 
-  /// the initial route that the application will navigate to when it starts
-  ///
-  static String initalRoute = '/profile';
-
   /// Private Navigators keys section
-  /// GlobalKey instances are used to uniquely identify navigators in the app
   // the debug label is for easier identification
-  static final rootNavigatorKey = GlobalKey<NavigatorState>();
+  /// GlobalKey instances are used to uniquely identify navigators in the app
   static final rootNavigatorProfile =
       GlobalKey<NavigatorState>(debugLabel: 'shellProfile');
   static final rootNavigatorAdvice =
@@ -45,11 +40,10 @@ class AppNavigation {
   static final GoRouter router = GoRouter(
 
       /// Go Router Configuration
-      ///
-      // the initial route of the app with its navigator key
-      // the navigator key identifies the root navigator of the app
-      initialLocation: initalRoute,
-      navigatorKey: rootNavigatorKey,
+      initialLocation:
+          '/onBoarding', // initial route that the application will navigate to when it starts
+      navigatorKey: GlobalKey<
+          NavigatorState>(), // identifies the root navigator of the app
       debugLogDiagnostics:
           false, // turn true and check debug console for routes
 
@@ -64,58 +58,6 @@ class AppNavigation {
             },
             //Each StatefulShellBranch represents a different "branch" or part of the application. A branch is essentially a section of the app that has its own navigation stack. In this example, there's a branch for the profile screen.
             branches: <StatefulShellBranch>[
-              // Branch AppStarters
-              StatefulShellBranch(
-                  navigatorKey: rootNavigatorAppStarters,
-                  routes: [
-                    /// AppStarters sub-route On Boarding
-                    ///
-                    GoRoute(
-                        path: '/onBoarding',
-                        name: 'On Boarding',
-                        builder: (context, state) {
-                          return OnBoardingScreen(
-                            key: state.pageKey,
-                          );
-                        },
-                        routes: [
-                          /// AppStarters sub-route login
-                          ///
-                          GoRoute(
-                            path: 'login',
-                            name: 'Log In',
-                            builder: (context, state) {
-                              return LogInScreen(
-                                key: state.pageKey,
-                              );
-                            },
-                          ),
-
-                          /// AppStarters sub-route login
-                          ///
-                          GoRoute(
-                            path: 'signup',
-                            name: 'Sign Up',
-                            builder: (context, state) {
-                              return SignUpScreen(
-                                key: state.pageKey,
-                              );
-                            },
-                          ),
-
-                          /// AppStarters sub-route Connection Setup
-                          ///
-                          GoRoute(
-                            path: 'connectionSetup',
-                            name: 'Connection Setup',
-                            builder: (context, state) {
-                              return ConnectionSetupScreen(
-                                key: state.pageKey,
-                              );
-                            },
-                          ),
-                        ]),
-                  ]),
               // Branch Surveys
               StatefulShellBranch(navigatorKey: rootNavigatorSurveys, routes: [
                 GoRoute(
@@ -243,6 +185,58 @@ class AppNavigation {
                   ],
                 ),
               ]),
+              // Branch AppStarters
+              StatefulShellBranch(
+                  navigatorKey: rootNavigatorAppStarters,
+                  routes: [
+                    /// AppStarters sub-route On Boarding
+                    ///
+                    GoRoute(
+                        path: '/onBoarding',
+                        name: 'On Boarding',
+                        builder: (context, state) {
+                          return OnBoardingScreen(
+                            key: state.pageKey,
+                          );
+                        },
+                        routes: [
+                          /// AppStarters sub-route login
+                          ///
+                          GoRoute(
+                            path: 'login',
+                            name: 'Log In',
+                            builder: (context, state) {
+                              return LogInScreen(
+                                key: state.pageKey,
+                              );
+                            },
+                          ),
+
+                          /// AppStarters sub-route login
+                          ///
+                          GoRoute(
+                            path: 'signup',
+                            name: 'Sign Up',
+                            builder: (context, state) {
+                              return SignUpScreen(
+                                key: state.pageKey,
+                              );
+                            },
+                          ),
+
+                          /// AppStarters sub-route Connection Setup
+                          ///
+                          GoRoute(
+                            path: 'connectionSetup',
+                            name: 'Connection Setup',
+                            builder: (context, state) {
+                              return ConnectionSetupScreen(
+                                key: state.pageKey,
+                              );
+                            },
+                          ),
+                        ]),
+                  ]),
             ]),
       ]);
 }
