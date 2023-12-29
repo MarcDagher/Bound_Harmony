@@ -149,7 +149,7 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
             );
           },
         ),
-        bottomNavigationBar: const MyNavigationBar(),
+        // bottomNavigationBar: const MyNavigationBar(),
       ),
     );
   }

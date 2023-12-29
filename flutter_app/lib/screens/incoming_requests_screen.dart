@@ -90,7 +90,7 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: const MyNavigationBar(),
+      // bottomNavigationBar: const MyNavigationBar(),
     );
   }
 

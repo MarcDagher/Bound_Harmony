@@ -51,7 +51,7 @@ class AppNavigation {
             },
             //Each StatefulShellBranch represents a different "branch" or part of the application. A branch is essentially a section of the app that has its own navigation stack. In this example, there's a branch for the profile screen.
             branches: <StatefulShellBranch>[
-              // Branch Advice
+              // Branch Surveys
               StatefulShellBranch(navigatorKey: rootNavigatorSurveys, routes: [
                 GoRoute(
                   path: '/surveys',
@@ -64,7 +64,7 @@ class AppNavigation {
                 ),
               ]),
 
-              // Branch Advice
+              // Branch Suggestions
               StatefulShellBranch(
                   navigatorKey: rootNavigatorSuggestions,
                   routes: [

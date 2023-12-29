@@ -3,15 +3,25 @@ import 'package:go_router/go_router.dart';
 import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
 
 class MyNavigationBar extends StatefulWidget {
-  const MyNavigationBar({super.key});
+  StatefulNavigationShell navigationShell;
+
+  MyNavigationBar({super.key, required this.navigationShell});
 
   @override
   State<MyNavigationBar> createState() => _MyNavigationBarState();
 }
 
 class _MyNavigationBarState extends State<MyNavigationBar> {
+  /// method for handling navigation branches
+  ///
+  void changeBranch(int index) {
+    widget.navigationShell.goBranch(
+      index,
+      initialLocation: index == widget.navigationShell.currentIndex,
+    );
+  }
+
   int selectedIndex = 0;
-  final List routes = ['/surveys', '/suggestions', '/advice', '/'];
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +31,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
         setState(() {
           selectedIndex = index;
         });
+        changeBranch(selectedIndex);
       },
       iconSize: 30,
       activeColor: Colors.black,
@@ -41,12 +52,6 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
 // survey: app_registration_rounded -- article_outlined -- assignment -- border_color_outlined -- chrome_reader_mode_rounded -- edit_road_rounded
 
 // advice: assistant - beenhere_outlined
-
-
-
-
-
-
 
 // BottomNavigationBar(
 //       type: BottomNavigationBarType.fixed,

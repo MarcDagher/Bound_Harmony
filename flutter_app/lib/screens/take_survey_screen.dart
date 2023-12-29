@@ -71,7 +71,7 @@ class TakeSurveyScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const MyNavigationBar(),
+      // bottomNavigationBar: const MyNavigationBar(),
     );
   }
 

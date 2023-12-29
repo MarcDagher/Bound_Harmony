@@ -1,7 +1,7 @@
 import 'package:bound_harmony/screens/incoming_requests_screen.dart';
 import 'package:bound_harmony/screens/my_partners_screen.dart';
 import 'package:go_router/go_router.dart';
-import 'package:bound_harmony/configurations/bound_harmony_router.dart';
+import 'package:bound_harmony/configurations/app_router.dart';
 import 'package:flutter/material.dart';
 
 void main() {

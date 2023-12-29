@@ -62,7 +62,7 @@ class BondingActivitiesScreen extends StatelessWidget {
                 return cardBuilder(place.value[0], place.value[1],
                     place.value[2], Theme.of(context).hintColor);
               })),
-      bottomNavigationBar: const MyNavigationBar(),
+      // bottomNavigationBar: const MyNavigationBar(),
     );
   }
 
