@@ -1,5 +1,7 @@
 import 'package:bound_harmony/main_view.dart';
 import 'package:bound_harmony/screens/advice_screen.dart';
+import 'package:bound_harmony/screens/bonding_activities_screen.dart';
+import 'package:bound_harmony/screens/date_builder_screen.dart';
 import 'package:bound_harmony/screens/incoming_requests_screen.dart';
 import 'package:bound_harmony/screens/my_partners_screen.dart';
 import 'package:bound_harmony/screens/profile_screen.dart';
@@ -72,14 +74,38 @@ class AppNavigation {
                   navigatorKey: rootNavigatorSuggestions,
                   routes: [
                     GoRoute(
-                      path: '/suggestions',
-                      name: 'Suggestions',
-                      builder: (context, state) {
-                        return SuggestionsScreen(
-                          key: state.pageKey,
-                        );
-                      },
-                    ),
+                        path: '/suggestions',
+                        name: 'Suggestions',
+                        builder: (context, state) {
+                          return SuggestionsScreen(
+                            key: state.pageKey,
+                          );
+                        },
+                        routes: [
+                          /// Suggestions sub-route Date Builder
+                          ///
+                          GoRoute(
+                            path: 'dateBuilder',
+                            name: 'Date Builder',
+                            builder: (context, state) {
+                              return DateBuilderScreen(
+                                key: state.pageKey,
+                              );
+                            },
+                          ),
+
+                          /// Suggestions sub-route Bonding Activities
+                          ///
+                          GoRoute(
+                            path: 'bondingActivities',
+                            name: 'Bonding Activities',
+                            builder: (context, state) {
+                              return BondingActivitiesScreen(
+                                key: state.pageKey,
+                              );
+                            },
+                          ),
+                        ]),
                   ]),
 
               // Branch Advice
