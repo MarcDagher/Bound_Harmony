@@ -55,14 +55,14 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
             // If no partners, display a message and input request bar
             if (partners.isEmpty) {
               widgets.add(
-                const Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 20),
-                      child: Text("You don't have any previous partners"),
-                    ),
-                    SizedBox(height: 5),
-                  ],
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 80),
+                  child: Column(
+                    children: [
+                      Text("You don't have any previous partners"),
+                      SizedBox(height: 5),
+                    ],
+                  ),
                 ),
               );
             }

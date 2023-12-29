@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
 //GiftIdeasScreen, [ Looks Good ]
 //IncomingRequestsScreen, [ Looks Good -- could use more colors]
 //LogInScreen,  [ Looks Good ]
-//MyPartnersScreen, [  Needs ListView Builder maybe  ]
+//MyPartnersScreen, [ Looks Good  ]
 //OnBoardingScreen, [ Looks Good ]
 //ProfileScreen, [ Looks Good ]
 //SignUpScreen, [ Looks Good ] 
