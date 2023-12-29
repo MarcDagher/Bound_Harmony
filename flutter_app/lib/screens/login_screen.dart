@@ -58,7 +58,7 @@ class _LogInScreenState extends State<LogInScreen> {
               children: [
                 Button(
                   text: 'Log In',
-                  handlePressed: () {},
+                  handlePressed: () => context.goNamed('Connection Setup'),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 30, bottom: 0),
