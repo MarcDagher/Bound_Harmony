@@ -1,11 +1,15 @@
 import 'package:bound_harmony/main_view.dart';
 import 'package:bound_harmony/screens/advice_screen.dart';
 import 'package:bound_harmony/screens/bonding_activities_screen.dart';
+import 'package:bound_harmony/screens/connection_setup_screen.dart';
 import 'package:bound_harmony/screens/date_builder_screen.dart';
 import 'package:bound_harmony/screens/gift_ideas_screen.dart';
 import 'package:bound_harmony/screens/incoming_requests_screen.dart';
+import 'package:bound_harmony/screens/login_screen.dart';
 import 'package:bound_harmony/screens/my_partners_screen.dart';
+import 'package:bound_harmony/screens/onboarding_screen.dart';
 import 'package:bound_harmony/screens/profile_screen.dart';
+import 'package:bound_harmony/screens/signup_screen.dart';
 import 'package:bound_harmony/screens/suggestions_screen.dart';
 import 'package:bound_harmony/screens/surveys_screen.dart';
 import 'package:bound_harmony/screens/take_survey_screen.dart';
@@ -33,6 +37,8 @@ class AppNavigation {
       GlobalKey<NavigatorState>(debugLabel: 'shellSurveys');
   static final rootNavigatorSuggestions =
       GlobalKey<NavigatorState>(debugLabel: 'shellSuggestions');
+  static final rootNavigatorAppStarters =
+      GlobalKey<NavigatorState>(debugLabel: 'shellAppStarters');
 
   /// The main router of the application
   ///
@@ -58,6 +64,58 @@ class AppNavigation {
             },
             //Each StatefulShellBranch represents a different "branch" or part of the application. A branch is essentially a section of the app that has its own navigation stack. In this example, there's a branch for the profile screen.
             branches: <StatefulShellBranch>[
+              // Branch AppStarters
+              StatefulShellBranch(
+                  navigatorKey: rootNavigatorAppStarters,
+                  routes: [
+                    /// AppStarters sub-route On Boarding
+                    ///
+                    GoRoute(
+                        path: '/onBoarding',
+                        name: 'On Boarding',
+                        builder: (context, state) {
+                          return OnBoardingScreen(
+                            key: state.pageKey,
+                          );
+                        },
+                        routes: [
+                          /// AppStarters sub-route login
+                          ///
+                          GoRoute(
+                            path: 'login',
+                            name: 'Log In',
+                            builder: (context, state) {
+                              return LogInScreen(
+                                key: state.pageKey,
+                              );
+                            },
+                          ),
+
+                          /// AppStarters sub-route login
+                          ///
+                          GoRoute(
+                            path: 'signup',
+                            name: 'Sign Up',
+                            builder: (context, state) {
+                              return SignUpScreen(
+                                key: state.pageKey,
+                              );
+                            },
+                          ),
+
+                          /// AppStarters sub-route Connection Setup
+                          ///
+                          GoRoute(
+                            path: 'connectionSetup',
+                            name: 'Connection Setup',
+                            builder: (context, state) {
+                              return ConnectionSetupScreen(
+                                key: state.pageKey,
+                              );
+                            },
+                          ),
+                        ]),
+                  ]),
               // Branch Surveys
               StatefulShellBranch(navigatorKey: rootNavigatorSurveys, routes: [
                 GoRoute(
