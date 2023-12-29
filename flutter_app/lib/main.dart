@@ -16,7 +16,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Bound Harmony',
-
       //// Design themes + setup
       ///
       ///
@@ -36,7 +35,7 @@ class MyApp extends StatelessWidget {
       //// Go Router
       ///
       ///
-      routerConfig: boundHarmonyRouter,
+      routerConfig: AppNavigation.router,
     );
   }
 }
