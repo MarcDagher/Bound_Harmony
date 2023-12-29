@@ -1,6 +1,7 @@
 import 'package:bound_harmony/main_view.dart';
 import 'package:bound_harmony/screens/advice_screen.dart';
 import 'package:bound_harmony/screens/incoming_requests_screen.dart';
+import 'package:bound_harmony/screens/my_partners_screen.dart';
 import 'package:bound_harmony/screens/profile_screen.dart';
 import 'package:bound_harmony/screens/suggestions_screen.dart';
 import 'package:bound_harmony/screens/surveys_screen.dart';
@@ -97,26 +98,39 @@ class AppNavigation {
               //This is a class that represents a branch in the application. It contains a navigator key (navigatorKey) and a list of routes specific to that branch.
               StatefulShellBranch(navigatorKey: rootNavigatorProfile, routes: [
                 GoRoute(
-                    path: '/profile',
-                    name: 'Profile',
-                    builder: (context, state) {
-                      return ProfileScreen(
-                        key: state.pageKey,
-                      );
-                    },
+                  path: '/profile',
+                  name: 'Profile',
+                  builder: (context, state) {
+                    return ProfileScreen(
+                      key: state.pageKey,
+                    );
+                  },
 
-                    /// Profile sub-screen: Incoming Requests
+                  /// Profile sub-screen: Incoming Requests
+                  ///
+                  routes: [
+                    GoRoute(
+                        path: 'incomingRequests',
+                        name: 'Incoming Requests',
+                        builder: (context, state) {
+                          return IncomingRequestsScreen(
+                            key: state.pageKey,
+                          );
+                        }),
+
+                    /// Profile sub-screen: My Partners
                     ///
-                    routes: [
-                      GoRoute(
-                          path: 'incomingRequests',
-                          name: 'Incoming Requests',
-                          builder: (context, state) {
-                            return IncomingRequestsScreen(
-                              key: state.pageKey,
-                            );
-                          })
-                    ]),
+                    GoRoute(
+                      path: 'myPartners',
+                      name: 'My Partners',
+                      builder: (context, state) {
+                        return MyPartnersScreen(
+                          key: state.pageKey,
+                        );
+                      },
+                    )
+                  ],
+                ),
               ]),
             ]),
       ]);
