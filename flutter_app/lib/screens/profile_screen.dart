@@ -115,14 +115,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           )
                         ],
                       ),
-                      onPressed: () {})
+                      onPressed: () {
+                        context.goNamed('My Partners');
+                      })
                 ],
               ),
             ],
           ),
         ),
       ),
-      // bottomNavigationBar: const MyNavigationBar(),
     );
   }
 }
