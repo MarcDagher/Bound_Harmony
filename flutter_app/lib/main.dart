@@ -38,18 +38,18 @@ class MyApp extends StatelessWidget {
 }
 
 // Screens [ 
-//AdviceScreen,  [ Looks Good ] 
-//BondingActivitiesScreen, [ Looks Good ]
-//ConnectionSetupScreen, [ Looks Good ]
-//DateBuilderScreen,  [ Looks Good ]
-//GiftIdeasScreen, [ Looks Good ]
-//IncomingRequestsScreen, [ Looks Good -- could use more colors]
-//LogInScreen,  [ Looks Good ]
-//MyPartnersScreen, [ Looks Good  ]
-//OnBoardingScreen, [ Looks Good ]
-//ProfileScreen, [ Looks Good ]
-//SignUpScreen, [ Looks Good ] 
-//SuggestionsScreen, [ Looks Good ]
-//SurveysScreen, [ Looks Good ]
-//TakeSurveyScreen [ Looks Good ]
+//AdviceScreen,   
+//BondingActivitiesScreen, 
+//ConnectionSetupScreen, [ When keyboard shows, items aren't dissapearing ]
+//DateBuilderScreen,  
+//GiftIdeasScreen, 
+//IncomingRequestsScreen, [ Needs better colors]
+//LogInScreen,  [ When keyboard shows, items aren't dissapearing ] [Shouldn't have navBar]
+//MyPartnersScreen,
+//OnBoardingScreen,  [Shouldn't have navBar]
+//ProfileScreen, [ When keyboard shows, items aren't dissapearing ]
+//SignUpScreen,  [Shouldn't have navBar] [ When keyboard shows, items aren't dissapearing ]
+//SuggestionsScreen, 
+//SurveysScreen, 
+//TakeSurveyScreen 
 //] 
