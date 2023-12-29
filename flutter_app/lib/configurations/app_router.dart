@@ -39,6 +39,8 @@ class AppNavigation {
       // the navigator key identifies the root navigator of the app
       initialLocation: initalRoute,
       navigatorKey: rootNavigatorKey,
+      debugLogDiagnostics:
+          false, // turn true and check debug console for routes
 
       /// route congiguration
       ///
@@ -95,14 +97,26 @@ class AppNavigation {
               //This is a class that represents a branch in the application. It contains a navigator key (navigatorKey) and a list of routes specific to that branch.
               StatefulShellBranch(navigatorKey: rootNavigatorProfile, routes: [
                 GoRoute(
-                  path: '/profile',
-                  name: 'Profile',
-                  builder: (context, state) {
-                    return ProfileScreen(
-                      key: state.pageKey,
-                    );
-                  },
-                ),
+                    path: '/profile',
+                    name: 'Profile',
+                    builder: (context, state) {
+                      return ProfileScreen(
+                        key: state.pageKey,
+                      );
+                    },
+
+                    /// Profile sub-screen: Incoming Requests
+                    ///
+                    routes: [
+                      GoRoute(
+                          path: 'incomingRequests',
+                          name: 'Incoming Requests',
+                          builder: (context, state) {
+                            return IncomingRequestsScreen(
+                              key: state.pageKey,
+                            );
+                          })
+                    ]),
               ]),
             ]),
       ]);

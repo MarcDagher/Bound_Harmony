@@ -2,6 +2,7 @@ import 'package:bound_harmony/reusables/display_box.dart';
 import 'package:bound_harmony/reusables/navigation_bar.dart';
 import 'package:bound_harmony/reusables/text_input.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -86,7 +87,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           )
                         ],
                       ),
-                      onPressed: () {}),
+                      onPressed: () {
+                        context.goNamed("Incoming Requests");
+                      }),
                   const SizedBox(height: 5),
 
                   // Custom Navigation button
