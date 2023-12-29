@@ -8,6 +8,7 @@ import 'package:bound_harmony/screens/my_partners_screen.dart';
 import 'package:bound_harmony/screens/profile_screen.dart';
 import 'package:bound_harmony/screens/suggestions_screen.dart';
 import 'package:bound_harmony/screens/surveys_screen.dart';
+import 'package:bound_harmony/screens/take_survey_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -67,6 +68,17 @@ class AppNavigation {
                       key: state.pageKey,
                     );
                   },
+                  routes: [
+                    GoRoute(
+                      path: 'takeSurvey',
+                      name: 'Take Survey',
+                      builder: (context, state) {
+                        return TakeSurveyScreen(
+                          key: state.pageKey,
+                        );
+                      },
+                    )
+                  ],
                 ),
               ]),
 
