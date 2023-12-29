@@ -1,5 +1,7 @@
 import 'package:bound_harmony/screens/incoming_requests_screen.dart';
 import 'package:bound_harmony/screens/my_partners_screen.dart';
+import 'package:go_router/go_router.dart';
+import 'package:bound_harmony/configurations/bound_harmony_router.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,9 +13,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Bound Harmony',
+
+      //// Design themes + setup
+      ///
+      ///
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
             backgroundColor: Colors.white,
@@ -26,7 +32,11 @@ class MyApp extends StatelessWidget {
         fontFamily: "Nunito",
         useMaterial3: true,
       ),
-      home: const MyPartnersScreen(),
+
+      //// Go Router
+      ///
+      ///
+      routerConfig: boundHarmonyRouter,
     );
   }
 }

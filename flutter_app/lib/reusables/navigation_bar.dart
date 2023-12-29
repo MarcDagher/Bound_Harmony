@@ -16,8 +16,8 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
-      backgroundColor: Color.fromARGB(255, 233, 232, 232),
-      fixedColor: Color.fromARGB(255, 233, 98, 98),
+      backgroundColor: const Color.fromARGB(255, 233, 232, 232),
+      fixedColor: const Color.fromARGB(255, 233, 98, 98),
       items: const [
         BottomNavigationBarItem(
             icon: Icon(Icons.border_color_outlined), label: 'Surveys'),
