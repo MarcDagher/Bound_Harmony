@@ -1,5 +1,6 @@
 import 'package:bound_harmony/reusables/navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SuggestionsScreen extends StatelessWidget {
   const SuggestionsScreen({super.key});
@@ -32,25 +33,30 @@ class SuggestionsScreen extends StatelessWidget {
               children: [
                 //////// ON CLICK - GO TO Date Builder
 
-                buildSurveyBox(
+                buildSuggestionBox(
                     'Date Builder',
                     const Color.fromARGB(255, 226, 217, 215),
-                    const Color(0xFF5CD3FF)),
+                    const Color(0xFF5CD3FF),
+                    'Date Builder',
+                    context),
                 const SizedBox(height: 15),
 
                 //////// ON CLICK - GO TO Date Bonding Activities
-                buildSurveyBox(
+                buildSuggestionBox(
                     'Bonding Activities',
                     const Color.fromARGB(255, 241, 214, 174),
-                    const Color.fromARGB(255, 236, 55, 70)),
+                    const Color.fromARGB(255, 236, 55, 70),
+                    'Bonding Activities',
+                    context),
                 const SizedBox(height: 15),
 
                 //////// ON CLICK - GO TO Date Bonding Activities
-                buildSurveyBox(
-                  'Gift Ideas',
-                  const Color.fromARGB(255, 150, 200, 180),
-                  const Color.fromARGB(255, 50, 120, 150),
-                ),
+                buildSuggestionBox(
+                    'Gift Ideas',
+                    const Color.fromARGB(255, 150, 200, 180),
+                    const Color.fromARGB(255, 50, 120, 150),
+                    'Gift Ideas',
+                    context),
               ],
             ),
           )
@@ -60,28 +66,34 @@ class SuggestionsScreen extends StatelessWidget {
     );
   }
 
-  buildSurveyBox(String text, Color color1, Color color2) {
+  buildSuggestionBox(String text, Color color1, Color color2, String route,
+      BuildContext context) {
     return Expanded(
       child: Row(
         children: [
           Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [color1, color2]),
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.grey,
+            child: GestureDetector(
+              onTap: () {
+                context.goNamed(route);
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [color1, color2]),
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.grey,
+                ),
+                child: Center(
+                    child: Text(
+                  text,
+                  style: const TextStyle(
+                      fontSize: 25,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600),
+                )),
               ),
-              child: Center(
-                  child: Text(
-                text,
-                style: const TextStyle(
-                    fontSize: 25,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600),
-              )),
             ),
           ),
         ],
