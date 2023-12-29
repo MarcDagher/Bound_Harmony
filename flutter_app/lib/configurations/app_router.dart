@@ -34,6 +34,8 @@ class AppNavigation {
       GlobalKey<NavigatorState>(debugLabel: 'shellSuggestions');
   static final rootNavigatorAppStarters =
       GlobalKey<NavigatorState>(debugLabel: 'shellAppStarters');
+  static final rootNavigatorAuth =
+      GlobalKey<NavigatorState>(debugLabel: 'shellAppAuth');
 
   /// The main router of the application
   ///
@@ -192,52 +194,53 @@ class AppNavigation {
                     /// AppStarters sub-route On Boarding
                     ///
                     GoRoute(
-                        path: '/onBoarding',
-                        name: 'On Boarding',
+                      path: '/onBoarding',
+                      name: 'On Boarding',
+                      builder: (context, state) {
+                        return OnBoardingScreen(
+                          key: state.pageKey,
+                        );
+                      },
+                    )
+                  ]),
+              StatefulShellBranch(navigatorKey: rootNavigatorAuth, routes: [
+                /// AppStarters sub-route login
+                ///
+                GoRoute(
+                    path: '/login',
+                    name: 'Log In',
+                    builder: (context, state) {
+                      return LogInScreen(
+                        key: state.pageKey,
+                      );
+                    },
+                    routes: [
+                      /// AppStarters sub-route login
+                      ///
+                      GoRoute(
+                        path: 'signup',
+                        name: 'Sign Up',
                         builder: (context, state) {
-                          return OnBoardingScreen(
+                          return SignUpScreen(
                             key: state.pageKey,
                           );
                         },
-                        routes: [
-                          /// AppStarters sub-route login
-                          ///
-                          GoRoute(
-                            path: 'login',
-                            name: 'Log In',
-                            builder: (context, state) {
-                              return LogInScreen(
-                                key: state.pageKey,
-                              );
-                            },
-                          ),
+                      ),
 
-                          /// AppStarters sub-route login
-                          ///
-                          GoRoute(
-                            path: 'signup',
-                            name: 'Sign Up',
-                            builder: (context, state) {
-                              return SignUpScreen(
-                                key: state.pageKey,
-                              );
-                            },
-                          ),
-
-                          /// AppStarters sub-route Connection Setup
-                          ///
-                          GoRoute(
-                            path: 'connectionSetup',
-                            name: 'Connection Setup',
-                            builder: (context, state) {
-                              return ConnectionSetupScreen(
-                                key: state.pageKey,
-                              );
-                            },
-                          ),
-                        ]),
-                  ]),
-            ]),
+                      /// AppStarters sub-route Connection Setup
+                      ///
+                      GoRoute(
+                        path: 'connectionSetup',
+                        name: 'Connection Setup',
+                        builder: (context, state) {
+                          return ConnectionSetupScreen(
+                            key: state.pageKey,
+                          );
+                        },
+                      ),
+                    ]),
+              ]),
+            ])
       ]);
 }
 

@@ -18,9 +18,8 @@ class _MainViewState extends State<MainView> {
   @override
   Widget build(BuildContext context) {
     // final currentNamedLocation = GoRouter.of(context).namedLocation(pathParameters: );
-    final currentNamedLocation =
-        GoRouter.of(context).namedLocation('Connection Setup');
-
+    final currentNamedLocation = GoRouter.of(context).namedLocation('Log In');
+// Log In - On Boarding - Sign Up
     //// if user doesnt have account
     /// take to register
 
@@ -33,9 +32,9 @@ class _MainViewState extends State<MainView> {
     print(currentNamedLocation);
     print('Im here for you $currentNamedLocation');
     if (currentNamedLocation == '/onBoarding' ||
-        currentNamedLocation == '/onBoarding/login' ||
-        currentNamedLocation == '/onBoarding/signup' ||
-        currentNamedLocation == '/onBoarding/connectionSetup') {
+        currentNamedLocation == '/login' ||
+        currentNamedLocation == '/login/signup' ||
+        currentNamedLocation == '/login/connectionSetup') {
       return Scaffold(
         /// depending on The shell branch
         ///

@@ -59,13 +59,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Column(
               children: [
                 Button(
-                  text: 'Log In',
+                  text: 'Create Account',
                   handlePressed: () {},
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 30, bottom: 0),
+                  padding: const EdgeInsets.only(top: 20, bottom: 0),
                   child: Text(
-                    "Don't have an account? Sign Up",
+                    "If you have an account Sign In",
                     style: TextStyle(color: Theme.of(context).primaryColor),
                   ),
                 )

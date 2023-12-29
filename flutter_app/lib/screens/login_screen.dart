@@ -1,6 +1,7 @@
 import 'package:bound_harmony/reusables/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:bound_harmony/reusables/button.dart';
+import 'package:go_router/go_router.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
@@ -61,9 +62,12 @@ class _LogInScreenState extends State<LogInScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 30, bottom: 0),
-                  child: Text(
-                    "Don't have an account? Sign Up",
-                    style: TextStyle(color: Theme.of(context).primaryColor),
+                  child: GestureDetector(
+                    onTap: () => context.goNamed('Sign Up'),
+                    child: Text(
+                      "Don't have an account? Sign Up",
+                      style: TextStyle(color: Theme.of(context).primaryColor),
+                    ),
                   ),
                 )
               ],
