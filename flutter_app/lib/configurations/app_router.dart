@@ -2,6 +2,7 @@ import 'package:bound_harmony/main_view.dart';
 import 'package:bound_harmony/screens/advice_screen.dart';
 import 'package:bound_harmony/screens/bonding_activities_screen.dart';
 import 'package:bound_harmony/screens/date_builder_screen.dart';
+import 'package:bound_harmony/screens/gift_ideas_screen.dart';
 import 'package:bound_harmony/screens/incoming_requests_screen.dart';
 import 'package:bound_harmony/screens/my_partners_screen.dart';
 import 'package:bound_harmony/screens/profile_screen.dart';
@@ -101,6 +102,18 @@ class AppNavigation {
                             name: 'Bonding Activities',
                             builder: (context, state) {
                               return BondingActivitiesScreen(
+                                key: state.pageKey,
+                              );
+                            },
+                          ),
+
+                          /// Suggestions sub-route Gift Ideas
+                          ///
+                          GoRoute(
+                            path: 'giftIdeas',
+                            name: 'Gift Ideas',
+                            builder: (context, state) {
+                              return GiftIdeasScreen(
                                 key: state.pageKey,
                               );
                             },
