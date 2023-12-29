@@ -56,7 +56,7 @@ class SuggestionsScreen extends StatelessWidget {
           )
         ]),
       ),
-      bottomNavigationBar: const MyNavigationBar(),
+      // bottomNavigationBar: const MyNavigationBar(),
     );
   }
 

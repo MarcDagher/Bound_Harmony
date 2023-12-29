@@ -22,6 +22,12 @@ class AppNavigation {
   static final rootNavigatorKey = GlobalKey<NavigatorState>();
   static final rootNavigatorProfile =
       GlobalKey<NavigatorState>(debugLabel: 'shellProfile');
+  static final rootNavigatorAdvice =
+      GlobalKey<NavigatorState>(debugLabel: 'shellAdvice');
+  static final rootNavigatorSurveys =
+      GlobalKey<NavigatorState>(debugLabel: 'shellSurveys');
+  static final rootNavigatorSuggestions =
+      GlobalKey<NavigatorState>(debugLabel: 'shellSuggestions');
 
   /// The main router of the application
   ///
@@ -45,19 +51,60 @@ class AppNavigation {
             },
             //Each StatefulShellBranch represents a different "branch" or part of the application. A branch is essentially a section of the app that has its own navigation stack. In this example, there's a branch for the profile screen.
             branches: <StatefulShellBranch>[
-              // Branch Profile#
+              // Branch Advice
+              StatefulShellBranch(navigatorKey: rootNavigatorSurveys, routes: [
+                GoRoute(
+                  path: '/surveys',
+                  name: 'Surveys',
+                  builder: (context, state) {
+                    return SurveysScreen(
+                      key: state.pageKey,
+                    );
+                  },
+                ),
+              ]),
+
+              // Branch Advice
+              StatefulShellBranch(
+                  navigatorKey: rootNavigatorSuggestions,
+                  routes: [
+                    GoRoute(
+                      path: '/suggestions',
+                      name: 'Suggestions',
+                      builder: (context, state) {
+                        return SuggestionsScreen(
+                          key: state.pageKey,
+                        );
+                      },
+                    ),
+                  ]),
+
+              // Branch Advice
+              StatefulShellBranch(navigatorKey: rootNavigatorAdvice, routes: [
+                GoRoute(
+                  path: '/advice',
+                  name: 'Advice',
+                  builder: (context, state) {
+                    return AdviceScreen(
+                      key: state.pageKey,
+                    );
+                  },
+                ),
+              ]),
+              // Branch Profile
               //This is a class that represents a branch in the application. It contains a navigator key (navigatorKey) and a list of routes specific to that branch.
               StatefulShellBranch(navigatorKey: rootNavigatorProfile, routes: [
                 GoRoute(
                   path: '/profile',
+                  name: 'Profile',
                   builder: (context, state) {
                     return ProfileScreen(
                       key: state.pageKey,
                     );
                   },
-                )
-              ])
-            ])
+                ),
+              ]),
+            ]),
       ]);
 }
 

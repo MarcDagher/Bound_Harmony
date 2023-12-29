@@ -189,7 +189,7 @@ class _AdviceScreenState extends State<AdviceScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: const MyNavigationBar(),
+      // bottomNavigationBar: const MyNavigationBar(),
     );
   }
 }

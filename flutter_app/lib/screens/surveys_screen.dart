@@ -98,7 +98,7 @@ class SurveysScreen extends StatelessWidget {
           )
         ]),
       ),
-      bottomNavigationBar: const MyNavigationBar(),
+      // bottomNavigationBar: const MyNavigationBar(),
     );
   }
 }
