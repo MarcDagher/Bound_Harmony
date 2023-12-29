@@ -15,11 +15,12 @@ class _MainViewState extends State<MainView> {
   bool loggedIn = true;
   bool hasAccount = true;
   int selectedIndex = 3;
+
   @override
   Widget build(BuildContext context) {
-    // final currentNamedLocation = GoRouter.of(context).namedLocation(pathParameters: );
-    final currentNamedLocation = GoRouter.of(context).namedLocation('Log In');
-// Log In - On Boarding - Sign Up
+    String currentNamedLocation =
+        GoRouter.of(context).routeInformationProvider.value.uri.toString();
+
     //// if user doesnt have account
     /// take to register
 
@@ -29,8 +30,9 @@ class _MainViewState extends State<MainView> {
     //// if logged in
     ///
     // if (hasAccount == true && loggedIn == true) {}
-    print(currentNamedLocation);
-    print('Im here for you $currentNamedLocation');
+    // print('Im here for you $currentNamedLocation');
+    print(GoRouter.of(context).routeInformationProvider.value.uri);
+
     if (currentNamedLocation == '/onBoarding' ||
         currentNamedLocation == '/login' ||
         currentNamedLocation == '/login/signup' ||
@@ -39,9 +41,6 @@ class _MainViewState extends State<MainView> {
         /// depending on The shell branch
         ///
         body: widget.navigationShell,
-
-        /// Shell branch handler is in navbar
-        ///
       );
     } else {
       return Scaffold(

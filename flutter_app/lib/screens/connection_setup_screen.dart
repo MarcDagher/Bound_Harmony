@@ -1,6 +1,7 @@
 import 'package:bound_harmony/reusables/button.dart';
 import 'package:bound_harmony/reusables/text_input.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ConnectionSetupScreen extends StatelessWidget {
   const ConnectionSetupScreen({super.key});
@@ -46,9 +47,8 @@ class ConnectionSetupScreen extends StatelessWidget {
                 const TextInputField(placeholder: "Enter your partner's email"),
                 const SizedBox(height: 25),
                 Button(
-                  text: 'Send Request',
-                  handlePressed: () {},
-                ),
+                    text: 'Send Request',
+                    handlePressed: () => context.go('/profile')),
               ],
             ),
           ],
