@@ -21,9 +21,10 @@ class AppNavigation {
   ///
   AppNavigation._();
 
-  /// Private Navigators keys section
   // the debug label is for easier identification
-  /// GlobalKey instances are used to uniquely identify navigators in the app
+  /// GlobalKey instances are used to uniquely identify the different navigators in the app
+  /// Each NavigatorState coresponds to a branch in the app and these keys help manage and control the navigation state within the branches (The main screens of the branch and its sub-screens)
+  /// Theses are used when defining branches to ensure that each branch has its own navigation state. This organization helps in managing navigation independently within the different sections
   static final rootNavigatorProfile =
       GlobalKey<NavigatorState>(debugLabel: 'shellProfile');
   static final rootNavigatorAdvice =
@@ -41,7 +42,11 @@ class AppNavigation {
   ///
   static final GoRouter router = GoRouter(
 
-      // identifies the root navigator of the app
+      // Identifies the root navigator of the app
+      // This key is then used to uniquely identify and interact with the top-level navigator
+      // The top level navigator manages stack of routes and determines which route is currently displayed.Each Navigator has its own state.
+      // The navigatorKey inside the MaterialApp is used to obtain the NavigatorState of the top-level navigator. This key allows you to perform actions on the top-level navigator, such as pushing or popping routes.
+      // The navigator key below is associated with the Navigator that the GoRouter manages. It doesn't represent the top-level navigator but the navigator specifically created for the routes defined within the GoRouter.
       navigatorKey: GlobalKey<NavigatorState>(),
 
       /// Go Router Configuration, initial route that the application will navigate to when it starts
@@ -52,9 +57,17 @@ class AppNavigation {
       /// route congiguration
       ///
       routes: <RouteBase>[
+        /// Helps manage navigation within different branches
+        ///  An IndexedStack is a widget that shows only one of its children at a time, and the child to be displayed is determined by an index.
+        ///  the index corresponds to the currently active "branch"
         StatefulShellRoute.indexedStack(
+
+            /// context includes information about the location of the widget in the widget tree, theme data, media queries,
+            /// The state parameter is an instance of the GoRouterState. It represents the state of the GoRouter at the point where this route is being built.
+            /// navigationShell parameter is used to pass an instance of StatefulNavigationShell which represent the navigation structure of a specific branch within the application
             builder: (context, state, navigationShell) {
               return MainView(
+                // to provide info of navigation structure
                 navigationShell: navigationShell,
               );
             },

@@ -5,6 +5,9 @@ import 'package:go_router/go_router.dart';
 class MainView extends StatefulWidget {
   const MainView({super.key, required this.navigationShell});
 
+  // we use the navigationShell to customize a widget's behavior or appearance based on the current navigation state.
+  // To determing hoe the UI should be structerd based on the current Navigation state
+  // Different branches of the application may have distinct navigation structures, and the navigationShell provides information about the current structure.
   final StatefulNavigationShell navigationShell;
 
   @override
