@@ -21,7 +21,7 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
     User(email: 'person@email.com', name: 'Person 5'),
     User(email: 'person@email.com', name: 'Person 6')
   ];
-  bool currentPartner = false;
+  bool currentPartner = true;
 
   @override
   Widget build(BuildContext context) {
@@ -61,52 +61,62 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
             }
 
             // If has partners and a current, display all except the last one. The last one in red
-            // if (partners.isNotEmpty && currentPartner) {
-            //   final name = partners[index].name;
-            // final email = partners[index].email;
-            //   for (int i = 0; i < partners.length - 1; i++) {
-            //     widgets.add(
-            //       Column(
-            //         children: [
-            //           // DisplayBox(text: partners[i]), /////////
-            //           const SizedBox(height: 5),
-            //         ],
-            //       ),
-            //     );
-            //   }
+            if (partners.isNotEmpty && currentPartner) {
+              //   final name = partners[index].name;
+              // final email = partners[index].email;
+              for (int i = 0; i < partners.length - 1; i++) {
+                widgets.add(
+                  Column(
+                    children: [
+                      buildUserListTile(
+                          partners[i].name,
+                          partners[i].email,
+                          context,
+                          Icons.accessibility_sharp,
+                          Theme.of(context).hintColor),
+                      const SizedBox(height: 5),
+                    ],
+                  ),
+                );
+              }
 
-            // Creating the red button that can disconnect on click
-            // widgets.add(
-            // Row(
-            //   children: [
-            //     Expanded(
-            //       child: MaterialButton(
-            //         color: Theme.of(context).primaryColor,
-            //         shape: RoundedRectangleBorder(
-            //           borderRadius: BorderRadius.circular(10),
-            //         ),
-            //         onPressed: () {},
-            //         child: Padding(
-            //           padding: const EdgeInsets.symmetric(vertical: 17),
-            //           child: Row(
-            //             children: [
-            //               Text(
-            //                 partners[partners.length - 1],
-            //                 style: const TextStyle(
-            //                   color: Colors.white,
-            //                   fontWeight: FontWeight.w600,
-            //                   fontSize: 20,
-            //                 ),
-            //               ),
-            //             ],
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
-            //   );
-            // }
+              // Creating the red button that can disconnect on click
+              widgets.add(buildUserListTile(
+                      partners[partners.length - 1].name,
+                      partners[partners.length - 1].email,
+                      context,
+                      Icons.favorite,
+                      Theme.of(context).primaryColor)
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       child: MaterialButton(
+                  //         color: Theme.of(context).primaryColor,
+                  //         shape: RoundedRectangleBorder(
+                  //           borderRadius: BorderRadius.circular(10),
+                  //         ),
+                  //         onPressed: () {},
+                  //         child: Padding(
+                  //           padding: const EdgeInsets.symmetric(vertical: 17),
+                  //           child: Row(
+                  //             children: [
+                  //               Text(
+                  //                 partners[partners.length - 1].name,
+                  //                 style: const TextStyle(
+                  //                   color: Colors.white,
+                  //                   fontWeight: FontWeight.w600,
+                  //                   fontSize: 20,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  );
+            }
 
             // If has partners without a current, display all + input request bar
             if (partners.isNotEmpty && !currentPartner) {
@@ -117,7 +127,11 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: buildUserListTile(
-                            partner.name, partner.email, context),
+                            partner.name,
+                            partner.email,
+                            context,
+                            Icons.accessibility_sharp,
+                            Theme.of(context).hintColor),
                       ),
                     ],
                   ),
@@ -153,7 +167,8 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
   }
 
   // I did it here to avoid creating a separate file for only a one time import
-  Widget buildUserListTile(String name, String email, BuildContext context) =>
+  Widget buildUserListTile(String name, String email, BuildContext context,
+          IconData icon, Color iconColor) =>
       Column(
         children: [
           Container(
@@ -170,9 +185,9 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: Icon(
-                      Icons.accessibility_sharp,
+                      icon,
                       size: 35,
-                      color: Theme.of(context).hintColor,
+                      color: iconColor,
                     ),
                   ),
                   Column(
