@@ -56,7 +56,7 @@ class _AdviceScreenState extends State<AdviceScreen> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color.fromARGB(255, 253, 158, 158),
+              Color.fromARGB(255, 247, 182, 182),
               Color.fromARGB(255, 248, 239, 239),
             ],
             begin: Alignment.topLeft,
@@ -70,10 +70,11 @@ class _AdviceScreenState extends State<AdviceScreen> {
               ///
               ///
               child: GroupedListView<Message, DateTime>(
+                // this child creates the time card and groups the elements (messages) according to their DateTime
                 padding: const EdgeInsets.all(8),
                 reverse: true,
                 order: GroupedListOrder.DESC,
-                useStickyGroupSeparators: false,
+                useStickyGroupSeparators: true,
                 floatingHeader: true,
                 // elements are the items that will be filling our list
                 elements: messages,
@@ -106,7 +107,7 @@ class _AdviceScreenState extends State<AdviceScreen> {
                 ),
 
                 /// Building messages Card
-                /// if its my => message align right : else left
+                /// if its my message =>  align right : else left
                 itemBuilder: (context, Message message) => Align(
                   alignment: message.isSentByMe
                       ? Alignment.centerRight
@@ -145,7 +146,7 @@ class _AdviceScreenState extends State<AdviceScreen> {
                       style: TextStyle(color: Theme.of(context).hintColor),
                       decoration: InputDecoration(
                           filled: true,
-                          fillColor: const Color.fromARGB(132, 201, 199, 199),
+                          fillColor: const Color.fromARGB(62, 201, 199, 199),
                           border: OutlineInputBorder(
                               borderSide: BorderSide.none,
                               borderRadius: BorderRadius.circular(20)),
@@ -155,7 +156,7 @@ class _AdviceScreenState extends State<AdviceScreen> {
                           hintStyle:
                               TextStyle(color: Theme.of(context).hintColor)),
 
-                      /// handling submit
+                      /// Input Field
                       ///
                       ///// FOR THE HANDLING OF THE MESSAGES, USE ONCHANGED AND CREATE A CONTROLLER. THEN HAVE A BUTTON SUBMIT THE CHANGED VALUES ONCLICK
                       onSubmitted: (text) {
