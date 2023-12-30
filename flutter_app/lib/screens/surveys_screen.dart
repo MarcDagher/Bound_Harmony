@@ -1,4 +1,3 @@
-import 'package:bound_harmony/reusables/navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -109,7 +108,6 @@ class SurveysScreen extends StatelessWidget {
           )
         ]),
       ),
-      // bottomNavigationBar: MyNavigationBar(navigationShell: widget.navigationShell),
     );
   }
 }

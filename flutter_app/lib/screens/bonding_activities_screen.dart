@@ -1,4 +1,3 @@
-import 'package:bound_harmony/reusables/navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 class BondingActivitiesScreen extends StatelessWidget {
@@ -62,7 +61,6 @@ class BondingActivitiesScreen extends StatelessWidget {
                 return cardBuilder(place.value[0], place.value[1],
                     place.value[2], Theme.of(context).hintColor);
               })),
-      // bottomNavigationBar: const MyNavigationBar(),
     );
   }
 

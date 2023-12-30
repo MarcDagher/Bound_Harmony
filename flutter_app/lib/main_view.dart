@@ -20,7 +20,6 @@ class _MainViewState extends State<MainView> {
   Widget build(BuildContext context) {
     String currentNamedLocation =
         GoRouter.of(context).routeInformationProvider.value.uri.toString();
-
     //// if user doesnt have account
     /// take to register
 
@@ -31,7 +30,7 @@ class _MainViewState extends State<MainView> {
     ///
     // if (hasAccount == true && loggedIn == true) {}
     // print('Im here for you $currentNamedLocation');
-    print(GoRouter.of(context).routeInformationProvider.value.uri);
+    // print(GoRouter.of(context).routeInformationProvider.value.uri);
 
     if (currentNamedLocation == '/onBoarding' ||
         currentNamedLocation == '/login' ||

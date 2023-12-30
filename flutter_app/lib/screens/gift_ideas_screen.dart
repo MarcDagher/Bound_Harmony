@@ -1,4 +1,3 @@
-import 'package:bound_harmony/reusables/navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 class GiftIdeasScreen extends StatelessWidget {
@@ -46,7 +45,6 @@ class GiftIdeasScreen extends StatelessWidget {
           },
         ),
       ),
-      // bottomNavigationBar: const MyNavigationBar(),
     );
   }
 

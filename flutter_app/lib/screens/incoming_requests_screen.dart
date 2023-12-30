@@ -1,4 +1,3 @@
-import 'package:bound_harmony/reusables/navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -90,12 +89,11 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
           ),
         ),
       ),
-      // bottomNavigationBar: const MyNavigationBar(),
     );
   }
 
   void handleRequest(int index, String action) {
-    final user = requests[index];
+    // final user = requests[index];
     setState(() => requests.removeAt(index)); // this will only remove from UI
 
     switch (action) {

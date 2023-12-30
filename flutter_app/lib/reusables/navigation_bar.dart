@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
+// import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
 
 class MyNavigationBar extends StatefulWidget {
-  StatefulNavigationShell navigationShell;
+  final StatefulNavigationShell navigationShell;
 
-  MyNavigationBar({super.key, required this.navigationShell});
+  const MyNavigationBar({super.key, required this.navigationShell});
 
   @override
   State<MyNavigationBar> createState() => _MyNavigationBarState();

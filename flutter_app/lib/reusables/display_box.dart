@@ -17,7 +17,7 @@ class DisplayBox extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
               child: Text(
                 text,
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
               ),
             ),
           ),

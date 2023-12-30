@@ -1,7 +1,4 @@
-import 'dart:ui';
-
 import 'package:bound_harmony/models/message.dart';
-import 'package:bound_harmony/reusables/navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
@@ -189,7 +186,6 @@ class _AdviceScreenState extends State<AdviceScreen> {
           ],
         ),
       ),
-      // bottomNavigationBar: const MyNavigationBar(),
     );
   }
 }

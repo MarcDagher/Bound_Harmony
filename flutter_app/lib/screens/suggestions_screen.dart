@@ -1,4 +1,3 @@
-import 'package:bound_harmony/reusables/navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -62,7 +61,6 @@ class SuggestionsScreen extends StatelessWidget {
           )
         ]),
       ),
-      // bottomNavigationBar: const MyNavigationBar(),
     );
   }
 

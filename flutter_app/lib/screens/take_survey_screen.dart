@@ -1,5 +1,4 @@
 import 'package:bound_harmony/reusables/button.dart';
-import 'package:bound_harmony/reusables/navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 class TakeSurveyScreen extends StatelessWidget {
@@ -71,7 +70,6 @@ class TakeSurveyScreen extends StatelessWidget {
           ],
         ),
       ),
-      // bottomNavigationBar: const MyNavigationBar(),
     );
   }
 
