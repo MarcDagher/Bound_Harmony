@@ -17,62 +17,69 @@ class _LogInScreenState extends State<LogInScreen> {
         0; // check if keyboard is in the UI
     return Scaffold(
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25),
-        ///////////////////// Main Column ///////////////////////
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            ///////////////////// Column: Logo + Title ///////////////////////
-            Column(
-              children: [
-                if (!isKeyboard)
-                  Image.asset(
-                      "assets/logo.png"), // when keyboard appears hide logo
-                Padding(
-                  padding: const EdgeInsets.only(top: 30),
-                  child: Text(
-                    'Log In',
-                    style: TextStyle(
-                        fontSize: 45,
-                        color: Theme.of(context).hintColor,
-                        fontWeight: FontWeight.w600),
-                  ),
-                ),
-              ],
-            ),
-
-            ///////////////////// Column: INPUT FIELDs  ///////////////////////
-            const Column(
-              children: [
-                TextInputField(placeholder: 'Email'),
-                SizedBox(
-                  height: 5,
-                ),
-                TextInputField(placeholder: 'Password')
-              ],
-            ),
-
-            ///////////////////// Column: BUTTON + Text ///////////////////////
-            Column(
-              children: [
-                Button(
-                  text: 'Log In',
-                  handlePressed: () => context.goNamed('Connection Setup'),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 30, bottom: 0),
-                  child: GestureDetector(
-                    onTap: () => context.goNamed('Sign Up'),
+          child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          child: Column(
+            children: [
+              ///////////////////// Column: Logo + Title ///////////////////////
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40),
+                    child: Image.asset("assets/logo.png"),
+                  ), // when keyboard appears hide logo
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40, bottom: 40),
                     child: Text(
-                      "Don't have an account? Sign Up",
-                      style: TextStyle(color: Theme.of(context).primaryColor),
+                      'Log In',
+                      style: TextStyle(
+                          fontSize: 45,
+                          color: Theme.of(context).hintColor,
+                          fontWeight: FontWeight.w600),
                     ),
                   ),
-                )
-              ],
-            ),
-          ],
+                ],
+              ),
+
+              ///////////////////// Column: INPUT FIELDs  ///////////////////////
+              const Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 10),
+                    child: TextInputField(placeholder: 'Email'),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 5, bottom: 20),
+                    child: TextInputField(placeholder: 'Password'),
+                  )
+                ],
+              ),
+
+              ///////////////////// Column: BUTTON + Text ///////////////////////
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 70),
+                    child: Button(
+                      text: 'Log In',
+                      handlePressed: () => context.goNamed('Connection Setup'),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 30, bottom: 0),
+                    child: GestureDetector(
+                      onTap: () => context.goNamed('Sign Up'),
+                      child: Text(
+                        "Don't have an account? Sign Up",
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       )),
     );
