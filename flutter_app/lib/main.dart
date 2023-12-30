@@ -37,18 +37,18 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// Screens [ 
+// Screens 
 //AdviceScreen,   
 //BondingActivitiesScreen, 
-//ConnectionSetupScreen, [ When keyboard shows, items aren't dissapearing ]
+//ConnectionSetupScreen, [Good] 
 //DateBuilderScreen,  
 //GiftIdeasScreen, 
 //IncomingRequestsScreen, [ Needs better colors]
-//LogInScreen,  [ When keyboard shows, items aren't dissapearing ] [Shouldn't have navBar]
-//MyPartnersScreen,
-//OnBoardingScreen,  [Shouldn't have navBar]
-//ProfileScreen, [ When keyboard shows, items aren't dissapearing ]
-//SignUpScreen,  [Shouldn't have navBar] [ When keyboard shows, items aren't dissapearing ]
+//LogInScreen, [Good]  
+//MyPartnersScreen, [Good]
+//OnBoardingScreen,  
+//ProfileScreen, [Good] [Minor detail: Last button is cut when i scroll down which looks ugly]
+//SignUpScreen,  [Good]
 //SuggestionsScreen, 
 //SurveysScreen, 
 //TakeSurveyScreen 

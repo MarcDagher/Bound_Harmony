@@ -43,7 +43,7 @@ class AppNavigation {
 
       /// Go Router Configuration
       initialLocation:
-          '/onBoarding', // initial route that the application will navigate to when it starts
+          '/profile/incomingRequests', // initial route that the application will navigate to when it starts
       navigatorKey: GlobalKey<
           NavigatorState>(), // identifies the root navigator of the app
       debugLogDiagnostics:
