@@ -1,3 +1,4 @@
+import 'package:bound_harmony/models/user.dart';
 import 'package:bound_harmony/reusables/button.dart';
 import 'package:bound_harmony/reusables/display_box.dart';
 import 'package:bound_harmony/reusables/text_input.dart';
@@ -12,17 +13,13 @@ class MyPartnersScreen extends StatefulWidget {
 
 class _MyPartnersScreenState extends State<MyPartnersScreen> {
   // Fetch partner history from the database
-  List<String> partners = [
-    // 'first@123.com',
-    // 'first@123.com',
-    // 'first@123.com',
-    // 'first@123.com',
-    // 'first@123.com',
-    // 'first@123.com',
-    // 'first@123.com',
-    // 'first@123.com',
-    // 'first@123.com',
-    // 'first@123.com',
+  List<User> partners = [
+    // User(email: 'person@email.com', name: 'Person 1'),
+    // User(email: 'person@email.com', name: 'Person 2'),
+    // User(email: 'person@email.com', name: 'Person 3'),
+    // User(email: 'person@email.com', name: 'Person 4'),
+    // User(email: 'person@email.com', name: 'Person 5'),
+    // User(email: 'person@email.com', name: 'Person 6')
   ];
   bool currentPartner = false;
 
@@ -67,67 +64,70 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
             }
 
             // If has partners and a current, display all except the last one. The last one in red
-            if (partners.isNotEmpty && currentPartner) {
-              for (int i = 0; i < partners.length - 1; i++) {
-                widgets.add(
-                  Column(
-                    children: [
-                      DisplayBox(text: partners[i]),
-                      const SizedBox(height: 5),
-                    ],
-                  ),
-                );
-              }
+            // if (partners.isNotEmpty && currentPartner) {
+            //   final name = partners[index].name;
+            // final email = partners[index].email;
+            //   for (int i = 0; i < partners.length - 1; i++) {
+            //     widgets.add(
+            //       Column(
+            //         children: [
+            //           // DisplayBox(text: partners[i]), /////////
+            //           const SizedBox(height: 5),
+            //         ],
+            //       ),
+            //     );
+            //   }
 
-              // Creating the red button that can disconnect on click
-              widgets.add(
-                Row(
-                  children: [
-                    Expanded(
-                      child: MaterialButton(
-                        color: Theme.of(context).primaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        onPressed: () {},
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 17),
-                          child: Row(
-                            children: [
-                              Text(
-                                partners[partners.length - 1],
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            }
+            // Creating the red button that can disconnect on click
+            // widgets.add(
+            // Row(
+            //   children: [
+            //     Expanded(
+            //       child: MaterialButton(
+            //         color: Theme.of(context).primaryColor,
+            //         shape: RoundedRectangleBorder(
+            //           borderRadius: BorderRadius.circular(10),
+            //         ),
+            //         onPressed: () {},
+            //         child: Padding(
+            //           padding: const EdgeInsets.symmetric(vertical: 17),
+            //           child: Row(
+            //             children: [
+            //               Text(
+            //                 partners[partners.length - 1],
+            //                 style: const TextStyle(
+            //                   color: Colors.white,
+            //                   fontWeight: FontWeight.w600,
+            //                   fontSize: 20,
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            //   );
+            // }
 
             // If has partners without a current, display all + input request bar
-            if (partners.isNotEmpty && !currentPartner) {
-              for (String partner in partners) {
-                widgets.add(
-                  Column(
-                    children: [
-                      DisplayBox(text: partner),
-                      const SizedBox(height: 5),
-                    ],
-                  ),
-                );
-              }
-            }
+            // if (partners.isNotEmpty && !currentPartner) {
+            //   for (String partner in partners) {
+            //     widgets.add(
+            //       Column(
+            //         children: [
+            //           DisplayBox(text: partner),
+            //           const SizedBox(height: 5),
+            //         ],
+            //       ),
+            //     );
+            //   }
+            // }
 
             // Create input field and the button
-            if (partners.isNotEmpty && !currentPartner || partners.isEmpty) {
+            if ((partners.isNotEmpty && !currentPartner) ||
+                (partners.isEmpty)) {
               widgets.add(
                 Column(
                   children: [

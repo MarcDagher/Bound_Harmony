@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
 //ConnectionSetupScreen, [Good] 
 //DateBuilderScreen,  
 //GiftIdeasScreen, 
-//IncomingRequestsScreen, [ Needs better colors]
+//IncomingRequestsScreen, [Good] 
 //LogInScreen, [Good]  
 //MyPartnersScreen, [Good]
 //OnBoardingScreen,  
