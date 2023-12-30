@@ -13,25 +13,25 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
-    final isKeyboard = MediaQuery.of(context).viewInsets.bottom !=
-        0; // check if keyboard is in the UI
+    // final isKeyboard = MediaQuery.of(context).viewInsets.bottom !=
+    //     0; // check if keyboard is in the UI
     return Scaffold(
       body: SafeArea(
-          child: Padding(
+          child: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 25),
-        ///////////////////// Main Column ///////////////////////
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             ///////////////////// Column: Logo + Title ///////////////////////
             Column(
               children: [
-                if (!isKeyboard)
-                  Image.asset(
-                    "assets/logo.png",
-                  ), // when keyboard appears hide logo
                 Padding(
-                  padding: const EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(top: 40),
+                  child: Image.asset(
+                    "assets/logo.png",
+                  ),
+                ), // when keyboard appears hide logo
+                Padding(
+                  padding: const EdgeInsets.only(top: 20, bottom: 20),
                   child: Text(
                     'Sign Up',
                     style: TextStyle(
@@ -46,31 +46,40 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ///////////////////// Column: INPUT FIELDs  ///////////////////////
             const Column(
               children: [
-                TextInputField(placeholder: 'Username'),
-                SizedBox(height: 5),
-                TextInputField(placeholder: 'Email'),
-                SizedBox(height: 5),
-                TextInputField(placeholder: 'Password'),
-                SizedBox(height: 5),
-                TextInputField(placeholder: 'Birthdate'),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 5),
+                  child: TextInputField(placeholder: 'Username'),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 5),
+                  child: TextInputField(placeholder: 'Email'),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 5),
+                  child: TextInputField(placeholder: 'Password'),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 5),
+                  child: TextInputField(placeholder: 'Birthdate'),
+                ),
               ],
             ),
 
             ///////////////////// Column: BUTTON + Text ///////////////////////
             Column(
               children: [
-                Button(
-                  text: 'Create Account',
-                  handlePressed: () {},
-                ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20, bottom: 0),
-                  child: GestureDetector(
-                    onTap: () => context.goNamed('Log In'),
-                    child: Text(
-                      "If you have an account Sign In",
-                      style: TextStyle(color: Theme.of(context).primaryColor),
-                    ),
+                  padding: const EdgeInsets.only(top: 30, bottom: 10),
+                  child: Button(
+                    text: 'Create Account',
+                    handlePressed: () {},
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () => context.goNamed('Log In'),
+                  child: Text(
+                    "If you have an account Sign In",
+                    style: TextStyle(color: Theme.of(context).primaryColor),
                   ),
                 )
               ],
