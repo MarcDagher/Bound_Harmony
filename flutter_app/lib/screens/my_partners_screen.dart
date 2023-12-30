@@ -14,12 +14,12 @@ class MyPartnersScreen extends StatefulWidget {
 class _MyPartnersScreenState extends State<MyPartnersScreen> {
   // Fetch partner history from the database
   List<User> partners = [
-    // User(email: 'person@email.com', name: 'Person 1'),
-    // User(email: 'person@email.com', name: 'Person 2'),
-    // User(email: 'person@email.com', name: 'Person 3'),
-    // User(email: 'person@email.com', name: 'Person 4'),
-    // User(email: 'person@email.com', name: 'Person 5'),
-    // User(email: 'person@email.com', name: 'Person 6')
+    User(email: 'person@email.com', name: 'Person 1'),
+    User(email: 'person@email.com', name: 'Person 2'),
+    User(email: 'person@email.com', name: 'Person 3'),
+    User(email: 'person@email.com', name: 'Person 4'),
+    User(email: 'person@email.com', name: 'Person 5'),
+    User(email: 'person@email.com', name: 'Person 6')
   ];
   bool currentPartner = false;
 
@@ -29,12 +29,9 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
-          title: const Padding(
-            padding: EdgeInsets.only(left: 10),
-            child: Text(
-              'My History',
-              style: TextStyle(fontWeight: FontWeight.w600),
-            ),
+          title: const Text(
+            'My History',
+            style: TextStyle(fontWeight: FontWeight.w600),
           ),
         ),
 
@@ -112,18 +109,21 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
             // }
 
             // If has partners without a current, display all + input request bar
-            // if (partners.isNotEmpty && !currentPartner) {
-            //   for (String partner in partners) {
-            //     widgets.add(
-            //       Column(
-            //         children: [
-            //           DisplayBox(text: partner),
-            //           const SizedBox(height: 5),
-            //         ],
-            //       ),
-            //     );
-            //   }
-            // }
+            if (partners.isNotEmpty && !currentPartner) {
+              for (User partner in partners) {
+                widgets.add(
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: buildUserListTile(
+                            partner.name, partner.email, context),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            }
 
             // Create input field and the button
             if ((partners.isNotEmpty && !currentPartner) ||
@@ -151,4 +151,47 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
       ),
     );
   }
+
+  // I did it here to avoid creating a separate file for only a one time import
+  Widget buildUserListTile(String name, String email, BuildContext context) =>
+      Column(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              border: Border(
+                  bottom: BorderSide(
+                      width: 0.2, color: Color.fromARGB(255, 206, 179, 179))),
+            ),
+            child: ListTile(
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              title: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Icon(
+                      Icons.accessibility_sharp,
+                      size: 35,
+                      color: Theme.of(context).hintColor,
+                    ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        name,
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                      Text(
+                        email,
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      );
 }
