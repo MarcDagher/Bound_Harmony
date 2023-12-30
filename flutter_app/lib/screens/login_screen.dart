@@ -13,73 +13,73 @@ class LogInScreen extends StatefulWidget {
 class _LogInScreenState extends State<LogInScreen> {
   @override
   Widget build(BuildContext context) {
-    final isKeyboard = MediaQuery.of(context).viewInsets.bottom !=
-        0; // check if keyboard is in the UI
+    // final isKeyboard = MediaQuery.of(context).viewInsets.bottom !=
+    //     0; // check if keyboard is in the UI
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: Column(
-            children: [
-              ///////////////////// Column: Logo + Title ///////////////////////
-              Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40),
-                    child: Image.asset("assets/logo.png"),
-                  ), // when keyboard appears hide logo
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40, bottom: 40),
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        padding: const EdgeInsets.symmetric(horizontal: 25),
+        child: Column(
+          children: [
+            ///////////////////// Column: Logo + Title ///////////////////////
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 40),
+                  child: Image.asset("assets/logo.png"),
+                ), // when keyboard appears hide logo
+                Padding(
+                  padding: const EdgeInsets.only(top: 40, bottom: 40),
+                  child: Text(
+                    'Log In',
+                    style: TextStyle(
+                        fontSize: 45,
+                        color: Theme.of(context).hintColor,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ],
+            ),
+
+            ///////////////////// Column: INPUT FIELDs  ///////////////////////
+            const Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 60),
+                  child: TextInputField(placeholder: 'Email'),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 5, bottom: 20),
+                  child: TextInputField(placeholder: 'Password'),
+                )
+              ],
+            ),
+
+            ///////////////////// Column: BUTTON + Text ///////////////////////
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 40),
+                  child: Button(
+                    text: 'Log In',
+                    handlePressed: () => context.goNamed('Connection Setup'),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20, bottom: 0),
+                  child: GestureDetector(
+                    onTap: () => context.goNamed('Sign Up'),
                     child: Text(
-                      'Log In',
+                      "Don't have an account? Sign Up",
                       style: TextStyle(
-                          fontSize: 45,
-                          color: Theme.of(context).hintColor,
-                          fontWeight: FontWeight.w600),
+                          color: Theme.of(context).primaryColor, fontSize: 16),
                     ),
                   ),
-                ],
-              ),
-
-              ///////////////////// Column: INPUT FIELDs  ///////////////////////
-              const Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 10),
-                    child: TextInputField(placeholder: 'Email'),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 5, bottom: 20),
-                    child: TextInputField(placeholder: 'Password'),
-                  )
-                ],
-              ),
-
-              ///////////////////// Column: BUTTON + Text ///////////////////////
-              Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 70),
-                    child: Button(
-                      text: 'Log In',
-                      handlePressed: () => context.goNamed('Connection Setup'),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 30, bottom: 0),
-                    child: GestureDetector(
-                      onTap: () => context.goNamed('Sign Up'),
-                      child: Text(
-                        "Don't have an account? Sign Up",
-                        style: TextStyle(color: Theme.of(context).primaryColor),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ],
-          ),
+                )
+              ],
+            ),
+          ],
         ),
       )),
     );
