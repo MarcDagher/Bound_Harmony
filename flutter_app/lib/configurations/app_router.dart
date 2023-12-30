@@ -41,13 +41,13 @@ class AppNavigation {
   ///
   static final GoRouter router = GoRouter(
 
-      /// Go Router Configuration
-      initialLocation:
-          '/advice', // initial route that the application will navigate to when it starts
-      navigatorKey: GlobalKey<
-          NavigatorState>(), // identifies the root navigator of the app
-      debugLogDiagnostics:
-          false, // turn true and check debug console for routes
+      // identifies the root navigator of the app
+      navigatorKey: GlobalKey<NavigatorState>(),
+
+      /// Go Router Configuration, initial route that the application will navigate to when it starts
+      initialLocation: '/onBoarding',
+      // turn true and check debug console for routes
+      debugLogDiagnostics: false,
 
       /// route congiguration
       ///
