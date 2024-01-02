@@ -13,11 +13,15 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   Map<String, String> formData = {'username': "", 'email': "", 'password': ""};
 
-  void Function(String)? handleInput(String field, String newField) {
+  void handleInput(String field, String newField) {
     setState(() {
       formData[field] = newField;
     });
     print(formData);
+  }
+
+  void handleSubmit(Map<String, String> formData) {
+    // post request
   }
 
   @override
@@ -87,7 +91,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   padding: const EdgeInsets.only(top: 60, bottom: 10),
                   child: Button(
                     text: 'Create Account',
-                    handlePressed: () {},
+                    handlePressed: () => handleSubmit(formData),
                   ),
                 ),
                 GestureDetector(
