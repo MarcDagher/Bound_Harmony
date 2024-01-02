@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:bound_harmony/reusables/text_input.dart';
 import 'package:bound_harmony/reusables/button.dart';
@@ -11,7 +12,22 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final dio = Dio();
+
   Map<String, String> formData = {'username': "", 'email': "", 'password': ""};
+
+  void getHttp() async {
+    final response = await dio.post(
+      'http://192.168.1.66:8000/api/register',
+      data: {
+        "username": formData['username'],
+        "email": formData['email'],
+        "password": formData['password'],
+        "birthdate": "15-01-2003"
+      },
+    );
+    print(response.data.toString());
+  }
 
   void handleInput(String field, String newField) {
     setState(() {
@@ -22,6 +38,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void handleSubmit(Map<String, String> formData) {
     // post request
+    getHttp();
   }
 
   @override
