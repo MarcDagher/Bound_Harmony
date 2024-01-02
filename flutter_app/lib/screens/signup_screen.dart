@@ -11,30 +11,13 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  String username = "";
-  String email = "";
-  String password = "";
-  String birthdate = "";
+  Map<String, String> formData = {'username': "", 'email': "", 'password': ""};
 
-  void Function(String)? handleUsername(String newUsername) {
+  void Function(String)? handleInput(String field, String newField) {
     setState(() {
-      username = newUsername;
+      formData[field] = newField;
     });
-    print(username);
-  }
-
-  void Function(String)? handleEmail(String newEmail) {
-    setState(() {
-      email = newEmail;
-    });
-    print(email);
-  }
-
-  void Function(String)? handlePassword(String newPassword) {
-    setState(() {
-      password = newPassword;
-    });
-    print(password);
+    print(formData);
   }
 
   @override
@@ -78,19 +61,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 5),
                     child: TextInputField(
-                        handleChange: (text) => handleUsername(text),
+                        handleChange: (text) => handleInput("username", text),
                         placeholder: 'Username'),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 5),
                     child: TextInputField(
-                        handleChange: (text) => handleEmail(text),
+                        handleChange: (text) => handleInput("email", text),
                         placeholder: 'Email'),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 5),
                     child: TextInputField(
-                        handleChange: (text) => handlePassword(text),
+                        handleChange: (text) => handleInput('password', text),
                         placeholder: 'Password'),
                   ),
                 ],
