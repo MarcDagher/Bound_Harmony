@@ -18,6 +18,9 @@ class TextInputField extends StatelessWidget {
           decoration: InputDecoration(
               border: InputBorder.none,
               labelText: placeholder,
+              labelStyle: TextStyle(
+                color: Theme.of(context).hintColor,
+              ),
               contentPadding:
                   const EdgeInsets.symmetric(horizontal: 15, vertical: 15))),
     );
