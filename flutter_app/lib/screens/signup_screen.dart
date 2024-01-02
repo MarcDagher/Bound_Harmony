@@ -11,6 +11,32 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  String username = "";
+  String email = "";
+  String password = "";
+  String birthdate = "";
+
+  void Function(String)? handleUsername(String newUsername) {
+    setState(() {
+      username = newUsername;
+    });
+    print(username);
+  }
+
+  void Function(String)? handleEmail(String newEmail) {
+    setState(() {
+      email = newEmail;
+    });
+    print(email);
+  }
+
+  void Function(String)? handlePassword(String newPassword) {
+    setState(() {
+      password = newPassword;
+    });
+    print(password);
+  }
+
   @override
   Widget build(BuildContext context) {
     // final isKeyboard = MediaQuery.of(context).viewInsets.bottom !=
@@ -32,7 +58,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ), // when keyboard appears hide logo
                 Padding(
-                  padding: const EdgeInsets.only(top: 20, bottom: 20),
+                  padding: const EdgeInsets.only(top: 30, bottom: 20),
                   child: Text(
                     'Sign Up',
                     style: TextStyle(
@@ -45,32 +71,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
 
             ///////////////////// Column: INPUT FIELDs  ///////////////////////
-            const Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(bottom: 5),
-                  child: TextInputField(placeholder: 'Username'),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 5),
-                  child: TextInputField(placeholder: 'Email'),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 5),
-                  child: TextInputField(placeholder: 'Password'),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 5),
-                  child: TextInputField(placeholder: 'Birthdate'),
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(top: 30),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 5),
+                    child: TextInputField(
+                        handleChange: (text) => handleUsername(text),
+                        placeholder: 'Username'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 5),
+                    child: TextInputField(
+                        handleChange: (text) => handleEmail(text),
+                        placeholder: 'Email'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 5),
+                    child: TextInputField(
+                        handleChange: (text) => handlePassword(text),
+                        placeholder: 'Password'),
+                  ),
+                ],
+              ),
             ),
 
             ///////////////////// Column: BUTTON + Text ///////////////////////
             Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 30, bottom: 10),
+                  padding: const EdgeInsets.only(top: 60, bottom: 10),
                   child: Button(
                     text: 'Create Account',
                     handlePressed: () {},

@@ -43,15 +43,23 @@ class _LogInScreenState extends State<LogInScreen> {
             ),
 
             ///////////////////// Column: INPUT FIELDs  ///////////////////////
-            const Column(
+            Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 60),
-                  child: TextInputField(placeholder: 'Email'),
+                  padding: const EdgeInsets.only(top: 60),
+                  child: TextInputField(
+                      handleChange: (string) {
+                        // print(string);
+                      },
+                      placeholder: 'Email'),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 5, bottom: 20),
-                  child: TextInputField(placeholder: 'Password'),
+                  padding: const EdgeInsets.only(top: 5, bottom: 20),
+                  child: TextInputField(
+                      handleChange: (string) {
+                        // print(string);
+                      },
+                      placeholder: 'Password'),
                 )
               ],
             ),

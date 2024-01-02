@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class TextInputField extends StatelessWidget {
+  final Function(String) handleChange;
   final String placeholder;
-  const TextInputField({super.key, required this.placeholder});
+  const TextInputField(
+      {super.key, required this.placeholder, required this.handleChange});
 
   @override
   Widget build(BuildContext context) {
@@ -11,11 +13,13 @@ class TextInputField extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Theme.of(context).hintColor)),
       child: TextFormField(
+          onChanged: handleChange,
+          obscureText: placeholder == "Password",
           decoration: InputDecoration(
               border: InputBorder.none,
-              hintText: placeholder,
+              labelText: placeholder,
               contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 15, vertical: 20))),
+                  const EdgeInsets.symmetric(horizontal: 15, vertical: 15))),
     );
   }
 }

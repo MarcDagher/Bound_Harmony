@@ -51,9 +51,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ///////////////////// Column: TextInputField - DisplayBox - TextInputField - Location - NavButton x2  ///////////////////////
               Column(
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 5),
-                    child: TextInputField(placeholder: 'Username'),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 5),
+                    child: TextInputField(
+                        handleChange: (string) {
+                          // print(string);
+                        },
+                        placeholder: 'Username'),
                   ),
 
                   // this will be a text. email is displayed from token
@@ -66,9 +70,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
 
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 5),
-                    child: TextInputField(placeholder: 'Location'),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 5),
+                    child: TextInputField(
+                        handleChange: (string) {
+                          print(string);
+                        },
+                        placeholder: 'Location'),
                   ), // Figure out how to do that... depends on google api
 
                   // Navigation Buttons

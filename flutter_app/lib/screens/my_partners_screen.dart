@@ -143,7 +143,10 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
               widgets.add(
                 Column(
                   children: [
-                    const TextInputField(
+                    TextInputField(
+                        handleChange: (string) {
+                          // print(string);
+                        },
                         placeholder: "Enter your partner's email"),
                     const SizedBox(height: 5),
                     Button(text: 'Send Request', handlePressed: () {}),
