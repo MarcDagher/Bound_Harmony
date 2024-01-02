@@ -14,12 +14,12 @@ class MyPartnersScreen extends StatefulWidget {
 class _MyPartnersScreenState extends State<MyPartnersScreen> {
   // Fetch partner history from the database
   List<User> partners = [
-    User(email: 'person@email.com', name: 'Person 1'),
-    User(email: 'person@email.com', name: 'Person 2'),
-    User(email: 'person@email.com', name: 'Person 3'),
-    User(email: 'person@email.com', name: 'Person 4'),
-    User(email: 'person@email.com', name: 'Person 5'),
-    User(email: 'person@email.com', name: 'Person 6')
+    User(email: 'person@email.com', username: 'Person 1', password: '...'),
+    User(email: 'person@email.com', username: 'Person 2', password: '...'),
+    User(email: 'person@email.com', username: 'Person 3', password: '...'),
+    User(email: 'person@email.com', username: 'Person 4', password: '...'),
+    User(email: 'person@email.com', username: 'Person 5', password: '...'),
+    User(email: 'person@email.com', username: 'Person 6', password: '...')
   ];
   bool currentPartner = true;
 
@@ -67,7 +67,7 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                   Column(
                     children: [
                       buildUserListTile(
-                          partners[i].name,
+                          partners[i].username,
                           partners[i].email,
                           context,
                           Icons.accessibility_sharp,
@@ -80,7 +80,7 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
 
               // Creating the red button that can disconnect on click
               widgets.add(buildUserListTile(
-                      partners[partners.length - 1].name,
+                      partners[partners.length - 1].username,
                       partners[partners.length - 1].email,
                       context,
                       Icons.favorite,
@@ -125,7 +125,7 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: buildUserListTile(
-                            partner.name,
+                            partner.username,
                             partner.email,
                             context,
                             Icons.accessibility_sharp,

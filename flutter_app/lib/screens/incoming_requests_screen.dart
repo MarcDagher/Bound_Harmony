@@ -12,12 +12,12 @@ class IncomingRequestsScreen extends StatefulWidget {
 
 class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
   List<User> requests = [
-    User(email: 'person@email.com', name: 'Person 1'),
-    User(email: 'person@email.com', name: 'Person 2'),
-    User(email: 'person@email.com', name: 'Person 3'),
-    User(email: 'person@email.com', name: 'Person 4'),
-    User(email: 'person@email.com', name: 'Person 5'),
-    User(email: 'person@email.com', name: 'Person 6')
+    User(email: 'person@email.com', username: 'Person 1', password: '...'),
+    User(email: 'person@email.com', username: 'Person 2', password: '...'),
+    User(email: 'person@email.com', username: 'Person 3', password: '...'),
+    User(email: 'person@email.com', username: 'Person 4', password: '...'),
+    User(email: 'person@email.com', username: 'Person 5', password: '...'),
+    User(email: 'person@email.com', username: 'Person 6', password: '...')
   ];
 
   @override
@@ -41,7 +41,7 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
             // itemBuiler is a callback function called for each item in the in the list (BuildContext, indeex of the item in the list)
             // It returns the widget for the corresponding list item. This depends on the itemCount.
             itemBuilder: (context, index) {
-              final name = requests[index].name;
+              final name = requests[index].username;
               final email = requests[index].email;
               //// EACH BOX IS A SLIDABLE WITH A STARTACTIONN AND AN ENDACTION
               return Slidable(
