@@ -1,3 +1,4 @@
+import 'package:bound_harmony/configurations/request.configuration.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:bound_harmony/reusables/text_input.dart';
@@ -16,17 +17,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Map<String, String> formData = {'username': "", 'email': "", 'password': ""};
 
-  void getHttp() async {
-    final response = await dio.post(
-      'http://192.168.1.66:8000/api/register',
-      data: {
-        "username": formData['username'],
-        "email": formData['email'],
-        "password": formData['password'],
-        "birthdate": "15-01-2003"
-      },
-    );
-    print(response.data.toString());
+  void postRegister(formData) async {
+    try {
+      final response = await dio.post(
+        '${Requests.baseUrl}/register',
+        data: {
+          "username": formData['username'],
+          "email": formData['email'],
+          "password": formData['password'],
+          "birthdate": "15-01-2003"
+        },
+      );
+      print("hello");
+      print(response.data.toString());
+    } on DioException catch (error) {
+      print(error);
+    }
   }
 
   void handleInput(String field, String newField) {
@@ -36,9 +42,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     print(formData);
   }
 
-  void handleSubmit(Map<String, String> formData) {
+  void handleSubmit(Map<String, String> formData) async {
     // post request
-    getHttp();
+    postRegister(formData);
   }
 
   @override
@@ -108,7 +114,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   padding: const EdgeInsets.only(top: 60, bottom: 10),
                   child: Button(
                     text: 'Create Account',
-                    handlePressed: () => handleSubmit(formData),
+                    handlePressed: () => postRegister(formData),
                   ),
                 ),
                 GestureDetector(
