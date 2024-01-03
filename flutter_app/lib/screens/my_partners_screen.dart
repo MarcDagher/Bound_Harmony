@@ -21,7 +21,7 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
     User(email: 'person@email.com', username: 'Person 5', password: '...'),
     User(email: 'person@email.com', username: 'Person 6', password: '...')
   ];
-  bool currentPartner = true;
+  bool currentPartner = false;
 
   @override
   Widget build(BuildContext context) {

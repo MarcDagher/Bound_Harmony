@@ -15,12 +15,15 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final dio = Dio();
   bool empty = false;
+  bool emailTaken = false;
+  bool success = false;
 
   Map<String, String> formData = {'username': "", 'email': "", 'password': ""};
 
   void postRegister(formData) async {
     try {
       final response = await dio.post(
+        options: Options(contentType: "application/json"),
         '${Requests.baseUrl}register',
         data: {
           "username": formData['username'],
@@ -29,19 +32,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
           "birthdate": "15-01-2003"
         },
       );
-      print("hello");
-      print(response.data.toString());
+
+      if (response.data['status'] == "success") {
+        setState(() {
+          success = true;
+          emailTaken = false;
+        });
+        context.goNamed('Log In');
+      }
     } on DioException catch (e) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx and is also not 304.
-      if (e.response != null) {
-        print(e.response!.data);
-        print(e.response!.headers);
-        print(e.response!.requestOptions);
-      } else {
-        // Something happened in setting up or sending the request that triggered an Error
-        print(e.requestOptions);
-        print(e.message);
+      if (e.response!.statusCode == 302) {
+        setState(() {
+          emailTaken = true;
+          success = false;
+        });
       }
     }
   }
@@ -114,11 +118,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         handleChange: (text) => handleInput('password', text),
                         placeholder: 'Password'),
                   ),
+
+                  // if not all fields are filled
                   if (empty == true)
                     const Text(
                       "All fields are required",
                       style: TextStyle(color: Colors.red),
-                    )
+                    ),
+
+                  // if username exists in DB
+                  if (emailTaken == true)
+                    const Text(
+                      "Email has already been used",
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  // if user created successfully
+                  if (success == true)
+                    const Text(
+                      "Account created successfully",
+                      style: TextStyle(color: Colors.red),
+                    ),
                 ],
               ),
             ),
@@ -130,6 +149,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   padding: const EdgeInsets.only(top: 60, bottom: 10),
                   child: Button(
                     text: 'Create Account',
+                    // check for empty input fields
                     handlePressed: () {
                       if (formData['username'] == "" ||
                           formData['email'] == "" ||

@@ -44,10 +44,10 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
             icon: Icon(Icons.account_circle_rounded), label: 'Profile')
       ],
       onTap: (int newIndex) {
+        changeBranch(newIndex);
         setState(() {
           selectedIndex = newIndex;
         });
-        changeBranch(selectedIndex);
       },
     );
   }
