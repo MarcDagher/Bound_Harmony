@@ -14,13 +14,14 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final dio = Dio();
+  bool empty = false;
 
   Map<String, String> formData = {'username': "", 'email': "", 'password': ""};
 
   void postRegister(formData) async {
     try {
       final response = await dio.post(
-        '${Requests.baseUrl}/register',
+        '${Requests.baseUrl}register',
         data: {
           "username": formData['username'],
           "email": formData['email'],
@@ -30,8 +31,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
       );
       print("hello");
       print(response.data.toString());
-    } on DioException catch (error) {
-      print(error);
+    } on DioException catch (e) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx and is also not 304.
+      if (e.response != null) {
+        print(e.response!.data);
+        print(e.response!.headers);
+        print(e.response!.requestOptions);
+      } else {
+        // Something happened in setting up or sending the request that triggered an Error
+        print(e.requestOptions);
+        print(e.message);
+      }
     }
   }
 
@@ -103,6 +114,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         handleChange: (text) => handleInput('password', text),
                         placeholder: 'Password'),
                   ),
+                  if (empty == true)
+                    const Text(
+                      "All fields are required",
+                      style: TextStyle(color: Colors.red),
+                    )
                 ],
               ),
             ),
@@ -114,7 +130,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   padding: const EdgeInsets.only(top: 60, bottom: 10),
                   child: Button(
                     text: 'Create Account',
-                    handlePressed: () => postRegister(formData),
+                    handlePressed: () {
+                      if (formData['username'] == "" ||
+                          formData['email'] == "" ||
+                          formData['password'] == "") {
+                        setState(() {
+                          empty = true;
+                        });
+                      } else {
+                        setState(() {
+                          empty = false;
+                        });
+                        postRegister(formData);
+                      }
+                    },
                   ),
                 ),
                 GestureDetector(
