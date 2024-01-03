@@ -1,5 +1,5 @@
-import 'package:bound_harmony/reusables/button.dart';
-import 'package:bound_harmony/reusables/text_input.dart';
+import 'package:bound_harmony/reusable%20widgets/button.dart';
+import 'package:bound_harmony/reusable%20widgets/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

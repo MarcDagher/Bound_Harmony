@@ -1,5 +1,5 @@
 import 'package:bound_harmony/models/user.dart';
-import 'package:bound_harmony/reusables/user_tile_builder.dart';
+import 'package:bound_harmony/reusable%20widgets/user_tile_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
