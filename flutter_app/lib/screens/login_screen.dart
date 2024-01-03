@@ -1,4 +1,6 @@
+import 'package:bound_harmony/configurations/request.configuration.dart';
 import 'package:bound_harmony/reusable%20widgets/text_input.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:bound_harmony/reusable%20widgets/button.dart';
 import 'package:go_router/go_router.dart';
@@ -11,6 +13,46 @@ class LogInScreen extends StatefulWidget {
 }
 
 class _LogInScreenState extends State<LogInScreen> {
+  final dio = Dio();
+  Map<String, String> formData = {'email': "", 'password': ""};
+  bool empty = false;
+  bool success = false;
+  bool wrongCredentials = false;
+
+  void handleInput(String field, String newField) {
+    setState(() {
+      formData[field] = newField;
+    });
+  }
+
+  void signInRequest() async {
+    try {
+      final response = await dio.post("${Requests.baseUrl}login", data: {
+        "email": formData['email'],
+        "password": formData['password'],
+      });
+      // print(response.data["authorisation"]["token"]);
+      print(response.data);
+      if (response.data['status'] == "success") {
+        setState(() {
+          success = true;
+          empty = false;
+          wrongCredentials = false;
+        });
+        context.goNamed('Connection Setup');
+      }
+    } on DioException catch (e) {
+      print(e.response!.statusCode);
+      if (e.response!.statusCode == 401) {
+        setState(() {
+          empty = false;
+          wrongCredentials = true;
+          success = false;
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // final isKeyboard = MediaQuery.of(context).viewInsets.bottom !=
@@ -48,19 +90,40 @@ class _LogInScreenState extends State<LogInScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 60),
                   child: TextInputField(
-                      handleChange: (string) {
-                        // print(string);
+                      handleChange: (text) {
+                        handleInput('email', text);
                       },
                       placeholder: 'Email'),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 5, bottom: 20),
                   child: TextInputField(
-                      handleChange: (string) {
-                        // print(string);
+                      handleChange: (text) {
+                        handleInput('password', text);
                       },
                       placeholder: 'Password'),
-                )
+                ),
+
+                // empty fields
+                if (empty == true)
+                  const Text(
+                    "All fields are required.",
+                    style: TextStyle(color: Colors.red),
+                  ),
+
+                // wrong email or password
+                if (wrongCredentials == true)
+                  const Text(
+                    "Wrong credentials.",
+                    style: TextStyle(color: Colors.red),
+                  ),
+
+                // success
+                if (success == true)
+                  const Text(
+                    "Success.",
+                    style: TextStyle(color: Colors.red),
+                  ),
               ],
             ),
 
@@ -71,7 +134,19 @@ class _LogInScreenState extends State<LogInScreen> {
                   padding: const EdgeInsets.only(top: 40),
                   child: Button(
                     text: 'Log In',
-                    handlePressed: () => context.goNamed('Connection Setup'),
+                    handlePressed: () {
+                      if (formData['email'] == "" ||
+                          formData['password'] == "") {
+                        setState(() {
+                          empty = true;
+                        });
+                      } else {
+                        signInRequest();
+                      }
+                      // else if (){
+
+                      // }
+                    },
                   ),
                 ),
                 Padding(

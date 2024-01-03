@@ -20,7 +20,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Map<String, String> formData = {'username': "", 'email': "", 'password': ""};
 
-  void postRegister(formData) async {
+  void registerRequest(formData) async {
     try {
       final response = await dio.post(
         options: Options(contentType: "application/json"),
@@ -55,11 +55,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       formData[field] = newField;
     });
     print(formData);
-  }
-
-  void handleSubmit(Map<String, String> formData) async {
-    // post request
-    postRegister(formData);
   }
 
   @override
@@ -132,6 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       "Email has already been used",
                       style: TextStyle(color: Colors.red),
                     ),
+
                   // if user created successfully
                   if (success == true)
                     const Text(
@@ -161,7 +157,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         setState(() {
                           empty = false;
                         });
-                        postRegister(formData);
+                        registerRequest(formData);
                       }
                     },
                   ),
