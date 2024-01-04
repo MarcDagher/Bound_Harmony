@@ -1,4 +1,3 @@
-import 'package:bound_harmony/configurations/request.configuration.dart';
 import 'package:bound_harmony/providers/auth_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -26,36 +25,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool success = false;
 
   Map<String, String> formData = {'username': "", 'email': "", 'password': ""};
-
-  // void registerRequest(formData) async {
-  //   try {
-  //     final response = await dio.post(
-  //       options: Options(contentType: "application/json"),
-  //       '${Requests.baseUrl}/register',
-  //       data: {
-  //         "username": formData['username'],
-  //         "email": formData['email'],
-  //         "password": formData['password'],
-  //         "birthdate": "15-01-2003"
-  //       },
-  //     );
-
-  //     if (response.data['status'] == "success") {
-  //       setState(() {
-  //         success = true;
-  //         emailTaken = false;
-  //       });
-  //       context.goNamed('Log In');
-  //     }
-  //   } on DioException catch (e) {
-  //     if (e.response!.statusCode == 302) {
-  //       setState(() {
-  //         emailTaken = true;
-  //         success = false;
-  //       });
-  //     }
-  //   }
-  // }
 
   void handleInput(String field, String newField) {
     setState(() {
