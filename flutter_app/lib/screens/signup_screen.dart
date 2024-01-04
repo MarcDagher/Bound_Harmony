@@ -56,7 +56,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     setState(() {
       formData[field] = newField;
     });
-    print(formData);
   }
 
   @override
@@ -93,65 +92,75 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
 
             ///////////////////// Column: INPUT FIELDs  ///////////////////////
-            Padding(
-              padding: const EdgeInsets.only(top: 30),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 5),
-                    child: TextInputField(
-                        handleChange: (text) => handleInput("username", text),
-                        placeholder: 'Username'),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 5),
-                    child: TextInputField(
-                        handleChange: (text) => handleInput("email", text),
-                        placeholder: 'Email'),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 5),
-                    child: TextInputField(
-                        handleChange: (text) => handleInput('password', text),
-                        placeholder: 'Password'),
-                  ),
 
-                  // if not all fields are filled
-                  if (empty == true)
-                    const Text(
-                      "All fields are required",
-                      style: TextStyle(color: Colors.red),
-                    ),
-
-                  // if username exists in DB
-                  if (emailTaken == true)
-                    const Text(
-                      "Email has already been used",
-                      style: TextStyle(color: Colors.red),
-                    ),
-
-                  // if user created successfully
-                  if (success == true)
-                    const Text(
-                      "Account created successfully",
-                      style: TextStyle(color: Colors.red),
-                    ),
-
-                  // if email format is wrong
-                  if (invalidEmailFormat == true)
-                    const Text(
-                      "Invalid email format.",
-                      style: TextStyle(color: Colors.red),
-                    ),
-
-                  // if email format is wrong
-                  if (passwordIsShort == true)
-                    const Text(
-                      "Password must be at least 6 characters.",
-                      style: TextStyle(color: Colors.red),
-                    ),
-                ],
+            if (empty == true ||
+                emailTaken == true ||
+                success == true ||
+                invalidEmailFormat == true ||
+                passwordIsShort == true)
+              const SizedBox(height: 20)
+            else
+              const SizedBox(
+                height: 30,
               ),
+
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: TextInputField(
+                      handleChange: (text) => handleInput("username", text),
+                      placeholder: 'Username'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: TextInputField(
+                      handleChange: (text) => handleInput("email", text),
+                      placeholder: 'Email'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: TextInputField(
+                      handleChange: (text) => handleInput('password', text),
+                      placeholder: 'Password'),
+                ),
+
+                // if not all fields are filled
+                if (empty == true)
+                  const Text(
+                    "All fields are required",
+                    style: TextStyle(color: Colors.red),
+                  ),
+
+                // if username exists in DB
+                if (emailTaken == true)
+                  const Text(
+                    "Email has already been used",
+                    style: TextStyle(color: Colors.red),
+                  ),
+
+                // if user created successfully
+                if (success == true)
+                  const Text(
+                    "Account created successfully",
+                    style: TextStyle(color: Colors.red),
+                  ),
+
+                // if email format is wrong
+                if (invalidEmailFormat == true)
+                  const Text(
+                    "Invalid email format.",
+                    style: TextStyle(color: Colors.red),
+                  ),
+
+                // if password is too short
+                if (passwordIsShort == true)
+                  const Text(
+                    "Password must be at least 6 characters.",
+                    style: TextStyle(color: Colors.red),
+                  ),
+              ],
             ),
 
             ///////////////////// Column: BUTTON + Text ///////////////////////
