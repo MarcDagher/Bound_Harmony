@@ -1,5 +1,5 @@
 import 'package:bound_harmony/configurations/app_router.dart';
-import 'package:bound_harmony/providers/user_provider.dart';
+import 'package:bound_harmony/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +13,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => UserProvider())],
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => AuthProvider(),
+        )
+      ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         title: 'Bound Harmony',
