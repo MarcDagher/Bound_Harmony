@@ -18,6 +18,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool emailTaken = false;
   bool success = false;
   bool invalidEmailFormat = false;
+  bool passwordIsShort = false;
 
   Map<String, String> formData = {'username': "", 'email': "", 'password': ""};
 
@@ -142,6 +143,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       "Invalid email format.",
                       style: TextStyle(color: Colors.red),
                     ),
+
+                  // if email format is wrong
+                  if (passwordIsShort == true)
+                    const Text(
+                      "Password must be at least 6 characters.",
+                      style: TextStyle(color: Colors.red),
+                    ),
                 ],
               ),
             ),
@@ -168,10 +176,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           empty = false;
                           invalidEmailFormat = true;
                         });
+                      } else if (formData['password']!.length < 6) {
+                        setState(() {
+                          empty = false;
+                          invalidEmailFormat = false;
+                          passwordIsShort = true;
+                        });
                       } else {
                         setState(() {
                           empty = false;
                           invalidEmailFormat = false;
+                          passwordIsShort = false;
                         });
                         registerRequest(formData);
                       }
