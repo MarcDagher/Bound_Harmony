@@ -79,7 +79,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ), // when keyboard appears hide logo
                 Padding(
-                  padding: const EdgeInsets.only(top: 30, bottom: 20),
+                  padding: const EdgeInsets.only(top: 30),
                   child: Text(
                     'Sign Up',
                     style: TextStyle(
@@ -98,10 +98,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 success == true ||
                 invalidEmailFormat == true ||
                 passwordIsShort == true)
-              const SizedBox(height: 20)
+              const SizedBox(height: 30)
             else
               const SizedBox(
-                height: 30,
+                height: 45,
               ),
 
             Column(
@@ -120,7 +120,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       placeholder: 'Email'),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 5),
+                  padding: const EdgeInsets.only(bottom: 20),
                   child: TextInputField(
                       handleChange: (text) => handleInput('password', text),
                       placeholder: 'Password'),
@@ -167,7 +167,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 60, bottom: 10),
+                  padding: const EdgeInsets.only(top: 45, bottom: 10),
                   child: Button(
                     text: 'Create Account',
                     // check for empty input fields
