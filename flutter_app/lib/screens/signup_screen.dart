@@ -17,6 +17,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool empty = false;
   bool emailTaken = false;
   bool success = false;
+  bool invalidEmailFormat = false;
 
   Map<String, String> formData = {'username': "", 'email': "", 'password': ""};
 
@@ -134,6 +135,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       "Account created successfully",
                       style: TextStyle(color: Colors.red),
                     ),
+
+                  // if email format is wrong
+                  if (invalidEmailFormat == true)
+                    const Text(
+                      "Invalid email format.",
+                      style: TextStyle(color: Colors.red),
+                    ),
                 ],
               ),
             ),
@@ -153,9 +161,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         setState(() {
                           empty = true;
                         });
+                      } else if (!RegExp(
+                              r'^[\w-]+(\.[\w-]+)*@(hotmail\.com|gmail\.com|yahoo\.com|outlook\.com)$')
+                          .hasMatch(formData['email']!)) {
+                        setState(() {
+                          empty = false;
+                          invalidEmailFormat = true;
+                        });
                       } else {
                         setState(() {
                           empty = false;
+                          invalidEmailFormat = false;
                         });
                         registerRequest(formData);
                       }
