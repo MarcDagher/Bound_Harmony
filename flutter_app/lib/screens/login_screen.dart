@@ -31,8 +31,6 @@ class _LogInScreenState extends State<LogInScreen> {
         "email": formData['email'],
         "password": formData['password'],
       });
-      // print(response.data["authorisation"]["token"]);
-      print(response.data);
       if (response.data['status'] == "success") {
         setState(() {
           success = true;
@@ -42,7 +40,6 @@ class _LogInScreenState extends State<LogInScreen> {
         context.goNamed('Connection Setup');
       }
     } on DioException catch (e) {
-      print(e.response!.statusCode);
       if (e.response!.statusCode == 401) {
         setState(() {
           empty = false;
@@ -72,7 +69,7 @@ class _LogInScreenState extends State<LogInScreen> {
                   child: Image.asset("assets/logo.png"),
                 ), // when keyboard appears hide logo
                 Padding(
-                  padding: const EdgeInsets.only(top: 40, bottom: 40),
+                  padding: const EdgeInsets.only(top: 40),
                   child: Text(
                     'Log In',
                     style: TextStyle(
@@ -85,16 +82,23 @@ class _LogInScreenState extends State<LogInScreen> {
             ),
 
             ///////////////////// Column: INPUT FIELDs  ///////////////////////
+            ///
+
+            if (empty == true || success == true || wrongCredentials == true)
+              const SizedBox(
+                height: 85,
+              )
+            else
+              const SizedBox(
+                height: 100,
+              ),
             Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 60),
-                  child: TextInputField(
-                      handleChange: (text) {
-                        handleInput('email', text);
-                      },
-                      placeholder: 'Email'),
-                ),
+                TextInputField(
+                    handleChange: (text) {
+                      handleInput('email', text);
+                    },
+                    placeholder: 'Email'),
                 Padding(
                   padding: const EdgeInsets.only(top: 5, bottom: 20),
                   child: TextInputField(
@@ -143,9 +147,6 @@ class _LogInScreenState extends State<LogInScreen> {
                       } else {
                         signInRequest();
                       }
-                      // else if (){
-
-                      // }
                     },
                   ),
                 ),
