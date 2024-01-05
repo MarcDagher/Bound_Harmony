@@ -39,7 +39,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  signInRequest(email, password) async {
+  logInRequest(email, password) async {
     final baseUrl = Requests.baseUrl;
     success = false;
     wrongCredentials = false;

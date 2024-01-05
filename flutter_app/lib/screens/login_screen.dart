@@ -143,7 +143,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           empty = true;
                         });
                       } else {
-                        context.read<AuthProvider>().signInRequest(
+                        context.read<AuthProvider>().logInRequest(
                             formData['email'], formData['password']);
                       }
                     },
