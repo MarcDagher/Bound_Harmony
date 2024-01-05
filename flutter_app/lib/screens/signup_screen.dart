@@ -24,6 +24,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool emailTaken = false;
   bool success = false;
 
+  //
+  final formKey = GlobalKey<FormState>();
+
   Map<String, String> formData = {'username': "", 'email': "", 'password': ""};
 
   void handleInput(String field, String newField) {
@@ -80,63 +83,87 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
             Consumer<AuthProvider>(
               builder: (context, value, child) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 5),
-                      child: TextInputField(
+                return Form(
+                  key: formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      /// Username Input Field
+                      ///
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 5),
+                        child: TextInputField(
                           handleChange: (text) => handleInput("username", text),
-                          placeholder: 'Username'),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 5),
-                      child: TextInputField(
+                          placeholder: 'Username',
+                          handleValidation: (name) =>
+                              name!.isEmpty ? "Required" : null,
+                        ),
+                      ),
+
+                      /// email Input Field
+                      ///
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 5),
+                        child: TextInputField(
                           handleChange: (text) => handleInput("email", text),
-                          placeholder: 'Email'),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: TextInputField(
+                          placeholder: 'Email',
+                          handleValidation: (email) =>
+                              !RegExp(r'^[\w-]+(\.[\w-]+)*@(hotmail\.com|gmail\.com|yahoo\.com|outlook\.com)$')
+                                      .hasMatch(formData['email']!)
+                                  ? "Invalid email format"
+                                  : null,
+                        ),
+                      ),
+
+                      /// password Input Field
+                      ///
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: TextInputField(
                           handleChange: (text) => handleInput('password', text),
-                          placeholder: 'Password'),
-                    ),
-
-                    // if not all input fields are filled
-                    if (empty == true)
-                      const Text(
-                        "All fields are required",
-                        style: TextStyle(color: Colors.red),
+                          placeholder: 'Password',
+                          handleValidation: (password) => password!.length < 6
+                              ? "Password must be at least 6 characters"
+                              : null,
+                        ),
                       ),
 
-                    // if email format is wrong
-                    if (invalidEmailFormat == true)
-                      const Text(
-                        "Invalid email format.",
-                        style: TextStyle(color: Colors.red),
-                      ),
+                      // // if not all input fields are filled
+                      // if (empty == true)
+                      //   const Text(
+                      //     "All fields are required",
+                      //     style: TextStyle(color: Colors.red),
+                      //   ),
 
-                    // if password is too short
-                    if (passwordIsShort == true)
-                      const Text(
-                        "Password must be at least 6 characters.",
-                        style: TextStyle(color: Colors.red),
-                      ),
+                      // // if email format is wrong
+                      // if (invalidEmailFormat == true)
+                      //   const Text(
+                      //     "Invalid email format.",
+                      //     style: TextStyle(color: Colors.red),
+                      //   ),
 
-                    // if email is taken
-                    if (value.emailTaken == true)
-                      const Text(
-                        "Email has already been used",
-                        style: TextStyle(color: Colors.red),
-                      ),
+                      // // if password is too short
+                      // if (passwordIsShort == true)
+                      //   const Text(
+                      //     "Password must be at least 6 characters.",
+                      //     style: TextStyle(color: Colors.red),
+                      //   ),
 
-                    // if user created successfully
-                    if (value.success == true)
-                      const Text(
-                        "Account created successfully",
-                        style: TextStyle(color: Colors.red),
-                      ),
-                  ],
+                      // if email is taken
+                      if (value.emailTaken == true)
+                        const Text(
+                          "Email has already been used",
+                          style: TextStyle(color: Colors.red),
+                        ),
+
+                      // if user created successfully
+                      if (value.success == true)
+                        const Text(
+                          "Account created successfully",
+                          style: TextStyle(color: Colors.red),
+                        ),
+                    ],
+                  ),
                 );
               },
             ),
@@ -150,49 +177,50 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     text: 'Create Account',
                     // check for empty input fields
                     handlePressed: () async {
-                      // if a field is empty
-                      if (formData['username'] == "" ||
-                          formData['email'] == "" ||
-                          formData['password'] == "") {
-                        setState(() {
-                          empty = true;
-                        });
+                      formKey.currentState!.validate();
+                      // // if a field is empty
+                      // if (formData['username'] == "" ||
+                      //     formData['email'] == "" ||
+                      //     formData['password'] == "") {
+                      //   setState(() {
+                      //     empty = true;
+                      //   });
 
-                        // if email format is invalid
-                      } else if (!RegExp(
-                              r'^[\w-]+(\.[\w-]+)*@(hotmail\.com|gmail\.com|yahoo\.com|outlook\.com)$')
-                          .hasMatch(formData['email']!)) {
-                        setState(() {
-                          empty = false;
-                          invalidEmailFormat = true;
-                        });
+                      //   // if email format is invalid
+                      // } else if (!RegExp(
+                      //         r'^[\w-]+(\.[\w-]+)*@(hotmail\.com|gmail\.com|yahoo\.com|outlook\.com)$')
+                      //     .hasMatch(formData['email']!)) {
+                      //   setState(() {
+                      //     empty = false;
+                      //     invalidEmailFormat = true;
+                      //   });
 
-                        // if password too short
-                      } else if (formData['password']!.length < 6) {
-                        setState(() {
-                          empty = false;
-                          invalidEmailFormat = false;
-                          passwordIsShort = true;
-                        });
+                      //   // if password too short
+                      // } else if (formData['password']!.length < 6) {
+                      //   setState(() {
+                      //     empty = false;
+                      //     invalidEmailFormat = false;
+                      //     passwordIsShort = true;
+                      //   });
 
-                        // clear all input error messages
-                      } else {
-                        setState(() {
-                          empty = false;
-                          invalidEmailFormat = false;
-                          passwordIsShort = false;
-                        });
+                      //   // clear all input error messages
+                      // } else {
+                      //   setState(() {
+                      //     empty = false;
+                      //     invalidEmailFormat = false;
+                      //     passwordIsShort = false;
+                      //   });
 
-                        // send request
-                        await context.read<AuthProvider>().signUpRequest(
-                            formData['username']!,
-                            formData['email']!,
-                            formData['password']!);
+                      //   // send request
+                      //   await context.read<AuthProvider>().signUpRequest(
+                      //       formData['username']!,
+                      //       formData['email']!,
+                      //       formData['password']!);
 
-                        // print(context.watch<AuthProvider>().emailTaken);
-                        // print(context.watch<AuthProvider>().success);
-                        // print("success: $success, emailTaken: $emailTaken");
-                      }
+                      //   // print(context.watch<AuthProvider>().emailTaken);
+                      //   // print(context.watch<AuthProvider>().success);
+                      //   // print("success: $success, emailTaken: $emailTaken");
+                      // }
                     },
                   ),
                 ),
