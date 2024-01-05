@@ -13,9 +13,12 @@ class TextInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      // functionalities
       validator: handleValidation,
       onChanged: handleChange,
       obscureText: placeholder == "Password",
+
+      // styling
       decoration: InputDecoration(
           border: OutlineInputBorder(
             borderSide: BorderSide(
@@ -23,10 +26,24 @@ class TextInputField extends StatelessWidget {
                 color: Theme.of(context).hintColor),
             borderRadius: BorderRadius.circular(10),
           ),
+
+          /// Focused Border
+          ///
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Theme.of(context).hintColor),
             borderRadius: BorderRadius.circular(10),
           ),
+
+          /// Error Border
+          ///
+          errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).primaryColor),
+              borderRadius: BorderRadius.circular(10)),
+          errorStyle: TextStyle(color: Theme.of(context).primaryColor),
+          focusedErrorBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).primaryColor),
+              borderRadius: BorderRadius.circular(10)),
+          //
           floatingLabelStyle: TextStyle(
             color: Theme.of(context).hintColor,
           ),
