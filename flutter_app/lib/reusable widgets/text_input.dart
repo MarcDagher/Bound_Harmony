@@ -8,21 +8,25 @@ class TextInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Theme.of(context).hintColor)),
-      child: TextFormField(
-          onChanged: handleChange,
-          obscureText: placeholder == "Password",
-          decoration: InputDecoration(
-              border: InputBorder.none,
-              labelText: placeholder,
-              labelStyle: TextStyle(
-                color: Theme.of(context).hintColor,
-              ),
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 15, vertical: 15))),
+    return TextFormField(
+      onChanged: handleChange,
+      obscureText: placeholder == "Password",
+      decoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderSide: BorderSide(
+                strokeAlign: double.infinity,
+                color: Theme.of(context).hintColor),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          floatingLabelStyle: TextStyle(
+            color: Theme.of(context).hintColor,
+          ),
+          labelText: placeholder,
+          labelStyle: TextStyle(
+            color: Theme.of(context).hintColor,
+          ),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 15, vertical: 20)),
     );
   }
 }
