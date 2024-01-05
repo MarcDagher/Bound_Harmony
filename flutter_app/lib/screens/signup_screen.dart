@@ -15,10 +15,6 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final dio = Dio();
-  // input handleing
-  bool empty = false;
-  bool invalidEmailFormat = false;
-  bool passwordIsShort = false;
 
   // response handleing
   bool emailTaken = false;
@@ -70,24 +66,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
             ///////////////////// Column: INPUT FIELDs  ///////////////////////
 
-            if (empty == true ||
-                emailTaken == true ||
-                success == true ||
-                invalidEmailFormat == true ||
-                passwordIsShort == true)
-              const SizedBox(height: 30)
-            else
-              const SizedBox(
-                height: 45,
-              ),
-
             Consumer<AuthProvider>(
               builder: (context, value, child) {
+                // if (value.emailTaken == true) {
+                //   setState(() {
+                //     emailTaken = value.emailTaken!;
+                //   });
+                // }
                 return Form(
                   key: formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
+                      if (value.emailTaken == true || value.success == true)
+                        const SizedBox(height: 30)
+                      else
+                        const SizedBox(
+                          height: 45,
+                        ),
+
                       /// Username Input Field
                       ///
                       Padding(
@@ -96,7 +93,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           handleChange: (text) => handleInput("username", text),
                           placeholder: 'Username',
                           handleValidation: (name) =>
-                              name!.isEmpty ? "Required" : null,
+                              name!.isEmpty ? "Username is required" : null,
                         ),
                       ),
 
@@ -111,7 +108,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               !RegExp(r'^[\w-]+(\.[\w-]+)*@(hotmail\.com|gmail\.com|yahoo\.com|outlook\.com)$')
                                       .hasMatch(formData['email']!)
                                   ? "Invalid email format"
-                                  : null,
+                                  : email!.isEmpty
+                                      ? "Email is required"
+                                      : null,
                         ),
                       ),
 
@@ -127,27 +126,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               : null,
                         ),
                       ),
-
-                      // // if not all input fields are filled
-                      // if (empty == true)
-                      //   const Text(
-                      //     "All fields are required",
-                      //     style: TextStyle(color: Colors.red),
-                      //   ),
-
-                      // // if email format is wrong
-                      // if (invalidEmailFormat == true)
-                      //   const Text(
-                      //     "Invalid email format.",
-                      //     style: TextStyle(color: Colors.red),
-                      //   ),
-
-                      // // if password is too short
-                      // if (passwordIsShort == true)
-                      //   const Text(
-                      //     "Password must be at least 6 characters.",
-                      //     style: TextStyle(color: Colors.red),
-                      //   ),
 
                       // if email is taken
                       if (value.emailTaken == true)
@@ -175,52 +153,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   padding: const EdgeInsets.only(top: 45, bottom: 10),
                   child: Button(
                     text: 'Create Account',
-                    // check for empty input fields
+                    // check for invalid input fields
                     handlePressed: () async {
-                      formKey.currentState!.validate();
-                      // // if a field is empty
-                      // if (formData['username'] == "" ||
-                      //     formData['email'] == "" ||
-                      //     formData['password'] == "") {
-                      //   setState(() {
-                      //     empty = true;
-                      //   });
+                      if (formKey.currentState!.validate()) {
+                        // send request
+                        await context.read<AuthProvider>().signUpRequest(
+                            formData['username']!,
+                            formData['email']!,
+                            formData['password']!);
 
-                      //   // if email format is invalid
-                      // } else if (!RegExp(
-                      //         r'^[\w-]+(\.[\w-]+)*@(hotmail\.com|gmail\.com|yahoo\.com|outlook\.com)$')
-                      //     .hasMatch(formData['email']!)) {
-                      //   setState(() {
-                      //     empty = false;
-                      //     invalidEmailFormat = true;
-                      //   });
-
-                      //   // if password too short
-                      // } else if (formData['password']!.length < 6) {
-                      //   setState(() {
-                      //     empty = false;
-                      //     invalidEmailFormat = false;
-                      //     passwordIsShort = true;
-                      //   });
-
-                      //   // clear all input error messages
-                      // } else {
-                      //   setState(() {
-                      //     empty = false;
-                      //     invalidEmailFormat = false;
-                      //     passwordIsShort = false;
-                      //   });
-
-                      //   // send request
-                      //   await context.read<AuthProvider>().signUpRequest(
-                      //       formData['username']!,
-                      //       formData['email']!,
-                      //       formData['password']!);
-
-                      //   // print(context.watch<AuthProvider>().emailTaken);
-                      //   // print(context.watch<AuthProvider>().success);
-                      //   // print("success: $success, emailTaken: $emailTaken");
-                      // }
+                        // print(context.watch<AuthProvider>().emailTaken);
+                        // print(context.watch<AuthProvider>().success);
+                        // print("success: $success, emailTaken: $emailTaken");
+                      }
                     },
                   ),
                 ),
