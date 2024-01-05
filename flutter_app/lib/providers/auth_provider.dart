@@ -12,6 +12,7 @@ class AuthProvider extends ChangeNotifier {
   signUpRequest(
       String formUsername, String formEmail, String formPassword) async {
     final baseUrl = Requests.baseUrl;
+    print("hello");
     try {
       final response = await dio.post("$baseUrl/register", data: {
         "username": formUsername,
@@ -19,7 +20,7 @@ class AuthProvider extends ChangeNotifier {
         "password": formPassword,
         "birthdate": "15-01-2003",
       });
-      // print("from provider => response data: ${response.data}");
+      print("from provider => response data: ${response.data}");
 
       if (response.data['status'] == "success") {
         success = true;
@@ -30,12 +31,12 @@ class AuthProvider extends ChangeNotifier {
         emailTaken = true;
         success = false;
       }
-      // print("from provider => status code: ${e.response!.statusCode}");
+      print("from provider => status code: ${e.response!.statusCode}");
     }
 
-    // print("from provider => success: $success");
-    // print("from provider => emailTaken: $emailTaken");
-    // notifyListeners();
-    return [emailTaken, success];
+    print("from provider => success: $success");
+    print("from provider => emailTaken: $emailTaken");
+    notifyListeners();
+    // return [emailTaken, success];
   }
 }

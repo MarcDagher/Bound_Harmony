@@ -122,35 +122,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
 
                 // if username exists in DB
-                // if (emailTaken == true)
-                //   const Text(
-                //     "Email has already been used",
-                //     style: TextStyle(color: Colors.red),
-                //   ),
+                if (emailTaken == true)
+                  const Text(
+                    "Email has already been used",
+                    style: TextStyle(color: Colors.red),
+                  ),
 
-                // // if user created successfully
-                // if (success == true)
-                //   const Text(
-                //     "Account created successfully",
-                //     style: TextStyle(color: Colors.red),
-                //   ),
-
-                Consumer<AuthProvider>(
-                  builder: (context, value, child) {
-                    if (value.emailTaken == true) {
-                      return const Text(
-                        "Email has already been used",
-                        style: TextStyle(color: Colors.red),
-                      );
-                    } else if (value.success == true) {
-                      return const Text(
-                        "Account created successfully",
-                        style: TextStyle(color: Colors.red),
-                      );
-                    }
-                    return const SizedBox();
-                  },
-                )
+                // if user created successfully
+                if (success == true)
+                  const Text(
+                    "Account created successfully",
+                    style: TextStyle(color: Colors.red),
+                  ),
               ],
             ),
 
@@ -202,18 +185,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             .signUpRequest(formData['username']!,
                                 formData['email']!, formData['password']!);
 
-                        // setState(() {
-                        //   success = result[1];
-                        //   emailTaken = result[0];
-                        // });
+                        setState(() {
+                          success = result[1];
+                          emailTaken = result[0];
+                        });
                         if (success == true) {
                           Navigator.popAndPushNamed(context, "LogIn");
                         }
                         // print(context.watch<AuthProvider>().emailTaken);
                         // print(context.watch<AuthProvider>().success);
                         // print("success: $success, emailTaken: $emailTaken");
-                        // print(
-                        //     "success: ${result[1]}, emailTaken: ${result[0]}");
+                        print(
+                            "success: ${result[1]}, emailTaken: ${result[0]}");
                       }
                     },
                   ),
