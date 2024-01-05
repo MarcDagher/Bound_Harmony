@@ -16,6 +16,7 @@ class LogInScreen extends StatefulWidget {
 
 class _LogInScreenState extends State<LogInScreen> {
   final dio = Dio();
+  final formKey = GlobalKey<FormState>();
   Map<String, String> formData = {'email': "", 'password': ""};
   bool empty = false;
   bool success = false;
@@ -26,34 +27,6 @@ class _LogInScreenState extends State<LogInScreen> {
       formData[field] = newField;
     });
   }
-
-  // void signInRequest() async {
-  //   try {
-  //     final response = await dio.post("${Requests.baseUrl}/login", data: {
-  //       "email": formData['email'],
-  //       "password": formData['password'],
-  //     });
-  //     print(response.data);
-  //     print(response.data);
-  //     if (response.data['status'] == "success") {
-  //       setState(() {
-  //         success = true;
-  //         empty = false;
-  //         wrongCredentials = false;
-  //       });
-  //       // context.goNamed('Connection Setup');
-  //     }
-  //   } on DioException catch (e) {
-  //     print(e.response!.statusCode);
-  //     if (e.response!.statusCode == 401) {
-  //       setState(() {
-  //         empty = false;
-  //         wrongCredentials = true;
-  //         success = false;
-  //       });
-  //     }
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -87,46 +60,59 @@ class _LogInScreenState extends State<LogInScreen> {
             ),
 
             ///////////////////// Column: INPUT FIELDs  ///////////////////////
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 60),
-                  child: TextInputField(
+            Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 60),
+                    child: TextInputField(
                       handleChange: (text) {
                         handleInput('email', text);
                       },
-                      placeholder: 'Email'),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 5, bottom: 20),
-                  child: TextInputField(
+                      placeholder: 'Email',
+                      handleValidation: (email) => email!.isEmpty
+                          ? "Email is required"
+                          : !RegExp(r'^[\w-]+(\.[\w-]+)*@(hotmail\.com|gmail\.com|yahoo\.com|outlook\.com)$')
+                                  .hasMatch(formData['email']!)
+                              ? "Invalid email format"
+                              : null,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5, bottom: 20),
+                    child: TextInputField(
                       handleChange: (text) {
                         handleInput('password', text);
                       },
-                      placeholder: 'Password'),
-                ),
-
-                // empty fields
-                if (empty == true)
-                  const Text(
-                    "All fields are required.",
-                    style: TextStyle(color: Colors.red),
+                      placeholder: 'Password',
+                      handleValidation: (password) =>
+                          password!.isEmpty ? "Password is required" : null,
+                    ),
                   ),
 
-                // wrong email or password
-                if (wrongCredentials == true)
-                  const Text(
-                    "Wrong credentials.",
-                    style: TextStyle(color: Colors.red),
-                  ),
+                  // empty fields
+                  if (empty == true)
+                    const Text(
+                      "All fields are required.",
+                      style: TextStyle(color: Colors.red),
+                    ),
 
-                // success
-                if (success == true)
-                  const Text(
-                    "Success.",
-                    style: TextStyle(color: Colors.red),
-                  ),
-              ],
+                  // wrong email or password
+                  if (wrongCredentials == true)
+                    const Text(
+                      "Wrong credentials.",
+                      style: TextStyle(color: Colors.red),
+                    ),
+
+                  // success
+                  if (success == true)
+                    const Text(
+                      "Success.",
+                      style: TextStyle(color: Colors.red),
+                    ),
+                ],
+              ),
             ),
 
             ///////////////////// Column: BUTTON + Text ///////////////////////
@@ -137,12 +123,7 @@ class _LogInScreenState extends State<LogInScreen> {
                   child: Button(
                     text: 'Log In',
                     handlePressed: () {
-                      if (formData['email'] == "" ||
-                          formData['password'] == "") {
-                        setState(() {
-                          empty = true;
-                        });
-                      } else {
+                      if (formKey.currentState!.validate()) {
                         context.read<AuthProvider>().logInRequest(
                             formData['email'], formData['password']);
                       }
