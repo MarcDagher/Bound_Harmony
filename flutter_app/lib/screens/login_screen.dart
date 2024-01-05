@@ -1,9 +1,11 @@
 import 'package:bound_harmony/configurations/request.configuration.dart';
+import 'package:bound_harmony/providers/auth_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/text_input.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:bound_harmony/reusable%20widgets/button.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
@@ -25,33 +27,33 @@ class _LogInScreenState extends State<LogInScreen> {
     });
   }
 
-  void signInRequest() async {
-    try {
-      final response = await dio.post("${Requests.baseUrl}/login", data: {
-        "email": formData['email'],
-        "password": formData['password'],
-      });
-      print(response.data);
-      print(response.data);
-      if (response.data['status'] == "success") {
-        setState(() {
-          success = true;
-          empty = false;
-          wrongCredentials = false;
-        });
-        // context.goNamed('Connection Setup');
-      }
-    } on DioException catch (e) {
-      print(e.response!.statusCode);
-      if (e.response!.statusCode == 401) {
-        setState(() {
-          empty = false;
-          wrongCredentials = true;
-          success = false;
-        });
-      }
-    }
-  }
+  // void signInRequest() async {
+  //   try {
+  //     final response = await dio.post("${Requests.baseUrl}/login", data: {
+  //       "email": formData['email'],
+  //       "password": formData['password'],
+  //     });
+  //     print(response.data);
+  //     print(response.data);
+  //     if (response.data['status'] == "success") {
+  //       setState(() {
+  //         success = true;
+  //         empty = false;
+  //         wrongCredentials = false;
+  //       });
+  //       // context.goNamed('Connection Setup');
+  //     }
+  //   } on DioException catch (e) {
+  //     print(e.response!.statusCode);
+  //     if (e.response!.statusCode == 401) {
+  //       setState(() {
+  //         empty = false;
+  //         wrongCredentials = true;
+  //         success = false;
+  //       });
+  //     }
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +143,8 @@ class _LogInScreenState extends State<LogInScreen> {
                           empty = true;
                         });
                       } else {
-                        signInRequest();
+                        context.read<AuthProvider>().signInRequest(
+                            formData['email'], formData['password']);
                       }
                     },
                   ),
