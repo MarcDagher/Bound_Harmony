@@ -1,4 +1,3 @@
-import 'package:bound_harmony/configurations/request.configuration.dart';
 import 'package:bound_harmony/providers/auth_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/text_input.dart';
 import 'package:dio/dio.dart';
@@ -18,7 +17,7 @@ class _LogInScreenState extends State<LogInScreen> {
   final dio = Dio();
   final formKey = GlobalKey<FormState>();
   Map<String, String> formData = {'email': "", 'password': ""};
-  bool empty = false;
+
   bool success = false;
   bool wrongCredentials = false;
 
@@ -91,24 +90,17 @@ class _LogInScreenState extends State<LogInScreen> {
                     ),
                   ),
 
-                  // empty fields
-                  if (empty == true)
-                    const Text(
-                      "All fields are required.",
-                      style: TextStyle(color: Colors.red),
-                    ),
-
-                  // wrong email or password
-                  if (wrongCredentials == true)
-                    const Text(
-                      "Wrong credentials.",
-                      style: TextStyle(color: Colors.red),
-                    ),
-
                   // success
-                  if (success == true)
+                  if (context.watch<AuthProvider>().success == true)
                     const Text(
                       "Success.",
+                      style: TextStyle(color: Colors.red),
+                    ),
+
+                  // wrong credentials
+                  if (context.watch<AuthProvider>().wrongCredentials == true)
+                    const Text(
+                      "Wrong credentials.",
                       style: TextStyle(color: Colors.red),
                     ),
                 ],
@@ -122,10 +114,11 @@ class _LogInScreenState extends State<LogInScreen> {
                   padding: const EdgeInsets.only(top: 40),
                   child: Button(
                     text: 'Log In',
-                    handlePressed: () {
+                    handlePressed: () async {
                       if (formKey.currentState!.validate()) {
-                        context.read<AuthProvider>().logInRequest(
+                        await context.read<AuthProvider>().logInRequest(
                             formData['email'], formData['password']);
+                        // print(context.watch<AuthProvider>().wrongCredentials);
                       }
                     },
                   ),
