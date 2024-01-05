@@ -78,83 +78,70 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 height: 45,
               ),
 
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 5),
-                  child: TextInputField(
-                      handleChange: (text) => handleInput("username", text),
-                      placeholder: 'Username'),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 5),
-                  child: TextInputField(
-                      handleChange: (text) => handleInput("email", text),
-                      placeholder: 'Email'),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: TextInputField(
-                      handleChange: (text) => handleInput('password', text),
-                      placeholder: 'Password'),
-                ),
+            Consumer<AuthProvider>(
+              builder: (context, value, child) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 5),
+                      child: TextInputField(
+                          handleChange: (text) => handleInput("username", text),
+                          placeholder: 'Username'),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 5),
+                      child: TextInputField(
+                          handleChange: (text) => handleInput("email", text),
+                          placeholder: 'Email'),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: TextInputField(
+                          handleChange: (text) => handleInput('password', text),
+                          placeholder: 'Password'),
+                    ),
 
-                // if not all input fields are filled
-                if (empty == true)
-                  const Text(
-                    "All fields are required",
-                    style: TextStyle(color: Colors.red),
-                  ),
+                    // if not all input fields are filled
+                    if (empty == true)
+                      const Text(
+                        "All fields are required",
+                        style: TextStyle(color: Colors.red),
+                      ),
 
-                // if email format is wrong
-                if (invalidEmailFormat == true)
-                  const Text(
-                    "Invalid email format.",
-                    style: TextStyle(color: Colors.red),
-                  ),
+                    // if email format is wrong
+                    if (invalidEmailFormat == true)
+                      const Text(
+                        "Invalid email format.",
+                        style: TextStyle(color: Colors.red),
+                      ),
 
-                // if password is too short
-                if (passwordIsShort == true)
-                  const Text(
-                    "Password must be at least 6 characters.",
-                    style: TextStyle(color: Colors.red),
-                  ),
+                    // if password is too short
+                    if (passwordIsShort == true)
+                      const Text(
+                        "Password must be at least 6 characters.",
+                        style: TextStyle(color: Colors.red),
+                      ),
 
-                // if username exists in DB
-                // if (emailTaken == true)
-                //   const Text(
-                //     "Email has already been used",
-                //     style: TextStyle(color: Colors.red),
-                //   ),
-
-                // // if user created successfully
-                // if (success == true)
-                //   const Text(
-                //     "Account created successfully",
-                //     style: TextStyle(color: Colors.red),
-                //   ),
-
-                Consumer<AuthProvider>(
-                  builder: (context, value, child) {
-                    if (value.emailTaken == true) {
-                      return const Text(
+                    // if email is taken
+                    if (value.emailTaken == true)
+                      const Text(
                         "Email has already been used",
                         style: TextStyle(color: Colors.red),
-                      );
-                    } else if (value.success == true) {
-                      return const Text(
+                      ),
+
+                    // if user created successfully
+                    if (value.success == true)
+                      const Text(
                         "Account created successfully",
                         style: TextStyle(color: Colors.red),
-                      );
-                    }
-                    return const SizedBox();
-                  },
-                )
-              ],
+                      ),
+                  ],
+                );
+              },
             ),
 
-            ///////////////////// Column: BUTTON + Text ///////////////////////
+            ///////////////////// Column: BUTTON(with conditions) + Text(Navigator) ///////////////////////
             Column(
               children: [
                 Padding(
@@ -188,7 +175,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           passwordIsShort = true;
                         });
 
-                        // clear all inout error messages
+                        // clear all input error messages
                       } else {
                         setState(() {
                           empty = false;
@@ -197,23 +184,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         });
 
                         // send request
-                        final result = await context
-                            .read<AuthProvider>()
-                            .signUpRequest(formData['username']!,
-                                formData['email']!, formData['password']!);
+                        await context.read<AuthProvider>().signUpRequest(
+                            formData['username']!,
+                            formData['email']!,
+                            formData['password']!);
 
-                        // setState(() {
-                        //   success = result[1];
-                        //   emailTaken = result[0];
-                        // });
-                        if (success == true) {
-                          Navigator.popAndPushNamed(context, "LogIn");
-                        }
                         // print(context.watch<AuthProvider>().emailTaken);
                         // print(context.watch<AuthProvider>().success);
                         // print("success: $success, emailTaken: $emailTaken");
-                        // print(
-                        //     "success: ${result[1]}, emailTaken: ${result[0]}");
                       }
                     },
                   ),
