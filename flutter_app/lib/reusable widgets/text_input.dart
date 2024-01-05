@@ -18,6 +18,10 @@ class TextInputField extends StatelessWidget {
                 color: Theme.of(context).hintColor),
             borderRadius: BorderRadius.circular(10),
           ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Theme.of(context).hintColor),
+            borderRadius: BorderRadius.circular(10),
+          ),
           floatingLabelStyle: TextStyle(
             color: Theme.of(context).hintColor,
           ),
