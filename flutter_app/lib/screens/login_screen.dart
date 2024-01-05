@@ -18,9 +18,6 @@ class _LogInScreenState extends State<LogInScreen> {
   final formKey = GlobalKey<FormState>();
   Map<String, String> formData = {'email': "", 'password': ""};
 
-  bool success = false;
-  bool wrongCredentials = false;
-
   void handleInput(String field, String newField) {
     setState(() {
       formData[field] = newField;
@@ -59,52 +56,58 @@ class _LogInScreenState extends State<LogInScreen> {
             ),
 
             ///////////////////// Column: INPUT FIELDs  ///////////////////////
-            Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 60),
-                    child: TextInputField(
-                      handleChange: (text) {
-                        handleInput('email', text);
-                      },
-                      placeholder: 'Email',
-                      handleValidation: (email) => email!.isEmpty
-                          ? "Email is required"
-                          : !RegExp(r'^[\w-]+(\.[\w-]+)*@(hotmail\.com|gmail\.com|yahoo\.com|outlook\.com)$')
-                                  .hasMatch(formData['email']!)
-                              ? "Invalid email format"
-                              : null,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 5, bottom: 20),
-                    child: TextInputField(
-                      handleChange: (text) {
-                        handleInput('password', text);
-                      },
-                      placeholder: 'Password',
-                      handleValidation: (password) =>
-                          password!.isEmpty ? "Password is required" : null,
-                    ),
-                  ),
+            Consumer<AuthProvider>(
+              builder: (context, value, child) {
+                return Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 60),
+                        child: TextInputField(
+                          handleChange: (text) {
+                            handleInput('email', text);
+                          },
+                          placeholder: 'Email',
+                          handleValidation: (email) => email!.isEmpty
+                              ? "Email is required"
+                              : !RegExp(r'^[\w-]+(\.[\w-]+)*@(hotmail\.com|gmail\.com|yahoo\.com|outlook\.com)$')
+                                      .hasMatch(formData['email']!)
+                                  ? "Invalid email format"
+                                  : null,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5, bottom: 20),
+                        child: TextInputField(
+                          handleChange: (text) {
+                            handleInput('password', text);
+                          },
+                          placeholder: 'Password',
+                          handleValidation: (password) =>
+                              password!.isEmpty ? "Password is required" : null,
+                        ),
+                      ),
 
-                  // success
-                  if (context.watch<AuthProvider>().success == true)
-                    const Text(
-                      "Success.",
-                      style: TextStyle(color: Colors.red),
-                    ),
+                      // success
+                      if (value.successLogin == true)
+                        // Navigator.popAndPushNamed(
+                        //             context, "Connection Setup"),
+                        const Text(
+                          "Success.",
+                          style: TextStyle(color: Colors.red),
+                        ),
 
-                  // wrong credentials
-                  if (context.watch<AuthProvider>().wrongCredentials == true)
-                    const Text(
-                      "Wrong credentials.",
-                      style: TextStyle(color: Colors.red),
-                    ),
-                ],
-              ),
+                      // wrong credentials
+                      if (value.wrongCredentials == true)
+                        const Text(
+                          "Wrong credentials.",
+                          style: TextStyle(color: Colors.red),
+                        ),
+                    ],
+                  ),
+                );
+              },
             ),
 
             ///////////////////// Column: BUTTON + Text ///////////////////////
@@ -118,7 +121,13 @@ class _LogInScreenState extends State<LogInScreen> {
                       if (formKey.currentState!.validate()) {
                         await context.read<AuthProvider>().logInRequest(
                             formData['email'], formData['password']);
-                        // print(context.watch<AuthProvider>().wrongCredentials);
+                        // if (context.read<AuthProvider>().successLogin == true) {
+                        //   // Navigator.popAndPushNamed(
+                        //   //     context, 'Connection Setup');
+                        //   context.goNamed('Connection Setup');
+                        // }
+                        // print(
+                        //     "From button: ${Provider.of<AuthProvider>(context, listen: false).success}");
                       }
                     },
                   ),

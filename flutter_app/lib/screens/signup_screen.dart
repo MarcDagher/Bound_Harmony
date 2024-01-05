@@ -68,17 +68,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
             Consumer<AuthProvider>(
               builder: (context, value, child) {
-                // if (value.emailTaken == true) {
-                //   setState(() {
-                //     emailTaken = value.emailTaken!;
-                //   });
-                // }
                 return Form(
                   key: formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      if (value.emailTaken == true || value.success == true)
+                      if (value.emailTaken == true ||
+                          value.successSignUp == true)
                         const SizedBox(height: 30)
                       else
                         const SizedBox(
@@ -135,7 +131,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
 
                       // if user created successfully
-                      if (value.success == true)
+                      if (value.successSignUp == true)
                         const Text(
                           "Account created successfully",
                           style: TextStyle(color: Colors.red),
@@ -161,9 +157,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             formData['username']!,
                             formData['email']!,
                             formData['password']!);
-
-                        // print(context.watch<AuthProvider>().emailTaken);
-                        // print(context.watch<AuthProvider>().success);
                         // print("success: $success, emailTaken: $emailTaken");
                       }
                     },
