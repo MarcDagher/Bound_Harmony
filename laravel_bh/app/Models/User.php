@@ -3,6 +3,9 @@
 namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
@@ -26,6 +29,22 @@ class User extends Authenticatable implements JWTSubject
         'connection_status',
         'couple_survey_status'
     ];
+
+
+    // one to one relation with roles table - one user belongs to one role
+    // foreign key in User represents Role
+    public function role() : BelongsTo
+    {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+    
+    public function responder_user() : HasMany{
+        return $this -> hasMany(Connection::class, 'responder');
+    }
+
+    public function requester_user() : HasMany{
+        return $this -> hasMany(Connection::class, 'requester');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
