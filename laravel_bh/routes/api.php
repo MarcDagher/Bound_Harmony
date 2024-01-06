@@ -7,6 +7,7 @@ use App\Http\Controllers\ChatBotController;
 use App\Http\Controllers\ConnectionsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SurveysController;
+use App\Http\Middleware\AuthMiddleware;
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login');
@@ -37,3 +38,6 @@ Route::controller(SurveysController::class)->group(function (){
 Route::controller(ChatBotController::class) -> group (function (){
     Route::post('/save_user_prompt', 'save_user_prompt');
 });
+
+// Route::middleware('auth.user')->group(function () {
+//     Route::post('favorite_hobby/create',  [ Controller ::class, 'createFavoriteHobby']);});

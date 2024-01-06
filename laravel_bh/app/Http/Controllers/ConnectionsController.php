@@ -176,10 +176,10 @@ class ConnectionsController extends Controller
             'connection_id' => 'required|integer', // on display of requests we will also have the details  of each request
             'status' => 'required|in:disconnected'
         ]);
-        $token = Auth::user();
+        $user = Auth::user(); // this is not a token this gets everything except for hidden items
         $connection = Connection::find($request->connection_id);
         
-        if ($connection && ($connection->requester === $token->id || $connection->responder === $token->id)){
+        if ($connection && ($connection->requester === $user->id || $connection->responder === $user->id)){
 
             $user1 = User::find($connection -> responder);
             $user2 = User::find($connection -> requester);
