@@ -48,7 +48,10 @@ class SurveysController extends Controller
             "*.question_id" => "required|integer",
              "*.response" => "required|string"
              ]);
-
+        
+        // extracts the json payload from the incoming http request
+        //  $request->json() will return an instance of Illuminate\Http\JsonResponse
+        // all() will convert the json into accessible arrays 
         $jsonData = $request->json()->all();
 
         $token = Auth::user();
