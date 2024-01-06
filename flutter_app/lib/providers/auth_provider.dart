@@ -1,6 +1,7 @@
 import 'package:bound_harmony/configurations/request.configuration.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -20,7 +21,7 @@ class AuthProvider extends ChangeNotifier {
 
   // AuthProvider({this.emailTaken, this.success, this.wrongCredentials});
 
-  initializePreferences() async {
+  Future initializePreferences() async {
     // inithializeing preferences.
     // gets an instance of the SharedPreference file (a Map wwith key value pairs) for this app.
     // ignore: prefer_conditional_assignment
@@ -29,7 +30,8 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  getAllPreferences() async {
+  Future getAllPreferences() async {
+    // there is still: location - birthdate - image
     await initializePreferences();
     pref_id = preferences?.getInt('id');
     pref_username = preferences?.getString('username');
@@ -70,7 +72,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  logInRequest(email, password) async {
+  Future logInRequest(email, password) async {
     final baseUrl = Requests.baseUrl;
 
     successSignUp = false;
@@ -82,7 +84,9 @@ class AuthProvider extends ChangeNotifier {
         data: {"email": email, "password": password},
       );
 
-      print("from provider => response data: ${response.data}");
+      // print(
+      //     "from provider => response data: ${response.data['authorisation']['token']}");
+      print(JwtDecoder.decode(response.data['authorisation']['token']));
 
       if (response.data['status'] == "success") {
         successLogin = true;
@@ -100,8 +104,6 @@ class AuthProvider extends ChangeNotifier {
             'connection_status', response.data['user']['connection_status']);
         preferences?.setString('couple_survey_status',
             response.data['user']['couple_survey_status']);
-
-        print('Done setting preferences');
       }
     } on DioException catch (error) {
       if (error.response!.statusCode == 401) {
@@ -116,13 +118,3 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
-
-
-// print(preferences?.getInt('id') ?? 00);
-        // print(preferences?.getString('username') ?? 'empty');
-        // print(preferences?.getString('email') ?? 'empty');
-        // //  preferences?.getString('birthdate') ?? false;
-        // //  preferences?.getString('email') ?? false;
-        // //  preferences?.getString('email') ?? false;
-        // print(preferences?.getString('connection_status') ?? 'empty');
-        // print(preferences?.getString('couple_survey_status') ?? 'empty');

@@ -127,8 +127,8 @@ class _LogInScreenState extends State<LogInScreen> {
 
                         await context.read<AuthProvider>().getAllPreferences();
 
-                        print(
-                            "from button: ${context.read<AuthProvider>().pref_id}");
+                        // print(
+                        //     "from button: ${context.read<AuthProvider>().pref_id}");
                       }
                     },
                   ),
