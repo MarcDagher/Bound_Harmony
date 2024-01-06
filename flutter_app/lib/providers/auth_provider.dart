@@ -53,7 +53,7 @@ class AuthProvider extends ChangeNotifier {
         data: {"email": email, "password": password},
       );
 
-      // print("from provider => response data: ${response.data}");
+      print("from provider => response data: ${response.data}");
 
       if (response.data['status'] == "success") {
         successLogin = true;
@@ -64,11 +64,11 @@ class AuthProvider extends ChangeNotifier {
         successLogin = false;
         wrongCredentials = true;
       }
-      // print("from provider => status code: ${error.response!.statusCode}");
+      print("from provider => status code: ${error.response!.statusCode}");
     }
 
-    // print("from provider => success: $success");
-    // print("from provider => wrongCreds: $wrongCredentials");
+    print("from provider => success: $successLogin");
+    print("from provider => wrongCreds: $wrongCredentials");
 
     notifyListeners();
   }

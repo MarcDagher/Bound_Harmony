@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
           create: (context) => AuthProvider(),
         )
       ],
+      // Should I use builder or child here?
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         title: 'Bound Harmony',

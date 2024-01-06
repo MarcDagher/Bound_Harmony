@@ -14,7 +14,6 @@ class LogInScreen extends StatefulWidget {
 }
 
 class _LogInScreenState extends State<LogInScreen> {
-  final dio = Dio();
   final formKey = GlobalKey<FormState>();
   Map<String, String> formData = {'email': "", 'password': ""};
 
