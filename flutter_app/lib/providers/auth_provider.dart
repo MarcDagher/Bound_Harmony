@@ -48,11 +48,11 @@ class AuthProvider extends ChangeNotifier {
     final baseUrl = Requests.baseUrl;
 
     SharedPreferences? preferences;
-    int pref_id;
-    String pref_username;
-    String pref_email;
-    String pref_connection_status;
-    String pref_couple_survey_status;
+    // int pref_id;
+    // String pref_username;
+    // String pref_email;
+    // String pref_connection_status;
+    // String pref_couple_survey_status;
 
     successSignUp = false;
     emailTaken = false;
@@ -60,22 +60,10 @@ class AuthProvider extends ChangeNotifier {
     initializePreferences() async {
       // inithializeing preferences.
       // gets an instance of the SharedPreference file (a Map wwith key value pairs) for this app.
+      // ignore: prefer_conditional_assignment
       if (preferences == null) {
         preferences = await SharedPreferences.getInstance();
       }
-    }
-
-    setTokenToPreferences(payload) async {
-      await initializePreferences();
-      print('Done awaiting in token thing');
-      pref_id = preferences?.setInt('id', payload['id']) as int;
-      pref_username =
-          preferences?.setString('username', payload['username']) as String;
-      pref_email = preferences?.setString('email', payload['email']) as String;
-      pref_connection_status = preferences?.setString(
-          'connection_status', payload['connection_status']) as String;
-      pref_couple_survey_status = preferences?.setString(
-          'couple_survey_status', payload['couple_survey_status']) as String;
     }
 
     try {
@@ -91,9 +79,8 @@ class AuthProvider extends ChangeNotifier {
         wrongCredentials = false;
 
         // checking if the preferences instance already exists
-        if (preferences == null) {
-          preferences = await SharedPreferences.getInstance();
-        }
+        // // gets an instance of the SharedPreference file (a Map wwith key value pairs) for this app.
+        initializePreferences();
 
         // adding token payload to the Preferences
         preferences?.setInt('id', response.data['user']['id']);
@@ -125,22 +112,5 @@ class AuthProvider extends ChangeNotifier {
     // print("from provider => success: $successLogin");
     // print("from provider => wrongCreds: $wrongCredentials");
     notifyListeners();
-
-    // getTokenFromPreferences() async {
-    //   // 18:04
-    //   await initializePreferences();
-    //   pref_id = preferences?.getInt('id') ?? 00;
-    //   pref_username = preferences?.getString('username') ?? 'empty';
-    //   pref_email = preferences?.getString('email') ?? 'empty';
-    //   // birthdate = preferences?.getString('birthdate') ?? false;
-    //   // location = preferences?.getString('email') ?? false;
-    //   // image = preferences?.getString('email') ?? false;
-    //   pref_connection_status =
-    //       preferences?.getString('connection_status') ?? 'empty';
-    //   pref_couple_survey_status =
-    //       preferences?.getString('couple_survey_status') ?? 'empty';
-
-    //   notifyListeners();
-    // }
   }
 }
