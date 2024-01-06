@@ -1,6 +1,5 @@
 import 'package:bound_harmony/providers/auth_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/text_input.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:bound_harmony/reusable%20widgets/button.dart';
 import 'package:go_router/go_router.dart';
@@ -125,8 +124,11 @@ class _LogInScreenState extends State<LogInScreen> {
                         //   //     context, 'Connection Setup');
                         //   context.goNamed('Connection Setup');
                         // }
-                        // print(
-                        //     "From button: ${Provider.of<AuthProvider>(context, listen: false).success}");
+
+                        await context.read<AuthProvider>().getAllPreferences();
+
+                        print(
+                            "from button: ${context.read<AuthProvider>().pref_id}");
                       }
                     },
                   ),

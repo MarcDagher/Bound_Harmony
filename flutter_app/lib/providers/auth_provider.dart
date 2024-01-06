@@ -11,7 +11,33 @@ class AuthProvider extends ChangeNotifier {
   bool? successLogin;
   bool? wrongCredentials;
 
+  SharedPreferences? preferences;
+  int? pref_id;
+  String? pref_username;
+  String? pref_email;
+  String? pref_connection_status;
+  String? pref_couple_survey_status;
+
   // AuthProvider({this.emailTaken, this.success, this.wrongCredentials});
+
+  initializePreferences() async {
+    // inithializeing preferences.
+    // gets an instance of the SharedPreference file (a Map wwith key value pairs) for this app.
+    // ignore: prefer_conditional_assignment
+    if (preferences == null) {
+      preferences = await SharedPreferences.getInstance();
+    }
+  }
+
+  getAllPreferences() async {
+    await initializePreferences();
+    pref_id = preferences?.getInt('id');
+    pref_username = preferences?.getString('username');
+    pref_email = preferences?.getString('email');
+    pref_connection_status = preferences?.getString('connection_status');
+    pref_couple_survey_status = preferences?.getString('couple_survey_status');
+    notifyListeners();
+  }
 
   Future signUpRequest(
       String formUsername, String formEmail, String formPassword) async {
@@ -47,24 +73,8 @@ class AuthProvider extends ChangeNotifier {
   logInRequest(email, password) async {
     final baseUrl = Requests.baseUrl;
 
-    SharedPreferences? preferences;
-    // int pref_id;
-    // String pref_username;
-    // String pref_email;
-    // String pref_connection_status;
-    // String pref_couple_survey_status;
-
     successSignUp = false;
     emailTaken = false;
-
-    initializePreferences() async {
-      // inithializeing preferences.
-      // gets an instance of the SharedPreference file (a Map wwith key value pairs) for this app.
-      // ignore: prefer_conditional_assignment
-      if (preferences == null) {
-        preferences = await SharedPreferences.getInstance();
-      }
-    }
 
     try {
       final response = await dio.post(
@@ -92,14 +102,6 @@ class AuthProvider extends ChangeNotifier {
             response.data['user']['couple_survey_status']);
 
         print('Done setting preferences');
-        // print(preferences?.getInt('id') ?? 00);
-        // print(preferences?.getString('username') ?? 'empty');
-        // print(preferences?.getString('email') ?? 'empty');
-        // //  preferences?.getString('birthdate') ?? false;
-        // //  preferences?.getString('email') ?? false;
-        // //  preferences?.getString('email') ?? false;
-        // print(preferences?.getString('connection_status') ?? 'empty');
-        // print(preferences?.getString('couple_survey_status') ?? 'empty');
       }
     } on DioException catch (error) {
       if (error.response!.statusCode == 401) {
@@ -114,3 +116,13 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+
+// print(preferences?.getInt('id') ?? 00);
+        // print(preferences?.getString('username') ?? 'empty');
+        // print(preferences?.getString('email') ?? 'empty');
+        // //  preferences?.getString('birthdate') ?? false;
+        // //  preferences?.getString('email') ?? false;
+        // //  preferences?.getString('email') ?? false;
+        // print(preferences?.getString('connection_status') ?? 'empty');
+        // print(preferences?.getString('couple_survey_status') ?? 'empty');
