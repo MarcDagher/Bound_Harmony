@@ -119,16 +119,14 @@ class _LogInScreenState extends State<LogInScreen> {
                       if (formKey.currentState!.validate()) {
                         await context.read<AuthProvider>().logInRequest(
                             formData['email'], formData['password']);
-                        // if (context.read<AuthProvider>().successLogin == true) {
-                        //   // Navigator.popAndPushNamed(
-                        //   //     context, 'Connection Setup');
-                        //   context.goNamed('Connection Setup');
-                        // }
-
-                        await context.read<AuthProvider>().getAllPreferences();
-
-                        // print(
-                        //     "from button: ${context.read<AuthProvider>().pref_id}");
+                        if (context.read<AuthProvider>().successLogin == true) {
+                          // await context
+                          //     .read<AuthProvider>()
+                          //     .getAllPreferences();
+                          // print(
+                          //     "from button: ${context.read<AuthProvider>().pref_id}");
+                          context.goNamed('Connection Setup');
+                        }
                       }
                     },
                   ),

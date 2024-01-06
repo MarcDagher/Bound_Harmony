@@ -13,7 +13,7 @@ class AuthProvider extends ChangeNotifier {
   bool? wrongCredentials;
 
   SharedPreferences? preferences;
-  int? pref_id;
+  String? pref_id;
   String? pref_username;
   String? pref_email;
   String? pref_connection_status;
@@ -33,7 +33,7 @@ class AuthProvider extends ChangeNotifier {
   Future getAllPreferences() async {
     // there is still: location - birthdate - image
     await initializePreferences();
-    pref_id = preferences?.getInt('id');
+    pref_id = preferences?.getString('id');
     pref_username = preferences?.getString('username');
     pref_email = preferences?.getString('email');
     pref_connection_status = preferences?.getString('connection_status');
@@ -84,9 +84,7 @@ class AuthProvider extends ChangeNotifier {
         data: {"email": email, "password": password},
       );
 
-      // print(
-      //     "from provider => response data: ${response.data['authorisation']['token']}");
-      print(JwtDecoder.decode(response.data['authorisation']['token']));
+      final token = JwtDecoder.decode(response.data['authorisation']['token']);
 
       if (response.data['status'] == "success") {
         successLogin = true;
@@ -97,13 +95,12 @@ class AuthProvider extends ChangeNotifier {
         initializePreferences();
 
         // adding token payload to the Preferences
-        preferences?.setInt('id', response.data['user']['id']);
-        preferences?.setString('username', response.data['user']['username']);
-        preferences?.setString('email', response.data['user']['email']);
+        preferences?.setString('id', token['sub']);
+        preferences?.setString('username', token['username']);
+        preferences?.setString('email', token['email']);
+        preferences?.setString('connection_status', token['connection status']);
         preferences?.setString(
-            'connection_status', response.data['user']['connection_status']);
-        preferences?.setString('couple_survey_status',
-            response.data['user']['couple_survey_status']);
+            'couple_survey_status', token['couple survey status']);
       }
     } on DioException catch (error) {
       if (error.response!.statusCode == 401) {
