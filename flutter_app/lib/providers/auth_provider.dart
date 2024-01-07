@@ -37,7 +37,7 @@ class AuthProvider extends ChangeNotifier {
     return token;
   }
 
-  Future getAllPreferences() async {
+  Future saveAllPreferences() async {
     // there is still: location - birthdate - image
     await initializePreferences();
     prefId = preferences?.getString('id');
@@ -123,6 +123,7 @@ class AuthProvider extends ChangeNotifier {
 
     // print("from provider => success: $successLogin");
     // print("from provider => wrongCreds: $wrongCredentials");
+    saveAllPreferences();
     notifyListeners();
   }
 }

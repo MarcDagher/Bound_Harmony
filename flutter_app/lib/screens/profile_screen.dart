@@ -1,7 +1,9 @@
+import 'package:bound_harmony/providers/auth_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/display_box.dart';
 import 'package:bound_harmony/reusable%20widgets/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -13,6 +15,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    final usernameController = TextEditingController();
     // final isKeyboard = MediaQuery.of(context).viewInsets.bottom !=
     //     0; // check if keyboard is in the UI
     return Scaffold(
@@ -51,22 +54,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ///////////////////// Column: TextInputField - DisplayBox - TextInputField - Location - NavButton x2  ///////////////////////
               Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 5),
-                    child: TextInputField(
-                        handleChange: (string) {
-                          // print(string);
-                        },
-                        placeholder: 'Username'),
+                  Consumer<AuthProvider>(
+                    builder: (context, value, child) => Padding(
+                      padding: const EdgeInsets.only(bottom: 5),
+                      child: TextInputField(
+                          handleChangeController: usernameController,
+                          placeholder: value.prefUsername!),
+                    ),
                   ),
 
                   // this will be a text. email is displayed from token
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 5),
-                    child: Row(
-                      children: [
-                        Expanded(child: DisplayBox(text: 'My-Email@123.com')),
-                      ],
+                  Consumer<AuthProvider>(
+                    builder: (context, value, child) => Padding(
+                      padding: const EdgeInsets.only(bottom: 5),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: DisplayBox(text: value.prefEmail),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
 
@@ -130,7 +137,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ],
                       ),
                       onPressed: () {
-                        context.goNamed('My Partners');
+                        // context.goNamed('My Partners');
                       })
                 ],
               ),

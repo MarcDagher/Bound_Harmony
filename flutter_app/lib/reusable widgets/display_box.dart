@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DisplayBox extends StatelessWidget {
-  final String text;
+  final String? text;
   const DisplayBox({super.key, required this.text});
 
   @override
@@ -16,7 +16,7 @@ class DisplayBox extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
               child: Text(
-                text,
+                text!,
                 style: const TextStyle(fontSize: 16),
               ),
             ),
