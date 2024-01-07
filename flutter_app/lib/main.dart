@@ -1,5 +1,6 @@
 import 'package:bound_harmony/configurations/app_router.dart';
 import 'package:bound_harmony/providers/auth_provider.dart';
+import 'package:bound_harmony/providers/connection_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => AuthProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ConnectionProvider(),
         )
       ],
       // Should I use builder or child here?

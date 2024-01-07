@@ -13,11 +13,11 @@ class AuthProvider extends ChangeNotifier {
   bool? wrongCredentials;
 
   SharedPreferences? preferences;
-  String? pref_id;
-  String? pref_username;
-  String? pref_email;
-  String? pref_connection_status;
-  String? pref_couple_survey_status;
+  String? prefId;
+  String? prefUsername;
+  String? prefEmail;
+  String? prefConnectionStatus;
+  String? prefCoupleSurveyStatus;
 
   // AuthProvider({this.emailTaken, this.success, this.wrongCredentials});
 
@@ -33,11 +33,11 @@ class AuthProvider extends ChangeNotifier {
   Future getAllPreferences() async {
     // there is still: location - birthdate - image
     await initializePreferences();
-    pref_id = preferences?.getString('id');
-    pref_username = preferences?.getString('username');
-    pref_email = preferences?.getString('email');
-    pref_connection_status = preferences?.getString('connection_status');
-    pref_couple_survey_status = preferences?.getString('couple_survey_status');
+    prefId = preferences?.getString('id');
+    prefUsername = preferences?.getString('username');
+    prefEmail = preferences?.getString('email');
+    prefConnectionStatus = preferences?.getString('connection_status');
+    prefCoupleSurveyStatus = preferences?.getString('couple_survey_status');
     notifyListeners();
   }
 
