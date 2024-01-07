@@ -72,7 +72,7 @@ class ConnectionsController extends Controller
                 return response()->json([
                     "status" => "failed",
                     "message" =>  "Connection already exists",
-                ], 403);
+                ], 405);
             } else {
                 $connection = Connection::create([
                     "requester" => $requester_id,
@@ -90,7 +90,7 @@ class ConnectionsController extends Controller
             return response()->json([
                 "status" => "failed",
                 "message" => "Request failed. User doesn't exist"
-            ]);
+            ], 403);
         }
     }
 
