@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class TextInputField extends StatelessWidget {
+  final String placeholder;
   final Function(String) handleChange;
   final String? Function(String?)? handleValidation;
-  final String placeholder;
+  final TextEditingController? handleChangeController;
   const TextInputField(
       {super.key,
       required this.placeholder,
       required this.handleChange,
-      this.handleValidation});
+      this.handleValidation,
+      this.handleChangeController});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class TextInputField extends StatelessWidget {
       validator: handleValidation,
       onChanged: handleChange,
       obscureText: placeholder == "Password",
-
+      controller: handleChangeController,
       // styling
       decoration: InputDecoration(
           border: OutlineInputBorder(
@@ -40,10 +42,12 @@ class TextInputField extends StatelessWidget {
               borderSide: BorderSide(color: Theme.of(context).primaryColor),
               borderRadius: BorderRadius.circular(10)),
           errorStyle: TextStyle(color: Theme.of(context).primaryColor),
+
+          /// focused error border
+          ///
           focusedErrorBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Theme.of(context).primaryColor),
               borderRadius: BorderRadius.circular(10)),
-          //
           floatingLabelStyle: TextStyle(
             color: Theme.of(context).hintColor,
           ),

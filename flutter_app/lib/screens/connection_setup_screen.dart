@@ -8,8 +8,8 @@ class ConnectionSetupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isKeyboard = MediaQuery.of(context).viewInsets.bottom !=
-        0; // check if keyboard is in the UI
+    // final isKeyboard = MediaQuery.of(context).viewInsets.bottom !=
+    //     0; // check if keyboard is in the UI
     return Scaffold(
       body: SafeArea(
           child: Padding(
@@ -25,13 +25,14 @@ class ConnectionSetupScreen extends StatelessWidget {
             ///////////////////// Column: Titles ///////////////////////
             Column(
               children: [
-                if (!isKeyboard)
-                  Text(
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Text(
                     'Welcome To Bound Harmony!',
                     style: TextStyle(
                         fontSize: 26, color: Theme.of(context).hintColor),
                   ),
-                const SizedBox(height: 10),
+                ),
                 Text(
                   "Here you will connect to your partner",
                   style: TextStyle(
@@ -43,15 +44,16 @@ class ConnectionSetupScreen extends StatelessWidget {
             ///////////////////// Column: Input + BUTTON ///////////////////////
             Column(
               children: [
-                TextInputField(
-                    handleChange: (string) {
-                      print(string);
-                    },
-                    placeholder: "Enter your partner's email"),
-                const SizedBox(height: 25),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 25),
+                  child: TextInputField(
+                      handleChange: (string) {},
+                      placeholder: "Enter your partner's email"),
+                ),
                 Button(
-                    text: 'Send Request',
-                    handlePressed: () => context.go('/profile')),
+                  text: 'Send Request',
+                  handlePressed: () {},
+                ),
               ],
             ),
           ],
