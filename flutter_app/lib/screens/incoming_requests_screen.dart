@@ -64,8 +64,8 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
                 // itemBuiler is a callback function called for each item in the in the list (BuildContext, indeex of the item in the list)
                 // It returns the widget for the corresponding list item. This depends on the itemCount.
                 itemBuilder: (context, index) {
-                  final requester = value.listOfRequests?[index]["requester"];
-                  final status = value.listOfRequests?[index]["status"];
+                  final name = value.listOfRequests?[index]["requester_name"];
+                  final email = value.listOfRequests?[index]["requester"];
                   //// EACH BOX IS A SLIDABLE WITH A STARTACTIONN AND AN ENDACTION
                   return Slidable(
                     startActionPane: ActionPane(
@@ -96,8 +96,8 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
 
                     // the child represents the design of each individual listTile
                     child: buildUserListTile(
-                        requester,
-                        status,
+                        name,
+                        email,
                         context,
                         Icons.favorite,
                         const Color.fromARGB(255, 255, 102, 92)),

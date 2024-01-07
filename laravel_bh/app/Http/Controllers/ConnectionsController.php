@@ -99,18 +99,21 @@ class ConnectionsController extends Controller
         // receiving end of a request
         // query connections where user is the responder and status is pending 
 
-        $token = Auth::user();
-        $incoming_requests = Connection::where(['status'=>'pending', 'responder'=>$token->id])->get();
-
+        $user = Auth::user();
+        $incoming_requests = Connection::where(['status'=>'pending', 'responder'=>$user->id])->get();
+        
         if (isset($incoming_requests[0])){
             $response_array = [];
 
             foreach($incoming_requests as $request){
-                $requester_email = User::find($incoming_requests[0]->requester)->email;
-                $responder_email = User::find($incoming_requests[0]->responder)->email;
+                
+                $requester_email = User::find($request->requester)->email;
+                $requester_name = User::find($request->requester)->username;
+                $responder_email = User::find($request->responder)->email;
                 $response_array[] = [
                     "id" => $request -> id,
                     "requester" => $requester_email,
+                    "requester_name" => $requester_name,
                     "responder" => $responder_email,
                     "status" => $request->status
                 ]; 
