@@ -1,3 +1,4 @@
+import 'package:bound_harmony/providers/auth_provider.dart';
 import 'package:bound_harmony/providers/connection_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/button.dart';
 import 'package:bound_harmony/reusable%20widgets/text_input.dart';
@@ -66,12 +67,14 @@ class ConnectionSetupScreen extends StatelessWidget {
                 ),
                 Button(
                   text: 'Send Request',
-                  handlePressed: () {
+                  handlePressed: () async {
                     if (formKey.currentState!.validate()) {
-                      print("from screen: $emailController.text");
+                      final token =
+                          await context.read<AuthProvider>().getToken();
+                      // print("from screen's button: $token");
                       context
                           .read<ConnectionProvider>()
-                          .sendRequest(emailController.text);
+                          .sendRequest(emailController.text, token);
                     }
                   },
                 ),

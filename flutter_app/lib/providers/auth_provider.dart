@@ -30,6 +30,13 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  Future getToken() async {
+    await initializePreferences();
+    final String? token = preferences?.getString('token');
+    // print('Inside getToken: $token');
+    return token;
+  }
+
   Future getAllPreferences() async {
     // there is still: location - birthdate - image
     await initializePreferences();
@@ -84,23 +91,27 @@ class AuthProvider extends ChangeNotifier {
         data: {"email": email, "password": password},
       );
 
-      final token = JwtDecoder.decode(response.data['authorisation']['token']);
-
       if (response.data['status'] == "success") {
         successLogin = true;
         wrongCredentials = false;
-
+        final token =
+            JwtDecoder.decode(response.data['authorisation']['token']);
         // checking if the preferences instance already exists
         // // gets an instance of the SharedPreference file (a Map wwith key value pairs) for this app.
-        initializePreferences();
+        await initializePreferences();
 
         // adding token payload to the Preferences
+        preferences?.setString(
+            'token', response.data['authorisation']['token']);
         preferences?.setString('id', token['sub']);
         preferences?.setString('username', token['username']);
         preferences?.setString('email', token['email']);
         preferences?.setString('connection_status', token['connection status']);
         preferences?.setString(
             'couple_survey_status', token['couple survey status']);
+
+        // final mytoken = preferences?.getString('token');
+        // print("Inside login: $mytoken");
       }
     } on DioException catch (error) {
       if (error.response!.statusCode == 401) {
