@@ -5,12 +5,15 @@ class TextInputField extends StatelessWidget {
   final Function(String)? handleChange;
   final String? Function(String?)? handleValidation;
   final TextEditingController? handleChangeController;
-  const TextInputField(
-      {super.key,
-      required this.placeholder,
-      this.handleChange,
-      this.handleValidation,
-      this.handleChangeController});
+  final void Function()? handleOnTap;
+  const TextInputField({
+    super.key,
+    required this.placeholder,
+    this.handleChange,
+    this.handleValidation,
+    this.handleChangeController,
+    this.handleOnTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +23,7 @@ class TextInputField extends StatelessWidget {
       onChanged: handleChange,
       obscureText: placeholder == "Password",
       controller: handleChangeController,
+      onTap: handleOnTap,
       // styling
       decoration: InputDecoration(
           border: OutlineInputBorder(

@@ -16,6 +16,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final usernameController = TextEditingController();
+    bool showUsernameButton = false;
+    bool showLocationButton = false;
     // final isKeyboard = MediaQuery.of(context).viewInsets.bottom !=
     //     0; // check if keyboard is in the UI
     return Scaffold(
@@ -54,15 +56,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ///////////////////// Column: TextInputField - DisplayBox - TextInputField - Location - NavButton x2  ///////////////////////
               Column(
                 children: [
+                  if (showUsernameButton == true) Text('Save Changes'),
+
                   Consumer<AuthProvider>(
                     builder: (context, value, child) => Padding(
                       padding: const EdgeInsets.only(bottom: 5),
                       child: TextInputField(
+                          handleOnTap: () {
+                            print(showUsernameButton);
+                            setState(() {
+                              showUsernameButton = !showUsernameButton;
+                            });
+                            print(showUsernameButton);
+                          },
                           handleChangeController: usernameController,
                           placeholder: value.prefUsername!),
                     ),
                   ),
-
                   // this will be a text. email is displayed from token
                   Consumer<AuthProvider>(
                     builder: (context, value, child) => Padding(
@@ -137,7 +147,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ],
                       ),
                       onPressed: () {
-                        // context.goNamed('My Partners');
+                        context.goNamed('My Partners');
                       })
                 ],
               ),

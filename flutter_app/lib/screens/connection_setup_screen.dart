@@ -40,19 +40,20 @@ class ConnectionSetupScreen extends StatelessWidget {
                           fontSize: 26, color: Theme.of(context).hintColor),
                     ),
                   ),
-                  if (value.success != false && value.success != true)
+                  if (value.successSendRequest != false &&
+                      value.successSendRequest != true)
                     Text(
                       "Here you will connect to your partner",
                       style: TextStyle(
                           fontSize: 15, color: Theme.of(context).hintColor),
                     ),
-                  if (value.success == false)
+                  if (value.successSendRequest == false)
                     Text(
                       value.message,
                       style: TextStyle(
                           fontSize: 15, color: Theme.of(context).primaryColor),
                     ),
-                  if (value.success == true)
+                  if (value.successSendRequest == true)
                     Text(
                       value.message,
                       style: TextStyle(
@@ -66,7 +67,7 @@ class ConnectionSetupScreen extends StatelessWidget {
             Consumer<ConnectionProvider>(
               builder: (context, value, child) => Column(
                 children: [
-                  if (value.success != true)
+                  if (value.successSendRequest != true)
                     Padding(
                       padding: const EdgeInsets.only(bottom: 25),
                       child: Form(
@@ -82,7 +83,7 @@ class ConnectionSetupScreen extends StatelessWidget {
                             placeholder: "Enter your partner's email"),
                       ),
                     ),
-                  if (value.success != true)
+                  if (value.successSendRequest != true)
                     Button(
                       text: 'Send Request',
                       handlePressed: () async {
@@ -96,7 +97,7 @@ class ConnectionSetupScreen extends StatelessWidget {
                         }
                       },
                     ),
-                  if (value.success == true)
+                  if (value.successSendRequest == true)
                     MaterialButton(
                         color: Theme.of(context).primaryColor,
                         shape: RoundedRectangleBorder(
