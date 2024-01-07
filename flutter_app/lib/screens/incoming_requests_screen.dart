@@ -14,22 +14,11 @@ class IncomingRequestsScreen extends StatefulWidget {
 }
 
 class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
-  // List<User> requests = [
-  //   User(email: 'person@email.com', username: 'Person 1', password: '...'),
-  //   User(email: 'person@email.com', username: 'Person 2', password: '...'),
-  //   User(email: 'person@email.com', username: 'Person 3', password: '...'),
-  //   User(email: 'person@email.com', username: 'Person 4', password: '...'),
-  //   User(email: 'person@email.com', username: 'Person 5', password: '...'),
-  //   User(email: 'person@email.com', username: 'Person 6', password: '...')
-  // ];
-
   @override
   Widget build(BuildContext context) {
     getdata() async {
       final token = await context.read<AuthProvider>().getToken();
       await context.read<ConnectionProvider>().displayIncomingRequests(token);
-      print(
-          "Inside getdata: ${context.read<ConnectionProvider>().listOfRequests}");
     }
 
     getdata();
