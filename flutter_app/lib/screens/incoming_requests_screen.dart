@@ -39,7 +39,11 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
         ///
         if (value.noRequests == true) {
           return Center(
-            child: Text(value.messageDisplayRequests),
+            child: Text(
+              value.messageDisplayRequests,
+              style:
+                  TextStyle(color: Theme.of(context).hintColor, fontSize: 17),
+            ),
           );
 
           /// If User has requests
