@@ -57,15 +57,16 @@ class ConnectionsController extends Controller
 
         if (isset($email_exists[0])){
             // if status is rejected or disconnected I want to be able to send again
-            $token = Auth::user();
-            $requester_id = $token->id;
+            $user = Auth::user();
+            $requester_id = $user->id;
             $responder_id = $email_exists[0]->id;
+            
 
             // nested query builder: records where connection exists and status is [accepted or pending] => i only want to request when status [rejected, desconnected] 
             // the nested queries are inside an anonymous function which takes the $query as a parameter representing the instance of query builder.
             // inside the use we include external variables that we want to include in the scope of the query
             $connection_exists = Connection::whereIn('status', ['pending', 'accepted']) -> where (function ($query) use ($requester_id, $responder_id) {
-                $query -> where(["requester"=>$requester_id , "responder"=>$responder_id]) -> orWhere(["responder"=>$requester_id , "requester"=>$responder_id]);
+                $query -> where(["requester"=>$requester_id , "responder"=>$responder_id]) -> Where(["responder"=>$requester_id , "requester"=>$responder_id]);
             })->get();
 
             if (isset($connection_exists[0])) {
@@ -85,7 +86,6 @@ class ConnectionsController extends Controller
                     "connection" => $connection
                 ]);
             }
-            
         } else {
             return response()->json([
                 "status" => "failed",

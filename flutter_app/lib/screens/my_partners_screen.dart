@@ -43,148 +43,159 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
       //// End of AppBar
       ///
       ///
-      body: ListView.builder(
-        itemCount:
-            1, // Set to 1, because we are using a single ListTile for the entire UI
-        itemBuilder: (context, index) {
-          // Widgets to be displayed conditionally
-          List<Widget> widgets = [];
+      body: Consumer<ConnectionProvider>(
+        builder: (context, value, child) => ListView.builder(
+          itemCount:
+              1, // Set to 1, because we are using a single ListTile for the entire UI
+          itemBuilder: (context, index) {
+            // Widgets to be displayed conditionally
+            List<Widget> widgets = [];
 
-          // If no partners, display a message and input request bar
-          if (partners.isEmpty) {
-            widgets.add(
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 80),
-                child: Column(
-                  children: [
-                    Text("You don't have any previous partners"),
-                    SizedBox(height: 5),
-                  ],
-                ),
-              ),
-            );
-          }
-
-          // Create input field and the button if:
-          // i have partner without current, or no partners at all
-          if ((partners.isNotEmpty && !currentPartner) || (partners.isEmpty)) {
-            widgets.add(
-              Column(
-                children: [
-                  Form(
-                    key: formKey,
-                    child: TextInputField(
-                        handleChangeController: requestController,
-                        handleValidation: (email) => email!.isEmpty
-                            ? "Email is required"
-                            : !RegExp(r'^[\w-]+(\.[\w-]+)*@(hotmail\.com|gmail\.com|yahoo\.com|outlook\.com)$')
-                                    .hasMatch(requestController.text)
-                                ? "Invalid email format"
-                                : null,
-                        placeholder: "Enter your partner's email"),
+            // If no partners, display a message and input request bar
+            if (partners.isEmpty) {
+              widgets.add(
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 80),
+                  child: Column(
+                    children: [
+                      Text("You don't have any previous partners"),
+                      SizedBox(height: 5),
+                    ],
                   ),
-                  const SizedBox(height: 5),
-                  Button(
-                      text: 'Send Request',
-                      handlePressed: () async {
-                        if (formKey.currentState!.validate()) {
-                          final token =
-                              await context.read<AuthProvider>().getToken();
-                          // ignore: use_build_context_synchronously
-                          await context
-                              .read<ConnectionProvider>()
-                              .sendRequest(requestController.text, token);
-                        }
-                      }),
-                ],
-              ),
-            );
-          }
+                ),
+              );
+            }
 
-          // If has partners and a current, display all except the last one. The last one in red
-          if (partners.isNotEmpty && currentPartner) {
-            for (int i = 0; i < partners.length - 1; i++) {
+            // Create input field and the button if:
+            // i have partner without current, or no partners at all
+            if ((partners.isNotEmpty && !currentPartner) ||
+                (partners.isEmpty)) {
               widgets.add(
                 Column(
                   children: [
-                    buildUserListTile(
-                        partners[i].username,
-                        partners[i].email,
-                        context,
-                        Icons.accessibility_sharp,
-                        Theme.of(context).hintColor),
+                    Form(
+                      key: formKey,
+                      child: TextInputField(
+                          handleChangeController: requestController,
+                          handleValidation: (email) => email!.isEmpty
+                              ? "Email is required"
+                              : !RegExp(r'^[\w-]+(\.[\w-]+)*@(hotmail\.com|gmail\.com|yahoo\.com|outlook\.com)$')
+                                      .hasMatch(requestController.text)
+                                  ? "Invalid email format"
+                                  : null,
+                          placeholder: "Enter your partner's email"),
+                    ),
                     const SizedBox(height: 5),
+                    Button(
+                        text: 'Send Request',
+                        handlePressed: () async {
+                          if (formKey.currentState!.validate()) {
+                            final token =
+                                await context.read<AuthProvider>().getToken();
+                            // ignore: use_build_context_synchronously
+                            print("text ${requestController.text}");
+                            await context
+                                .read<ConnectionProvider>()
+                                .sendRequest(requestController.text, token);
+                            if (value.messageSendRequest ==
+                                "Request has been sent. Good Luck!") {
+                              print("dispose");
+                              // formKey.currentState!.dispose();
+                            }
+                          }
+                        }),
+                    if (value.messageSendRequest.isNotEmpty)
+                      Text(value.messageSendRequest)
                   ],
                 ),
               );
             }
 
-            // Creating the red button that can disconnect on click
-            widgets.add(buildUserListTile(
-                    partners[partners.length - 1].username,
-                    partners[partners.length - 1].email,
-                    context,
-                    Icons.favorite,
-                    Theme.of(context).primaryColor)
-                // Row(
-                //   children: [
-                //     Expanded(
-                //       child: MaterialButton(
-                //         color: Theme.of(context).primaryColor,
-                //         shape: RoundedRectangleBorder(
-                //           borderRadius: BorderRadius.circular(10),
-                //         ),
-                //         onPressed: () {},
-                //         child: Padding(
-                //           padding: const EdgeInsets.symmetric(vertical: 17),
-                //           child: Row(
-                //             children: [
-                //               Text(
-                //                 partners[partners.length - 1].name,
-                //                 style: const TextStyle(
-                //                   color: Colors.white,
-                //                   fontWeight: FontWeight.w600,
-                //                   fontSize: 20,
-                //                 ),
-                //               ),
-                //             ],
-                //           ),
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                );
-          }
-
-          // If has partners without a current, display all + input request bar
-          if (partners.isNotEmpty && !currentPartner) {
-            for (User partner in partners) {
-              widgets.add(
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
-                      child: buildUserListTile(
-                          partner.username,
-                          partner.email,
+            // If has partners and a current, display all except the last one. The last one in red
+            if (partners.isNotEmpty && currentPartner) {
+              for (int i = 0; i < partners.length - 1; i++) {
+                widgets.add(
+                  Column(
+                    children: [
+                      buildUserListTile(
+                          partners[i].username,
+                          partners[i].email,
                           context,
                           Icons.accessibility_sharp,
                           Theme.of(context).hintColor),
-                    ),
-                  ],
-                ),
-              );
-            }
-          }
+                      const SizedBox(height: 5),
+                    ],
+                  ),
+                );
+              }
 
-          // Return the list of widgets inside a single ListTile
-          return ListTile(
-            title: Column(
-              children: widgets,
-            ),
-          );
-        },
+              // Creating the red button that can disconnect on click
+              widgets.add(buildUserListTile(
+                      partners[partners.length - 1].username,
+                      partners[partners.length - 1].email,
+                      context,
+                      Icons.favorite,
+                      Theme.of(context).primaryColor)
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       child: MaterialButton(
+                  //         color: Theme.of(context).primaryColor,
+                  //         shape: RoundedRectangleBorder(
+                  //           borderRadius: BorderRadius.circular(10),
+                  //         ),
+                  //         onPressed: () {},
+                  //         child: Padding(
+                  //           padding: const EdgeInsets.symmetric(vertical: 17),
+                  //           child: Row(
+                  //             children: [
+                  //               Text(
+                  //                 partners[partners.length - 1].name,
+                  //                 style: const TextStyle(
+                  //                   color: Colors.white,
+                  //                   fontWeight: FontWeight.w600,
+                  //                   fontSize: 20,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  );
+            }
+
+            // If has partners without a current, display all + input request bar
+            if (partners.isNotEmpty && !currentPartner) {
+              for (User partner in partners) {
+                widgets.add(
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: buildUserListTile(
+                            partner.username,
+                            partner.email,
+                            context,
+                            Icons.accessibility_sharp,
+                            Theme.of(context).hintColor),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            }
+
+            // Return the list of widgets inside a single ListTile
+            return ListTile(
+              title: Column(
+                children: widgets,
+              ),
+            );
+          },
+        ),
       ),
     );
   }
