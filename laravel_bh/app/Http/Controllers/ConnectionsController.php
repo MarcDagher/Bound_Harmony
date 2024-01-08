@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
+use function PHPUnit\Framework\isEmpty;
+
 class ConnectionsController extends Controller
 {
     public function display_history (){
@@ -59,22 +61,19 @@ class ConnectionsController extends Controller
             // if status is rejected or disconnected I want to be able to send again
             $user = Auth::user();
             $requester_id = $user->id;
-            $responder_id = $email_exists[0]->id;
+            $responder_id = $email_exists[0]->id; 
+
+            $connection_exists_first_way = Connection::whereIn('status', ['pending', 'accepted']) -> where(["requester"=>$requester_id , "responder"=>$responder_id]) ->get();
             
+            $connection_exists_second_way = Connection::whereIn('status', ['pending', 'accepted']) -> where(["requester"=>$responder_id , "responder"=>$requester_id]) ->get();
 
-            // nested query builder: records where connection exists and status is [accepted or pending] => i only want to request when status [rejected, desconnected] 
-            // the nested queries are inside an anonymous function which takes the $query as a parameter representing the instance of query builder.
-            // inside the use we include external variables that we want to include in the scope of the query
-            $connection_exists = Connection::whereIn('status', ['pending', 'accepted']) -> where (function ($query) use ($requester_id, $responder_id) {
-                $query -> where(["requester"=>$requester_id , "responder"=>$responder_id]) -> Where(["responder"=>$requester_id , "requester"=>$responder_id]);
-            })->get();
-
-            if (isset($connection_exists[0])) {
+            if (count($connection_exists_first_way) > 0 || count($connection_exists_second_way) > 0 ) {
                 return response()->json([
                     "status" => "failed",
                     "message" =>  "Connection already exists",
                 ], 405);
             } else {
+                
                 $connection = Connection::create([
                     "requester" => $requester_id,
                     "responder" => $responder_id,

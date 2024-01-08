@@ -97,11 +97,11 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                             await context
                                 .read<ConnectionProvider>()
                                 .sendRequest(requestController.text, token);
-                            if (value.messageSendRequest ==
-                                "Request has been sent. Good Luck!") {
-                              print("dispose");
-                              // formKey.currentState!.dispose();
-                            }
+                            // if (value.messageSendRequest ==
+                            //     "Request has been sent. Good Luck!") {
+                            //   print("dispose");
+                            //   formKey.currentState!.dispose();
+                            // }
                           }
                         }),
                     if (value.messageSendRequest.isNotEmpty)
