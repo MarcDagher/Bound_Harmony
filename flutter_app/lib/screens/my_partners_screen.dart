@@ -15,22 +15,28 @@ class MyPartnersScreen extends StatefulWidget {
 }
 
 class _MyPartnersScreenState extends State<MyPartnersScreen> {
-  // Fetch partner history from the database
-  List<User> partners = [
-    // User(email: 'person@email.com', username: 'Person 1', password: '...'),
-    // User(email: 'person@email.com', username: 'Person 2', password: '...'),
-    // User(email: 'person@email.com', username: 'Person 3', password: '...'),
-    // User(email: 'person@email.com', username: 'Person 4', password: '...'),
-    // User(email: 'person@email.com', username: 'Person 5', password: '...'),
-    // User(email: 'person@email.com', username: 'Person 6', password: '...')
-  ];
-  bool currentPartner = false;
-
-  final TextEditingController requestController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
+  // List<User> partners = [
+  //   // User(email: 'person@email.com', username: 'Person 1', password: '...'),
+  //   // User(email: 'person@email.com', username: 'Person 2', password: '...'),
+  //   // User(email: 'person@email.com', username: 'Person 3', password: '...'),
+  //   // User(email: 'person@email.com', username: 'Person 4', password: '...'),
+  //   // User(email: 'person@email.com', username: 'Person 5', password: '...'),
+  //   // User(email: 'person@email.com', username: 'Person 6', password: '...')
+  // ];
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController requestController = TextEditingController();
+    final formKey = GlobalKey<FormState>();
+
+    getPartnersList() async {
+      final token = await context.read<AuthProvider>().getToken();
+      // ignore: use_build_context_synchronously
+      await context.read<ConnectionProvider>().getPartners(token);
+    }
+
+    getPartnersList();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -48,11 +54,15 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
           itemCount:
               1, // Set to 1, because we are using a single ListTile for the entire UI
           itemBuilder: (context, index) {
+            print(
+                "Auth Connection Status in screen: ${context.read<AuthProvider>().preferences?.get('connection_status')}");
+
+            print("List In screen: ${value.listOfPartners}");
             // Widgets to be displayed conditionally
             List<Widget> widgets = [];
 
             // If no partners, display a message and input request bar
-            if (partners.isEmpty) {
+            if (value.listOfPartners.isEmpty) {
               widgets.add(
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 80),
@@ -68,8 +78,13 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
 
             // Create input field and the button if:
             // i have partner without current, or no partners at all
-            if ((partners.isNotEmpty && !currentPartner) ||
-                (partners.isEmpty)) {
+            if ((value.listOfPartners.isNotEmpty &&
+                    context
+                            .read<AuthProvider>()
+                            .preferences
+                            ?.get('connection_status') ==
+                        'false') ||
+                (value.listOfPartners.isEmpty)) {
               widgets.add(
                 Column(
                   children: [
@@ -93,15 +108,9 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                             final token =
                                 await context.read<AuthProvider>().getToken();
                             // ignore: use_build_context_synchronously
-                            print("text ${requestController.text}");
                             await context
                                 .read<ConnectionProvider>()
                                 .sendRequest(requestController.text, token);
-                            // if (value.messageSendRequest ==
-                            //     "Request has been sent. Good Luck!") {
-                            //   print("dispose");
-                            //   formKey.currentState!.dispose();
-                            // }
                           }
                         }),
                     if (value.messageSendRequest.isNotEmpty)
@@ -112,14 +121,19 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
             }
 
             // If has partners and a current, display all except the last one. The last one in red
-            if (partners.isNotEmpty && currentPartner) {
-              for (int i = 0; i < partners.length - 1; i++) {
+            if (value.listOfPartners.isNotEmpty &&
+                context
+                        .read<AuthProvider>()
+                        .preferences
+                        ?.get('connection_status') ==
+                    'true') {
+              for (int i = 0; i < value.listOfPartners.length - 1; i++) {
                 widgets.add(
                   Column(
                     children: [
                       buildUserListTile(
-                          partners[i].username,
-                          partners[i].email,
+                          "add name to db response",
+                          value.listOfPartners[i]["requester"],
                           context,
                           Icons.accessibility_sharp,
                           Theme.of(context).hintColor),
@@ -131,8 +145,9 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
 
               // Creating the red button that can disconnect on click
               widgets.add(buildUserListTile(
-                      partners[partners.length - 1].username,
-                      partners[partners.length - 1].email,
+                      'No name yet',
+                      value.listOfPartners[value.listOfPartners.length - 1]
+                          ['requester'],
                       context,
                       Icons.favorite,
                       Theme.of(context).primaryColor)
@@ -168,16 +183,17 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
             }
 
             // If has partners without a current, display all + input request bar
-            if (partners.isNotEmpty && !currentPartner) {
-              for (User partner in partners) {
+            if (value.listOfPartners.isNotEmpty &&
+                value.preferences?.get('connection_status') == 'false') {
+              for (final partner in value.listOfPartners) {
                 widgets.add(
                   Column(
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: buildUserListTile(
-                            partner.username,
-                            partner.email,
+                            "no name",
+                            partner["requester"],
                             context,
                             Icons.accessibility_sharp,
                             Theme.of(context).hintColor),

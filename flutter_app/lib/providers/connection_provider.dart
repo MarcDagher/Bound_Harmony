@@ -145,10 +145,13 @@ class ConnectionProvider extends ChangeNotifier {
       final response = await dio.get("$baseUrl/display_history",
           options: Options(headers: {"authorization": "Bearer $token"}));
 
-      // listOfPartners = response.data["connections"];
-      print(response.data);
+      listOfPartners = response.data["connections"];
+      // print(response.data["connections"]);
+      print("In method: $listOfPartners");
     } on DioException catch (error) {
       print(error);
     }
+
+    notifyListeners();
   }
 }
