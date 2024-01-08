@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bound_harmony/configurations/request.configuration.dart';
 import 'package:bound_harmony/providers/auth_provider.dart';
 import 'package:dio/dio.dart';
@@ -7,27 +9,33 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ConnectionProvider extends ChangeNotifier {
   SharedPreferences? preferences;
 
-  String messageSendRequest;
+  // sendRequst method
+  String messageSendRequest = "";
   bool? successSendRequest;
 
-  String messageDisplayRequests;
+  // displayIncomingRequests method
+  String messageDisplayRequests = "";
   List<dynamic>? listOfRequests;
   bool? successDisplayRequests;
   bool? noRequests;
 
-  bool sendResponseFail;
-  String failedResponseMessage;
+  // respondToRequest method
+  bool sendResponseFail = false;
+  String failedResponseMessage = "";
 
-  ConnectionProvider(
-      {this.preferences,
-      this.messageSendRequest = "",
-      this.successSendRequest,
-      this.successDisplayRequests,
-      this.messageDisplayRequests = "",
-      this.listOfRequests,
-      this.noRequests,
-      this.sendResponseFail = false,
-      this.failedResponseMessage = ""});
+  // getPartners method
+  List listOfPartners = [];
+
+  // ConnectionProvider(
+  //     {this.preferences,
+  //     this.messageSendRequest = "",
+  //     this.successSendRequest,
+  //     this.successDisplayRequests,
+  //     this.messageDisplayRequests = "",
+  //     this.listOfRequests,
+  //     this.noRequests,
+  //     this.sendResponseFail = false,
+  //     this.failedResponseMessage = ""});
 
   /// Send a request
   ///
@@ -125,6 +133,23 @@ class ConnectionProvider extends ChangeNotifier {
         failedResponseMessage =
             "Connection error occured, please try again later";
       }
+    }
+  }
+
+  /// Display user's partners
+  ///
+  getPartners(token) async {
+    final baseUrl = Requests.baseUrl;
+    final dio = Dio();
+
+    try {
+      final response = await dio.get("$baseUrl/display_history",
+          options: Options(headers: {"authorization": "Bearer $token"}));
+
+      // listOfPartners = response.data["connections"];
+      print(response.data);
+    } on DioException catch (error) {
+      print(error);
     }
   }
 }
