@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TextInputField extends StatelessWidget {
-  final String placeholder;
+  final String? placeholder;
   final Function(String)? handleChange;
   final String? Function(String?)? handleValidation;
   final TextEditingController? handleChangeController;

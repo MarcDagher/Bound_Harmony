@@ -70,7 +70,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             print(showUsernameButton);
                           },
                           handleChangeController: usernameController,
-                          placeholder: value.prefUsername!),
+                          placeholder: value.prefUsername),
                     ),
                   ),
                   // this will be a text. email is displayed from token
@@ -80,7 +80,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: Row(
                         children: [
                           Expanded(
-                            child: DisplayBox(text: value.prefEmail),
+                            // child: DisplayBox(text: value.prefEmail),
+                            child: DisplayBox(text: "value.prefEmail"),
                           ),
                         ],
                       ),
