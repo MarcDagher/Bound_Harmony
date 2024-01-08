@@ -49,13 +49,13 @@ class ConnectionSetupScreen extends StatelessWidget {
                     ),
                   if (value.successSendRequest == false)
                     Text(
-                      value.message,
+                      value.messageSendRequest,
                       style: TextStyle(
                           fontSize: 15, color: Theme.of(context).primaryColor),
                     ),
                   if (value.successSendRequest == true)
                     Text(
-                      value.message,
+                      value.messageSendRequest,
                       style: TextStyle(
                           fontSize: 15, color: Theme.of(context).primaryColor),
                     ),

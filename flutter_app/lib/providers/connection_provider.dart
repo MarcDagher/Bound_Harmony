@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class ConnectionProvider extends ChangeNotifier {
-  String message;
+  String messageSendRequest;
   bool? successSendRequest;
 
   String messageDisplayRequests;
@@ -12,7 +12,7 @@ class ConnectionProvider extends ChangeNotifier {
   bool? noRequests;
 
   ConnectionProvider(
-      {this.message = "",
+      {this.messageSendRequest = "",
       this.successSendRequest,
       this.successDisplayRequests,
       this.messageDisplayRequests = "",
@@ -32,16 +32,16 @@ class ConnectionProvider extends ChangeNotifier {
           options: Options(headers: {'authorization': 'Bearer $token'}));
 
       successSendRequest = true;
-      message = response.data["message"];
+      messageSendRequest = response.data["message"];
 
       // print("From ConnectionProvider response: ${response.data}");
     } on DioException catch (error) {
       if (error.response!.statusCode == 405) {
         successSendRequest = false;
-        message = "Request already exists";
+        messageSendRequest = "Request already exists";
       } else if (error.response!.statusCode == 403) {
         successSendRequest = false;
-        message = "Email doesn't exist";
+        messageSendRequest = "Email doesn't exist";
       }
       // print("From ConnectionProvider error: $error");
     }
@@ -53,11 +53,11 @@ class ConnectionProvider extends ChangeNotifier {
   displayIncomingRequests(token) async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
-    print("in displayIncomingRequests");
+    // print("in displayIncomingRequests");
     try {
       final response = await dio.get("$baseUrl/display_requests",
           options: Options(headers: {'authorization': 'Bearer $token'}));
-      print("in controller: ${response.data}");
+      // print("in controller: ${response.data}");
       if (response.data["status"] == "success") {
         successDisplayRequests = true;
         listOfRequests = response.data["requests"];
@@ -70,5 +70,20 @@ class ConnectionProvider extends ChangeNotifier {
     }
 
     notifyListeners();
+  }
+
+  /// Accept or Reject request
+  ///
+  respondToRequest(token, requestID, userResponse) async {
+    final baseUrl = Requests.baseUrl;
+    final dio = Dio();
+
+    try {
+      final response = await dio.post("$baseUrl/respond_to_request",
+          data: {'request_id': requestID, 'response': userResponse});
+      print("from provider: ${response.data}");
+    } on DioException catch (error) {
+      print(error);
+    }
   }
 }

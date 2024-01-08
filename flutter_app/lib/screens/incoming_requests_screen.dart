@@ -19,10 +19,12 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
     getdata() async {
       final token = await context.read<AuthProvider>().getToken();
       await context.read<ConnectionProvider>().displayIncomingRequests(token);
+      // print(context.read<ConnectionProvider>().listOfRequests);
     }
 
     getdata();
-
+    final requests = context.read<ConnectionProvider>().listOfRequests;
+    print("From screen: $requests");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -65,8 +67,11 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
                           autoClose: true,
                           icon: Icons.check,
                           label: 'Accept',
-                          onPressed: (context) =>
-                              handleRequest(index, 'Accept'),
+                          onPressed: (context) {
+                            // handleRequest(index, 'Accept')
+                            print(requests?[index]);
+                            print(requests?[index]['id']);
+                          },
                         ),
                       ],
                     ),
@@ -74,8 +79,11 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
                       motion: const BehindMotion(),
                       children: [
                         SlidableAction(
-                          onPressed: (context) =>
-                              handleRequest(index, 'Reject'),
+                          onPressed: (context) {
+                            // handleRequest(index, 'Reject')
+                            handleRequest(
+                                index, 'Reject', requests?[index]['id']);
+                          },
                           backgroundColor: Colors.red,
                           icon: Icons.cancel,
                           label: 'Reject',
@@ -106,9 +114,10 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
     );
   }
 
-  void handleRequest(int index, String action) {
+  void handleRequest(int index, String action, requestID) async {
     // final user = requests[index];
     // setState(() => requests.removeAt(index)); // this will only remove from UI
+    final token = await context.read<AuthProvider>().getToken();
 
     switch (action) {
       case 'Accept':
@@ -116,6 +125,9 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
       /// Remove all of the requests and adjust database:
       /// change user's current status to true
       case 'Reject':
+        await context
+            .read<ConnectionProvider>()
+            .respondToRequest(token, requestID, 'rejected');
 
         /// Remove the rejected one
         /// add to db the rejected status
