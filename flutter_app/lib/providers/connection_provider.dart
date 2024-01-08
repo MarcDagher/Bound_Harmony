@@ -44,7 +44,7 @@ class ConnectionProvider extends ChangeNotifier {
     final dio = Dio();
 
     try {
-      // print("From ConnectionProvider: $token");
+      print("From ConnectionProvider: $token");
       final response = await dio.post("$baseUrl/send_request",
           data: {'email': email},
           options: Options(headers: {'authorization': 'Bearer $token'}));
@@ -52,7 +52,7 @@ class ConnectionProvider extends ChangeNotifier {
       successSendRequest = true;
       messageSendRequest = response.data["message"];
 
-      // print("From ConnectionProvider response: ${response.data}");
+      print("From ConnectionProvider response: ${response.data}");
     } on DioException catch (error) {
       if (error.response!.statusCode == 405) {
         successSendRequest = false;
@@ -61,7 +61,7 @@ class ConnectionProvider extends ChangeNotifier {
         successSendRequest = false;
         messageSendRequest = "Email doesn't exist";
       }
-      // print("From ConnectionProvider error: $error");
+      print("From ConnectionProvider error: $error");
     }
     notifyListeners();
   }

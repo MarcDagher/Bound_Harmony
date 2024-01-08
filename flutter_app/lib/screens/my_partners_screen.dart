@@ -1,8 +1,11 @@
 import 'package:bound_harmony/models/user.dart';
+import 'package:bound_harmony/providers/auth_provider.dart';
+import 'package:bound_harmony/providers/connection_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/button.dart';
 import 'package:bound_harmony/reusable%20widgets/text_input.dart';
 import 'package:bound_harmony/reusable%20widgets/user_tile_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MyPartnersScreen extends StatefulWidget {
   const MyPartnersScreen({Key? key}) : super(key: key);
@@ -22,6 +25,9 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
     // User(email: 'person@email.com', username: 'Person 6', password: '...')
   ];
   bool currentPartner = false;
+
+  final TextEditingController requestController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +61,42 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                     SizedBox(height: 5),
                   ],
                 ),
+              ),
+            );
+          }
+
+          // Create input field and the button if:
+          // i have partner without current, or no partners at all
+          if ((partners.isNotEmpty && !currentPartner) || (partners.isEmpty)) {
+            widgets.add(
+              Column(
+                children: [
+                  Form(
+                    key: formKey,
+                    child: TextInputField(
+                        handleChangeController: requestController,
+                        handleValidation: (email) => email!.isEmpty
+                            ? "Email is required"
+                            : !RegExp(r'^[\w-]+(\.[\w-]+)*@(hotmail\.com|gmail\.com|yahoo\.com|outlook\.com)$')
+                                    .hasMatch(requestController.text)
+                                ? "Invalid email format"
+                                : null,
+                        placeholder: "Enter your partner's email"),
+                  ),
+                  const SizedBox(height: 5),
+                  Button(
+                      text: 'Send Request',
+                      handlePressed: () async {
+                        if (formKey.currentState!.validate()) {
+                          final token =
+                              await context.read<AuthProvider>().getToken();
+                          // ignore: use_build_context_synchronously
+                          await context
+                              .read<ConnectionProvider>()
+                              .sendRequest(requestController.text, token);
+                        }
+                      }),
+                ],
               ),
             );
           }
@@ -134,23 +176,6 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                 ),
               );
             }
-          }
-
-          // Create input field and the button
-          if ((partners.isNotEmpty && !currentPartner) || (partners.isEmpty)) {
-            widgets.add(
-              Column(
-                children: [
-                  TextInputField(
-                      handleChange: (string) {
-                        // print(string);
-                      },
-                      placeholder: "Enter your partner's email"),
-                  const SizedBox(height: 5),
-                  Button(text: 'Send Request', handlePressed: () {}),
-                ],
-              ),
-            );
           }
 
           // Return the list of widgets inside a single ListTile
