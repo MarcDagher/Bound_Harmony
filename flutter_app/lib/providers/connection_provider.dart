@@ -1,4 +1,5 @@
 import 'package:bound_harmony/configurations/request.configuration.dart';
+import 'package:bound_harmony/providers/auth_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -112,10 +113,10 @@ class ConnectionProvider extends ChangeNotifier {
             preferences = await SharedPreferences.getInstance();
           }
 
-          preferences?.setString('connection_status', "true");
-          print("In provider, data: ${response.data}");
+          await preferences?.setString('connection_status', "true");
+
           print(
-              "In provider, token status: ${preferences?.getString("connection_status")}");
+              "Controller in accepted in prefs ${preferences?.getString('connection_status')} ");
         }
       }
     } on DioException catch (error) {
