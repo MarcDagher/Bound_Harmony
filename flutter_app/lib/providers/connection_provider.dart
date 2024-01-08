@@ -60,6 +60,7 @@ class ConnectionProvider extends ChangeNotifier {
       // print("in controller: ${response.data}");
       if (response.data["status"] == "success") {
         successDisplayRequests = true;
+        noRequests = false;
         listOfRequests = response.data["requests"];
       } else if (response.data["status"] == "No requests") {
         noRequests = true;
@@ -82,6 +83,13 @@ class ConnectionProvider extends ChangeNotifier {
       final response = await dio.post("$baseUrl/respond_to_request",
           data: {'request_id': requestID, 'response': userResponse});
       print("from provider: ${response.data}");
+      if (response.data["status"] == "success") {
+        if (response.data["request"]["status"] == "rejected") {
+          listOfRequests?.removeWhere(
+              (element) => element['id'] == response.data["request"]["id"]);
+          notifyListeners();
+        }
+      }
     } on DioException catch (error) {
       print(error);
     }

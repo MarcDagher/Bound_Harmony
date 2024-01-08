@@ -167,7 +167,7 @@ class ConnectionsController extends Controller
             return response() -> json([
                 "status" => "failed",
                 "message" => "Error finding connection"
-            ]);
+            ], 400);
         }
 
     }

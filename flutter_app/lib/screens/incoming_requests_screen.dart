@@ -39,7 +39,7 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
       body: Consumer<ConnectionProvider>(builder: (context, value, child) {
         /// If User doesn't have any requests
         ///
-        if (value.noRequests == true) {
+        if (value.noRequests == true || value.listOfRequests!.isEmpty) {
           return Center(
             child: Text(value.messageDisplayRequests),
           );
@@ -128,6 +128,7 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
         await context
             .read<ConnectionProvider>()
             .respondToRequest(token, requestID, 'rejected');
+        // setState(() => requests.removeAt(index));
 
         /// Remove the rejected one
         /// add to db the rejected status
