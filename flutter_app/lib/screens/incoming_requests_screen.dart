@@ -70,9 +70,10 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
                           icon: Icons.check,
                           label: 'Accept',
                           onPressed: (context) {
-                            // handleRequest(index, 'Accept')
-                            print(value.listOfRequests?[index]);
-                            print(value.listOfRequests?[index]['id']);
+                            handleRequest(index, 'Accept',
+                                value.listOfRequests?[index]['id']);
+                            // print(value.listOfRequests?[index]);
+                            // print(value.listOfRequests?[index]['id']);
                           },
                         ),
                       ],
@@ -82,8 +83,8 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
                       children: [
                         SlidableAction(
                           onPressed: (context) {
-                            print(
-                                "From on pressed: $index, ${value.listOfRequests?[index]}");
+                            // print(
+                            //     "From Reject on pressed: $index, ${value.listOfRequests?[index]}");
                             handleRequest(index, 'Reject',
                                 value.listOfRequests?[index]['id']);
                           },
@@ -118,23 +119,25 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
   }
 
   void handleRequest(int index, String action, requestID) async {
-    // final user = requests[index];
-    // setState(() => requests.removeAt(index)); // this will only remove from UI
     final token = await context.read<AuthProvider>().getToken();
 
     switch (action) {
       case 'Accept':
 
-      /// Remove all of the requests and adjust database:
-      /// change user's current status to true
+        /// Remove all of the requests and adjust database:
+        /// change user's current status to true
+
+        await context
+            .read<ConnectionProvider>()
+            .respondToRequest(token, requestID, 'accepted');
+
       case 'Reject':
+
+        /// Remove the rejected request by listening to the listOfRequests in controller
+        /// list of requests will be updated when request's status becomes rejected
         await context
             .read<ConnectionProvider>()
             .respondToRequest(token, requestID, 'rejected');
-        // setState(() => requests.removeAt(index));
-
-        /// Remove the rejected one
-        /// add to db the rejected status
 
         break;
       default:

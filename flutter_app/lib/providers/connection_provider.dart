@@ -1,8 +1,11 @@
 import 'package:bound_harmony/configurations/request.configuration.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ConnectionProvider extends ChangeNotifier {
+  SharedPreferences? preferences;
+
   String messageSendRequest;
   bool? successSendRequest;
 
@@ -15,7 +18,8 @@ class ConnectionProvider extends ChangeNotifier {
   String failedResponseMessage;
 
   ConnectionProvider(
-      {this.messageSendRequest = "",
+      {this.preferences,
+      this.messageSendRequest = "",
       this.successSendRequest,
       this.successDisplayRequests,
       this.messageDisplayRequests = "",
@@ -87,19 +91,31 @@ class ConnectionProvider extends ChangeNotifier {
     try {
       final response = await dio.post("$baseUrl/respond_to_request",
           data: {'request_id': requestID, 'response': userResponse});
+
       sendResponseFail = false;
       if (response.data["status"] == "success") {
         noRequests = false;
+
+        /// rejecting a request
+        ///
         if (response.data["request"]["status"] == "rejected") {
           listOfRequests?.removeWhere(
               (element) => element['id'] == response.data["request"]["id"]);
-          print("From provider: $listOfRequests");
-          print("From provider: ${listOfRequests?.length}");
-
+          // print("From provider: $listOfRequests");
+          // print("From provider: ${listOfRequests?.length}");
           if (listOfRequests!.isEmpty) {
             noRequests = true;
           }
           notifyListeners();
+        } else if (response.data["request"]["status"] == "accepted") {
+          if (preferences == null) {
+            preferences = await SharedPreferences.getInstance();
+          }
+
+          preferences?.setString('connection_status', "true");
+          print("In provider, data: ${response.data}");
+          print(
+              "In provider, token status: ${preferences?.getString("connection_status")}");
         }
       }
     } on DioException catch (error) {
