@@ -23,8 +23,6 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
     }
 
     getdata();
-    final requests = context.read<ConnectionProvider>().listOfRequests;
-    print("From screen: $requests");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -39,7 +37,7 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
       body: Consumer<ConnectionProvider>(builder: (context, value, child) {
         /// If User doesn't have any requests
         ///
-        if (value.noRequests == true || value.listOfRequests!.isEmpty) {
+        if (value.noRequests == true) {
           return Center(
             child: Text(value.messageDisplayRequests),
           );
@@ -69,8 +67,8 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
                           label: 'Accept',
                           onPressed: (context) {
                             // handleRequest(index, 'Accept')
-                            print(requests?[index]);
-                            print(requests?[index]['id']);
+                            print(value.listOfRequests?[index]);
+                            print(value.listOfRequests?[index]['id']);
                           },
                         ),
                       ],
@@ -80,9 +78,10 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
                       children: [
                         SlidableAction(
                           onPressed: (context) {
-                            // handleRequest(index, 'Reject')
-                            handleRequest(
-                                index, 'Reject', requests?[index]['id']);
+                            print(
+                                "From on pressed: $index, ${value.listOfRequests?[index]}");
+                            handleRequest(index, 'Reject',
+                                value.listOfRequests?[index]['id']);
                           },
                           backgroundColor: Colors.red,
                           icon: Icons.cancel,
@@ -108,7 +107,7 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
           /// If requests haven't loaded yet
           ///
         } else {
-          return const Center(child: Text("loding"));
+          return const Center(child: Text("loading..."));
         }
       }),
     );

@@ -11,13 +11,18 @@ class ConnectionProvider extends ChangeNotifier {
   bool? successDisplayRequests;
   bool? noRequests;
 
+  bool sendResponseFail;
+  String failedResponseMessage;
+
   ConnectionProvider(
       {this.messageSendRequest = "",
       this.successSendRequest,
       this.successDisplayRequests,
       this.messageDisplayRequests = "",
       this.listOfRequests,
-      this.noRequests});
+      this.noRequests,
+      this.sendResponseFail = false,
+      this.failedResponseMessage = ""});
 
   /// Send a request
   ///
@@ -82,16 +87,29 @@ class ConnectionProvider extends ChangeNotifier {
     try {
       final response = await dio.post("$baseUrl/respond_to_request",
           data: {'request_id': requestID, 'response': userResponse});
-      print("from provider: ${response.data}");
+      sendResponseFail = false;
       if (response.data["status"] == "success") {
+        noRequests = false;
         if (response.data["request"]["status"] == "rejected") {
           listOfRequests?.removeWhere(
               (element) => element['id'] == response.data["request"]["id"]);
+          print("From provider: $listOfRequests");
+          print("From provider: ${listOfRequests?.length}");
+
+          if (listOfRequests!.isEmpty) {
+            noRequests = true;
+          }
           notifyListeners();
         }
       }
     } on DioException catch (error) {
+      /// When i got error status 302,i'm not sure what the error is. I refresh cntrl + s in connection provider and it works
       print(error);
+      if (error.response?.statusCode == 302) {
+        sendResponseFail = true;
+        failedResponseMessage =
+            "Connection error occured, please try again later";
+      }
     }
   }
 }
