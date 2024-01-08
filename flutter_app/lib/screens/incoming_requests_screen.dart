@@ -52,14 +52,17 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
           /// If user already has a connection (prefConnectionStatus = "true")
           ///
           print("In baba consumer: ${value.prefConnectionStatus}");
-          if (value.prefConnectionStatus == "true") {
+          print(
+              "In baba 2 consumer: ${value.preferences!.getString('connection_status')}");
+
+          if (value.preferences!.get('connection_status') == "true") {
             return const Center(
                 child: Text("You're already in a relationship!"));
           }
 
           /// If user doesn't have a connection (prefConnectionStatus = "false")
           ///
-          else if (value.prefConnectionStatus == "false") {
+          else if (value.preferences!.get('connection_status') == "false") {
             /// gets incoming requests (pending ones)
             ///
             getdata();
@@ -142,7 +145,7 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
                 /// If requests haven't loaded yet
                 ///
               } else {
-                return const Center(child: Text("loading..."));
+                return const Center(child: Text("Loading..."));
               }
             });
           } else {

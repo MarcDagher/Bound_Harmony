@@ -94,30 +94,28 @@ class ConnectionProvider extends ChangeNotifier {
           data: {'request_id': requestID, 'response': userResponse});
 
       sendResponseFail = false;
-      if (response.data["status"] == "success") {
-        noRequests = false;
 
-        /// rejecting a request
-        ///
-        if (response.data["request"]["status"] == "rejected") {
-          listOfRequests?.removeWhere(
-              (element) => element['id'] == response.data["request"]["id"]);
-          // print("From provider: $listOfRequests");
-          // print("From provider: ${listOfRequests?.length}");
-          if (listOfRequests!.isEmpty) {
-            noRequests = true;
-          }
-          notifyListeners();
-        } else if (response.data["request"]["status"] == "accepted") {
-          if (preferences == null) {
-            preferences = await SharedPreferences.getInstance();
-          }
-
-          await preferences?.setString('connection_status', "true");
-
-          print(
-              "Controller in accepted in prefs ${preferences?.getString('connection_status')} ");
+      /// rejecting a request
+      ///
+      if (response.data["request"]["status"] == "rejected") {
+        listOfRequests?.removeWhere(
+            (element) => element['id'] == response.data["request"]["id"]);
+        // print("From provider: $listOfRequests");
+        // print("From provider: ${listOfRequests?.length}");
+        if (listOfRequests!.isEmpty) {
+          noRequests = true;
+        } else {
+          noRequests = false;
         }
+        notifyListeners();
+      } else if (response.data["request"]["status"] == "accepted") {
+        preferences = await SharedPreferences.getInstance();
+
+        await preferences?.setString('connection_status', "true");
+
+        print(
+            "Provider in prefs ${preferences?.getString('connection_status')} ");
+        notifyListeners();
       }
     } on DioException catch (error) {
       /// When i got error status 302,i'm not sure what the error is. I refresh cntrl + s in connection provider and it works

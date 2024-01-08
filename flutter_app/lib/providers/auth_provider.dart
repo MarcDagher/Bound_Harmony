@@ -39,12 +39,14 @@ class AuthProvider extends ChangeNotifier {
 
   Future saveAllPreferences() async {
     // there is still: location - birthdate - image
-    await initializePreferences();
+    preferences = await SharedPreferences.getInstance();
     prefId = preferences?.getString('id');
     prefUsername = preferences?.getString('username');
     prefEmail = preferences?.getString('email');
     prefConnectionStatus = preferences?.getString('connection_status');
     prefCoupleSurveyStatus = preferences?.getString('couple_survey_status');
+
+    print("Inside saveMethod: ${preferences?.getString('connection_status')}");
     notifyListeners();
   }
 
