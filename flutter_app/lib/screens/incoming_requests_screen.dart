@@ -23,15 +23,6 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
       await context.read<ConnectionProvider>().displayIncomingRequests(token);
     }
 
-    /// get user's connection status "true" or "false"
-    getConnectionStatus() async {
-      await context.read<AuthProvider>().saveAllPreferences();
-      print(
-          "Inside method(screen) 1:  ${context.read<AuthProvider>().preferences?.get('connection_status')}");
-      print(
-          "Inside method(screen) 2: ${context.read<AuthProvider>().prefConnectionStatus}");
-    }
-
     getdata();
     return Scaffold(
       appBar: AppBar(
@@ -44,110 +35,90 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
 
       //// END OF APPBAR /////
 
-      body: Consumer<AuthProvider>(
-        builder: (context, value, child) {
-          /// If user already has a connection (prefConnectionStatus = "true")
+      body: Consumer<ConnectionProvider>(builder: (context, value, child) {
+        print("inside consumer: currentPartnerr = ${value.currentPartner}");
+        if (value.currentPartner == true) {
+          return const Center(child: Text("You're already in a relationship!"));
+        } else if (value.currentPartner == false) {
+          /// If User doesn't have any requests
           ///
+          if (value.noRequests == true) {
+            return Center(
+              child: Text(
+                value.messageDisplayRequests,
+                style:
+                    TextStyle(color: Theme.of(context).hintColor, fontSize: 17),
+              ),
+            );
 
-          print("In parent consumer: ${value.prefConnectionStatus}");
-          print(
-              "In parent 2 consumer: ${value.preferences!.getString('connection_status')}");
-
-          if (value.preferences!.get('connection_status') == "true") {
-            return const Center(
-                child: Text("You're already in a relationship!"));
-          }
-
-          /// If user doesn't have a connection (prefConnectionStatus = "false")
-          ///
-          else if (value.preferences!.get('connection_status') == "false") {
-            /// gets incoming requests (pending ones)
+            /// If User has requests
             ///
-            return Consumer<ConnectionProvider>(
-                builder: (context, value, child) {
-              /// If User doesn't have any requests
-              ///
-              if (value.noRequests == true) {
-                return Center(
-                  child: Text(
-                    value.messageDisplayRequests,
-                    style: TextStyle(
-                        color: Theme.of(context).hintColor, fontSize: 17),
-                  ),
-                );
-
-                /// If User has requests
-                ///
-              } else if (value.successDisplayRequests == true) {
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  ////// Closes a slide when another is open
-                  child: SlidableAutoCloseBehavior(
-                    child: ListView.builder(
-                      // itemBuiler is a callback function called for each item in the in the list (BuildContext, indeex of the item in the list)
-                      // It returns the widget for the corresponding list item. This depends on the itemCount.
-                      itemBuilder: (context, index) {
-                        final name =
-                            value.listOfRequests?[index]["requester_name"];
-                        final email = value.listOfRequests?[index]["requester"];
-                        //// EACH BOX IS A SLIDABLE WITH A STARTACTIONN AND AN ENDACTION
-                        return Slidable(
-                          startActionPane: ActionPane(
-                            motion: const BehindMotion(),
-                            children: [
-                              SlidableAction(
-                                backgroundColor: Colors.green,
-                                autoClose: true,
-                                icon: Icons.check,
-                                label: 'Accept',
-                                onPressed: (context) async {
-                                  handleRequest(index, 'Accept',
-                                      value.listOfRequests?[index]['id']);
-                                  await getConnectionStatus();
-                                },
-                              ),
-                            ],
+          } else if (value.successDisplayRequests == true) {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              ////// Closes a slide when another is open
+              child: SlidableAutoCloseBehavior(
+                child: ListView.builder(
+                  // itemBuiler is a callback function called for each item in the in the list (BuildContext, indeex of the item in the list)
+                  // It returns the widget for the corresponding list item. This depends on the itemCount.
+                  itemBuilder: (context, index) {
+                    final name = value.listOfRequests?[index]["requester_name"];
+                    final email = value.listOfRequests?[index]["requester"];
+                    //// EACH BOX IS A SLIDABLE WITH A STARTACTIONN AND AN ENDACTION
+                    return Slidable(
+                      startActionPane: ActionPane(
+                        motion: const BehindMotion(),
+                        children: [
+                          SlidableAction(
+                            backgroundColor: Colors.green,
+                            autoClose: true,
+                            icon: Icons.check,
+                            label: 'Accept',
+                            onPressed: (context) async {
+                              handleRequest(index, 'Accept',
+                                  value.listOfRequests?[index]['id']);
+                            },
                           ),
-                          endActionPane: ActionPane(
-                            motion: const BehindMotion(),
-                            children: [
-                              SlidableAction(
-                                onPressed: (context) {
-                                  handleRequest(index, 'Reject',
-                                      value.listOfRequests?[index]['id']);
-                                },
-                                backgroundColor: Colors.red,
-                                icon: Icons.cancel,
-                                label: 'Reject',
-                              ),
-                            ],
+                        ],
+                      ),
+                      endActionPane: ActionPane(
+                        motion: const BehindMotion(),
+                        children: [
+                          SlidableAction(
+                            onPressed: (context) {
+                              handleRequest(index, 'Reject',
+                                  value.listOfRequests?[index]['id']);
+                            },
+                            backgroundColor: Colors.red,
+                            icon: Icons.cancel,
+                            label: 'Reject',
                           ),
+                        ],
+                      ),
 
-                          // the child represents the design of each individual listTile
-                          child: buildUserListTile(
-                              name,
-                              email,
-                              context,
-                              Icons.favorite,
-                              const Color.fromARGB(255, 255, 102, 92)),
-                        );
-                      },
-                      itemCount: value.listOfRequests?.length,
-                    ),
-                  ),
-                );
+                      // the child represents the design of each individual listTile
+                      child: UserListTile(
+                          name: name,
+                          email: email,
+                          context: context,
+                          icon: Icons.favorite,
+                          iconColor: const Color.fromARGB(255, 255, 102, 92)),
+                    );
+                  },
+                  itemCount: value.listOfRequests?.length,
+                ),
+              ),
+            );
 
-                /// If requests haven't loaded yet
-                ///
-              } else {
-                return const Center(child: Text("Loading..."));
-              }
-            });
+            /// If requests haven't loaded yet
+            ///
           } else {
-            return const Center(child: Text("Loading"));
+            return const Center(child: Text("Loading..."));
           }
-        },
-      ),
+        } else {
+          return const Center(child: Text("Loading"));
+        }
+      }),
     );
   }
 

@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
 
-Widget buildUserListTile(String name, String email, BuildContext context,
-        IconData icon, Color iconColor) =>
-    Column(
+class UserListTile extends StatelessWidget {
+  final String name;
+  final String email;
+  final BuildContext context;
+  final IconData icon;
+  final Color iconColor;
+
+  const UserListTile(
+      {super.key,
+      required this.name,
+      required this.email,
+      required this.context,
+      required this.icon,
+      required this.iconColor});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
       children: [
         Container(
           decoration: const BoxDecoration(
@@ -42,3 +57,5 @@ Widget buildUserListTile(String name, String email, BuildContext context,
         ),
       ],
     );
+  }
+}

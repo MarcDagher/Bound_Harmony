@@ -46,9 +46,10 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
           itemCount:
               1, // Set to 1, because we are using a single ListTile for the entire UI
           itemBuilder: (context, index) {
-            print("currentPartner Status in screen: ${value.currentPartner}");
+            // print("currentPartner Status in screen: ${value.currentPartner}");
 
-            print("List In screen: ${value.listOfPartners}");
+            // print("List In screen: ${value.listOfPartners}");
+
             // Widgets to be displayed conditionally
             List<Widget> widgets = [];
 
@@ -61,12 +62,12 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
-                        child: buildUserListTile(
-                            partner["requester_name"],
-                            partner["requester"],
-                            context,
-                            Icons.accessibility_sharp,
-                            Theme.of(context).hintColor),
+                        child: UserListTile(
+                            name: partner["requester_name"],
+                            email: partner["requester"],
+                            context: context,
+                            icon: Icons.accessibility_sharp,
+                            iconColor: Theme.of(context).hintColor),
                       ),
                     ],
                   ),
@@ -139,12 +140,12 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                 widgets.add(
                   Column(
                     children: [
-                      buildUserListTile(
-                          value.listOfPartners[i]["requester_name"],
-                          value.listOfPartners[i]["requester"],
-                          context,
-                          Icons.accessibility_sharp,
-                          Theme.of(context).hintColor),
+                      UserListTile(
+                          name: value.listOfPartners[i]["requester_name"],
+                          email: value.listOfPartners[i]["requester"],
+                          context: context,
+                          icon: Icons.accessibility_sharp,
+                          iconColor: Theme.of(context).hintColor),
                       const SizedBox(height: 5),
                     ],
                   ),
@@ -165,9 +166,9 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                             index = i;
                           }
                         }
-                        print("TESTING");
+                        // print("TESTING");
                         // print(index);
-                        print(value.listOfPartners[index!]["id"]);
+                        // print(value.listOfPartners[index!]["id"]);
                         // print("initiating disconnect");
                         await value.disconnect(
                             token, value.listOfPartners[index!]["id"]);
@@ -177,14 +178,16 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                       label: "Disconnect",
                     )
                   ]),
-                  child: buildUserListTile(
-                      value.listOfPartners[value.listOfPartners.length - 1]
-                          ["requester_name"],
-                      value.listOfPartners[value.listOfPartners.length - 1]
-                          ['requester'],
-                      context,
-                      Icons.favorite,
-                      Theme.of(context).primaryColor)));
+                  child: UserListTile(
+                      name:
+                          value.listOfPartners[value.listOfPartners.length - 1]
+                              ["requester_name"],
+                      email:
+                          value.listOfPartners[value.listOfPartners.length - 1]
+                              ['requester'],
+                      context: context,
+                      icon: Icons.favorite,
+                      iconColor: Theme.of(context).primaryColor)));
             }
 
             // Return the list of widgets inside a single ListTile
