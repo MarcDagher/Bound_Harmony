@@ -32,10 +32,7 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
           "Inside method(screen) 2: ${context.read<AuthProvider>().prefConnectionStatus}");
     }
 
-    // getConnectionStatus();
-    // final connectionStatus = context.read<AuthProvider>().prefConnectionStatus;
-    // print("Inside screen conn-status: $connectionStatus");
-
+    getdata();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -51,9 +48,10 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
         builder: (context, value, child) {
           /// If user already has a connection (prefConnectionStatus = "true")
           ///
-          print("In baba consumer: ${value.prefConnectionStatus}");
+
+          print("In parent consumer: ${value.prefConnectionStatus}");
           print(
-              "In baba 2 consumer: ${value.preferences!.getString('connection_status')}");
+              "In parent 2 consumer: ${value.preferences!.getString('connection_status')}");
 
           if (value.preferences!.get('connection_status') == "true") {
             return const Center(
@@ -65,7 +63,6 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
           else if (value.preferences!.get('connection_status') == "false") {
             /// gets incoming requests (pending ones)
             ///
-            getdata();
             return Consumer<ConnectionProvider>(
                 builder: (context, value, child) {
               /// If User doesn't have any requests
@@ -116,8 +113,6 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
                             children: [
                               SlidableAction(
                                 onPressed: (context) {
-                                  // print(
-                                  //     "From Reject on pressed: $index, ${value.listOfRequests?[index]}");
                                   handleRequest(index, 'Reject',
                                       value.listOfRequests?[index]['id']);
                                 },

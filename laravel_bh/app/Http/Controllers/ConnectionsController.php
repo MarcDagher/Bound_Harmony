@@ -182,27 +182,36 @@ class ConnectionsController extends Controller
         ]);
         $user = Auth::user(); // this is not a token this gets everything except for hidden items
         $connection = Connection::find($request->connection_id);
-        
-        if ($connection && ($connection->requester === $user->id || $connection->responder === $user->id)){
+        try {
+            if ($connection && ($connection->requester === $user->id || $connection->responder === $user->id)){
 
-            $user1 = User::find($connection -> responder);
-            $user2 = User::find($connection -> requester);
-            
-            $connection -> status = "disconnected";
-            $user1 -> connection_status = 'false';
-            $user2 -> connection_status = 'false';
+                $user1 = User::find($connection -> responder);
+                $user2 = User::find($connection -> requester);
+                
+                $connection -> status = "disconnected";
+                $user1 -> connection_status = 'false';
+                $user2 -> connection_status = 'false';
+    
+                $connection -> save();
+                $user1 -> save();
+                $user2 -> save();
 
-            $connection -> save();
-            $user1 -> save();
-            $user2 -> save();
-
-        } else {
             return response() -> json([
-                "status" => "failed",
-                "message" => "Error finding your connection",
-                "connection" => $connection
-            ]);
+                "status" => "success",
+                "message" => "Disconnected successfully",
+                "connection" => $connection]);
+            
+
+            } else {
+                return response() -> json([
+                    "status" => "failed",
+                    "message" => "Error finding your connection",
+                ]);
+            }
+        } catch (\Throwable $th) {
+            return $th;
         }
+        
     }
 
 }

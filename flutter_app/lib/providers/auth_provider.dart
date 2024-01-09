@@ -21,13 +21,12 @@ class AuthProvider extends ChangeNotifier {
 
   // AuthProvider({this.emailTaken, this.success, this.wrongCredentials});
 
-  Future initializePreferences() async {
-    // inithializeing preferences.
-    // gets an instance of the SharedPreference file (a Map wwith key value pairs) for this app.
+  initializePreferences() async {
     // ignore: prefer_conditional_assignment
-    if (preferences == null) {
-      preferences = await SharedPreferences.getInstance();
-    }
+
+    preferences = await SharedPreferences.getInstance();
+    notifyListeners();
+    return preferences;
   }
 
   Future getToken() async {
@@ -125,7 +124,7 @@ class AuthProvider extends ChangeNotifier {
 
     // print("from provider => success: $successLogin");
     // print("from provider => wrongCreds: $wrongCredentials");
-    saveAllPreferences();
+
     notifyListeners();
   }
 }

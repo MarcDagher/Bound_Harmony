@@ -70,7 +70,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             print(showUsernameButton);
                           },
                           handleChangeController: usernameController,
-                          placeholder: value.prefUsername),
+                          placeholder:
+                              value.preferences?.getString('username')),
                     ),
                   ),
                   // this will be a text. email is displayed from token

@@ -29,17 +29,6 @@ class ConnectionProvider extends ChangeNotifier {
   // disconnect method
   String disconnectMessage = "";
 
-  // ConnectionProvider(
-  //     {this.preferences,
-  //     this.messageSendRequest = "",
-  //     this.successSendRequest,
-  //     this.successDisplayRequests,
-  //     this.messageDisplayRequests = "",
-  //     this.listOfRequests,
-  //     this.noRequests,
-  //     this.sendResponseFail = false,
-  //     this.failedResponseMessage = ""});
-
   /// Send a request
   ///
   Future sendRequest(String email, token) async {
@@ -87,7 +76,8 @@ class ConnectionProvider extends ChangeNotifier {
         messageDisplayRequests = response.data["message"];
       }
     } on DioException catch (error) {
-      print("in controller: ${error.response!.statusCode}");
+      print(
+          "in provider displayIncomingRequests: ${error.response!.statusCode}");
     }
 
     notifyListeners();
@@ -119,8 +109,6 @@ class ConnectionProvider extends ChangeNotifier {
         }
         notifyListeners();
       } else if (response.data["request"]["status"] == "accepted") {
-        preferences = await SharedPreferences.getInstance();
-
         await preferences?.setString('connection_status', "true");
 
         print(
@@ -149,10 +137,10 @@ class ConnectionProvider extends ChangeNotifier {
           options: Options(headers: {"authorization": "Bearer $token"}));
 
       listOfPartners = response.data["connections"];
-      // print(response.data["connections"]);
+      print(response.data["connections"]);
       print("In method: $listOfPartners");
     } on DioException catch (error) {
-      print(error);
+      print("In getPartners provider: $error");
     }
 
     notifyListeners();
@@ -165,16 +153,23 @@ class ConnectionProvider extends ChangeNotifier {
     final dio = Dio();
 
     try {
-      final response = await dio
-          .post("$baseUrl/disconnect", data: {"connection_id": connectionId});
+      print("inside disconnect");
+      final response = await dio.post("$baseUrl/disconnect",
+          data: {"connection_id": connectionId},
+          options: Options(headers: {"authorization": "Bearer $token"}));
 
       if (response.data["status"] == "disconnected") {
+        preferences = await AuthProvider().initializePreferences();
+        await preferences!.setString('connection_status', 'false');
+        listOfRequests?.removeWhere(
+            (element) => element['id'] == response.data["connection"]["id"]);
         disconnectMessage = "Disconnected successfuly";
+        print("Data: ${response.data}");
       } else {
         disconnectMessage = "Something went wrong";
       }
     } on DioException catch (error) {
-      print(error);
+      print("Error: $error");
     }
   }
 }

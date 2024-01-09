@@ -62,6 +62,32 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
             // Widgets to be displayed conditionally
             List<Widget> widgets = [];
 
+            // If has partners without a current, display all + input request bar
+            if (value.listOfPartners.isNotEmpty &&
+                context
+                        .read<AuthProvider>()
+                        .preferences
+                        ?.get('connection_status') ==
+                    'false') {
+              for (final partner in value.listOfPartners) {
+                widgets.add(
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: buildUserListTile(
+                            partner["requester_name"],
+                            partner["requester"],
+                            context,
+                            Icons.accessibility_sharp,
+                            Theme.of(context).hintColor),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            }
+
             // If no partners, display a message and input request bar
             if (value.listOfPartners.isEmpty) {
               widgets.add(
@@ -87,36 +113,39 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                         'false') ||
                 (value.listOfPartners.isEmpty)) {
               widgets.add(
-                Column(
-                  children: [
-                    Form(
-                      key: formKey,
-                      child: TextInputField(
-                          handleChangeController: requestController,
-                          handleValidation: (email) => email!.isEmpty
-                              ? "Email is required"
-                              : !RegExp(r'^[\w-]+(\.[\w-]+)*@(hotmail\.com|gmail\.com|yahoo\.com|outlook\.com)$')
-                                      .hasMatch(requestController.text)
-                                  ? "Invalid email format"
-                                  : null,
-                          placeholder: "Enter your partner's email"),
-                    ),
-                    const SizedBox(height: 5),
-                    Button(
-                        text: 'Send Request',
-                        handlePressed: () async {
-                          if (formKey.currentState!.validate()) {
-                            final token =
-                                await context.read<AuthProvider>().getToken();
-                            // ignore: use_build_context_synchronously
-                            await context
-                                .read<ConnectionProvider>()
-                                .sendRequest(requestController.text, token);
-                          }
-                        }),
-                    if (value.messageSendRequest.isNotEmpty)
-                      Text(value.messageSendRequest)
-                  ],
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    children: [
+                      Form(
+                        key: formKey,
+                        child: TextInputField(
+                            handleChangeController: requestController,
+                            handleValidation: (email) => email!.isEmpty
+                                ? "Email is required"
+                                : !RegExp(r'^[\w-]+(\.[\w-]+)*@(hotmail\.com|gmail\.com|yahoo\.com|outlook\.com)$')
+                                        .hasMatch(requestController.text)
+                                    ? "Invalid email format"
+                                    : null,
+                            placeholder: "Enter your partner's email"),
+                      ),
+                      const SizedBox(height: 5),
+                      Button(
+                          text: 'Send Request',
+                          handlePressed: () async {
+                            if (formKey.currentState!.validate()) {
+                              final token =
+                                  await context.read<AuthProvider>().getToken();
+                              // ignore: use_build_context_synchronously
+                              await context
+                                  .read<ConnectionProvider>()
+                                  .sendRequest(requestController.text, token);
+                            }
+                          }),
+                      if (value.messageSendRequest.isNotEmpty)
+                        Text(value.messageSendRequest)
+                    ],
+                  ),
                 ),
               );
             }
@@ -133,7 +162,7 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                   Column(
                     children: [
                       buildUserListTile(
-                          "add name to db response",
+                          value.listOfPartners[i]["requester_name"],
                           value.listOfPartners[i]["requester"],
                           context,
                           Icons.accessibility_sharp,
@@ -149,7 +178,17 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                   endActionPane:
                       ActionPane(motion: const BehindMotion(), children: [
                     SlidableAction(
-                      onPressed: (context) {},
+                      onPressed: (context) async {
+                        final token =
+                            await context.read<AuthProvider>().getToken();
+
+                        print("initiating disconnect");
+                        value.disconnect(
+                            token,
+                            value.listOfPartners[
+                                value.listOfPartners.length - 1]["id"]);
+                        print("disconnect initiated");
+                      },
                       backgroundColor: Colors.red,
                       icon: Icons.cancel,
                       label: "Disconnect",
@@ -163,28 +202,6 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                       context,
                       Icons.favorite,
                       Theme.of(context).primaryColor)));
-            }
-
-            // If has partners without a current, display all + input request bar
-            if (value.listOfPartners.isNotEmpty &&
-                value.preferences?.get('connection_status') == 'false') {
-              for (final partner in value.listOfPartners) {
-                widgets.add(
-                  Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: buildUserListTile(
-                            partner["requester_name"],
-                            partner["requester"],
-                            context,
-                            Icons.accessibility_sharp,
-                            Theme.of(context).hintColor),
-                      ),
-                    ],
-                  ),
-                );
-              }
             }
 
             // Return the list of widgets inside a single ListTile
