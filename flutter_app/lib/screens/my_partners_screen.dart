@@ -46,10 +46,6 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
           itemCount:
               1, // Set to 1, because we are using a single ListTile for the entire UI
           itemBuilder: (context, index) {
-            // print("currentPartner Status in screen: ${value.currentPartner}");
-
-            // print("List In screen: ${value.listOfPartners}");
-
             // Widgets to be displayed conditionally
             List<Widget> widgets = [];
 
@@ -91,7 +87,7 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
             }
 
             // Create input field and the button if:
-            // i have partner without current, or no partners at all
+            // if has partner without current, or no partners at all
             if ((value.listOfPartners.isNotEmpty &&
                     value.currentPartner == false) ||
                 (value.listOfPartners.isEmpty)) {
@@ -133,7 +129,7 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
               );
             }
 
-            // If has partners and a current, display all except the last one. The last one in red
+            // If has partners and a current, display all except the last one. The last one is Slidable
             if (value.listOfPartners.isNotEmpty &&
                 value.currentPartner == true) {
               for (int i = 0; i < value.listOfPartners.length - 1; i++) {
@@ -152,7 +148,7 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                 );
               }
 
-              // Creating the red button that can disconnect on click
+              // Creating Slidable that can disconnect on click
               widgets.add(Slidable(
                   endActionPane:
                       ActionPane(motion: const BehindMotion(), children: [
@@ -166,10 +162,6 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                             index = i;
                           }
                         }
-                        // print("TESTING");
-                        // print(index);
-                        // print(value.listOfPartners[index!]["id"]);
-                        // print("initiating disconnect");
                         await value.disconnect(
                             token, value.listOfPartners[index!]["id"]);
                       },
