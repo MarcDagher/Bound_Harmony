@@ -110,7 +110,7 @@ class ConnectionProvider extends ChangeNotifier {
         }
         notifyListeners();
       } else if (response.data["request"]["status"] == "accepted") {
-        await preferences?.setString('connection_status', "true");
+        currentPartner = true;
 
         print(
             "Provider in prefs ${preferences?.getString('connection_status')} ");
