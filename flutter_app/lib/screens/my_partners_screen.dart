@@ -5,6 +5,7 @@ import 'package:bound_harmony/reusable%20widgets/button.dart';
 import 'package:bound_harmony/reusable%20widgets/text_input.dart';
 import 'package:bound_harmony/reusable%20widgets/user_tile_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 
 class MyPartnersScreen extends StatefulWidget {
@@ -144,43 +145,24 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
               }
 
               // Creating the red button that can disconnect on click
-              widgets.add(buildUserListTile(
+              widgets.add(Slidable(
+                  endActionPane:
+                      ActionPane(motion: const BehindMotion(), children: [
+                    SlidableAction(
+                      onPressed: (context) {},
+                      backgroundColor: Colors.red,
+                      icon: Icons.cancel,
+                      label: "Disconnect",
+                    )
+                  ]),
+                  child: buildUserListTile(
                       value.listOfPartners[value.listOfPartners.length - 1]
                           ["requester_name"],
                       value.listOfPartners[value.listOfPartners.length - 1]
                           ['requester'],
                       context,
                       Icons.favorite,
-                      Theme.of(context).primaryColor)
-                  // Row(
-                  //   children: [
-                  //     Expanded(
-                  //       child: MaterialButton(
-                  //         color: Theme.of(context).primaryColor,
-                  //         shape: RoundedRectangleBorder(
-                  //           borderRadius: BorderRadius.circular(10),
-                  //         ),
-                  //         onPressed: () {},
-                  //         child: Padding(
-                  //           padding: const EdgeInsets.symmetric(vertical: 17),
-                  //           child: Row(
-                  //             children: [
-                  //               Text(
-                  //                 partners[partners.length - 1].name,
-                  //                 style: const TextStyle(
-                  //                   color: Colors.white,
-                  //                   fontWeight: FontWeight.w600,
-                  //                   fontSize: 20,
-                  //                 ),
-                  //               ),
-                  //             ],
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
-                  );
+                      Theme.of(context).primaryColor)));
             }
 
             // If has partners without a current, display all + input request bar
