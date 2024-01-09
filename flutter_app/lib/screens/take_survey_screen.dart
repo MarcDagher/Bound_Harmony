@@ -1,30 +1,32 @@
+import 'package:bound_harmony/providers/survey_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+Map<String, List<String>> questions = {
+  "What's your name?": ["option1", "option2", "option3"],
+  "What's your name?1": ["option1", "option2", "option3"],
+  "What's your name?2": ["option1", "option2", "option3"],
+  "What's your name?3": ["option1", "option2", "option3"],
+  "What's your name?4": ["option1", "option2", "option3"],
+  "What's your name?5": ["option1", "option2", "option3"],
+  "What's your name?44": ["option1", "option2", "option3"],
+  "What's your name?52": ["option1", "option2", "option3"],
+  "What's your name?246": ["option1", "option2", "option3"],
+  "What's your name?235": ["option1", "option2", "option3"],
+  "What's your name?354": ["option1", "option2", "option3"],
+  "What's your name?346": ["option1", "option2", "option3"],
+  "What's your name?654": ["option1", "option2", "option3"],
+  "What's your name?265": ["option1", "option2", "option3"],
+  "What's your name?526": ["option1", "option2", "option3"],
+  "What's your name?2465": ["option1", "option2", "option3"],
+};
 
 class TakeSurveyScreen extends StatelessWidget {
   const TakeSurveyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Map<String, List<String>> questions = {
-      "What's your name?": ["option1", "option2", "option3"],
-      "What's your name?1": ["option1", "option2", "option3"],
-      "What's your name?2": ["option1", "option2", "option3"],
-      "What's your name?3": ["option1", "option2", "option3"],
-      "What's your name?4": ["option1", "option2", "option3"],
-      "What's your name?5": ["option1", "option2", "option3"],
-      "What's your name?44": ["option1", "option2", "option3"],
-      "What's your name?52": ["option1", "option2", "option3"],
-      "What's your name?246": ["option1", "option2", "option3"],
-      "What's your name?235": ["option1", "option2", "option3"],
-      "What's your name?354": ["option1", "option2", "option3"],
-      "What's your name?346": ["option1", "option2", "option3"],
-      "What's your name?654": ["option1", "option2", "option3"],
-      "What's your name?265": ["option1", "option2", "option3"],
-      "What's your name?526": ["option1", "option2", "option3"],
-      "What's your name?2465": ["option1", "option2", "option3"],
-    };
-
     return Scaffold(
       appBar: AppBar(
         title: const Padding(
@@ -34,42 +36,45 @@ class TakeSurveyScreen extends StatelessWidget {
       ),
       //////////// END OF APPBAR
 
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25),
-        child: Column(
-          children: [
-            Expanded(
-              ///////// BUILDING SURVEY'S QUESTIONS AND LOOPING OVER OPTIONS
-              ///
-              ///
-              child: ListView.builder(
-                itemCount: questions.length,
-                itemBuilder: (context, index) {
-                  final entry = questions.entries.elementAt(index);
-                  return Column(
-                    children: [
-                      buildQuestion(entry.key, Theme.of(context).hintColor),
-                      for (String option in entry.value)
-                        buildOption(option, Theme.of(context).hintColor,
-                            Theme.of(context).primaryColor),
-                    ],
-                  );
-                },
+      body: Consumer<SurveysProvider>(builder: (context, value, child) {
+        value.getSurvey(2);
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          child: Column(
+            children: [
+              Expanded(
+                ///////// BUILDING SURVEY'S QUESTIONS AND LOOPING OVER OPTIONS
+                ///
+                ///
+                child: ListView.builder(
+                  itemCount: questions.length,
+                  itemBuilder: (context, index) {
+                    final entry = questions.entries.elementAt(index);
+                    return Column(
+                      children: [
+                        buildQuestion(entry.key, Theme.of(context).hintColor),
+                        for (String option in entry.value)
+                          buildOption(option, Theme.of(context).hintColor,
+                              Theme.of(context).primaryColor),
+                      ],
+                    );
+                  },
+                ),
               ),
-            ),
 
-            /////// REUSABLE SUBMIT BUTTON
-            ///
-            ///
-            Button(
-                text: 'Submit',
-                handlePressed: () {},
-                // When all questions are answered change color to primary red
-                color: Theme.of(context).hintColor),
-            const SizedBox(height: 10)
-          ],
-        ),
-      ),
+              /////// REUSABLE SUBMIT BUTTON
+              ///
+              ///
+              Button(
+                  text: 'Submit',
+                  handlePressed: () {},
+                  // When all questions are answered change color to primary red
+                  color: Theme.of(context).hintColor),
+              const SizedBox(height: 10)
+            ],
+          ),
+        );
+      }),
     );
   }
 
