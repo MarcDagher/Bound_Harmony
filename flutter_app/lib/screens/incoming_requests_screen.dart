@@ -1,4 +1,3 @@
-import 'package:bound_harmony/models/user.dart';
 import 'package:bound_harmony/providers/auth_provider.dart';
 import 'package:bound_harmony/providers/connection_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/user_tile_builder.dart';
@@ -36,7 +35,6 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
       //// END OF APPBAR /////
 
       body: Consumer<ConnectionProvider>(builder: (context, value, child) {
-        print("inside consumer: currentPartnerr = ${value.currentPartner}");
         if (value.currentPartner == true) {
           return const Center(child: Text("You're already in a relationship!"));
         } else if (value.currentPartner == false) {
@@ -64,7 +62,7 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
                   itemBuilder: (context, index) {
                     final name = value.listOfRequests?[index]["requester_name"];
                     final email = value.listOfRequests?[index]["requester"];
-                    //// EACH BOX IS A SLIDABLE WITH A STARTACTIONN AND AN ENDACTION
+                    //// EACH BOX IS A SLIDABLE WITH A START ACTION AND AN ENDACTION
                     return Slidable(
                       startActionPane: ActionPane(
                         motion: const BehindMotion(),
@@ -128,25 +126,19 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
     switch (action) {
       case 'Accept':
 
-        /// Remove all of the requests and adjust database:
-        /// change user's current status to true
-
+        /// change user's currentPartner to true and notify listeners
         await context
             .read<ConnectionProvider>()
             .respondToRequest(token, requestID, 'accepted');
 
       case 'Reject':
 
-        /// Remove the rejected request by listening to the listOfRequests in controller
-        /// list of requests will be updated when request's status becomes rejected
+        /// Remove the rejected request by listening to the listOfRequests in provider
         await context
             .read<ConnectionProvider>()
             .respondToRequest(token, requestID, 'rejected');
-
         break;
       default:
-
-      ///
     }
   }
 }
