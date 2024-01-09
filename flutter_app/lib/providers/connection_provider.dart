@@ -139,7 +139,14 @@ class ConnectionProvider extends ChangeNotifier {
 
       listOfPartners = response.data["connections"];
       print("Inside getPartners $listOfPartners");
-      if (response.data["connections"][0]["status"] == "accepted") {
+
+      int count = 0;
+      for (int i = 0; i < response.data["connections"].length; i++) {
+        if (response.data["connections"][i]['status'] == 'accepted') {
+          count++;
+        }
+      }
+      if (count > 0) {
         currentPartner = true;
       } else {
         currentPartner = false;
