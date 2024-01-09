@@ -75,19 +75,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   // this will be a text. email is displayed from token
-                  Consumer<AuthProvider>(
-                    builder: (context, value, child) => Padding(
+                  Consumer<AuthProvider>(builder: (context, value, child) {
+                    return Padding(
                       padding: const EdgeInsets.only(bottom: 5),
                       child: Row(
                         children: [
                           Expanded(
-                            // child: DisplayBox(text: value.prefEmail),
-                            child: DisplayBox(text: "value.prefEmail"),
+                            child: DisplayBox(
+                                text:
+                                    value.preferences?.get('email') as String),
                           ),
                         ],
                       ),
-                    ),
-                  ),
+                    );
+                  }),
 
                   Padding(
                     padding: const EdgeInsets.only(bottom: 5),
