@@ -26,6 +26,9 @@ class ConnectionProvider extends ChangeNotifier {
   // getPartners method
   List listOfPartners = [];
 
+  // disconnect method
+  String disconnectMessage = "";
+
   // ConnectionProvider(
   //     {this.preferences,
   //     this.messageSendRequest = "",
@@ -153,5 +156,25 @@ class ConnectionProvider extends ChangeNotifier {
     }
 
     notifyListeners();
+  }
+
+  /// Disconnect from current partner
+  ///
+  disconnect(token, int connectionId) async {
+    final baseUrl = Requests.baseUrl;
+    final dio = Dio();
+
+    try {
+      final response = await dio
+          .post("$baseUrl/disconnect", data: {"connection_id": connectionId});
+
+      if (response.data["status"] == "disconnected") {
+        disconnectMessage = "Disconnected successfuly";
+      } else {
+        disconnectMessage = "Something went wrong";
+      }
+    } on DioException catch (error) {
+      print(error);
+    }
   }
 }

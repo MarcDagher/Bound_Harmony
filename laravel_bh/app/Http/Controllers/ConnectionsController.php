@@ -178,7 +178,7 @@ class ConnectionsController extends Controller
         // Change user's connection_status to false
         $request -> validate([
             'connection_id' => 'required|integer', // on display of requests we will also have the details  of each request
-            'status' => 'required|in:disconnected'
+            // 'status' => 'required|in:disconnected'
         ]);
         $user = Auth::user(); // this is not a token this gets everything except for hidden items
         $connection = Connection::find($request->connection_id);
