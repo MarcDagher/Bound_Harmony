@@ -25,6 +25,7 @@ class ConnectionProvider extends ChangeNotifier {
 
   // getPartners method
   List listOfPartners = [];
+  bool currentPartner = false;
 
   // disconnect method
   String disconnectMessage = "";
@@ -137,7 +138,13 @@ class ConnectionProvider extends ChangeNotifier {
           options: Options(headers: {"authorization": "Bearer $token"}));
 
       listOfPartners = response.data["connections"];
-      print(response.data["connections"]);
+      print("Inside getPartners $listOfPartners");
+      if (response.data["connections"][0]["status"] == "accepted") {
+        currentPartner = true;
+      } else {
+        currentPartner = false;
+      }
+      print(response.data["connections"][0]["status"]);
       print("In method: $listOfPartners");
     } on DioException catch (error) {
       print("In getPartners provider: $error");
@@ -157,16 +164,19 @@ class ConnectionProvider extends ChangeNotifier {
       final response = await dio.post("$baseUrl/disconnect",
           data: {"connection_id": connectionId},
           options: Options(headers: {"authorization": "Bearer $token"}));
+      print("Data: ${response.data}");
+      if (response.data["connection"]["status"] == "disconnected") {
+        // preferences = await AuthProvider().initializePreferences();
+        // await preferences!.setString('connection_status', 'false');
 
-      if (response.data["status"] == "disconnected") {
-        preferences = await AuthProvider().initializePreferences();
-        await preferences!.setString('connection_status', 'false');
         listOfRequests?.removeWhere(
             (element) => element['id'] == response.data["connection"]["id"]);
+        currentPartner = false;
         disconnectMessage = "Disconnected successfuly";
-        print("Data: ${response.data}");
+        notifyListeners();
       } else {
         disconnectMessage = "Something went wrong";
+        notifyListeners();
       }
     } on DioException catch (error) {
       print("Error: $error");

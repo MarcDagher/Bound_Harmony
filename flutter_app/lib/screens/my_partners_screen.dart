@@ -48,6 +48,7 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
           itemBuilder: (context, index) {
             print(
                 "Auth Connection Status in screen: ${context.read<AuthProvider>().preferences?.get('connection_status')}");
+            print("currentPartner Status in screen: ${value.currentPartner}");
 
             print("List In screen: ${value.listOfPartners}");
             // Widgets to be displayed conditionally
@@ -55,11 +56,7 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
 
             // If has partners without a current, display all + input request bar
             if (value.listOfPartners.isNotEmpty &&
-                context
-                        .read<AuthProvider>()
-                        .preferences
-                        ?.get('connection_status') ==
-                    'false') {
+                value.currentPartner == false) {
               for (final partner in value.listOfPartners) {
                 widgets.add(
                   Column(
@@ -97,11 +94,7 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
             // Create input field and the button if:
             // i have partner without current, or no partners at all
             if ((value.listOfPartners.isNotEmpty &&
-                    context
-                            .read<AuthProvider>()
-                            .preferences
-                            ?.get('connection_status') ==
-                        'false') ||
+                    value.currentPartner == false) ||
                 (value.listOfPartners.isEmpty)) {
               widgets.add(
                 Padding(
@@ -143,11 +136,7 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
 
             // If has partners and a current, display all except the last one. The last one in red
             if (value.listOfPartners.isNotEmpty &&
-                context
-                        .read<AuthProvider>()
-                        .preferences
-                        ?.get('connection_status') ==
-                    'true') {
+                value.currentPartner == true) {
               for (int i = 0; i < value.listOfPartners.length - 1; i++) {
                 widgets.add(
                   Column(
