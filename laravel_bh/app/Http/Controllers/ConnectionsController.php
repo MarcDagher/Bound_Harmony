@@ -25,10 +25,12 @@ class ConnectionsController extends Controller
 
             foreach ($connections as $connection){
                 $requester_email = User::find($connection->requester)->email;
+                $requester_name = User::find($connection->requester)->username;
                 $responder_email = User::find($connection->responder)->email;
                 $response_array[] = [
                     "id" => $connection -> id,
                     "requester" => $requester_email,
+                    "requester_name" => $requester_name,
                     "responder" => $responder_email,
                     "status" => $connection->status
                 ]; 

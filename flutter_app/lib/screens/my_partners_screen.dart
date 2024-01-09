@@ -145,7 +145,8 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
 
               // Creating the red button that can disconnect on click
               widgets.add(buildUserListTile(
-                      'No name yet',
+                      value.listOfPartners[value.listOfPartners.length - 1]
+                          ["requester_name"],
                       value.listOfPartners[value.listOfPartners.length - 1]
                           ['requester'],
                       context,
@@ -192,7 +193,7 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: buildUserListTile(
-                            "no name",
+                            partner["requester_name"],
                             partner["requester"],
                             context,
                             Icons.accessibility_sharp,
@@ -205,10 +206,8 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
             }
 
             // Return the list of widgets inside a single ListTile
-            return ListTile(
-              title: Column(
-                children: widgets,
-              ),
+            return Column(
+              children: widgets,
             );
           },
         ),
