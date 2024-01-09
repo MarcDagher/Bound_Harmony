@@ -16,15 +16,6 @@ class MyPartnersScreen extends StatefulWidget {
 }
 
 class _MyPartnersScreenState extends State<MyPartnersScreen> {
-  // List<User> partners = [
-  //   // User(email: 'person@email.com', username: 'Person 1', password: '...'),
-  //   // User(email: 'person@email.com', username: 'Person 2', password: '...'),
-  //   // User(email: 'person@email.com', username: 'Person 3', password: '...'),
-  //   // User(email: 'person@email.com', username: 'Person 4', password: '...'),
-  //   // User(email: 'person@email.com', username: 'Person 5', password: '...'),
-  //   // User(email: 'person@email.com', username: 'Person 6', password: '...')
-  // ];
-
   @override
   Widget build(BuildContext context) {
     final TextEditingController requestController = TextEditingController();
