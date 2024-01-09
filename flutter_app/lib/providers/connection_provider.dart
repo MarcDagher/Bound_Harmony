@@ -144,8 +144,7 @@ class ConnectionProvider extends ChangeNotifier {
       } else {
         currentPartner = false;
       }
-      print(response.data["connections"][0]["status"]);
-      print("In method: $listOfPartners");
+      // print(response.data["connections"][0]["status"]);
     } on DioException catch (error) {
       print("In getPartners provider: $error");
     }

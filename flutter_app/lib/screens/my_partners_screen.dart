@@ -46,8 +46,6 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
           itemCount:
               1, // Set to 1, because we are using a single ListTile for the entire UI
           itemBuilder: (context, index) {
-            print(
-                "Auth Connection Status in screen: ${context.read<AuthProvider>().preferences?.get('connection_status')}");
             print("currentPartner Status in screen: ${value.currentPartner}");
 
             print("List In screen: ${value.listOfPartners}");
@@ -161,13 +159,18 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                       onPressed: (context) async {
                         final token =
                             await context.read<AuthProvider>().getToken();
-
-                        print("initiating disconnect");
-                        value.disconnect(
-                            token,
-                            value.listOfPartners[
-                                value.listOfPartners.length - 1]["id"]);
-                        print("disconnect initiated");
+                        int? index;
+                        for (int i = 0; i < value.listOfPartners.length; i++) {
+                          if (value.listOfPartners[i]['status'] == 'accepted') {
+                            index = i;
+                          }
+                        }
+                        print("TESTING");
+                        // print(index);
+                        print(value.listOfPartners[index!]["id"]);
+                        // print("initiating disconnect");
+                        await value.disconnect(
+                            token, value.listOfPartners[index!]["id"]);
                       },
                       backgroundColor: Colors.red,
                       icon: Icons.cancel,
