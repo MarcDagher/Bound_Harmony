@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bound_harmony/configurations/request.configuration.dart';
-import 'package:bound_harmony/providers/auth_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,8 +29,7 @@ class ConnectionProvider extends ChangeNotifier {
   // disconnect method
   String disconnectMessage = "";
 
-  /// Send a request
-  ///
+  /// Send a request to connect with partner
   Future sendRequest(String email, token) async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
@@ -43,10 +41,7 @@ class ConnectionProvider extends ChangeNotifier {
 
       successSendRequest = true;
       messageSendRequest = response.data["message"];
-
-      print("From ConnectionProvider response: ${response.data}");
     } on DioException catch (error) {
-      print("From ConnectionProvider error: $error");
       if (error.response?.statusCode == 405) {
         successSendRequest = false;
         messageSendRequest = "Request already exists";
@@ -59,15 +54,12 @@ class ConnectionProvider extends ChangeNotifier {
   }
 
   /// Display incoming requests
-  ///
   displayIncomingRequests(token) async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
-    // print("in displayIncomingRequests");
     try {
       final response = await dio.get("$baseUrl/display_requests",
           options: Options(headers: {'authorization': 'Bearer $token'}));
-      // print("in controller: ${response.data}");
       if (response.data["status"] == "success") {
         successDisplayRequests = true;
         noRequests = false;
@@ -85,7 +77,6 @@ class ConnectionProvider extends ChangeNotifier {
   }
 
   /// Accept or Reject request
-  ///
   respondToRequest(token, requestID, userResponse) async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
@@ -97,12 +88,9 @@ class ConnectionProvider extends ChangeNotifier {
       sendResponseFail = false;
 
       /// rejecting a request
-      ///
       if (response.data["request"]["status"] == "rejected") {
         listOfRequests?.removeWhere(
             (element) => element['id'] == response.data["request"]["id"]);
-        // print("From provider: $listOfRequests");
-        // print("From provider: ${listOfRequests?.length}");
         if (listOfRequests!.isEmpty) {
           noRequests = true;
         } else {
@@ -112,13 +100,11 @@ class ConnectionProvider extends ChangeNotifier {
       } else if (response.data["request"]["status"] == "accepted") {
         currentPartner = true;
 
-        print(
-            "Provider in prefs ${preferences?.getString('connection_status')} ");
         notifyListeners();
       }
     } on DioException catch (error) {
       /// When i got error status 302,i'm not sure what the error is. I refresh cntrl + s in connection provider and it works
-      print(error);
+      print("In respondToRequest: $error");
       if (error.response?.statusCode == 302) {
         sendResponseFail = true;
         failedResponseMessage =
@@ -138,7 +124,6 @@ class ConnectionProvider extends ChangeNotifier {
           options: Options(headers: {"authorization": "Bearer $token"}));
 
       listOfPartners = response.data["connections"];
-      print("Inside getPartners $listOfPartners");
 
       int count = 0;
       for (int i = 0; i < response.data["connections"].length; i++) {
@@ -160,21 +145,15 @@ class ConnectionProvider extends ChangeNotifier {
   }
 
   /// Disconnect from current partner
-  ///
   disconnect(token, int connectionId) async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
 
     try {
-      print("inside disconnect");
       final response = await dio.post("$baseUrl/disconnect",
           data: {"connection_id": connectionId},
           options: Options(headers: {"authorization": "Bearer $token"}));
-      print("Data: ${response.data}");
       if (response.data["connection"]["status"] == "disconnected") {
-        // preferences = await AuthProvider().initializePreferences();
-        // await preferences!.setString('connection_status', 'false');
-
         listOfRequests?.removeWhere(
             (element) => element['id'] == response.data["connection"]["id"]);
         currentPartner = false;
