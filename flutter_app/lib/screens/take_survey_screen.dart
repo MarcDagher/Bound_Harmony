@@ -14,6 +14,7 @@ class TakeSurveyScreen extends StatefulWidget {
 }
 
 class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
+  /// Prepare List of Response Models for fetching
   List<Response> personalSurveyResponses = [
     Response(questionId: 1, response: ""),
     Response(questionId: 2, response: ""),
@@ -37,8 +38,13 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
     Response(questionId: 20, response: ""),
   ];
 
+  /// Track completion of responses to handle the submit button's color change
   bool personalSurveyComplete = false;
 
+  /// Track completion of responses to handle fetching on submit
+  bool incompleteSurveyMessage = false;
+
+  /// Inside handleChange in Radio, Check if the responses are all filled and setState personalSurveyComplete
   checkIfComplete(context, personalSurveyResponses) {
     for (Response response in personalSurveyResponses) {
       if (response.response == "") {
@@ -55,26 +61,25 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
 
   @override
   Widget build(BuildContext context) {
+    /// Fetch Survey questions according to given ID
     getSurveyRequest(id) async {
       await context.read<SurveysProvider>().getSurvey(id);
     }
 
+    /// On build of the screen, fetch questions and options
     getSurveyRequest(1);
 
+    /// Submit Button's color
     Color buttonColor = personalSurveyComplete == true
         ? Theme.of(context).primaryColor
         : Theme.of(context).hintColor;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Padding(
-          padding: EdgeInsets.only(left: 10),
-          child: Text("Couple's Survey"),
-        ),
+        title: const Text("Individual Survey"),
       ),
       //////////// END OF APPBAR
       body: Consumer<SurveysProvider>(builder: (context, value, child) {
-        // print("Inside screen: ${value.questions.length}");
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25),
           child: Column(
@@ -107,15 +112,37 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
               /////// REUSABLE SUBMIT BUTTON
               ///
               ///
-              Button(
-                  text: 'Submit',
-                  handlePressed: () {
-                    print(
-                        "From button: ${personalSurveyResponses[1].response}");
-                  },
-                  // When all questions are answered change color to primary red
-                  color: buttonColor),
-              const SizedBox(height: 10)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Button(
+                    text: 'Submit',
+                    handlePressed: () {
+                      for (Response response in personalSurveyResponses) {
+                        if (response.response == "") {
+                          setState(() {
+                            incompleteSurveyMessage = true;
+                          });
+                          print("Incomplete");
+                          return;
+                        }
+                      }
+                      print("complete");
+                      setState(() {
+                        incompleteSurveyMessage = false;
+                      });
+                      // print(
+                      //     "From button: ${personalSurveyResponses[1].response}");
+                    },
+                    // When all questions are answered change color to primary red
+                    color: buttonColor),
+              ),
+
+              if (personalSurveyComplete == false &&
+                  incompleteSurveyMessage == true)
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 10, top: 10),
+                  child: Text('Please complete all questions'),
+                )
             ],
           ),
         );
@@ -157,20 +184,22 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
                 chosenResponse as String;
           });
           checkIfComplete(context, personalSurveyResponses);
-
-          print(personalSurveyComplete);
-          // print(
-          //     "chosenResponse: $chosenResponse, listOfOptions: $listOfOptions, questionIndex: $questionIndex");
-          // print(
-          //     "After set state: ${personalSurveyResponses[questionIndex].response}");
         },
         shape: ContinuousRectangleBorder(
             side: BorderSide(color: Theme.of(context).hintColor),
             borderRadius: BorderRadius.circular(8)),
         contentPadding: const EdgeInsets.only(left: 6),
-        // activeColor: Theme.of(context).primaryColor,
+        activeColor: Theme.of(context).primaryColor,
         selectedTileColor: Colors.amber,
       ),
     );
   }
 }
+
+
+// if (personalSurveyComplete == true &&
+//                   incompleteSurveyMessage == false)
+//                 const Padding(
+//                   padding: EdgeInsets.only(bottom: 10, top: 10),
+//                   child: Text('Your responses have been saved'),
+//                 ),
