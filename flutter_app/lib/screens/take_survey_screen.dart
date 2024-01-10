@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bound_harmony/providers/survey_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/button.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +29,11 @@ class TakeSurveyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    getSurveyRequest(id) async {
+      await context.read<SurveysProvider>().getSurvey(id);
+    }
+
+    getSurveyRequest(2);
     return Scaffold(
       appBar: AppBar(
         title: const Padding(
@@ -35,9 +42,9 @@ class TakeSurveyScreen extends StatelessWidget {
         ),
       ),
       //////////// END OF APPBAR
-
       body: Consumer<SurveysProvider>(builder: (context, value, child) {
-        value.getSurvey(2);
+        // value.getSurvey(2)
+        print("Inside screen: ${value.questions}");
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25),
           child: Column(

@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SurveysProvider extends ChangeNotifier {
   List<Question?> questions = [];
 
-  getSurvey(int survey_id) async {
+  getSurvey(int surveyId) async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
 
@@ -15,7 +15,7 @@ class SurveysProvider extends ChangeNotifier {
       final preferences = await SharedPreferences.getInstance();
       final token = preferences.get('token');
       final response = await dio.get("$baseUrl/get_survey",
-          data: {"survey_id": survey_id},
+          data: {"survey_id": surveyId},
           options: Options(headers: {"authorization": "Bearer $token"}));
 
       // print("In getSurvey survey: ${response.data["survey"][0]["question"]}");
@@ -35,7 +35,8 @@ class SurveysProvider extends ChangeNotifier {
             options: listOfOptions,
             question: response.data["survey"][i]["question"]["question"]));
       }
-      print("Questions: $questions");
+      notifyListeners();
+      print("In provider. Questions: $questions");
     } on DioException catch (error) {
       print("In getSurvey error: $error");
     }
