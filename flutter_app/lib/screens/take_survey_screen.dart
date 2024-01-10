@@ -44,7 +44,7 @@ class TakeSurveyScreen extends StatelessWidget {
       //////////// END OF APPBAR
       body: Consumer<SurveysProvider>(builder: (context, value, child) {
         // value.getSurvey(2)
-        print("Inside screen: ${value.questions}");
+        print("Inside screen: ${value.questions.length}");
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25),
           child: Column(
@@ -54,13 +54,14 @@ class TakeSurveyScreen extends StatelessWidget {
                 ///
                 ///
                 child: ListView.builder(
-                  itemCount: questions.length,
+                  itemCount: value.questions.length,
                   itemBuilder: (context, index) {
-                    final entry = questions.entries.elementAt(index);
+                    // final entry = questions.entries.elementAt(index);
                     return Column(
                       children: [
-                        buildQuestion(entry.key, Theme.of(context).hintColor),
-                        for (String option in entry.value)
+                        buildQuestion(value.questions[index]!.question,
+                            Theme.of(context).hintColor),
+                        for (String option in value.questions[index]!.options)
                           buildOption(option, Theme.of(context).hintColor,
                               Theme.of(context).primaryColor),
                       ],

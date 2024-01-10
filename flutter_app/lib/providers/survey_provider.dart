@@ -10,7 +10,7 @@ class SurveysProvider extends ChangeNotifier {
   getSurvey(int surveyId) async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
-
+    List<Question> localQuestionsList = [];
     try {
       final preferences = await SharedPreferences.getInstance();
       final token = preferences.get('token');
@@ -30,13 +30,14 @@ class SurveysProvider extends ChangeNotifier {
           // print(
           //     "Option $j: ${response.data["survey"][i]["options"][j]["option"]}");
         }
-        questions.add(Question(
+        localQuestionsList.add(Question(
             id: response.data["survey"][i]["question"]["question_id"],
             options: listOfOptions,
             question: response.data["survey"][i]["question"]["question"]));
       }
+      questions = localQuestionsList;
       notifyListeners();
-      print("In provider. Questions: $questions");
+      // print("In provider. Questions: $questions");
     } on DioException catch (error) {
       print("In getSurvey error: $error");
     }
