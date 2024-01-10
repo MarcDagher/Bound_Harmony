@@ -36,6 +36,23 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
     Response(questionId: 19, response: ""),
     Response(questionId: 20, response: ""),
   ];
+
+  bool personalSurveyComplete = false;
+
+  checkIfComplete(context, personalSurveyResponses) {
+    for (Response response in personalSurveyResponses) {
+      if (response.response == "") {
+        setState(() {
+          personalSurveyComplete = false;
+        });
+        return;
+      }
+    }
+    setState(() {
+      personalSurveyComplete = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     getSurveyRequest(id) async {
@@ -43,6 +60,11 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
     }
 
     getSurveyRequest(1);
+
+    Color buttonColor = personalSurveyComplete == true
+        ? Theme.of(context).primaryColor
+        : Theme.of(context).hintColor;
+
     return Scaffold(
       appBar: AppBar(
         title: const Padding(
@@ -87,9 +109,12 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
               ///
               Button(
                   text: 'Submit',
-                  handlePressed: () {},
+                  handlePressed: () {
+                    print(
+                        "From button: ${personalSurveyResponses[1].response}");
+                  },
                   // When all questions are answered change color to primary red
-                  color: Theme.of(context).hintColor),
+                  color: buttonColor),
               const SizedBox(height: 10)
             ],
           ),
@@ -125,16 +150,19 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
       child: RadioListTile(
         title: Text(option, overflow: TextOverflow.clip),
         value: chosenOption,
-        groupValue: listOfOptions,
+        groupValue: personalSurveyResponses[questionIndex].response,
         onChanged: (chosenResponse) {
-          print(
-              "chosenResponse: $chosenResponse, listOfOptions: $listOfOptions, questionIndex: $questionIndex");
           setState(() {
             personalSurveyResponses[questionIndex].response =
                 chosenResponse as String;
-            // print(
-            //     "After set state: ${personalSurveyResponses[questionIndex].response}");
           });
+          checkIfComplete(context, personalSurveyResponses);
+
+          print(personalSurveyComplete);
+          // print(
+          //     "chosenResponse: $chosenResponse, listOfOptions: $listOfOptions, questionIndex: $questionIndex");
+          // print(
+          //     "After set state: ${personalSurveyResponses[questionIndex].response}");
         },
         shape: ContinuousRectangleBorder(
             side: BorderSide(color: Theme.of(context).hintColor),
@@ -146,57 +174,3 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
     );
   }
 }
-
-// List options = ["potato", "onions"];
-// List answers = ["Yes", "No"];
-// String currentOption = "";
-// String currentAnswer = "";
-
-// return Column(
-//   children: [
-//     RadioListTile(
-//       title: Text(options[0]),
-//       value: options[0],
-//       groupValue: currentOption,
-//       onChanged: (value) {
-//         setState(() {
-//           currentOption = value;
-//         });
-//         print(currentOption);
-//       },
-//     ),
-//     RadioListTile(
-//       title: Text(options[1]),
-//       value: options[1],
-//       groupValue: currentOption,
-//       onChanged: (value) {
-//         setState(() {
-//           currentOption = value;
-//         });
-//         print(currentOption);
-//       },
-//     ),
-//     RadioListTile(
-//       title: Text(answers[0]),
-//       value: answers[0],
-//       groupValue: currentAnswer,
-//       onChanged: (value) {
-//         setState(() {
-//           currentAnswer = value;
-//         });
-//         print(currentAnswer);
-//       },
-//     ),
-//     RadioListTile(
-//       title: Text(answers[1]),
-//       value: answers[1],
-//       groupValue: currentAnswer,
-//       onChanged: (value) {
-//         setState(() {
-//           currentAnswer = value;
-//         });
-//         print(currentAnswer);
-//       },
-//     ),
-//   ],
-// );
