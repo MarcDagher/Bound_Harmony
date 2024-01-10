@@ -130,6 +130,7 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
                       setState(() {
                         incompleteSurveyMessage = false;
                       });
+
                       // print(
                       //     "From button: ${personalSurveyResponses[1].response}");
                     },
@@ -137,12 +138,12 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
                     color: buttonColor),
               ),
 
-              if (personalSurveyComplete == false &&
-                  incompleteSurveyMessage == true)
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 10, top: 10),
-                  child: Text('Please complete all questions'),
-                )
+              // if (personalSurveyComplete == false &&
+              //     incompleteSurveyMessage == true)
+              //   const Padding(
+              //     padding: EdgeInsets.only(bottom: 5, top: 0),
+              //     child: Text('Please complete all questions'),
+              //   )
             ],
           ),
         );

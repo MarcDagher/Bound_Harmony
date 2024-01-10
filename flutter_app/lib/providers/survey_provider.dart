@@ -42,4 +42,15 @@ class SurveysProvider extends ChangeNotifier {
       print("In getSurvey error: $error");
     }
   }
+
+  saveSurveyResponse(token, listOfResponses) async {
+    final baseUrl = Requests.baseUrl;
+    final dio = Dio();
+
+    try {
+      final response = await dio.post("$baseUrl/save_responses",
+          data: {},
+          options: Options(headers: {"authorization": "Bearer $token"}));
+    } on DioException catch (error) {}
+  }
 }
