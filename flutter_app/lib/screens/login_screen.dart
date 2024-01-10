@@ -126,7 +126,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           //     .getAllPreferences();
                           // print(
                           //     "from button: ${context.read<AuthProvider>().prefEmail}");
-                          context.goNamed('Profile');
+                          context.goNamed('Connection Setup');
                         }
                       }
                     },

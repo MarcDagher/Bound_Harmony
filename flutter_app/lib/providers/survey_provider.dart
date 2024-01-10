@@ -47,10 +47,18 @@ class SurveysProvider extends ChangeNotifier {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
 
-    try {
-      final response = await dio.post("$baseUrl/save_responses",
-          data: {},
-          options: Options(headers: {"authorization": "Bearer $token"}));
-    } on DioException catch (error) {}
+    List arrayOfResponsesObjects = [];
+    // for ( response in listOfResponses){
+
+    // }
+
+    print("From provider question ID: ${listOfResponses[0].questionId}");
+    print("From provider response: ${listOfResponses[0].response}");
+
+    // try {
+    //   // final response = await dio.post("$baseUrl/save_responses",
+    //   //     data: {},
+    //   //     options: Options(headers: {"authorization": "Bearer $token"}));
+    // } on DioException catch (error) {}
   }
 }

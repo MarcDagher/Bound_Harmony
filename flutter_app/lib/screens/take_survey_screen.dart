@@ -5,6 +5,7 @@ import 'package:bound_harmony/providers/survey_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TakeSurveyScreen extends StatefulWidget {
   const TakeSurveyScreen({super.key});
@@ -57,6 +58,13 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
     setState(() {
       personalSurveyComplete = true;
     });
+  }
+
+  /// Get token
+  getToken() async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    final token = preferences.get('token');
+    return token;
   }
 
   @override
@@ -116,20 +124,24 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
                 padding: const EdgeInsets.only(bottom: 10),
                 child: Button(
                     text: 'Submit',
-                    handlePressed: () {
+                    handlePressed: () async {
                       for (Response response in personalSurveyResponses) {
                         if (response.response == "") {
                           setState(() {
                             incompleteSurveyMessage = true;
                           });
-                          print("Incomplete");
+                          print("From screen survey is  Incomplete");
                           return;
                         }
                       }
-                      print("complete");
+                      print("From screen survey is complete");
                       setState(() {
                         incompleteSurveyMessage = false;
                       });
+                      print("From screen request method called");
+                      final token = getToken();
+                      await value.saveSurveyResponse(
+                          token, personalSurveyResponses);
 
                       // print(
                       //     "From button: ${personalSurveyResponses[1].response}");
