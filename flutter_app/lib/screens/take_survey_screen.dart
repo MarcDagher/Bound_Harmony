@@ -104,6 +104,8 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
         shape: ContinuousRectangleBorder(
             side: BorderSide(color: Theme.of(context).hintColor),
             borderRadius: BorderRadius.circular(8)),
+        contentPadding: const EdgeInsets.only(left: 6),
+        activeColor: Theme.of(context).primaryColor,
       ),
     );
   }
