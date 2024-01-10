@@ -17,7 +17,7 @@ class SurveysProvider extends ChangeNotifier {
       final response = await dio.get("$baseUrl/get_survey",
           data: {"survey_id": surveyId},
           options: Options(headers: {"authorization": "Bearer $token"}));
-
+      print("In getSurvey: ${response.data}");
       // print("In getSurvey survey: ${response.data["survey"][0]["question"]}");
       // print("In getSurvey survey");
       for (int i = 0; i < response.data["survey"].length; i++) {

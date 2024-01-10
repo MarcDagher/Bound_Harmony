@@ -23,7 +23,7 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
       await context.read<SurveysProvider>().getSurvey(id);
     }
 
-    getSurveyRequest(2);
+    getSurveyRequest(1);
     return Scaffold(
       appBar: AppBar(
         title: const Padding(
@@ -45,7 +45,6 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
                 child: ListView.builder(
                   itemCount: value.questions.length,
                   itemBuilder: (context, index) {
-                    // final entry = questions.entries.elementAt(index);
                     return Column(
                       children: [
                         buildQuestion(value.questions[index]!.question,
@@ -79,17 +78,15 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
   ///
   ///
   Widget buildQuestion(question, textColor) {
-    return Row(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(bottom: 10, top: 30),
-          child: Text(
-            question,
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 10, top: 30),
+        child: Text(question,
             style: TextStyle(
                 color: textColor, fontSize: 20, fontWeight: FontWeight.w700),
-          ),
-        ),
-      ],
+            overflow: TextOverflow.clip),
+      ),
     );
   }
 
@@ -97,7 +94,7 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: RadioListTile(
-        title: Text(option),
+        title: Text(option, overflow: TextOverflow.clip),
         value: 0,
         groupValue: 1,
         onChanged: (value) {},
