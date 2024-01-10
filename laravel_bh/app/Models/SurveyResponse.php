@@ -13,7 +13,7 @@ class SurveyResponse extends Model
     protected $fillable = [
         'user_id',
         'question_id',
-        'response'
+        'option_id',
     ];
 
     // foreign key in SurveyResponse belongs to User

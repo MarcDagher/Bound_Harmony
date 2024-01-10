@@ -57,24 +57,24 @@ class SurveysController extends Controller
         $token = Auth::user();
 
         foreach($jsonData as $data){
-            $questionId = $data['question_id'];
+            $question_id = $data['question_id'];
             $response = $data['response'];
     
-            $response_validation = Option::where(["question_id" => $questionId, "option" => $response]) -> get();
-    
-            // if ( isset($response_validation[0])){
-            //     SurveyResponse::create([
-            //         "user_id" => $token->id,
-            //         "question_id" => $questionId,
-            //         "option_id" => $response_validation -> id,
-            //         "response" => $response
-            //     ]);
-            // } else {
-            //     return response() -> json([
-            //         "status" => "failed",
-            //         "message" => "Invalid response"
-            //     ]);
-            // }
+            $response_validation = Option::where(["question_id" => $question_id, "option" => $response]) -> get();
+ 
+            if (isset($response_validation[0])){
+                SurveyResponse::create([
+                    "user_id" => $token->id,
+                    "question_id" => $question_id,
+                    "option_id" => $response_validation[0] -> id
+                ]);
+
+            } else {
+                return response() -> json([
+                    "status" => "failed",
+                    "message" => "Invalid response"
+                ]);
+            }
 
         }
 
