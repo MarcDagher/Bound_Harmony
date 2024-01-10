@@ -23,7 +23,7 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
       await context.read<SurveysProvider>().getSurvey(id);
     }
 
-    getSurveyRequest(1);
+    // getSurveyRequest(1);
     return Scaffold(
       appBar: AppBar(
         title: const Padding(
@@ -50,8 +50,8 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
                         buildQuestion(value.questions[index]!.question,
                             Theme.of(context).hintColor),
                         for (String option in value.questions[index]!.options)
-                          buildRadioOption(option, Theme.of(context).hintColor,
-                              Theme.of(context).primaryColor),
+                          buildRadioOption(
+                              option: option, value: 0, groupValue: 0),
                       ],
                     );
                   },
@@ -90,13 +90,13 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
     );
   }
 
-  Widget buildRadioOption(option, grey, red) {
+  Widget buildRadioOption({option, value, groupValue}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: RadioListTile(
         title: Text(option, overflow: TextOverflow.clip),
-        value: 0,
-        groupValue: 1,
+        value: value,
+        groupValue: groupValue,
         onChanged: (value) {},
         shape: ContinuousRectangleBorder(
             side: BorderSide(color: Theme.of(context).hintColor),
