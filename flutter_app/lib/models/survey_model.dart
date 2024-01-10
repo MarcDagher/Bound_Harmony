@@ -13,7 +13,7 @@ class Question {
 
 class Response {
   final int questionId;
-  final String response;
+  String response;
 
   Response({required this.questionId, required this.response});
 }
