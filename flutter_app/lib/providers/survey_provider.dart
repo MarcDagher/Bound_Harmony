@@ -1,5 +1,5 @@
 import 'package:bound_harmony/configurations/request.configuration.dart';
-import 'package:bound_harmony/models/questions_model.dart';
+import 'package:bound_harmony/models/survey_model.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
