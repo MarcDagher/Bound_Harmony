@@ -46,7 +46,7 @@ class SurveysController extends Controller
         // array of objects {user_id, question_id, response}
         $request -> validate([ 
             "*.question_id" => "required|integer",
-             "*.option_id" => "required|integer"
+             "*.response" => "required|string"
              ]);
         
         // extracts the json payload from the incoming http request
@@ -58,18 +58,15 @@ class SurveysController extends Controller
 
         foreach($jsonData as $data){
             $questionId = $data['question_id'];
-            $optionId = $data['response'];
-
-            // print_r($data[]);
-            // echo $questionId;
-            // echo $response;
+            $response = $data['response'];
     
-            // $response_validation = Option::where(["question_id" => $questionId, "option" => $response]) -> get();
+            $response_validation = Option::where(["question_id" => $questionId, "option" => $response]) -> get();
     
             // if ( isset($response_validation[0])){
             //     SurveyResponse::create([
             //         "user_id" => $token->id,
             //         "question_id" => $questionId,
+            //         "option_id" => $response_validation -> id,
             //         "response" => $response
             //     ]);
             // } else {
