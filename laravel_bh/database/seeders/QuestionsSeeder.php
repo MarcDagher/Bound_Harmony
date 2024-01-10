@@ -13,6 +13,10 @@ class QuestionsSeeder extends Seeder
      */
     public function run(): void
     {
+
+
+        /// Questions for the Personal Survey
+        ///
         Question::create([
             "question" => "I enjoy places that are crowded with people",
             "survey_id" => 1,
@@ -112,6 +116,7 @@ class QuestionsSeeder extends Seeder
             "question" => "I like animals",
             "survey_id" => 1
         ]);
-
+        /////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////
     }
 }

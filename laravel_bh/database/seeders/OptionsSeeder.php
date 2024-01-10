@@ -13,6 +13,9 @@ class OptionsSeeder extends Seeder
      */
     public function run(): void
     {
+
+        /// Options for the questions of the Personal Survey with syrvey_id = 1
+        ///
         Option::create([ "option" => "no", "question_id" => 1 ]);
         Option::create([ "option" => "yes", "question_id" => 1 ]);
 
@@ -72,5 +75,7 @@ class OptionsSeeder extends Seeder
 
         Option::create([ "option" => "no", "question_id" => 20 ]);
         Option::create([ "option" => "yes", "question_id" => 20 ]);
+        ///////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////
     }
 }
