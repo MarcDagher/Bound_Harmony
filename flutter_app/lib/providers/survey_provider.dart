@@ -46,11 +46,18 @@ class SurveysProvider extends ChangeNotifier {
   saveSurveyResponse(token, listOfResponses) async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
-
     List arrayOfResponsesObjects = [];
-    // for ( response in listOfResponses){
 
-    // }
+    for (int i = 0; i < listOfResponses.length; i++) {
+      arrayOfResponsesObjects.add({
+        "question_id": listOfResponses[0].questionId,
+        "response": listOfResponses[0].response
+      });
+    }
+
+    // try{
+
+    // } on DioException catch (error) {}
 
     print("From provider question ID: ${listOfResponses[0].questionId}");
     print("From provider response: ${listOfResponses[0].response}");

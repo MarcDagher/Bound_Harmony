@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('connections', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('requester');
-            $table->unsignedBigInteger('responder')->nullable();
+            $table->unsignedBigInteger('responder');
             $table->enum('status', ['pending', 'accepted', 'rejected', 'disconnected'])->default('pending');
             $table->timestamps();
 
