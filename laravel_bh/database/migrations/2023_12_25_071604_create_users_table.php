@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->date('birthdate');
             $table->string('location')->nullable();
-            $table->string('image')->default('no image')->nullable();
+            $table->string('profile_pic_url')->default('no image')->nullable();
             $table->enum('connection_status', ['true', 'false'])->default('false');
             $table->enum('couple_survey_status', ['completed', 'uncompleted'])->default('uncompleted');
             $table->timestamps();

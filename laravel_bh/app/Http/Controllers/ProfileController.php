@@ -40,21 +40,21 @@ class ProfileController extends Controller
     public function edit_image(Request $request){
         $token = Auth::user();
         $request -> validate([
-            "image" => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            "profile_pic_url" => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-        if ($request->hasFile('image')){
+        if ($request->hasFile('profile_pic_url')){
             $user = User::find($token->id);
-            // image path is in storage/app/images
-            $imagePath = $request->file('image')->store('images', 'public');
-            $user->image = $imagePath;
+            // image path is in storage/app/public/images
+            $imagePath = $request->file('profile_pic_url')->store('images', 'public');
+            $user->profile_pic_url = $imagePath;
             $user->save();
             //Use the File class to retrieve image file
             $imageFile = File::get(storage_path('app/public/'.$imagePath));
             return response()->json([
                 "status" => "success",
                 "message" => "Image changed successfully",
-                "image" => base64_encode($imageFile)
+                "profile_pic_url" => base64_encode($imageFile)
                 //   NOTE: convert to base64 and return image for the frontend
             ]);
         } else {

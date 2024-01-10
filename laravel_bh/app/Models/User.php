@@ -25,7 +25,7 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'birthdate',
         'location',
-        'image',
+        'profile_pic_url',
         'connection_status',
         'couple_survey_status'
     ];
