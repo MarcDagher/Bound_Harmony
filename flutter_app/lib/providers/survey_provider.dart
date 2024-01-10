@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SurveysProvider extends ChangeNotifier {
+  List<Question?> questions = [];
+
   getSurvey(int survey_id) async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
@@ -12,21 +14,28 @@ class SurveysProvider extends ChangeNotifier {
     try {
       final preferences = await SharedPreferences.getInstance();
       final token = preferences.get('token');
-      final response =
-          await dio.get("$baseUrl/get_survey", data: {"survey_id": survey_id});
+      final response = await dio.get("$baseUrl/get_survey",
+          data: {"survey_id": survey_id},
+          options: Options(headers: {"authorization": "Bearer $token"}));
 
-      // print(
-      //     "In getSurvey survey: ${response.data["survey"][0]["question"]["question"]}");
+      // print("In getSurvey survey: ${response.data["survey"][0]["question"]}");
       // print("In getSurvey survey");
       for (int i = 0; i < response.data["survey"].length; i++) {
-        print(
-            "Question $i: ${response.data["survey"][i]["question"]["question"]}");
+        List listOfOptions = [];
+        // print(
+        //     "Question $i: ${response.data["survey"][i]["question"]["question"]}");
+
         for (int j = 0; j < response.data["survey"][i]["options"].length; j++) {
-          print(
-              "Option $j: ${response.data["survey"][i]["options"][j]["option"]}");
+          listOfOptions.add(response.data["survey"][i]["options"][j]["option"]);
+          // print(
+          //     "Option $j: ${response.data["survey"][i]["options"][j]["option"]}");
         }
+        questions.add(Question(
+            id: response.data["survey"][i]["question"]["question_id"],
+            options: listOfOptions,
+            question: response.data["survey"][i]["question"]["question"]));
       }
-      // Question(id: id, options: options, question: question)
+      print("Questions: $questions");
     } on DioException catch (error) {
       print("In getSurvey error: $error");
     }

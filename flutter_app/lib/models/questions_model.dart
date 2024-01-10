@@ -8,7 +8,7 @@ const Color background = Color(0xFF1A3464);
 class Question {
   final int id;
   final String question;
-  final List<Map> options;
+  final List options;
 
   Question({required this.id, required this.options, required this.question});
 
