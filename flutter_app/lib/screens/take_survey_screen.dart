@@ -5,28 +5,18 @@ import 'package:bound_harmony/reusable%20widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-Map<String, List<String>> questions = {
-  "What's your name?": ["option1", "option2", "option3"],
-  "What's your name?1": ["option1", "option2", "option3"],
-  "What's your name?2": ["option1", "option2", "option3"],
-  "What's your name?3": ["option1", "option2", "option3"],
-  "What's your name?4": ["option1", "option2", "option3"],
-  "What's your name?5": ["option1", "option2", "option3"],
-  "What's your name?44": ["option1", "option2", "option3"],
-  "What's your name?52": ["option1", "option2", "option3"],
-  "What's your name?246": ["option1", "option2", "option3"],
-  "What's your name?235": ["option1", "option2", "option3"],
-  "What's your name?354": ["option1", "option2", "option3"],
-  "What's your name?346": ["option1", "option2", "option3"],
-  "What's your name?654": ["option1", "option2", "option3"],
-  "What's your name?265": ["option1", "option2", "option3"],
-  "What's your name?526": ["option1", "option2", "option3"],
-  "What's your name?2465": ["option1", "option2", "option3"],
-};
-
-class TakeSurveyScreen extends StatelessWidget {
+class TakeSurveyScreen extends StatefulWidget {
   const TakeSurveyScreen({super.key});
 
+  @override
+  State<TakeSurveyScreen> createState() => _TakeSurveyScreenState();
+}
+
+class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
+  List options = ["potato", "onions"];
+  List answers = ["Yes", "No"];
+  String currentOption = "";
+  String currentAnswer = "";
   @override
   Widget build(BuildContext context) {
     getSurveyRequest(id) async {
@@ -43,8 +33,7 @@ class TakeSurveyScreen extends StatelessWidget {
       ),
       //////////// END OF APPBAR
       body: Consumer<SurveysProvider>(builder: (context, value, child) {
-        // value.getSurvey(2)
-        print("Inside screen: ${value.questions.length}");
+        print("Inside screen: ${value.questions}");
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25),
           child: Column(
@@ -62,7 +51,7 @@ class TakeSurveyScreen extends StatelessWidget {
                         buildQuestion(value.questions[index]!.question,
                             Theme.of(context).hintColor),
                         for (String option in value.questions[index]!.options)
-                          buildOption(option, Theme.of(context).hintColor,
+                          buildRadioOption(option, Theme.of(context).hintColor,
                               Theme.of(context).primaryColor),
                       ],
                     );
@@ -104,25 +93,71 @@ class TakeSurveyScreen extends StatelessWidget {
     );
   }
 
-  Widget buildOption(option, grey, red) {
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 3),
-          decoration: BoxDecoration(
-              border: Border.all(color: grey),
-              borderRadius: BorderRadius.circular(5)),
-          child: ListTile(
-            title: Text(
-              option,
-              style: TextStyle(color: grey),
-            ),
-            leading: Icon(size: 15, Icons.radio_button_off, color: red),
-            horizontalTitleGap: 0.5,
-          ),
-        ),
-        const SizedBox(height: 5)
-      ],
+  Widget buildRadioOption(option, grey, red) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 5),
+      child: RadioListTile(
+        title: Text(option),
+        value: 0,
+        groupValue: 1,
+        onChanged: (value) {},
+        shape: ContinuousRectangleBorder(
+            side: BorderSide(color: Theme.of(context).hintColor),
+            borderRadius: BorderRadius.circular(8)),
+      ),
     );
   }
 }
+
+
+
+
+
+// return Column(
+        //   children: [
+        //     RadioListTile(
+        //       title: Text(options[0]),
+        //       value: options[0],
+        //       groupValue: currentOption,
+        //       onChanged: (value) {
+        //         setState(() {
+        //           currentOption = value;
+        //         });
+        //         print(currentOption);
+        //       },
+        //     ),
+        //     RadioListTile(
+        //       title: Text(options[1]),
+        //       value: options[1],
+        //       groupValue: currentOption,
+        //       onChanged: (value) {
+        //         setState(() {
+        //           currentOption = value;
+        //         });
+        //         print(currentOption);
+        //       },
+        //     ),
+        //     RadioListTile(
+        //       title: Text(answers[0]),
+        //       value: answers[0],
+        //       groupValue: currentAnswer,
+        //       onChanged: (value) {
+        //         setState(() {
+        //           currentAnswer = value;
+        //         });
+        //         print(currentAnswer);
+        //       },
+        //     ),
+        //     RadioListTile(
+        //       title: Text(answers[1]),
+        //       value: answers[1],
+        //       groupValue: currentAnswer,
+        //       onChanged: (value) {
+        //         setState(() {
+        //           currentAnswer = value;
+        //         });
+        //         print(currentAnswer);
+        //       },
+        //     ),
+        //   ],
+        // );
