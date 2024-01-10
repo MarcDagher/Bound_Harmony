@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Option;
 use App\Models\Question;
 use App\Models\SurveyResponse;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -54,17 +55,16 @@ class SurveysController extends Controller
         // all() will convert the json into accessible arrays 
         $jsonData = $request->json()->all();
 
-        $token = Auth::user();
+        $user = Auth::user();
 
         foreach($jsonData as $data){
             $question_id = $data['question_id'];
             $response = $data['response'];
     
             $response_validation = Option::where(["question_id" => $question_id, "option" => $response]) -> get();
- 
             if (isset($response_validation[0])){
                 SurveyResponse::create([
-                    "user_id" => $token->id,
+                    "user_id" => $user->id,
                     "question_id" => $question_id,
                     "option_id" => $response_validation[0] -> id
                 ]);
