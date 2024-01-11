@@ -27,6 +27,9 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
     CoupleSurveyResponse(questionId: 29, response: ""),
   ];
 
+  bool coupleSurveyComplete = false;
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     // This method will fetch all questions and options of the Couple's Survey
@@ -104,9 +107,15 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
                         if (value.questions[questionIndex]!.type == "text")
                           Padding(
                             padding: const EdgeInsets.only(bottom: 5),
-                            child: TextInputField(
-                                handleChangeController: inputController,
-                                placeholder: "Enter your response here..."),
+                            child: Form(
+                              key: formKey,
+                              child: TextInputField(
+                                  handleChangeController: inputController,
+                                  handleValidation: (text) => text == ""
+                                      ? "This field is required"
+                                      : null,
+                                  placeholder: "Enter your response here..."),
+                            ),
                           )
                       ],
                     );
@@ -120,13 +129,46 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),
                 child: Button(
-                    text: 'Submit',
-                    handlePressed: () async {
-                      print(coupleSurveyResponses[0].response);
-                    },
+                  text: 'Submit',
+                  // When all questions are answered change color to primary red
+                  color: coupleSurveyComplete == false
+                      ? Theme.of(context).hintColor
+                      : Theme.of(context).primaryColor,
+                  handlePressed: () async {
+                    if (formKey.currentState!.validate()) {
+                      for (CoupleSurveyResponse model
+                          in coupleSurveyResponses) {
+                        /// if radio button
+                        if (model.questionId == 21 ||
+                            model.questionId == 25 ||
+                            model.questionId == 26 ||
+                            model.questionId == 27) {
+                          if (model.response == "") {
+                            return;
+                          }
 
-                    // When all questions are answered change color to primary red
-                    color: Theme.of(context).hintColor),
+                          /// if checkbox
+                        } else if (model.questionId == 22 ||
+                            model.questionId == 23 ||
+                            model.questionId == 24 ||
+                            model.questionId == 28) {
+                          if (model.checkboxes!.isEmpty) {
+                            return;
+                          }
+
+                          /// if input
+                        } else if (model.questionId == 29) {
+                          if (model.response == "") {
+                            return;
+                          }
+                        }
+                      }
+                      print(inputController.text);
+
+                      // send request
+                    }
+                  },
+                ),
               ),
             ],
           ),
