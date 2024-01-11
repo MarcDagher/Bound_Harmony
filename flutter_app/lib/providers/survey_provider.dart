@@ -14,7 +14,6 @@ class SurveysProvider extends ChangeNotifier {
   bool successSavingResponse = false;
 
   getSurvey(int surveyId) async {
-    // To make sure on load of survey, we don't get a message saying success
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
     List<Question> localQuestionsList = [];
@@ -24,16 +23,11 @@ class SurveysProvider extends ChangeNotifier {
       final response = await dio.get("$baseUrl/get_survey",
           data: {"survey_id": surveyId},
           options: Options(headers: {"authorization": "Bearer $token"}));
-      // print("In getSurvey survey: ${response.data["survey"][0]["question"]}");
       for (int i = 0; i < response.data["survey"].length; i++) {
         List listOfOptions = [];
-        // print(
-        //     "Question $i: ${response.data["survey"][i]["question"]["question"]}");
 
         for (int j = 0; j < response.data["survey"][i]["options"].length; j++) {
           listOfOptions.add(response.data["survey"][i]["options"][j]["option"]);
-          // print(
-          //     "Option $j: ${response.data["survey"][i]["options"][j]["option"]}");
         }
         localQuestionsList.add(Question(
           id: response.data["survey"][i]["question"]["question_id"],
