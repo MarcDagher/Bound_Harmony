@@ -74,4 +74,15 @@ class SurveysProvider extends ChangeNotifier {
       print(error);
     }
   }
+
+  saveCouplesSurveyResponses(token, listOfResponses) async {
+    final baseUrl = Requests.baseUrl;
+    final dio = Dio();
+    List arrayOfResponsesObjects = [];
+
+    print("In provider: $listOfResponses");
+    for (CoupleSurveyResponse surveyResponse in listOfResponses) {
+      // if (surveyResponse.)
+    }
+  }
 }

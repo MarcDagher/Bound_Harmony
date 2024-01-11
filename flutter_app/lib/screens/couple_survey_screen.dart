@@ -5,6 +5,7 @@ import 'package:bound_harmony/reusable%20widgets/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CouplesSurveyScreen extends StatefulWidget {
   const CouplesSurveyScreen({super.key});
@@ -131,7 +132,6 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
                         if (value.questions[questionIndex]!.type == "text")
                           Padding(
                             padding: const EdgeInsets.only(bottom: 5),
-                            // child: Form(
                             child: TextInputField(
                                 handleChange: (text) {
                                   setState(() {
@@ -156,7 +156,6 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
                                   });
                                 },
                                 placeholder: "Enter your response here..."),
-                            // ),
                           )
                       ],
                     );
@@ -182,7 +181,11 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
                         return;
                       }
                     }
-
+                    final SharedPreferences preferences =
+                        await SharedPreferences.getInstance();
+                    final token = preferences.get('token');
+                    await value.saveCouplesSurveyResponses(
+                        token, coupleSurveyResponses);
                     // send request
                   },
                 ),
