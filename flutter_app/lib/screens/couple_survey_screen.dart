@@ -13,22 +13,19 @@ class CouplesSurveyScreen extends StatefulWidget {
 }
 
 class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
-  final List list = [1, 2, 3, 4, 5];
-
   // The list of Response Models I will send to the provider's method, where I will divide and send to database
-  final List<Response> coupleSurveyResponses = [
-    Response(questionId: 21, response: ""),
-    Response(questionId: 22, response: ""),
-    Response(questionId: 23, response: ""),
-    Response(questionId: 24, response: ""),
-    Response(questionId: 25, response: ""),
-    Response(questionId: 26, response: ""),
-    Response(questionId: 27, response: ""),
-    Response(questionId: 28, response: ""),
-    Response(questionId: 29, response: ""),
+  final List<CoupleSurveyResponse> coupleSurveyResponses = [
+    CoupleSurveyResponse(questionId: 21, response: ""),
+    CoupleSurveyResponse(questionId: 22, checkboxes: [], isChecked: []),
+    CoupleSurveyResponse(questionId: 23, checkboxes: [], isChecked: []),
+    CoupleSurveyResponse(questionId: 24, checkboxes: [], isChecked: []),
+    CoupleSurveyResponse(questionId: 25, response: ""),
+    CoupleSurveyResponse(questionId: 26, response: ""),
+    CoupleSurveyResponse(questionId: 27, response: ""),
+    CoupleSurveyResponse(questionId: 28, checkboxes: [], isChecked: []),
+    CoupleSurveyResponse(questionId: 29, response: ""),
   ];
 
-  bool? isChecked = false;
   @override
   Widget build(BuildContext context) {
     // This method will fetch all questions and options of the Couple's Survey
@@ -44,7 +41,6 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
       ),
       //////////// END OF APPBAR
       body: Consumer<SurveysProvider>(builder: (context, value, child) {
-        // print("Inside consumer: ${value.questions[0]!.type}");
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25),
           child: Column(
@@ -56,6 +52,17 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
                 child: ListView.builder(
                   itemCount: value.questions.length,
                   itemBuilder: (context, questionIndex) {
+                    //// For the checkboxes, loop over their options and add a false value
+                    /// Inside their isChecked array inside the model. This will be used to control onChecked behavior with the indicator i
+                    if (value.questions[questionIndex]!.type == "checkbox") {
+                      for (int i = 0;
+                          i < value.questions[questionIndex]!.options.length;
+                          i++) {
+                        coupleSurveyResponses[questionIndex]
+                            .isChecked!
+                            .add(false);
+                      }
+                    }
                     return Column(
                       children: [
                         // if (value.questions[questionIndex]!.type == "radio" ||
@@ -72,15 +79,23 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
                                 option: option,
                                 chosenOption:
                                     coupleSurveyResponses[questionIndex]
-                                        .response,
+                                        .response as String,
                                 questionIndex: questionIndex),
 
-                        /// If checbox
+                        /// If checkbox.
+                        /// I used i from the for loop, to give it as an indicator and have access to isChecked
                         ///
                         if (value.questions[questionIndex]!.type == "checkbox")
-                          for (String option
-                              in value.questions[questionIndex]!.options)
-                            buildCheckbox(option: option),
+                          for (int i = 0;
+                              i <
+                                  value
+                                      .questions[questionIndex]!.options.length;
+                              i++)
+                            buildCheckbox(
+                                option:
+                                    value.questions[questionIndex]!.options[i],
+                                questionIndex: questionIndex,
+                                indicator: i),
 
                         /// If Input
                         ///
@@ -103,7 +118,9 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
                 padding: const EdgeInsets.only(bottom: 10),
                 child: Button(
                     text: 'Submit',
-                    handlePressed: () async {},
+                    handlePressed: () async {
+                      print(coupleSurveyResponses[0].response);
+                    },
 
                     // When all questions are answered change color to primary red
                     color: Theme.of(context).hintColor),
@@ -160,7 +177,10 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
     );
   }
 
-  Widget buildCheckbox({required String option}) {
+  Widget buildCheckbox(
+      {required String option,
+      required int questionIndex,
+      required int indicator}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: CheckboxListTile(
@@ -172,9 +192,24 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
         shape: ContinuousRectangleBorder(
             side: BorderSide(color: Theme.of(context).hintColor),
             borderRadius: BorderRadius.circular(8)),
-        value: false,
+
+        /// value is the bool inside the question's isChecked array inside the model at index indicator
+        ///
+        value: coupleSurveyResponses[questionIndex].isChecked![indicator],
         onChanged: (value) {
-          ///
+          setState(() {
+            coupleSurveyResponses[questionIndex].isChecked![indicator] = value;
+          });
+          if (coupleSurveyResponses[questionIndex].isChecked![indicator] ==
+              true) {
+            coupleSurveyResponses[questionIndex].checkboxes!.add(option);
+          } else {
+            coupleSurveyResponses[questionIndex].checkboxes!.remove(option);
+          }
+          // print("in onChanged value: $value");
+          // print(
+          //     "in onChanged isChecked: ${coupleSurveyResponses[questionIndex].isChecked![indicator]}");
+          // print(coupleSurveyResponses[questionIndex].checkboxes);
         },
       ),
     );
