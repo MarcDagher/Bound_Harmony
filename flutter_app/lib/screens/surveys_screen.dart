@@ -1,5 +1,7 @@
+import 'package:bound_harmony/providers/survey_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class SurveysScreen extends StatelessWidget {
   const SurveysScreen({super.key});
@@ -40,6 +42,9 @@ class SurveysScreen extends StatelessWidget {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
+                            context
+                                .read<SurveysProvider>()
+                                .successSavingResponse = false;
                             context.goNamed('Take Survey');
                           },
                           child: Container(
@@ -77,6 +82,9 @@ class SurveysScreen extends StatelessWidget {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
+                            context
+                                .read<SurveysProvider>()
+                                .successSavingResponse = false;
                             context.goNamed('Take Survey');
                           },
                           child: Container(

@@ -81,67 +81,74 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
       ),
       //////////// END OF APPBAR
       body: Consumer<SurveysProvider>(builder: (context, value, child) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: Column(
-            children: [
-              Expanded(
-                ///////// BUILDING SURVEY'S QUESTIONS AND LOOPING OVER OPTIONS
-                ///
-                ///
-                child: ListView.builder(
-                  itemCount: value.questions.length,
-                  itemBuilder: (context, questionIndex) {
-                    return Column(
-                      children: [
-                        buildQuestion(value.questions[questionIndex]!.question,
-                            Theme.of(context).hintColor),
-                        for (String option
-                            in value.questions[questionIndex]!.options)
-                          buildRadioOption(
-                              option: option,
-                              chosenOption: option,
-                              listOfOptions:
-                                  value.questions[questionIndex]!.options,
-                              questionIndex: questionIndex),
-                      ],
-                    );
-                  },
-                ),
-              ),
-
-              /////// REUSABLE SUBMIT BUTTON
-              ///
-              ///
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Button(
-                    text: 'Submit',
-                    handlePressed: () async {
-                      for (Response response in personalSurveyResponses) {
-                        if (response.response == "") {
-                          setState(() {
-                            incompleteSurveyMessage = true;
-                          });
-                          return;
-                        }
-                      }
-                      setState(() {
-                        incompleteSurveyMessage = false;
-                      });
-                      final SharedPreferences preferences =
-                          await SharedPreferences.getInstance();
-                      final token = preferences.get('token');
-                      await value.saveSurveyResponse(
-                          token, personalSurveyResponses);
+        if (value.successSavingResponse == false) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            child: Column(
+              children: [
+                Expanded(
+                  ///////// BUILDING SURVEY'S QUESTIONS AND LOOPING OVER OPTIONS
+                  ///
+                  ///
+                  child: ListView.builder(
+                    itemCount: value.questions.length,
+                    itemBuilder: (context, questionIndex) {
+                      return Column(
+                        children: [
+                          buildQuestion(
+                              value.questions[questionIndex]!.question,
+                              Theme.of(context).hintColor),
+                          for (String option
+                              in value.questions[questionIndex]!.options)
+                            buildRadioOption(
+                                option: option,
+                                chosenOption: option,
+                                listOfOptions:
+                                    value.questions[questionIndex]!.options,
+                                questionIndex: questionIndex),
+                        ],
+                      );
                     },
+                  ),
+                ),
 
-                    // When all questions are answered change color to primary red
-                    color: buttonColor),
-              ),
-            ],
-          ),
-        );
+                /////// REUSABLE SUBMIT BUTTON
+                ///
+                ///
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Button(
+                      text: 'Submit',
+                      handlePressed: () async {
+                        for (Response response in personalSurveyResponses) {
+                          if (response.response == "") {
+                            setState(() {
+                              incompleteSurveyMessage = true;
+                            });
+                            return;
+                          }
+                        }
+                        setState(() {
+                          incompleteSurveyMessage = false;
+                        });
+                        final SharedPreferences preferences =
+                            await SharedPreferences.getInstance();
+                        final token = preferences.get('token');
+                        await value.saveSurveyResponse(
+                            token, personalSurveyResponses);
+                      },
+
+                      // When all questions are answered change color to primary red
+                      color: buttonColor),
+                ),
+              ],
+            ),
+          );
+        } else if (value.successSavingResponse == true) {
+          return const Center(child: Text("Your answers have been saved."));
+        } else {
+          return const Center(child: Text("Loading..."));
+        }
       }),
     );
   }

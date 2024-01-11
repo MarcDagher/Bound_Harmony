@@ -15,7 +15,6 @@ class SurveysProvider extends ChangeNotifier {
 
   getSurvey(int surveyId) async {
     // To make sure on load of survey, we don't get a message saying success
-    successSavingResponse = false;
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
     List<Question> localQuestionsList = [];
