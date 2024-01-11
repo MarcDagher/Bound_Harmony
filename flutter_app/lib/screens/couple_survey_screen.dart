@@ -1,6 +1,7 @@
 import 'package:bound_harmony/models/survey_model.dart';
 import 'package:bound_harmony/providers/survey_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/button.dart';
+import 'package:bound_harmony/reusable%20widgets/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,6 +28,7 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
     Response(questionId: 29, response: ""),
   ];
 
+  bool? isChecked = false;
   @override
   Widget build(BuildContext context) {
     // This method will fetch all questions and options of the Couple's Survey
@@ -52,16 +54,17 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
                 ///
                 ///
                 child: ListView.builder(
-                  itemCount: list.length,
+                  itemCount: value.questions.length,
                   itemBuilder: (context, questionIndex) {
                     return Column(
                       children: [
+                        // if (value.questions[questionIndex]!.type == "radio" ||
+                        //     value.questions[questionIndex]!.type == "checkbox")
+                        buildQuestion(
+                            question: value.questions[questionIndex]!.question),
+
                         /// If radio buttons
                         ///
-                        if (value.questions[questionIndex]!.type == "radio")
-                          buildQuestion(
-                              question:
-                                  value.questions[questionIndex]!.question),
                         if (value.questions[questionIndex]!.type == "radio")
                           for (String option
                               in value.questions[questionIndex]!.options)
@@ -71,6 +74,22 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
                                     coupleSurveyResponses[questionIndex]
                                         .response,
                                 questionIndex: questionIndex),
+
+                        /// If checbox
+                        ///
+                        if (value.questions[questionIndex]!.type == "checkbox")
+                          for (String option
+                              in value.questions[questionIndex]!.options)
+                            buildCheckbox(option: option),
+
+                        /// If Input
+                        ///
+                        if (value.questions[questionIndex]!.type == "text")
+                          const Padding(
+                            padding: EdgeInsets.only(bottom: 5),
+                            child: TextInputField(
+                                placeholder: "Enter your response here..."),
+                          )
                       ],
                     );
                   },
@@ -130,9 +149,6 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
             coupleSurveyResponses[questionIndex].response =
                 chosenResponse as String;
           });
-          // print(
-          //   "In setState, chosenOption: $chosenOption, chosenResponse: $chosenResponse, in list: ${coupleSurveyResponses[questionIndex].response}",
-          // );
         },
         shape: ContinuousRectangleBorder(
             side: BorderSide(color: Theme.of(context).hintColor),
@@ -140,6 +156,26 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
         contentPadding: const EdgeInsets.only(left: 6),
         activeColor: Theme.of(context).primaryColor,
         selectedTileColor: Colors.amber,
+      ),
+    );
+  }
+
+  Widget buildCheckbox({required String option}) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 5),
+      child: CheckboxListTile(
+        title: Text(option),
+        controlAffinity: ListTileControlAffinity.leading,
+        activeColor: Theme.of(context).primaryColor,
+        checkColor: Colors.white,
+        contentPadding: const EdgeInsets.only(left: 7, right: 0),
+        shape: ContinuousRectangleBorder(
+            side: BorderSide(color: Theme.of(context).hintColor),
+            borderRadius: BorderRadius.circular(8)),
+        value: false,
+        onChanged: (value) {
+          ///
+        },
       ),
     );
   }
