@@ -10,6 +10,6 @@ class CouplesSurveyScreen extends StatefulWidget {
 class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold();
   }
 }
