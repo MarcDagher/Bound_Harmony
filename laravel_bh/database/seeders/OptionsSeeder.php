@@ -16,65 +16,129 @@ class OptionsSeeder extends Seeder
 
         /// Options for the questions of the Personal Survey with syrvey_id = 1
         ///
-        Option::create([ "option" => "No", "question_id" => 1 ]);
-        Option::create([ "option" => "Yes", "question_id" => 1 ]);
 
-        Option::create([ "option" => "No", "question_id" => 2 ]);
-        Option::create([ "option" => "Yes", "question_id" => 2 ]);
+        $personalQ1tillQ20 = ["No", "Yes"];
 
-        Option::create([ "option" => "No", "question_id" => 3 ]);
-        Option::create([ "option" => "Yes", "question_id" => 3 ]);
-
-        Option::create([ "option" => "No", "question_id" => 4 ]);
-        Option::create([ "option" => "Yes", "question_id" => 4 ]);
-
-        Option::create([ "option" => "No", "question_id" => 5 ]);
-        Option::create([ "option" => "Yes", "question_id" => 5 ]);
-
-        Option::create([ "option" => "No", "question_id" => 6 ]);
-        Option::create([ "option" => "Yes", "question_id" => 6 ]);
-
-        Option::create([ "option" => "No", "question_id" => 7 ]);
-        Option::create([ "option" => "Yes", "question_id" => 7 ]);
-
-        Option::create([ "option" => "No", "question_id" => 8 ]);
-        Option::create([ "option" => "Yes", "question_id" => 8 ]);
-
-        Option::create([ "option" => "No", "question_id" => 9 ]);
-        Option::create([ "option" => "Yes", "question_id" => 9 ]);
-
-        Option::create([ "option" => "No", "question_id" => 10 ]);
-        Option::create([ "option" => "Yes", "question_id" => 10 ]);
-
-        Option::create([ "option" => "No", "question_id" => 11 ]);
-        Option::create([ "option" => "Yes", "question_id" => 11 ]);
-
-        Option::create([ "option" => "No", "question_id" => 12 ]);
-        Option::create([ "option" => "Yes", "question_id" => 12 ]);
-
-        Option::create([ "option" => "No", "question_id" => 13 ]);
-        Option::create([ "option" => "Yes", "question_id" => 13 ]);
-
-        Option::create([ "option" => "No", "question_id" => 14 ]);
-        Option::create([ "option" => "Yes", "question_id" => 14 ]);
-
-        Option::create([ "option" => "No", "question_id" => 15 ]);
-        Option::create([ "option" => "Yes", "question_id" => 15 ]);
-
-        Option::create([ "option" => "No", "question_id" => 16 ]);
-        Option::create([ "option" => "Yes", "question_id" => 16 ]);
-
-        Option::create([ "option" => "No", "question_id" => 17 ]);
-        Option::create([ "option" => "Yes", "question_id" => 17 ]);
-
-        Option::create([ "option" => "No", "question_id" => 18 ]);
-        Option::create([ "option" => "Yes", "question_id" => 18 ]);
-
-        Option::create([ "option" => "No", "question_id" => 19 ]);
-        Option::create([ "option" => "Yes", "question_id" => 19 ]);
-
-        Option::create([ "option" => "No", "question_id" => 20 ]);
-        Option::create([ "option" => "Yes", "question_id" => 20 ]);
+        foreach($personalQ1tillQ20 as $option){
+            Option::create([
+                "question_id" => 1,
+                "option" => $option,
+            ]);
+        }
+        foreach($personalQ1tillQ20 as $option){
+            Option::create([
+                "question_id" => 2,
+                "option" => $option,
+            ]);
+        }
+        foreach($personalQ1tillQ20 as $option){
+            Option::create([
+                "question_id" => 3,
+                "option" => $option,
+            ]);
+        }
+        foreach($personalQ1tillQ20 as $option){
+            Option::create([
+                "question_id" => 4,
+                "option" => $option,
+            ]);
+        }
+        foreach($personalQ1tillQ20 as $option){
+            Option::create([
+                "question_id" => 5,
+                "option" => $option,
+            ]);
+        }
+        foreach($personalQ1tillQ20 as $option){
+            Option::create([
+                "question_id" => 6,
+                "option" => $option,
+            ]);
+        }
+        foreach($personalQ1tillQ20 as $option){
+            Option::create([
+                "question_id" => 7,
+                "option" => $option,
+            ]);
+        }
+        foreach($personalQ1tillQ20 as $option){
+            Option::create([
+                "question_id" => 8,
+                "option" => $option,
+            ]);
+        }
+        foreach($personalQ1tillQ20 as $option){
+            Option::create([
+                "question_id" => 9,
+                "option" => $option,
+            ]);
+        }
+        foreach($personalQ1tillQ20 as $option){
+            Option::create([
+                "question_id" => 10,
+                "option" => $option,
+            ]);
+        }
+        foreach($personalQ1tillQ20 as $option){
+            Option::create([
+                "question_id" => 11,
+                "option" => $option,
+            ]);
+        }
+        foreach($personalQ1tillQ20 as $option){
+            Option::create([
+                "question_id" => 12,
+                "option" => $option,
+            ]);
+        }
+        foreach($personalQ1tillQ20 as $option){
+            Option::create([
+                "question_id" => 13,
+                "option" => $option,
+            ]);
+        }
+        foreach($personalQ1tillQ20 as $option){
+            Option::create([
+                "question_id" => 14,
+                "option" => $option,
+            ]);
+        }
+        foreach($personalQ1tillQ20 as $option){
+            Option::create([
+                "question_id" => 15,
+                "option" => $option,
+            ]);
+        }
+        foreach($personalQ1tillQ20 as $option){
+            Option::create([
+                "question_id" => 16,
+                "option" => $option,
+            ]);
+        }
+        foreach($personalQ1tillQ20 as $option){
+            Option::create([
+                "question_id" => 17,
+                "option" => $option,
+            ]);
+        }
+        foreach($personalQ1tillQ20 as $option){
+            Option::create([
+                "question_id" => 18,
+                "option" => $option,
+            ]);
+        }
+        foreach($personalQ1tillQ20 as $option){
+            Option::create([
+                "question_id" => 19,
+                "option" => $option,
+            ]);
+        }
+        foreach($personalQ1tillQ20 as $option){
+            Option::create([
+                "question_id" => 20,
+                "option" => $option,
+            ]);
+        }
         ///////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////
 
