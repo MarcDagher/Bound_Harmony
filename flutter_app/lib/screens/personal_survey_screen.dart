@@ -100,9 +100,7 @@ class _PersonalSurveyScreenState extends State<PersonalSurveyScreen> {
                               in value.questions[questionIndex]!.options)
                             buildRadioOption(
                                 option: option,
-                                chosenOption: option,
-                                listOfOptions:
-                                    value.questions[questionIndex]!.options,
+                                // chosenOption: option,
                                 questionIndex: questionIndex),
                         ],
                       );
@@ -169,15 +167,14 @@ class _PersonalSurveyScreenState extends State<PersonalSurveyScreen> {
 
   Widget buildRadioOption({
     required String option,
-    required String chosenOption,
-    required listOfOptions,
+    // required String chosenOption,
     required int questionIndex,
   }) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: RadioListTile(
         title: Text(option, overflow: TextOverflow.clip),
-        value: chosenOption,
+        value: option,
         groupValue: personalSurveyResponses[questionIndex].response,
         onChanged: (chosenResponse) {
           setState(() {
