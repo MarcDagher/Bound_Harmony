@@ -36,9 +36,11 @@ class SurveysProvider extends ChangeNotifier {
           //     "Option $j: ${response.data["survey"][i]["options"][j]["option"]}");
         }
         localQuestionsList.add(Question(
-            id: response.data["survey"][i]["question"]["question_id"],
-            options: listOfOptions,
-            question: response.data["survey"][i]["question"]["question"]));
+          id: response.data["survey"][i]["question"]["question_id"],
+          options: listOfOptions,
+          question: response.data["survey"][i]["question"]["question"],
+          type: response.data["survey"][i]["question"]["question_type"],
+        ));
       }
       questions = localQuestionsList;
       notifyListeners();

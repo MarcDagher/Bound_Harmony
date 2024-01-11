@@ -22,7 +22,7 @@ class SurveysController extends Controller
         if ($questions){
             foreach($questions as $question){
                 $response_array[] = [
-                    "question" => [ "question" => $question -> question, "question_id" => $question -> id],
+                    "question" => [ "question" => $question -> question, "question_id" => $question -> id, "question_type" => $question -> question_type],
                     "options" => Option::where('question_id', $question->id) ->select('id', 'question_id', 'option') -> get()
                 ];
             }

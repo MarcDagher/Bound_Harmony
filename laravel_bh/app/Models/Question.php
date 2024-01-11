@@ -13,7 +13,8 @@ class Question extends Model
 
     protected $fillable = [
         'question',
-        'survey_id'
+        'survey_id',
+        'question_type'
     ];
 
     // one to one relation with Surveys table - one question belongs to one specific survey
