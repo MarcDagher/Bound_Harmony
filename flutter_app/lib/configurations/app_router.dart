@@ -2,6 +2,7 @@ import 'package:bound_harmony/main_view.dart';
 import 'package:bound_harmony/screens/advice_screen.dart';
 import 'package:bound_harmony/screens/bonding_activities_screen.dart';
 import 'package:bound_harmony/screens/connection_setup_screen.dart';
+import 'package:bound_harmony/screens/couple_survey_screen.dart';
 import 'package:bound_harmony/screens/date_builder_screen.dart';
 import 'package:bound_harmony/screens/gift_ideas_screen.dart';
 import 'package:bound_harmony/screens/incoming_requests_screen.dart';
@@ -50,7 +51,8 @@ class AppNavigation {
       navigatorKey: GlobalKey<NavigatorState>(),
 
       /// Go Router Configuration, initial route that the application will navigate to when it starts
-      initialLocation: '/login',
+      // initialLocation: '/login',
+      initialLocation: '/surveys',
       // turn true and check debug console for routes
       debugLogDiagnostics: false,
 
@@ -91,6 +93,15 @@ class AppNavigation {
                       name: 'Personal Survey',
                       builder: (context, state) {
                         return PersonalSurveyScreen(
+                          key: state.pageKey,
+                        );
+                      },
+                    ),
+                    GoRoute(
+                      path: 'couplesSurvey',
+                      name: 'Couples Survey',
+                      builder: (context, state) {
+                        return CouplesSurveyScreen(
                           key: state.pageKey,
                         );
                       },
