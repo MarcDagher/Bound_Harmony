@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bound_harmony/models/survey_model.dart';
 import 'package:bound_harmony/providers/survey_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/button.dart';
@@ -198,11 +196,3 @@ class _PersonalSurveyScreenState extends State<PersonalSurveyScreen> {
     );
   }
 }
-
-
-// if (personalSurveyComplete == true &&
-//                   incompleteSurveyMessage == false)
-//                 const Padding(
-//                   padding: EdgeInsets.only(bottom: 10, top: 10),
-//                   child: Text('Your responses have been saved'),
-//                 ),

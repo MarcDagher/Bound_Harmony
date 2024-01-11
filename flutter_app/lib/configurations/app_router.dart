@@ -12,7 +12,7 @@ import 'package:bound_harmony/screens/profile_screen.dart';
 import 'package:bound_harmony/screens/signup_screen.dart';
 import 'package:bound_harmony/screens/suggestions_screen.dart';
 import 'package:bound_harmony/screens/surveys_screen.dart';
-import 'package:bound_harmony/screens/take_survey_screen.dart';
+import 'package:bound_harmony/screens/personal_survey_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
