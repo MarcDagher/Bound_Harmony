@@ -7,9 +7,15 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SurveysProvider extends ChangeNotifier {
+  // in getSurvey, to store all questions with their options
   List<Question?> questions = [];
 
+  // in saveSurveyResponse, to toggle UI for a successfuly save request
+  bool successSavingResponse = false;
+
   getSurvey(int surveyId) async {
+    // To make sure on load of survey, we don't get a message saying success
+    successSavingResponse = false;
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
     List<Question> localQuestionsList = [];
@@ -19,9 +25,7 @@ class SurveysProvider extends ChangeNotifier {
       final response = await dio.get("$baseUrl/get_survey",
           data: {"survey_id": surveyId},
           options: Options(headers: {"authorization": "Bearer $token"}));
-      // print("In getSurvey: ${response.data}");
       // print("In getSurvey survey: ${response.data["survey"][0]["question"]}");
-      // print("In getSurvey survey");
       for (int i = 0; i < response.data["survey"].length; i++) {
         List listOfOptions = [];
         // print(
@@ -39,7 +43,6 @@ class SurveysProvider extends ChangeNotifier {
       }
       questions = localQuestionsList;
       notifyListeners();
-      // print("In provider. Questions: $questions");
     } on DioException catch (error) {
       print("In getSurvey error: $error");
     }
@@ -57,7 +60,6 @@ class SurveysProvider extends ChangeNotifier {
       });
     }
 
-    // print("In provider: $arrayOfResponsesObjects");
     // print("From provider question ID: ${listOfResponses[0].questionId}");
     // print("From provider response: ${listOfResponses[0].response}");
 
@@ -68,8 +70,12 @@ class SurveysProvider extends ChangeNotifier {
             "authorization": "Bearer $token",
             "content-type": "application/json"
           }));
-      print("In dio.post response: ${response.data}");
+
+      if (response.data["status"] == "success") {
+        successSavingResponse = true;
+      }
     } on DioException catch (error) {
+      successSavingResponse = false;
       print(error);
     }
   }

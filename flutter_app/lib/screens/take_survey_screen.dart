@@ -123,34 +123,22 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
                           setState(() {
                             incompleteSurveyMessage = true;
                           });
-                          print("From screen survey is  Incomplete");
                           return;
                         }
                       }
-                      print("From screen survey is complete");
                       setState(() {
                         incompleteSurveyMessage = false;
                       });
-                      print("From screen saveSurveyResponse called");
                       final SharedPreferences preferences =
                           await SharedPreferences.getInstance();
                       final token = preferences.get('token');
                       await value.saveSurveyResponse(
                           token, personalSurveyResponses);
-
-                      // print(
-                      //     "From button: ${personalSurveyResponses[1].response}");
                     },
+
                     // When all questions are answered change color to primary red
                     color: buttonColor),
               ),
-
-              // if (personalSurveyComplete == false &&
-              //     incompleteSurveyMessage == true)
-              //   const Padding(
-              //     padding: EdgeInsets.only(bottom: 5, top: 0),
-              //     child: Text('Please complete all questions'),
-              //   )
             ],
           ),
         );
