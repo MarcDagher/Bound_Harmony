@@ -28,6 +28,34 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
   ];
 
   bool coupleSurveyComplete = false;
+  validateInputs(model) {
+    /// if radio button
+    if (model.questionId == 21 ||
+        model.questionId == 25 ||
+        model.questionId == 26 ||
+        model.questionId == 27) {
+      if (model.response!.isEmpty) {
+        return;
+      }
+      // print("radio: ${model.response}");
+
+      /// if checkbox
+    } else if (model.questionId == 22 ||
+        model.questionId == 23 ||
+        model.questionId == 24 ||
+        model.questionId == 28) {
+      if (model.checkboxes!.isEmpty) {
+        return;
+      }
+
+      /// if input
+    } else if (model.questionId == 29) {
+      if (model.response == "") {
+        return;
+      }
+    }
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,8 +96,6 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
                     }
                     return Column(
                       children: [
-                        // if (value.questions[questionIndex]!.type == "radio" ||
-                        //     value.questions[questionIndex]!.type == "checkbox")
                         buildQuestion(
                             question: value.questions[questionIndex]!.question),
 
@@ -105,53 +131,32 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
                         if (value.questions[questionIndex]!.type == "text")
                           Padding(
                             padding: const EdgeInsets.only(bottom: 5),
-                            child: Form(
-                              child: TextInputField(
-                                  handleChange: (text) {
+                            // child: Form(
+                            child: TextInputField(
+                                handleChange: (text) {
+                                  setState(() {
+                                    coupleSurveyResponses[8].response = text;
+                                  });
+                                  if (text == "") {
                                     setState(() {
-                                      coupleSurveyResponses[8].response = text;
+                                      coupleSurveyComplete = false;
                                     });
-                                    if (text == "") {
-                                      setState(() {
-                                        coupleSurveyComplete = false;
-                                      });
-                                      return;
-                                    } else {
-                                      for (CoupleSurveyResponse model
-                                          in coupleSurveyResponses) {
-                                        /// if radio button
-                                        if (model.questionId == 21 ||
-                                            model.questionId == 25 ||
-                                            model.questionId == 26 ||
-                                            model.questionId == 27) {
-                                          if (model.response!.isEmpty) {
-                                            return;
-                                          }
-                                          // print("radio: ${model.response}");
-
-                                          /// if checkbox
-                                        } else if (model.questionId == 22 ||
-                                            model.questionId == 23 ||
-                                            model.questionId == 24 ||
-                                            model.questionId == 28) {
-                                          if (model.checkboxes!.isEmpty) {
-                                            return;
-                                          }
-
-                                          /// if input
-                                        } else if (model.questionId == 29) {
-                                          if (model.response == "") {
-                                            return;
-                                          }
-                                        }
+                                    return;
+                                  } else {
+                                    for (CoupleSurveyResponse model
+                                        in coupleSurveyResponses) {
+                                      final success = validateInputs(model);
+                                      if (success != true) {
+                                        return;
                                       }
                                     }
-                                    setState(() {
-                                      coupleSurveyComplete = true;
-                                    });
-                                  },
-                                  placeholder: "Enter your response here..."),
-                            ),
+                                  }
+                                  setState(() {
+                                    coupleSurveyComplete = true;
+                                  });
+                                },
+                                placeholder: "Enter your response here..."),
+                            // ),
                           )
                       ],
                     );
@@ -172,35 +177,11 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
                       : Theme.of(context).primaryColor,
                   handlePressed: () async {
                     for (CoupleSurveyResponse model in coupleSurveyResponses) {
-                      /// if radio button
-                      if (model.questionId == 21 ||
-                          model.questionId == 25 ||
-                          model.questionId == 26 ||
-                          model.questionId == 27) {
-                        if (model.response!.isEmpty) {
-                          print("here");
-                          return;
-                        }
-                        // print("radio: ${model.response}");
-
-                        /// if checkbox
-                      } else if (model.questionId == 22 ||
-                          model.questionId == 23 ||
-                          model.questionId == 24 ||
-                          model.questionId == 28) {
-                        if (model.checkboxes!.isEmpty) {
-                          return;
-                        }
-
-                        /// if input
-                      } else if (model.questionId == 29) {
-                        if (model.response == "") {
-                          return;
-                        }
+                      final success = validateInputs(model);
+                      if (success != true) {
+                        return;
                       }
                     }
-                    print("done");
-                    // print(inputController.text);
 
                     // send request
                   },
@@ -250,29 +231,9 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
 
           ///// validate completion of survey to change button's color
           for (CoupleSurveyResponse model in coupleSurveyResponses) {
-            /// if radio button
-            if (model.questionId == 21 ||
-                model.questionId == 25 ||
-                model.questionId == 26 ||
-                model.questionId == 27) {
-              if (model.response == "") {
-                return;
-              }
-
-              /// if checkbox
-            } else if (model.questionId == 22 ||
-                model.questionId == 23 ||
-                model.questionId == 24 ||
-                model.questionId == 28) {
-              if (model.checkboxes!.isEmpty) {
-                return;
-              }
-
-              /// if input
-            } else if (model.questionId == 29) {
-              if (model.response == "") {
-                return;
-              }
+            final success = validateInputs(model);
+            if (success != true) {
+              return;
             }
           }
           setState(() {
@@ -325,29 +286,12 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
 
           ///// validate completion of survey to change button's color
           for (CoupleSurveyResponse model in coupleSurveyResponses) {
-            /// if radio button
-            if (model.questionId == 21 ||
-                model.questionId == 25 ||
-                model.questionId == 26 ||
-                model.questionId == 27) {
-              if (model.response == "") {
-                return;
-              }
-
-              /// if checkbox
-            } else if (model.questionId == 22 ||
-                model.questionId == 23 ||
-                model.questionId == 24 ||
-                model.questionId == 28) {
-              if (model.checkboxes!.isEmpty) {
-                return;
-              }
-
-              /// if input
-            } else if (model.questionId == 29) {
-              if (model.response == "") {
-                return;
-              }
+            final success = validateInputs(model);
+            if (success != true) {
+              setState(() {
+                coupleSurveyComplete = false;
+              });
+              return;
             }
           }
           setState(() {
