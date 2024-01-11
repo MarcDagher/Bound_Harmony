@@ -47,8 +47,8 @@ class SurveysController extends Controller
         // array of objects {user_id, question_id, response}
         $request -> validate([ 
             "*.question_id" => "required|integer",
-             "*.response" => "required|string"
-             ]);
+            "*.response" => "required|string"
+            ]);
         
         // extracts the json payload from the incoming http request
         //  $request->json() will return an instance of Illuminate\Http\JsonResponse
@@ -81,6 +81,6 @@ class SurveysController extends Controller
         return response() -> json([
             "status" => "success",
             "message" => "Your responses have been saved"
-        ]);
+        ]); 
     }
 }

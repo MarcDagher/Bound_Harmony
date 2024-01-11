@@ -50,7 +50,7 @@ class AppNavigation {
       navigatorKey: GlobalKey<NavigatorState>(),
 
       /// Go Router Configuration, initial route that the application will navigate to when it starts
-      initialLocation: '/onBoarding',
+      initialLocation: '/login',
       // turn true and check debug console for routes
       debugLogDiagnostics: false,
 

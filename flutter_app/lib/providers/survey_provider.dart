@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bound_harmony/configurations/request.configuration.dart';
 import 'package:bound_harmony/models/survey_model.dart';
 import 'package:dio/dio.dart';
@@ -50,22 +52,25 @@ class SurveysProvider extends ChangeNotifier {
 
     for (int i = 0; i < listOfResponses.length; i++) {
       arrayOfResponsesObjects.add({
-        "question_id": listOfResponses[0].questionId,
-        "response": listOfResponses[0].response
+        "question_id": listOfResponses[i].questionId,
+        "response": listOfResponses[i].response
       });
     }
 
-    // try{
+    // print("In provider: $arrayOfResponsesObjects");
+    // print("From provider question ID: ${listOfResponses[0].questionId}");
+    // print("From provider response: ${listOfResponses[0].response}");
 
-    // } on DioException catch (error) {}
-
-    print("From provider question ID: ${listOfResponses[0].questionId}");
-    print("From provider response: ${listOfResponses[0].response}");
-
-    // try {
-    //   // final response = await dio.post("$baseUrl/save_responses",
-    //   //     data: {},
-    //   //     options: Options(headers: {"authorization": "Bearer $token"}));
-    // } on DioException catch (error) {}
+    try {
+      final response = await dio.post("$baseUrl/save_responses",
+          data: jsonEncode(arrayOfResponsesObjects),
+          options: Options(headers: {
+            "authorization": "Bearer $token",
+            "content-type": "application/json"
+          }));
+      print("In dio.post response: ${response.data}");
+    } on DioException catch (error) {
+      print(error);
+    }
   }
 }

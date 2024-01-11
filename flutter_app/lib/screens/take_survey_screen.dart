@@ -60,13 +60,6 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
     });
   }
 
-  /// Get token
-  getToken() async {
-    final SharedPreferences preferences = await SharedPreferences.getInstance();
-    final token = preferences.get('token');
-    return token;
-  }
-
   @override
   Widget build(BuildContext context) {
     /// Fetch Survey questions according to given ID
@@ -138,8 +131,10 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
                       setState(() {
                         incompleteSurveyMessage = false;
                       });
-                      print("From screen request method called");
-                      final token = getToken();
+                      print("From screen saveSurveyResponse called");
+                      final SharedPreferences preferences =
+                          await SharedPreferences.getInstance();
+                      final token = preferences.get('token');
                       await value.saveSurveyResponse(
                           token, personalSurveyResponses);
 

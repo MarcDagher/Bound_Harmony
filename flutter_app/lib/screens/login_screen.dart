@@ -121,12 +121,8 @@ class _LogInScreenState extends State<LogInScreen> {
                             formData['email'], formData['password']);
 
                         if (context.read<AuthProvider>().successLogin == true) {
-                          // await context
-                          //     .read<AuthProvider>()
-                          //     .getAllPreferences();
-                          // print(
-                          //     "from button: ${context.read<AuthProvider>().prefEmail}");
-                          context.goNamed('Connection Setup');
+                          // context.goNamed('Connection Setup');
+                          context.goNamed('Profile');
                         }
                       }
                     },
