@@ -87,10 +87,10 @@ class AppNavigation {
                     /// Surveys sub-route Take Survey
                     ///
                     GoRoute(
-                      path: 'takeSurvey',
-                      name: 'Take Survey',
+                      path: 'personalSurvey',
+                      name: 'Personal Survey',
                       builder: (context, state) {
-                        return TakeSurveyScreen(
+                        return PersonalSurveyScreen(
                           key: state.pageKey,
                         );
                       },

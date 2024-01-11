@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class TakeSurveyScreen extends StatefulWidget {
-  const TakeSurveyScreen({super.key});
+class PersonalSurveyScreen extends StatefulWidget {
+  const PersonalSurveyScreen({super.key});
 
   @override
-  State<TakeSurveyScreen> createState() => _TakeSurveyScreenState();
+  State<PersonalSurveyScreen> createState() => _PersonalSurveyScreenState();
 }
 
-class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
+class _PersonalSurveyScreenState extends State<PersonalSurveyScreen> {
   /// Prepare List of Response Models for fetching
   List<Response> personalSurveyResponses = [
     Response(questionId: 1, response: ""),
@@ -77,7 +77,7 @@ class _TakeSurveyScreenState extends State<TakeSurveyScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Individual Survey"),
+        title: const Text("Personal Survey"),
       ),
       //////////// END OF APPBAR
       body: Consumer<SurveysProvider>(builder: (context, value, child) {

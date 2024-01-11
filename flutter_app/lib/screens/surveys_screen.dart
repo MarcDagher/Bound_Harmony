@@ -45,7 +45,7 @@ class SurveysScreen extends StatelessWidget {
                             context
                                 .read<SurveysProvider>()
                                 .successSavingResponse = false;
-                            context.goNamed('Take Survey');
+                            context.goNamed('Personal Survey');
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -85,7 +85,7 @@ class SurveysScreen extends StatelessWidget {
                             context
                                 .read<SurveysProvider>()
                                 .successSavingResponse = false;
-                            context.goNamed('Take Survey');
+                            // context.goNamed('Take Survey');
                           },
                           child: Container(
                             decoration: BoxDecoration(
