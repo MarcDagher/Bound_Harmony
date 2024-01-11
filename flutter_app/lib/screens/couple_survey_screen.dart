@@ -3,6 +3,7 @@ import 'package:bound_harmony/providers/survey_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/button.dart';
 import 'package:bound_harmony/reusable%20widgets/text_input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class CouplesSurveyScreen extends StatefulWidget {
@@ -29,6 +30,7 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
   @override
   Widget build(BuildContext context) {
     // This method will fetch all questions and options of the Couple's Survey
+    final TextEditingController inputController = TextEditingController();
     getSurveyRequest(id) async {
       await context.read<SurveysProvider>().getSurvey(id);
     }
@@ -100,9 +102,10 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
                         /// If Input
                         ///
                         if (value.questions[questionIndex]!.type == "text")
-                          const Padding(
-                            padding: EdgeInsets.only(bottom: 5),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 5),
                             child: TextInputField(
+                                handleChangeController: inputController,
                                 placeholder: "Enter your response here..."),
                           )
                       ],
