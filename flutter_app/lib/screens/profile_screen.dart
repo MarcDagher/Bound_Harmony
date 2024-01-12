@@ -15,40 +15,42 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    final usernameController = TextEditingController();
-    bool showUsernameButton = false;
-    bool showLocationButton = false;
-    // final isKeyboard = MediaQuery.of(context).viewInsets.bottom !=
-    //     0; // check if keyboard is in the UI
+    // final usernameController = TextEditingController();
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           padding: const EdgeInsets.symmetric(horizontal: 25),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ///////////////////// Column: Profile Image + Edit button ///////////////////////
               Padding(
                 padding: const EdgeInsets.only(top: 20, bottom: 40),
-                child: Column(
+                child: Stack(
                   children: [
-                    // if (!isKeyboard)
-                    SizedBox(
-                        width: 180,
-                        height: 180,
-                        child: Icon(Icons.account_circle,
-                            size: 180, color: Theme.of(context).hintColor)),
-                    // if (!isKeyboard)
-                    Text(
-                      'Edit Profile Picture',
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color: Theme.of(context).primaryColor,
-                          decoration: TextDecoration.underline,
-                          decorationColor: Theme.of(context).primaryColor),
-                    )
+                    const CircleAvatar(
+                      radius: 80.0,
+                      // child: Icon(Icons.account_circle),
+                      backgroundImage: AssetImage("assets/logo.png"),
+                    ),
+                    Positioned(
+                        bottom: 20.0,
+                        right: 20.0,
+                        child: InkWell(
+                          onTap: () {
+                            showModalBottomSheet(
+                                context: context,
+                                builder: (context) =>
+                                    buildBottomSheet(context));
+                          },
+                          child: const Icon(
+                            Icons.camera_alt,
+                            color: Colors.teal,
+                            size: 30,
+                          ),
+                        ))
                   ],
                 ),
               ),
@@ -56,23 +58,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ///////////////////// Column: TextInputField - DisplayBox - TextInputField - Location - NavButton x2  ///////////////////////
               Column(
                 children: [
-                  if (showUsernameButton == true) Text('Save Changes'),
-
                   Consumer<AuthProvider>(
                     builder: (context, value, child) => Padding(
-                      padding: const EdgeInsets.only(bottom: 5),
-                      child: TextInputField(
-                          handleOnTap: () {
-                            print(showUsernameButton);
-                            setState(() {
-                              showUsernameButton = !showUsernameButton;
-                            });
-                            print(showUsernameButton);
-                          },
-                          handleChangeController: usernameController,
-                          placeholder:
-                              value.preferences?.getString('username')),
-                    ),
+                        padding: const EdgeInsets.only(bottom: 5),
+                        child: DisplayBox(
+                            text:
+                                "Username: ${value.preferences?.getString('username')}")),
                   ),
                   // this will be a text. email is displayed from token
                   Consumer<AuthProvider>(builder: (context, value, child) {
@@ -83,21 +74,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Expanded(
                             child: DisplayBox(
                                 text:
-                                    value.preferences?.get('email') as String),
+                                    "Email: ${value.preferences?.get('email')}"),
                           ),
                         ],
                       ),
                     );
                   }),
 
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 5),
-                    child: TextInputField(
-                        handleChange: (string) {
-                          print(string);
-                        },
-                        placeholder: 'Location'),
-                  ), // Figure out how to do that... depends on google api
+                  Consumer<AuthProvider>(builder: (context, value, child) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 5),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: DisplayBox(
+                                text:
+                                    "Birthdate: ${value.preferences?.get('birthdate')}"),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
+
+                  const Padding(
+                      padding: EdgeInsets.only(bottom: 5),
+                      child: DisplayBox(
+                          text:
+                              'Location: Still need to figure this out')), // Figure out how to do that... depends on google api
 
                   // Navigation Buttons
                   MaterialButton(
@@ -161,3 +164,48 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 }
+
+Widget buildBottomSheet(context) {
+  return Container(
+    height: 100,
+    width: MediaQuery.of(context).size.width,
+    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+    child: Column(children: [
+      Text(
+        "Choose Profile Photo",
+        style: TextStyle(fontSize: 20),
+      ),
+      SizedBox(height: 20),
+      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        TextButton.icon(
+            onPressed: () {}, icon: Icon(Icons.camera), label: Text("Camera")),
+        TextButton.icon(
+            onPressed: () {}, icon: Icon(Icons.image), label: Text("Gallery")),
+      ])
+    ]),
+  );
+}
+
+
+
+
+
+
+// SizedBox(
+                    //     width: 180,
+                    //     height: 180,
+                    //     child: Icon(Icons.account_circle,
+                    //         size: 180, color: Theme.of(context).hintColor)),
+
+
+
+
+                    // Text(
+                    //   'Edit Profile Picture',
+                    //   style: TextStyle(
+                    //       fontSize: 15,
+                    //       fontWeight: FontWeight.w500,
+                    //       color: Theme.of(context).primaryColor,
+                    //       decoration: TextDecoration.underline,
+                    //       decorationColor: Theme.of(context).primaryColor),
+                    // )

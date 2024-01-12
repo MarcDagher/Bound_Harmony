@@ -92,6 +92,7 @@ class AuthProvider extends ChangeNotifier {
         preferences?.setString('id', token['sub']);
         preferences?.setString('username', token['username']);
         preferences?.setString('email', token['email']);
+        preferences?.setString('birthdate', token['birthdate']);
         preferences?.setString('connection_status', token['connection status']);
         preferences?.setString(
             'couple_survey_status', token['couple survey status']);
