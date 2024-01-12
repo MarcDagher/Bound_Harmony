@@ -2,12 +2,14 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:bound_harmony/providers/auth_provider.dart';
+import 'package:bound_harmony/providers/user_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/display_box.dart';
 import 'package:bound_harmony/reusable%20widgets/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -210,14 +212,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const SizedBox(height: 20),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 TextButton.icon(
-                    onPressed: () {
-                      cameraImagePicker();
+                    onPressed: () async {
+                      await cameraImagePicker();
                     },
                     icon: const Icon(Icons.camera),
                     label: const Text("Camera")),
                 TextButton.icon(
                     onPressed: () async {
                       await galleryImagePicker();
+
+                      /// Attempt to send File to DB
+                      /// //////////////////////////
+                      if (_image != null) {
+                        final SharedPreferences preferences =
+                            await SharedPreferences.getInstance();
+                        final token = preferences.get('token');
+                        await context
+                            .read<UserProvider>()
+                            .saveImage(token, _image);
+                      }
                     },
                     icon: const Icon(Icons.image),
                     label: const Text("Gallery")),
