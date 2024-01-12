@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\Auth;
 class SurveysController extends Controller
 {
     
+    // query questions and options of the survey
     public function get_survey (Request $request) {
-        // query questions and options of the survey
 
         $request -> validate(["survey_id" => "required|integer|in:1,2"]);
 
@@ -40,11 +40,11 @@ class SurveysController extends Controller
         }
     }
 
+    // save user's responses 
     public function save_responses (Request $request) {
-        // save user's responses 
 
         // expecting an array of json objects - *. is a wildcard that validates the values of each key
-        // array of objects {user_id, question_id, response}
+        // array of objects {"question_id" : id , "response" : response} 
         $request -> validate([ 
             "*.question_id" => "required|integer",
             "*.response" => "required|string"
@@ -60,20 +60,29 @@ class SurveysController extends Controller
         foreach($jsonData as $data){
             $question_id = $data['question_id'];
             $response = $data['response'];
-    
-            $response_validation = Option::where(["question_id" => $question_id, "option" => $response]) -> get();
-            if (isset($response_validation[0])){
-                SurveyResponse::create([
-                    "user_id" => $user->id,
-                    "question_id" => $question_id,
-                    "option_id" => $response_validation[0] -> id
-                ]);
-
+            
+            /// If a question has a type text, it doesn't have options. Add it to the text column in survey_responses
+            if (Question::find($data['question_id']) -> question_type == "text"){
+                echo "This is a text";
             } else {
-                return response() -> json([
-                    "status" => "failed",
-                    "message" => "Invalid response"
-                ]);
+
+                $response_validation = Option::where(["question_id" => $question_id, "option" => $response]) -> get();
+                echo "$response_validation \n";
+                if (isset($response_validation[0])){
+                    // echo "$response \n";
+                    // {user_id, question_id, response}
+                    // SurveyResponse::create([
+                    //     "user_id" => $user->id,
+                    //     "question_id" => $question_id,
+                    //     "option_id" => $response_validation[0] -> id
+                    // ]);
+    
+                } else {
+                    return response() -> json([
+                        "status" => "failed",
+                        "message" => "Invalid response"
+                    ]);
+                }
             }
 
         }

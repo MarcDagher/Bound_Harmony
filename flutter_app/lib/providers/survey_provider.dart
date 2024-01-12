@@ -83,17 +83,17 @@ class SurveysProvider extends ChangeNotifier {
     for (CoupleSurveyResponse surveyResponse in listOfResponses) {
       if (surveyResponse.questionType == "radio") {
         arrayOfResponsesObjects.add({
-          "questionId": surveyResponse.questionId,
+          "question_id": surveyResponse.questionId,
           "response": surveyResponse.response
         });
       } else if (surveyResponse.questionType == "checkbox") {
         for (String option in surveyResponse.checkboxes!) {
           arrayOfResponsesObjects.add(
-              {"questionId": surveyResponse.questionId, "response": option});
+              {"question_id": surveyResponse.questionId, "response": option});
         }
       } else if (surveyResponse.questionType == "text") {
         arrayOfResponsesObjects.add({
-          "questionId": surveyResponse.questionId,
+          "question_id": surveyResponse.questionId,
           "response": surveyResponse.response
         });
       }
