@@ -36,7 +36,10 @@ class AuthProvider extends ChangeNotifier {
 
   // Send Sign Up request
   Future signUpRequest(
-      String formUsername, String formEmail, String formPassword) async {
+      {required String formUsername,
+      required String formEmail,
+      required String formPassword,
+      required String formBirthdate}) async {
     final baseUrl = Requests.baseUrl;
     successLogin = false;
     wrongCredentials = false;
@@ -45,13 +48,14 @@ class AuthProvider extends ChangeNotifier {
         "username": formUsername,
         "email": formEmail,
         "password": formPassword,
-        "birthdate": "15-01-2003",
+        "birthdate": formBirthdate,
       });
 
       if (response.data['status'] == "success") {
         successSignUp = true;
         emailTaken = false;
       }
+      print("In provider ${response.data}");
     } on DioException catch (e) {
       if (e.response!.statusCode == 302) {
         emailTaken = true;

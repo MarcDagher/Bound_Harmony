@@ -14,15 +14,12 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  // response handleing
-  bool emailTaken = false;
-  bool success = false;
-
   //
   final formKey = GlobalKey<FormState>();
 
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController birthdateController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   @override
@@ -104,6 +101,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
 
+                      /// Birthdate Input Field
+                      ///
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 5),
+                        child: TextInputField(
+                          handleChangeController: birthdateController,
+                          placeholder: 'Birthdate',
+                          handleValidation: (birthdate) => !RegExp(
+                                      r'^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-\d{4}$')
+                                  .hasMatch(birthdateController.text)
+                              ? "Format must be Day-Month-Year (eg. 15-01-2001)"
+                              : birthdate!.isEmpty
+                                  ? "Birthdate is required"
+                                  : null,
+                        ),
+                      ),
+
                       /// password Input Field
                       ///
                       Padding(
@@ -148,9 +162,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       if (formKey.currentState!.validate()) {
                         // send request
                         await context.read<AuthProvider>().signUpRequest(
-                            usernameController.text,
-                            emailController.text,
-                            passwordController.text);
+                            formUsername: usernameController.text,
+                            formEmail: emailController.text,
+                            formPassword: passwordController.text,
+                            formBirthdate: birthdateController.text);
                         // print("success: $success, emailTaken: $emailTaken");
                       }
                     },
