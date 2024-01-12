@@ -78,12 +78,27 @@ class SurveysProvider extends ChangeNotifier {
   saveCouplesSurveyResponses(token, listOfResponses) async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
-    List arrayOfResponsesObjects = [];
+    List arrayOfResponsesObjects = []; // [{"questionId" : "response"}]
 
-    print(
-        "In provider: ${listOfResponses[listOfResponses.length - 1].response}");
     for (CoupleSurveyResponse surveyResponse in listOfResponses) {
-      // if (surveyResponse.)
+      if (surveyResponse.questionType == "radio") {
+        arrayOfResponsesObjects.add({
+          "questionId": surveyResponse.questionId,
+          "response": surveyResponse.response
+        });
+      } else if (surveyResponse.questionType == "checkbox") {
+        for (String option in surveyResponse.checkboxes!) {
+          arrayOfResponsesObjects.add(
+              {"questionId": surveyResponse.questionId, "response": option});
+        }
+      } else if (surveyResponse.questionType == "text") {
+        arrayOfResponsesObjects.add({
+          "questionId": surveyResponse.questionId,
+          "response": surveyResponse.response
+        });
+      }
     }
+    print("In provider: $arrayOfResponsesObjects");
+    print("In provider: ${arrayOfResponsesObjects.length}");
   }
 }
