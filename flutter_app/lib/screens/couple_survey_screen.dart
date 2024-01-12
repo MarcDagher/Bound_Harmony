@@ -17,40 +17,51 @@ class CouplesSurveyScreen extends StatefulWidget {
 class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
   // The list of Response Models I will send to the provider's method, where I will divide and send to database
   final List<CoupleSurveyResponse> coupleSurveyResponses = [
-    CoupleSurveyResponse(questionId: 21, response: ""),
-    CoupleSurveyResponse(questionId: 22, checkboxes: [], isChecked: []),
-    CoupleSurveyResponse(questionId: 23, checkboxes: [], isChecked: []),
-    CoupleSurveyResponse(questionId: 24, checkboxes: [], isChecked: []),
-    CoupleSurveyResponse(questionId: 25, response: ""),
-    CoupleSurveyResponse(questionId: 26, response: ""),
-    CoupleSurveyResponse(questionId: 27, response: ""),
-    CoupleSurveyResponse(questionId: 28, checkboxes: [], isChecked: []),
-    CoupleSurveyResponse(questionId: 29, response: ""),
+    CoupleSurveyResponse(questionId: 21, questionType: "radio", response: ""),
+    CoupleSurveyResponse(
+        questionId: 22,
+        questionType: "checkbox",
+        checkboxes: [],
+        isChecked: []),
+    CoupleSurveyResponse(
+        questionId: 23,
+        questionType: "checkbox",
+        checkboxes: [],
+        isChecked: []),
+    CoupleSurveyResponse(
+        questionId: 24,
+        questionType: "checkbox",
+        checkboxes: [],
+        isChecked: []),
+    CoupleSurveyResponse(questionId: 25, questionType: "radio", response: ""),
+    CoupleSurveyResponse(questionId: 26, questionType: "radio", response: ""),
+    CoupleSurveyResponse(questionId: 27, questionType: "radio", response: ""),
+    CoupleSurveyResponse(
+        questionId: 28,
+        questionType: "checkbox",
+        checkboxes: [],
+        isChecked: []),
+    CoupleSurveyResponse(questionId: 29, questionType: "text", response: ""),
   ];
 
   bool coupleSurveyComplete = false;
   validateInputs(model) {
     /// if radio button
-    if (model.questionId == 21 ||
-        model.questionId == 25 ||
-        model.questionId == 26 ||
-        model.questionId == 27) {
+    // print("In validate: ${model.questionType}");
+    if (model.questionType == "radio") {
       if (model.response!.isEmpty) {
         return;
       }
       // print("radio: ${model.response}");
 
       /// if checkbox
-    } else if (model.questionId == 22 ||
-        model.questionId == 23 ||
-        model.questionId == 24 ||
-        model.questionId == 28) {
+    } else if (model.questionType == "checkbox") {
       if (model.checkboxes!.isEmpty) {
         return;
       }
 
       /// if input
-    } else if (model.questionId == 29) {
+    } else if (model.questionType == "text") {
       if (model.response == "") {
         return;
       }

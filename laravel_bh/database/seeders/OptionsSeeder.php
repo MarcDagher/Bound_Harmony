@@ -145,7 +145,7 @@ class OptionsSeeder extends Seeder
         /// Options for the questions of the Couples Survey with syrvey_id = 2
 
         // How do you feel about your current relationship?
-        $coupleQ1 = ["Everything is going well. I'm satisfied.", "Slippery Slope.", "I found the one!", "I'm happy.", "Neutral."];
+        $coupleQ1 = ["I'm satisfied", "Slippery Slope", "I found the one!", "I'm happy", "Neutral", "I'm not happy"];
 
         foreach ($coupleQ1 as $option){
             Option::create([
@@ -156,7 +156,7 @@ class OptionsSeeder extends Seeder
 
 
         // Select the choices that describe your partner:
-        $coupleQ2Q3 = ["Thoughtful" , "Compassionate" , "Supportive" , "Understanding" , "Patient" , "Dishonest" , "Poor communication skills" , "Un,empathetic" , "Selfish" , "Poor temper control" , "Unreliable" , "Has good sense of humor", "Close-minded" , "Impatient" , "Controlling"];
+        $coupleQ2Q3 = ["Thoughtful" , "Compassionate" , "Supportive" , "Understanding" , "Patient" , "Dishonest" , "Poor communication skills" , "Unempathetic" , "Selfish" , "Poor temper control" , "Unreliable" , "Has good sense of humor", "Close-minded" , "Impatient" , "Controlling"];
         foreach ($coupleQ2Q3 as $option){
             Option::create([
                 "question_id" => 22,
@@ -182,23 +182,25 @@ class OptionsSeeder extends Seeder
         }
 
         // yes or no questions 5-6-7
-        $coupleQ5Q6Q7 = ["No", "Yes"];
+        $coupleQ5Q6 = ["No", "Yes"];
 
-        foreach($coupleQ5Q6Q7 as $option){
+        foreach($coupleQ5Q6 as $option){
             Option::create([
                 "question_id" => 25,
                 "option" => $option,
             ]);
         }
 
-        foreach($coupleQ5Q6Q7 as $option){
+        foreach($coupleQ5Q6 as $option){
             Option::create([
                 "question_id" => 26,
                 "option" => $option,
             ]);
         }
 
-        foreach($coupleQ5Q6Q7 as $option){
+        $coupleQ7 = ["Every day", "A few times a week", "Every once in a while, but not every week", "We are very busy and don't spend quality time together"];
+
+        foreach($coupleQ7 as $option){
             Option::create([
                 "question_id" => 27,
                 "option" => $option,

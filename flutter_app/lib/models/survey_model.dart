@@ -23,9 +23,11 @@ class CoupleSurveyResponse {
   String? response;
   List<String>? checkboxes;
   List<bool?>? isChecked;
+  String questionType;
   CoupleSurveyResponse(
       {required this.questionId,
       this.response,
       this.checkboxes,
-      this.isChecked});
+      this.isChecked,
+      required this.questionType});
 }

@@ -80,7 +80,8 @@ class SurveysProvider extends ChangeNotifier {
     final dio = Dio();
     List arrayOfResponsesObjects = [];
 
-    print("In provider: $listOfResponses");
+    print(
+        "In provider: ${listOfResponses[listOfResponses.length - 1].response}");
     for (CoupleSurveyResponse surveyResponse in listOfResponses) {
       // if (surveyResponse.)
     }
