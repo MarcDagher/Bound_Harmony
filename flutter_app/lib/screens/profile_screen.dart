@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:bound_harmony/providers/auth_provider.dart';
 import 'package:bound_harmony/providers/user_provider.dart';
+import 'package:bound_harmony/reusable%20widgets/button.dart';
 import 'package:bound_harmony/reusable%20widgets/display_box.dart';
 import 'package:bound_harmony/reusable%20widgets/text_input.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,15 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  Future handlePopUp(
+          {required String alertTitle, required String placeholder}) =>
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: Text(alertTitle),
+                content: TextInputField(placeholder: placeholder),
+                actions: [Button(text: "Submit", handlePressed: () {})],
+              ));
   XFile? _image;
 
   @override
@@ -74,7 +84,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ////// username
                         child: DisplayBox(
                             text:
-                                "Username: ${value.preferences?.getString('username')}")),
+                                "Username: ${value.preferences?.getString('username')}",
+                            handleTap: () => handlePopUp(
+                                alertTitle: "Change Username",
+                                placeholder: "New username"))),
                   ),
 
                   Consumer<AuthProvider>(builder: (context, value, child) {
@@ -109,7 +122,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     );
                   }),
 
-                  const Padding(
+                  Padding(
                       padding: EdgeInsets.only(bottom: 5),
                       ////// location
                       child: DisplayBox(
