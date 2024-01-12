@@ -13,6 +13,7 @@ class SurveysProvider extends ChangeNotifier {
   // in saveSurveyResponse, to toggle UI for a successfuly save request
   bool successSavingResponse = false;
 
+  // in saveCouplesSurveyResponse, to toggle UI for a successfuly save request
   bool successSavingCouplesSurveyResponse = false;
 
   getSurvey(int surveyId) async {
@@ -57,9 +58,6 @@ class SurveysProvider extends ChangeNotifier {
       });
     }
 
-    // print("From provider question ID: ${listOfResponses[0].questionId}");
-    // print("From provider response: ${listOfResponses[0].response}");
-
     try {
       final response = await dio.post("$baseUrl/save_responses",
           data: jsonEncode(arrayOfResponsesObjects),
@@ -70,9 +68,9 @@ class SurveysProvider extends ChangeNotifier {
 
       if (response.data["status"] == "success") {
         successSavingResponse = true;
+        notifyListeners();
       }
     } on DioException catch (error) {
-      successSavingResponse = false;
       print(error);
     }
   }
