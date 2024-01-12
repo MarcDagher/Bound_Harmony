@@ -17,10 +17,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  // this will open the gallery
-
-  // Uint8List? image;
-  // XFile? selectedImage;
   XFile? _image;
 
   @override
@@ -31,9 +27,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           padding: const EdgeInsets.symmetric(horizontal: 25),
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ///////////////////// Column: Profile Image + Edit button ///////////////////////
+              ///////////////////// Stack: Profile Image + Edit button ///////////////////////
               Padding(
                 padding: const EdgeInsets.only(top: 20, bottom: 40),
                 child: Stack(
@@ -67,23 +62,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
 
-              ///////////////////// Column: TextInputField - DisplayBox - TextInputField - Location - NavButton x2  ///////////////////////
+              ///////////////////// Column: Username - email - birthdate - Location - NavButton x2  ///////////////////////
               Column(
                 children: [
                   Consumer<AuthProvider>(
                     builder: (context, value, child) => Padding(
                         padding: const EdgeInsets.only(bottom: 5),
+
+                        ////// username
                         child: DisplayBox(
                             text:
                                 "Username: ${value.preferences?.getString('username')}")),
                   ),
-                  // this will be a text. email is displayed from token
+
                   Consumer<AuthProvider>(builder: (context, value, child) {
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 5),
                       child: Row(
                         children: [
                           Expanded(
+                            ////// email
                             child: DisplayBox(
                                 text:
                                     "Email: ${value.preferences?.get('email')}"),
@@ -99,6 +97,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: Row(
                         children: [
                           Expanded(
+                            ////// Birthdate
                             child: DisplayBox(
                                 text:
                                     "Birthdate: ${value.preferences?.get('birthdate')}"),
@@ -110,6 +109,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                   const Padding(
                       padding: EdgeInsets.only(bottom: 5),
+                      ////// location
                       child: DisplayBox(
                           text:
                               'Location: Still need to figure this out')), // Figure out how to do that... depends on google api
@@ -176,35 +176,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  // Future pickImageFromGallery() async {
-  // final returnImage =
-  //     await ImagePicker().pickImage(source: ImageSource.gallery);
-  // final ImagePicker picker = ImagePicker();
-  // final XFile? selectedImage =
-  //     await picker.pickImage(source: ImageSource.gallery);
-  // print("After");
-  // if (returnImage == null) return;
-  // setState(() {
-  //   selectedImage = XFile(returnImage.path);
-  //   image = File(returnImage.path).readAsBytesSync();
-  // });
-  // }
-
-  // Future pickImageFromCamera() async {
-  //   final returnImage =
-  //       await ImagePicker().pickImage(source: ImageSource.camera);
-  //   print("In camera picker");
-  //   if (returnImage == null) return;
-  //   setState(() {
-  //     selectedImage = XFile(returnImage.path);
-  //     image = File(returnImage.path).readAsBytesSync();
-  //   });
-  // }
-
-  Future<void> imagePicker() async {
+  Future<void> galleryImagePicker() async {
     final ImagePicker picker = ImagePicker();
     final XFile? selectedImage =
         await picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      _image = selectedImage;
+    });
+  }
+
+  Future<void> cameraImagePicker() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? selectedImage =
+        await picker.pickImage(source: ImageSource.camera);
     setState(() {
       _image = selectedImage;
     });
@@ -227,16 +211,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 TextButton.icon(
                     onPressed: () {
-                      // pickImageFromCamera();
+                      cameraImagePicker();
                     },
                     icon: const Icon(Icons.camera),
                     label: const Text("Camera")),
                 TextButton.icon(
                     onPressed: () async {
-                      print("hello from gallery");
-                      // pickImageFromGallery();
-                      await imagePicker();
-                      print("hello after");
+                      await galleryImagePicker();
                     },
                     icon: const Icon(Icons.image),
                     label: const Text("Gallery")),
