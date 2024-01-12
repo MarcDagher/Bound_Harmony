@@ -55,7 +55,6 @@ class AuthProvider extends ChangeNotifier {
         successSignUp = true;
         emailTaken = false;
       }
-      print("In provider ${response.data}");
     } on DioException catch (e) {
       if (e.response!.statusCode == 302) {
         emailTaken = true;

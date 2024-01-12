@@ -1,5 +1,4 @@
 import 'package:bound_harmony/providers/auth_provider.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:bound_harmony/reusable%20widgets/text_input.dart';
 import 'package:bound_harmony/reusable%20widgets/button.dart';
@@ -24,8 +23,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final isKeyboard = MediaQuery.of(context).viewInsets.bottom !=
-    //     0; // check if keyboard is in the UI
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
@@ -69,7 +66,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         const SizedBox(height: 30)
                       else
                         const SizedBox(
-                          height: 45,
+                          height: 15,
                         ),
 
                       /// Username Input Field
@@ -107,11 +104,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         padding: const EdgeInsets.only(bottom: 5),
                         child: TextInputField(
                           handleChangeController: birthdateController,
-                          placeholder: 'Birthdate',
+                          placeholder: 'Birthdate (dd-mm-year)',
                           handleValidation: (birthdate) => !RegExp(
                                       r'^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-\d{4}$')
                                   .hasMatch(birthdateController.text)
-                              ? "Format must be Day-Month-Year (eg. 15-01-2001)"
+                              ? "Format must be Day-Month-Year (eg. 01-01-2020)"
                               : birthdate!.isEmpty
                                   ? "Birthdate is required"
                                   : null,
@@ -166,7 +163,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             formEmail: emailController.text,
                             formPassword: passwordController.text,
                             formBirthdate: birthdateController.text);
-                        // print("success: $success, emailTaken: $emailTaken");
                       }
                     },
                   ),
