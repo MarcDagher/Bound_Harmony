@@ -34,13 +34,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 40),
+                  padding: const EdgeInsets.only(top: 30),
                   child: Image.asset(
                     "assets/logo.png",
                   ),
                 ), // when keyboard appears hide logo
                 Padding(
-                  padding: const EdgeInsets.only(top: 30),
+                  padding: const EdgeInsets.only(top: 20),
                   child: Text(
                     'Sign Up',
                     style: TextStyle(
@@ -63,7 +63,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     children: [
                       if (value.emailTaken == true ||
                           value.successSignUp == true)
-                        const SizedBox(height: 30)
+                        const SizedBox(height: 0)
                       else
                         const SizedBox(
                           height: 15,
@@ -151,7 +151,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 45, bottom: 10),
+                  padding: const EdgeInsets.only(top: 30, bottom: 10),
                   child: Button(
                     text: 'Create Account',
                     // check for invalid input fields
