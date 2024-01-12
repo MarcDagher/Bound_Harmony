@@ -44,7 +44,7 @@ class SurveysScreen extends StatelessWidget {
                           onTap: () {
                             context
                                 .read<SurveysProvider>()
-                                .successSavingResponse = false;
+                                .successSavingPersonalSurveyResponse = false;
                             context.goNamed('Personal Survey');
                           },
                           child: Container(
@@ -84,7 +84,7 @@ class SurveysScreen extends StatelessWidget {
                           onTap: () {
                             context
                                 .read<SurveysProvider>()
-                                .successSavingResponse = false;
+                                .successSavingCouplesSurveyResponse = false;
                             context.goNamed('Couples Survey');
                           },
                           child: Container(

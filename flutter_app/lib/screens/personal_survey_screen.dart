@@ -79,7 +79,7 @@ class _PersonalSurveyScreenState extends State<PersonalSurveyScreen> {
       ),
       //////////// END OF APPBAR
       body: Consumer<SurveysProvider>(builder: (context, value, child) {
-        if (value.successSavingResponse == false) {
+        if (value.successSavingPersonalSurveyResponse == false) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: Column(
@@ -130,7 +130,7 @@ class _PersonalSurveyScreenState extends State<PersonalSurveyScreen> {
                         final SharedPreferences preferences =
                             await SharedPreferences.getInstance();
                         final token = preferences.get('token');
-                        await value.saveSurveyResponse(
+                        await value.savePersonalSurveyResponse(
                             token, personalSurveyResponses);
                       },
 
@@ -140,7 +140,7 @@ class _PersonalSurveyScreenState extends State<PersonalSurveyScreen> {
               ],
             ),
           );
-        } else if (value.successSavingResponse == true) {
+        } else if (value.successSavingPersonalSurveyResponse == true) {
           return const Center(child: Text("Your answers have been saved."));
         } else {
           return const Center(child: Text("Loading..."));

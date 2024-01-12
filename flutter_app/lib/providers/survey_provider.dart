@@ -11,7 +11,7 @@ class SurveysProvider extends ChangeNotifier {
   List<Question?> questions = [];
 
   // in saveSurveyResponse, to toggle UI for a successfuly save request
-  bool successSavingResponse = false;
+  bool successSavingPersonalSurveyResponse = false;
 
   // in saveCouplesSurveyResponse, to toggle UI for a successfuly save request
   bool successSavingCouplesSurveyResponse = false;
@@ -46,7 +46,7 @@ class SurveysProvider extends ChangeNotifier {
     }
   }
 
-  saveSurveyResponse(token, listOfResponses) async {
+  savePersonalSurveyResponse(token, listOfResponses) async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
     List arrayOfResponsesObjects = [];
@@ -67,7 +67,7 @@ class SurveysProvider extends ChangeNotifier {
           }));
 
       if (response.data["status"] == "success") {
-        successSavingResponse = true;
+        successSavingPersonalSurveyResponse = true;
         notifyListeners();
       }
     } on DioException catch (error) {
