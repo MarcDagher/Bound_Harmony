@@ -204,7 +204,6 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
                           await SharedPreferences.getInstance();
                       final token = preferences.get('token');
                       // send request
-                      print("in button: sending request");
                       await value.saveCouplesSurveyResponses(
                           token, coupleSurveyResponses);
                     },
