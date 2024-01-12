@@ -20,15 +20,17 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  Future handlePopUp(
-          {required String alertTitle, required String placeholder}) =>
-      showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-                title: Text(alertTitle),
-                content: TextInputField(placeholder: placeholder),
-                actions: [Button(text: "Submit", handlePressed: () {})],
-              ));
+  // Future handlePopUp({
+  //   required String alertTitle,
+  //   required String placeholder,
+  //   required handleSubmit,
+  //   required TextEditingController controller,
+  //   required validator,
+  // }) =>
+
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController locationController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   XFile? _image;
 
   @override
@@ -85,9 +87,59 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: DisplayBox(
                           text:
                               "Username: ${value.preferences?.getString('username')}",
-                          handleTap: () => handlePopUp(
-                              alertTitle: "Change Username",
-                              placeholder: "New username"),
+                          handleTap: () {
+                            /// they have the same input field, so make the card for both the username and location
+                            showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                      title: const Text("Change Username"),
+                                      content: Form(
+                                        key: formKey,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            TextInputField(
+                                              placeholder: "New Username",
+                                              handleChangeController:
+                                                  usernameController,
+                                              handleValidation: (text) =>
+                                                  text!.isEmpty
+                                                      ? "Field is required"
+                                                      : null,
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.only(top: 5),
+                                              child: TextInputField(
+                                                placeholder: "New Location",
+                                                handleChangeController:
+                                                    locationController,
+                                                handleValidation: (text) =>
+                                                    text!.isEmpty
+                                                        ? "Field is required"
+                                                        : null,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      actions: [
+                                        Button(
+                                            text: "Submit",
+                                            handlePressed: () {
+                                              if (formKey.currentState!
+                                                  .validate()) {
+                                                // send request
+                                                print("hello");
+                                                print(usernameController.text);
+                                                print(locationController.text);
+                                              }
+                                            })
+                                      ],
+                                    ));
+                          },
                         )),
                   ),
 
@@ -124,13 +176,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   }),
 
                   Padding(
-                      padding: EdgeInsets.only(bottom: 5),
+                      padding: const EdgeInsets.only(bottom: 5),
                       ////// location
                       child: DisplayBox(
                         text: 'Location: Still need to figure this out',
-                        handleTap: () => handlePopUp(
-                            alertTitle: "Change Location",
-                            placeholder: "New location"),
                       )), // Figure out how to do that... depends on google api
 
                   // Navigation Buttons

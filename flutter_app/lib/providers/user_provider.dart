@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class UserProvider extends ChangeNotifier {
-  updateUserInfo() {}
+  updateUsername(token) {}
 
   saveImage(token, image) async {
     final baseUrl = Requests.baseUrl;
