@@ -14,8 +14,6 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final dio = Dio();
-
   // response handleing
   bool emailTaken = false;
   bool success = false;
@@ -23,13 +21,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   //
   final formKey = GlobalKey<FormState>();
 
-  Map<String, String> formData = {'username': "", 'email': "", 'password': ""};
-
-  void handleInput(String field, String newField) {
-    setState(() {
-      formData[field] = newField;
-    });
-  }
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +80,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 5),
                         child: TextInputField(
-                          handleChange: (text) => handleInput("username", text),
+                          handleChangeController: usernameController,
                           placeholder: 'Username',
                           handleValidation: (name) =>
                               name!.isEmpty ? "Username is required" : null,
@@ -98,11 +92,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 5),
                         child: TextInputField(
-                          handleChange: (text) => handleInput("email", text),
+                          handleChangeController: emailController,
                           placeholder: 'Email',
                           handleValidation: (email) =>
                               !RegExp(r'^[\w-]+(\.[\w-]+)*@(hotmail\.com|gmail\.com|yahoo\.com|outlook\.com)$')
-                                      .hasMatch(formData['email']!)
+                                      .hasMatch(emailController.text)
                                   ? "Invalid email format"
                                   : email!.isEmpty
                                       ? "Email is required"
@@ -115,7 +109,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 20),
                         child: TextInputField(
-                          handleChange: (text) => handleInput('password', text),
+                          handleChangeController: passwordController,
                           placeholder: 'Password',
                           handleValidation: (password) => password!.length < 6
                               ? "Password must be at least 6 characters"
@@ -154,9 +148,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       if (formKey.currentState!.validate()) {
                         // send request
                         await context.read<AuthProvider>().signUpRequest(
-                            formData['username']!,
-                            formData['email']!,
-                            formData['password']!);
+                            usernameController.text,
+                            emailController.text,
+                            passwordController.text);
                         // print("success: $success, emailTaken: $emailTaken");
                       }
                     },
