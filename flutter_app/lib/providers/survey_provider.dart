@@ -13,6 +13,8 @@ class SurveysProvider extends ChangeNotifier {
   // in saveSurveyResponse, to toggle UI for a successfuly save request
   bool successSavingResponse = false;
 
+  bool successSavingCouplesSurveyResponse = false;
+
   getSurvey(int surveyId) async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
@@ -105,7 +107,8 @@ class SurveysProvider extends ChangeNotifier {
           data: jsonEncode(arrayOfResponsesObjects),
           options: Options(headers: {"authorization": "Bearer $token"}));
 
-      print("In provider, response: ${response.data}");
+      successSavingCouplesSurveyResponse = true;
+      notifyListeners();
     } on DioException catch (error) {
       print("In provider, error: $error");
     }

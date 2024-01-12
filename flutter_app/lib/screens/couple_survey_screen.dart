@@ -84,129 +84,136 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
       ),
       //////////// END OF APPBAR
       body: Consumer<SurveysProvider>(builder: (context, value, child) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: Column(
-            children: [
-              Expanded(
-                ///////// BUILDING SURVEY'S QUESTIONS AND LOOPING OVER OPTIONS
-                ///
-                ///
-                child: ListView.builder(
-                  itemCount: value.questions.length,
-                  itemBuilder: (context, questionIndex) {
-                    //// For the checkboxes, loop over their options and add a false value
-                    /// Inside their isChecked array inside the model. This will be used to control onChecked behavior with the indicator i
-                    if (value.questions[questionIndex]!.type == "checkbox") {
-                      for (int i = 0;
-                          i < value.questions[questionIndex]!.options.length;
-                          i++) {
-                        coupleSurveyResponses[questionIndex]
-                            .isChecked!
-                            .add(false);
+        if (value.successSavingCouplesSurveyResponse == true) {
+          return const Center(child: Text("Your responses have been saved."));
+        } else {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            child: Column(
+              children: [
+                Expanded(
+                  ///////// BUILDING SURVEY'S QUESTIONS AND LOOPING OVER OPTIONS
+                  ///
+                  ///
+                  child: ListView.builder(
+                    itemCount: value.questions.length,
+                    itemBuilder: (context, questionIndex) {
+                      //// For the checkboxes, loop over their options and add a false value
+                      /// Inside their isChecked array inside the model. This will be used to control onChecked behavior with the indicator i
+                      if (value.questions[questionIndex]!.type == "checkbox") {
+                        for (int i = 0;
+                            i < value.questions[questionIndex]!.options.length;
+                            i++) {
+                          coupleSurveyResponses[questionIndex]
+                              .isChecked!
+                              .add(false);
+                        }
                       }
-                    }
-                    return Column(
-                      children: [
-                        buildQuestion(
-                            question: value.questions[questionIndex]!.question),
+                      return Column(
+                        children: [
+                          buildQuestion(
+                              question:
+                                  value.questions[questionIndex]!.question),
 
-                        /// If radio buttons
-                        ///
-                        if (value.questions[questionIndex]!.type == "radio")
-                          for (String option
-                              in value.questions[questionIndex]!.options)
-                            buildRadioOption(
-                                option: option,
-                                chosenOption:
-                                    coupleSurveyResponses[questionIndex]
-                                        .response as String,
-                                questionIndex: questionIndex),
+                          /// If radio buttons
+                          ///
+                          if (value.questions[questionIndex]!.type == "radio")
+                            for (String option
+                                in value.questions[questionIndex]!.options)
+                              buildRadioOption(
+                                  option: option,
+                                  chosenOption:
+                                      coupleSurveyResponses[questionIndex]
+                                          .response as String,
+                                  questionIndex: questionIndex),
 
-                        /// If checkbox.
-                        /// I used i from the for loop, to give it as an indicator and have access to isChecked
-                        ///
-                        if (value.questions[questionIndex]!.type == "checkbox")
-                          for (int i = 0;
-                              i <
-                                  value
-                                      .questions[questionIndex]!.options.length;
-                              i++)
-                            buildCheckbox(
-                                option:
-                                    value.questions[questionIndex]!.options[i],
-                                questionIndex: questionIndex,
-                                indicator: i),
+                          /// If checkbox.
+                          /// I used i from the for loop, to give it as an indicator and have access to isChecked
+                          ///
+                          if (value.questions[questionIndex]!.type ==
+                              "checkbox")
+                            for (int i = 0;
+                                i <
+                                    value.questions[questionIndex]!.options
+                                        .length;
+                                i++)
+                              buildCheckbox(
+                                  option: value
+                                      .questions[questionIndex]!.options[i],
+                                  questionIndex: questionIndex,
+                                  indicator: i),
 
-                        /// If Input
-                        ///
-                        if (value.questions[questionIndex]!.type == "text")
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 5),
-                            child: TextInputField(
-                                handleChange: (text) {
-                                  setState(() {
-                                    coupleSurveyResponses[8].response = text;
-                                  });
-                                  if (text == "") {
+                          /// If Input
+                          ///
+                          if (value.questions[questionIndex]!.type == "text")
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 5),
+                              child: TextInputField(
+                                  handleChange: (text) {
                                     setState(() {
-                                      coupleSurveyComplete = false;
+                                      coupleSurveyResponses[8].response = text;
                                     });
-                                    return;
-                                  } else {
-                                    for (CoupleSurveyResponse model
-                                        in coupleSurveyResponses) {
-                                      final success = validateInputs(model);
-                                      if (success != true) {
-                                        return;
+                                    if (text == "") {
+                                      setState(() {
+                                        coupleSurveyComplete = false;
+                                      });
+                                      return;
+                                    } else {
+                                      for (CoupleSurveyResponse model
+                                          in coupleSurveyResponses) {
+                                        final success = validateInputs(model);
+                                        if (success != true) {
+                                          return;
+                                        }
                                       }
                                     }
-                                  }
-                                  setState(() {
-                                    coupleSurveyComplete = true;
-                                  });
-                                },
-                                placeholder: "Enter your response here..."),
-                          )
-                      ],
-                    );
-                  },
+                                    setState(() {
+                                      coupleSurveyComplete = true;
+                                    });
+                                  },
+                                  placeholder: "Enter your response here..."),
+                            )
+                        ],
+                      );
+                    },
+                  ),
                 ),
-              ),
 
-              /////// REUSABLE SUBMIT BUTTON
-              ///
-              ///
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Button(
-                  text: 'Submit',
-                  // When all questions are answered change color to primary red
-                  color: coupleSurveyComplete == false
-                      ? Theme.of(context).hintColor
-                      : Theme.of(context).primaryColor,
-                  handlePressed: () async {
-                    for (CoupleSurveyResponse model in coupleSurveyResponses) {
-                      final success = validateInputs(model);
-                      if (success != true) {
-                        return;
+                /////// REUSABLE SUBMIT BUTTON
+                ///
+                ///
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Button(
+                    text: 'Submit',
+                    // When all questions are answered change color to primary red
+                    color: coupleSurveyComplete == false
+                        ? Theme.of(context).hintColor
+                        : Theme.of(context).primaryColor,
+                    handlePressed: () async {
+                      for (CoupleSurveyResponse model
+                          in coupleSurveyResponses) {
+                        final success = validateInputs(model);
+                        if (success != true) {
+                          return;
+                        }
                       }
-                    }
 
-                    // prepare token
-                    final SharedPreferences preferences =
-                        await SharedPreferences.getInstance();
-                    final token = preferences.get('token');
-                    // send request
-                    print("in button: sending request");
-                    await value.saveCouplesSurveyResponses(
-                        token, coupleSurveyResponses);
-                  },
+                      // prepare token
+                      final SharedPreferences preferences =
+                          await SharedPreferences.getInstance();
+                      final token = preferences.get('token');
+                      // send request
+                      print("in button: sending request");
+                      await value.saveCouplesSurveyResponses(
+                          token, coupleSurveyResponses);
+                    },
+                  ),
                 ),
-              ),
-            ],
-          ),
-        );
+              ],
+            ),
+          );
+        }
       }),
     );
   }
