@@ -192,12 +192,15 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
                         return;
                       }
                     }
+
+                    // prepare token
                     final SharedPreferences preferences =
                         await SharedPreferences.getInstance();
                     final token = preferences.get('token');
+                    // send request
+                    print("in button: sending request");
                     await value.saveCouplesSurveyResponses(
                         token, coupleSurveyResponses);
-                    // send request
                   },
                 ),
               ),
