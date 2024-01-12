@@ -83,11 +83,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                         ////// username
                         child: DisplayBox(
-                            text:
-                                "Username: ${value.preferences?.getString('username')}",
-                            handleTap: () => handlePopUp(
-                                alertTitle: "Change Username",
-                                placeholder: "New username"))),
+                          text:
+                              "Username: ${value.preferences?.getString('username')}",
+                          handleTap: () => handlePopUp(
+                              alertTitle: "Change Username",
+                              placeholder: "New username"),
+                        )),
                   ),
 
                   Consumer<AuthProvider>(builder: (context, value, child) {
@@ -98,8 +99,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Expanded(
                             ////// email
                             child: DisplayBox(
-                                text:
-                                    "Email: ${value.preferences?.get('email')}"),
+                              text: "Email: ${value.preferences?.get('email')}",
+                            ),
                           ),
                         ],
                       ),
@@ -126,8 +127,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       padding: EdgeInsets.only(bottom: 5),
                       ////// location
                       child: DisplayBox(
-                          text:
-                              'Location: Still need to figure this out')), // Figure out how to do that... depends on google api
+                        text: 'Location: Still need to figure this out',
+                        handleTap: () => handlePopUp(
+                            alertTitle: "Change Location",
+                            placeholder: "New location"),
+                      )), // Figure out how to do that... depends on google api
 
                   // Navigation Buttons
                   MaterialButton(
