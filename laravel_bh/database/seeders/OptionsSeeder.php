@@ -217,8 +217,14 @@ class OptionsSeeder extends Seeder
             ]);
         }
 
-        // What is one thing, or multiple things, that you struggle with in your relationship? (If none then type in "n/a") => qustion 19 is a text input its doesnt have options 
-        
+        // What is one thing, or multiple things, that you struggle with in your relationship? (If none then type in "n/a")
+
+        /// I will use this option [id = 100] whenever I need to say that: this input text doeasn't have an option => "N/A"
+        /// instead, I will add the response to the text_input column in survey_responses 
+        Option::create([
+            "question_id" => 29,
+            "option" => "N/A",
+        ]);
 
     }
 }

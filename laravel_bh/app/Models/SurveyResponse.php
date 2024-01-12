@@ -14,6 +14,7 @@ class SurveyResponse extends Model
         'user_id',
         'question_id',
         'option_id',
+        'text_input'
     ];
 
     // foreign key in SurveyResponse belongs to User

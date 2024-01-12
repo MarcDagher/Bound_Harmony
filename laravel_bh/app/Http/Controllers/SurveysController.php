@@ -59,23 +59,29 @@ class SurveysController extends Controller
 
         foreach($jsonData as $data){
             $question_id = $data['question_id'];
-            $response = $data['response'];
-            
+            $response = $data['response'];            
+
             /// If a question has a type text, it doesn't have options. Add it to the text column in survey_responses
             if (Question::find($data['question_id']) -> question_type == "text"){
-                echo "This is a text";
-            } else {
 
+                SurveyResponse::create([
+                    "user_id" => $user->id,
+                    "question_id" => $question_id,
+                    "option_id" => 100,
+                    "text_input" => $response
+                ]);
+                
+            } else {
+                // check if the option exists in options table
                 $response_validation = Option::where(["question_id" => $question_id, "option" => $response]) -> get();
-                echo "$response_validation \n";
+                
                 if (isset($response_validation[0])){
-                    // echo "$response \n";
-                    // {user_id, question_id, response}
-                    // SurveyResponse::create([
-                    //     "user_id" => $user->id,
-                    //     "question_id" => $question_id,
-                    //     "option_id" => $response_validation[0] -> id
-                    // ]);
+
+                    SurveyResponse::create([
+                        "user_id" => $user->id,
+                        "question_id" => $question_id,
+                        "option_id" => $response_validation[0] -> id
+                    ]);
     
                 } else {
                     return response() -> json([
