@@ -20,13 +20,13 @@ class Response {
 
 class CoupleSurveyResponse {
   final int questionId;
-  String? response;
+  String response;
   List<String>? checkboxes;
   List<bool?>? isChecked;
   String questionType;
   CoupleSurveyResponse(
       {required this.questionId,
-      this.response,
+      this.response = "",
       this.checkboxes,
       this.isChecked,
       required this.questionType});

@@ -124,7 +124,7 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
                                   option: option,
                                   chosenOption:
                                       coupleSurveyResponses[questionIndex]
-                                          .response as String,
+                                          .response,
                                   questionIndex: questionIndex),
 
                           /// If checkbox.
