@@ -19,8 +19,9 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   // this will open the gallery
 
-  Uint8List? image;
-  File? selectedImage;
+  // Uint8List? image;
+  // XFile? selectedImage;
+  XFile? _image;
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +38,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding: const EdgeInsets.only(top: 20, bottom: 40),
                 child: Stack(
                   children: [
-                    image != null
+                    _image != null
                         ? CircleAvatar(
                             radius: 80.0,
-                            backgroundImage: MemoryImage(image!),
+                            backgroundImage: FileImage(File(_image!.path)),
                           )
                         : const Icon(
                             Icons.account_circle,
@@ -175,23 +176,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Future pickImageFromGallery() async {
-    final returnImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (returnImage == null) return;
-    setState(() {
-      selectedImage = File(returnImage.path);
-      image = File(returnImage.path).readAsBytesSync();
-    });
-  }
+  // Future pickImageFromGallery() async {
+  // final returnImage =
+  //     await ImagePicker().pickImage(source: ImageSource.gallery);
+  // final ImagePicker picker = ImagePicker();
+  // final XFile? selectedImage =
+  //     await picker.pickImage(source: ImageSource.gallery);
+  // print("After");
+  // if (returnImage == null) return;
+  // setState(() {
+  //   selectedImage = XFile(returnImage.path);
+  //   image = File(returnImage.path).readAsBytesSync();
+  // });
+  // }
 
-  Future pickImageFromCamera() async {
-    final returnImage =
-        await ImagePicker().pickImage(source: ImageSource.camera);
-    if (returnImage == null) return;
+  // Future pickImageFromCamera() async {
+  //   final returnImage =
+  //       await ImagePicker().pickImage(source: ImageSource.camera);
+  //   print("In camera picker");
+  //   if (returnImage == null) return;
+  //   setState(() {
+  //     selectedImage = XFile(returnImage.path);
+  //     image = File(returnImage.path).readAsBytesSync();
+  //   });
+  // }
+
+  Future<void> imagePicker() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? selectedImage =
+        await picker.pickImage(source: ImageSource.gallery);
     setState(() {
-      selectedImage = File(returnImage.path);
-      image = File(returnImage.path).readAsBytesSync();
+      _image = selectedImage;
     });
   }
 
@@ -212,14 +227,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 TextButton.icon(
                     onPressed: () {
-                      pickImageFromCamera();
+                      // pickImageFromCamera();
                     },
                     icon: const Icon(Icons.camera),
                     label: const Text("Camera")),
                 TextButton.icon(
-                    onPressed: () {
+                    onPressed: () async {
                       print("hello from gallery");
-                      pickImageFromGallery();
+                      // pickImageFromGallery();
+                      await imagePicker();
+                      print("hello after");
                     },
                     icon: const Icon(Icons.image),
                     label: const Text("Gallery")),
