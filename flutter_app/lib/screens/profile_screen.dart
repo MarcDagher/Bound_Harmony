@@ -1,8 +1,12 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:bound_harmony/providers/auth_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/display_box.dart';
 import 'package:bound_harmony/reusable%20widgets/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -13,10 +17,13 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  // this will open the gallery
+
+  Uint8List? image;
+  File? selectedImage;
+
   @override
   Widget build(BuildContext context) {
-    // final usernameController = TextEditingController();
-
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -30,26 +37,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding: const EdgeInsets.only(top: 20, bottom: 40),
                 child: Stack(
                   children: [
-                    const CircleAvatar(
-                      radius: 80.0,
-                      // child: Icon(Icons.account_circle),
-                      backgroundImage: AssetImage("assets/logo.png"),
-                    ),
+                    image != null
+                        ? CircleAvatar(
+                            radius: 80.0,
+                            backgroundImage: MemoryImage(image!),
+                          )
+                        : const Icon(
+                            Icons.account_circle,
+                            size: 200,
+                          ),
+
+                    //// bottom sheet to choose image
+                    ///
                     Positioned(
-                        bottom: 20.0,
-                        right: 20.0,
+                        bottom: 0,
+                        right: 0,
                         child: InkWell(
-                          onTap: () {
-                            showModalBottomSheet(
-                                context: context,
-                                builder: (context) =>
-                                    buildBottomSheet(context));
-                          },
                           child: const Icon(
-                            Icons.camera_alt,
-                            color: Colors.teal,
+                            Icons.add_a_photo_rounded,
+                            color: Colors.black,
                             size: 30,
                           ),
+                          onTap: () {
+                            buildBottomSheet(context);
+                          },
                         ))
                   ],
                 ),
@@ -163,49 +174,58 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
+
+  Future pickImageFromGallery() async {
+    final returnImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (returnImage == null) return;
+    setState(() {
+      selectedImage = File(returnImage.path);
+      image = File(returnImage.path).readAsBytesSync();
+    });
+  }
+
+  Future pickImageFromCamera() async {
+    final returnImage =
+        await ImagePicker().pickImage(source: ImageSource.camera);
+    if (returnImage == null) return;
+    setState(() {
+      selectedImage = File(returnImage.path);
+      image = File(returnImage.path).readAsBytesSync();
+    });
+  }
+
+  buildBottomSheet(context) {
+    return showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            height: 100,
+            width: MediaQuery.of(context).size.width,
+            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: Column(children: [
+              const Text(
+                "Choose Profile Photo",
+                style: TextStyle(fontSize: 20),
+              ),
+              const SizedBox(height: 20),
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                TextButton.icon(
+                    onPressed: () {
+                      pickImageFromCamera();
+                    },
+                    icon: const Icon(Icons.camera),
+                    label: const Text("Camera")),
+                TextButton.icon(
+                    onPressed: () {
+                      print("hello from gallery");
+                      pickImageFromGallery();
+                    },
+                    icon: const Icon(Icons.image),
+                    label: const Text("Gallery")),
+              ])
+            ]),
+          );
+        });
+  }
 }
-
-Widget buildBottomSheet(context) {
-  return Container(
-    height: 100,
-    width: MediaQuery.of(context).size.width,
-    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-    child: Column(children: [
-      Text(
-        "Choose Profile Photo",
-        style: TextStyle(fontSize: 20),
-      ),
-      SizedBox(height: 20),
-      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        TextButton.icon(
-            onPressed: () {}, icon: Icon(Icons.camera), label: Text("Camera")),
-        TextButton.icon(
-            onPressed: () {}, icon: Icon(Icons.image), label: Text("Gallery")),
-      ])
-    ]),
-  );
-}
-
-
-
-
-
-
-// SizedBox(
-                    //     width: 180,
-                    //     height: 180,
-                    //     child: Icon(Icons.account_circle,
-                    //         size: 180, color: Theme.of(context).hintColor)),
-
-
-
-
-                    // Text(
-                    //   'Edit Profile Picture',
-                    //   style: TextStyle(
-                    //       fontSize: 15,
-                    //       fontWeight: FontWeight.w500,
-                    //       color: Theme.of(context).primaryColor,
-                    //       decoration: TextDecoration.underline,
-                    //       decorationColor: Theme.of(context).primaryColor),
-                    // )
