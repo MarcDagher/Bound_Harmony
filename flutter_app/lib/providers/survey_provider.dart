@@ -80,6 +80,7 @@ class SurveysProvider extends ChangeNotifier {
     final dio = Dio();
     List arrayOfResponsesObjects = []; // [{"questionId" : "response"}]
 
+    /// prepare payload and store it in arrayOfResponsesObjects to send it to DB
     for (CoupleSurveyResponse surveyResponse in listOfResponses) {
       if (surveyResponse.questionType == "radio") {
         arrayOfResponsesObjects.add({
@@ -98,7 +99,15 @@ class SurveysProvider extends ChangeNotifier {
         });
       }
     }
-    print("In provider: $arrayOfResponsesObjects");
-    print("In provider: ${arrayOfResponsesObjects.length}");
+
+    try {
+      final response = await dio.post("$baseUrl/save_responses",
+          data: jsonEncode(arrayOfResponsesObjects),
+          options: Options(headers: {"authorization": "Bearer $token"}));
+
+      print("In provider, response: ${response.data}");
+    } on DioException catch (error) {
+      print("In provider, error: $error");
+    }
   }
 }
