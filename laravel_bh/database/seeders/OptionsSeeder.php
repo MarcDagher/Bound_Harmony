@@ -14,7 +14,7 @@ class OptionsSeeder extends Seeder
     public function run(): void
     {
 
-        /// Options for the questions of the Personal Survey with syrvey_id = 1
+        /// Options for the questions of the Personal Survey with survey_id = 1
         ///
 
         $personalQ1tillQ20 = ["No", "Yes"];
@@ -217,11 +217,8 @@ class OptionsSeeder extends Seeder
             ]);
         }
 
-        // What is one thing, or multiple things, that you struggle with in your relationship? (If none then type in "n/a")
-        Option::create([
-            "question_id" => 29,
-            "option" => "N/A",
-        ]);
+        // What is one thing, or multiple things, that you struggle with in your relationship? (If none then type in "n/a") => qustion 19 is a text input its doesnt have options 
+        
 
     }
 }

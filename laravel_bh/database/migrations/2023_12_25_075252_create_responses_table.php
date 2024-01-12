@@ -12,15 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('survey_responses', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('question_id');
-            $table->unsignedBigInteger('option_id');
-            $table->timestamps();
+            $table -> id();
+            $table -> unsignedBigInteger('user_id');
+            $table -> unsignedBigInteger('question_id');
+            $table -> unsignedBigInteger('option_id');
+            $table -> string('text_input') -> nullable();
+            $table -> timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('question_id')->references('id')->on('questions');
-            $table->foreign("option_id")->references('id')->on('options');
+            $table -> foreign('user_id') -> references('id') -> on('users');
+            $table -> foreign('question_id') -> references('id') -> on('questions');
+            $table -> foreign("option_id") -> references('id') ->on ('options');
         });
     }
 
