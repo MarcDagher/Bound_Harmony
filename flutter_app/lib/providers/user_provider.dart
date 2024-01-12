@@ -3,7 +3,20 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class UserProvider extends ChangeNotifier {
-  updateUsername(token) {}
+  updateProfileInfo(token, newUsername) {
+    final baseUrl = Requests.baseUrl;
+    final dio = Dio();
+
+    try {
+      final response = dio.post('$baseUrl/update_profile',
+          data: {"username": newUsername},
+          options: Options(headers: {"authorization": "Bearer $token"}));
+
+      // print("in updateProfileInfo: ${response.data}");
+    } catch (e) {
+      print(e);
+    }
+  }
 
   saveImage(token, image) async {
     final baseUrl = Requests.baseUrl;

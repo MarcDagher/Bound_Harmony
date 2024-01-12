@@ -116,10 +116,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 placeholder: "New Location",
                                                 handleChangeController:
                                                     locationController,
-                                                handleValidation: (text) =>
-                                                    text!.isEmpty
-                                                        ? "Field is required"
-                                                        : null,
+                                                // handleValidation: (text) =>
+                                                //     text!.isEmpty
+                                                //         ? "Field is required"
+                                                //         : null,
                                               ),
                                             ),
                                           ],
@@ -128,14 +128,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       actions: [
                                         Button(
                                             text: "Submit",
-                                            handlePressed: () {
-                                              if (formKey.currentState!
-                                                  .validate()) {
-                                                // send request
-                                                print("hello");
-                                                print(usernameController.text);
-                                                print(locationController.text);
-                                              }
+                                            handlePressed: () async {
+                                              // if (formKey.currentState!
+                                              //     .validate()) {}
+                                              final SharedPreferences
+                                                  preferences =
+                                                  await SharedPreferences
+                                                      .getInstance();
+                                              final token =
+                                                  preferences.get('token');
+                                              await context
+                                                  .read<UserProvider>()
+                                                  .updateProfileInfo(token,
+                                                      usernameController.text);
                                             })
                                       ],
                                     ));
