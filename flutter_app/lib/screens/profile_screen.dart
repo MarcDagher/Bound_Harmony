@@ -20,17 +20,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  // Future handlePopUp({
-  //   required String alertTitle,
-  //   required String placeholder,
-  //   required handleSubmit,
-  //   required TextEditingController controller,
-  //   required validator,
-  // }) =>
-
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController locationController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
   XFile? _image;
 
   @override
@@ -79,71 +68,81 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ///////////////////// Column: Username - email - birthdate - Location - NavButton x2  ///////////////////////
               Column(
                 children: [
-                  Consumer<AuthProvider>(
+                  Consumer<UserProvider>(
                     builder: (context, value, child) => Padding(
                         padding: const EdgeInsets.only(bottom: 5),
 
                         ////// username
                         child: DisplayBox(
-                          text:
-                              "Username: ${value.preferences?.getString('username')}",
+                          // text: "Username: ${value.preferences?.getString('username')}" ,
+                          text: value.newDefaultUsername == ""
+                              ? "Username: ${context.read<AuthProvider>().preferences!.getString('username')}"
+                              : "Username: ${value.newDefaultUsername}",
                           handleTap: () {
                             /// they have the same input field, so make the card for both the username and location
                             showDialog(
                                 context: context,
-                                builder: (context) => AlertDialog(
-                                      title: const Text("Change Username"),
-                                      content: Form(
-                                        key: formKey,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            TextInputField(
-                                              placeholder: "New Username",
-                                              handleChangeController:
-                                                  usernameController,
-                                              handleValidation: (text) =>
-                                                  text!.isEmpty
-                                                      ? "Field is required"
-                                                      : null,
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.only(top: 5),
-                                              child: TextInputField(
-                                                placeholder: "New Location",
-                                                handleChangeController:
-                                                    locationController,
-                                                // handleValidation: (text) =>
-                                                //     text!.isEmpty
-                                                //         ? "Field is required"
-                                                //         : null,
-                                              ),
-                                            ),
-                                          ],
+                                builder: (context) {
+                                  List formData = ["", ""];
+                                  Color buttonColor =
+                                      Theme.of(context).primaryColor;
+                                  return AlertDialog(
+                                    title: const Text("Edit Profile Info"),
+                                    content: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        TextInputField(
+                                          placeholder: "New Username",
+                                          handleChange: (text) {
+                                            setState(() {
+                                              formData[0] = text;
+                                            });
+                                          },
                                         ),
-                                      ),
-                                      actions: [
-                                        Button(
-                                            text: "Submit",
-                                            handlePressed: () async {
-                                              // if (formKey.currentState!
-                                              //     .validate()) {}
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 5),
+                                          child: TextInputField(
+                                            placeholder: "New Location",
+                                            handleChange: (text) {
+                                              setState(() {
+                                                formData[1] = text;
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    actions: [
+                                      ///// Alert Submit Button
+                                      ///
+                                      Button(
+                                          text: "Submit",
+                                          color: buttonColor,
+                                          handlePressed: () async {
+                                            if (formData[0].isNotEmpty ||
+                                                formData[1].isNotEmpty) {
                                               final SharedPreferences
                                                   preferences =
                                                   await SharedPreferences
                                                       .getInstance();
                                               final token =
                                                   preferences.get('token');
-                                              await context
-                                                  .read<UserProvider>()
-                                                  .updateProfileInfo(token,
-                                                      usernameController.text);
-                                            })
-                                      ],
-                                    ));
+                                              await value.updateProfileInfo(
+                                                  token, formData[0]);
+                                              if (value.newUsernameSuccess ==
+                                                  true) {
+                                                Navigator.of(context).pop();
+                                                value.newUsernameSuccess =
+                                                    false;
+                                              }
+                                            }
+                                          })
+                                    ],
+                                  );
+                                });
                           },
                         )),
                   ),
@@ -156,7 +155,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Expanded(
                             ////// email
                             child: DisplayBox(
-                              text: "Email: ${value.preferences?.get('email')}",
+                              text:
+                                  "Email: ${context.read<AuthProvider>().preferences!.getString('email')}",
                             ),
                           ),
                         ],
@@ -164,21 +164,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     );
                   }),
 
-                  Consumer<AuthProvider>(builder: (context, value, child) {
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 5),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            ////// Birthdate
-                            child: DisplayBox(
-                                text:
-                                    "Birthdate: ${value.preferences?.get('birthdate')}"),
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
+                  // Consumer<AuthProvider>(builder: (context, value, child) {
+                  //   return
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 5),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          ////// Birthdate
+                          child: DisplayBox(
+                              text:
+                                  "Birthdate: ${context.read<AuthProvider>().preferences!.getString('birthdate')}"),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // }),
 
                   Padding(
                       padding: const EdgeInsets.only(bottom: 5),

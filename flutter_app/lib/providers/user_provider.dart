@@ -3,16 +3,24 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class UserProvider extends ChangeNotifier {
-  updateProfileInfo(token, newUsername) {
+  String newDefaultUsername = "";
+  bool newUsernameSuccess = false;
+
+  updateProfileInfo(token, String newUsername) async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
 
     try {
-      final response = dio.post('$baseUrl/update_profile',
+      final response = await dio.post('$baseUrl/update_profile',
           data: {"username": newUsername},
           options: Options(headers: {"authorization": "Bearer $token"}));
+      if (response.data["status"] == "success") {
+        newDefaultUsername = newUsername;
+        newUsernameSuccess = true;
+        notifyListeners();
+      }
 
-      // print("in updateProfileInfo: ${response.data}");
+      print("in updateProfileInfo: ${response.data}");
     } catch (e) {
       print(e);
     }
