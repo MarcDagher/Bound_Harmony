@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:bound_harmony/providers/auth_provider.dart';
 import 'package:bound_harmony/providers/user_provider.dart';
@@ -31,7 +30,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 25),
           child: Column(
             children: [
-              ///////////////////// Stack: Profile Image + Edit button ///////////////////////
+              //////
+              ///////////////////// Stack :Circle Avatar + Add Image Icon ///////////////////////
               Padding(
                 padding: const EdgeInsets.only(top: 20, bottom: 40),
                 child: Stack(
@@ -46,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             size: 200,
                           ),
 
-                    //// bottom sheet to choose image
+                    /// add image icon: on click open bottom sheet
                     ///
                     Positioned(
                         bottom: 0,
@@ -68,18 +68,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ///////////////////// Column: Username - email - birthdate - Location - NavButton x2  ///////////////////////
               Column(
                 children: [
+                  /// Username display + on click open dialog
                   Consumer<UserProvider>(
                     builder: (context, value, child) => Padding(
                         padding: const EdgeInsets.only(bottom: 5),
-
-                        ////// username
                         child: DisplayBox(
-                          // text: "Username: ${value.preferences?.getString('username')}" ,
                           text: value.newDefaultUsername == ""
                               ? "Username: ${context.read<AuthProvider>().preferences!.getString('username')}"
                               : "Username: ${value.newDefaultUsername}",
                           handleTap: () {
-                            /// they have the same input field, so make the card for both the username and location
                             showDialog(
                                 context: context,
                                 builder: (context) {
@@ -143,52 +140,44 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ],
                                   );
                                 });
+                            ////// End of Dialog
+                            ///
                           },
                         )),
                   ),
 
-                  Consumer<AuthProvider>(builder: (context, value, child) {
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 5),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            ////// email
-                            child: DisplayBox(
-                              text:
-                                  "Email: ${context.read<AuthProvider>().preferences!.getString('email')}",
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
-
-                  // Consumer<AuthProvider>(builder: (context, value, child) {
-                  //   return
+                  /// Email display
                   Padding(
                     padding: const EdgeInsets.only(bottom: 5),
                     child: Row(
                       children: [
                         Expanded(
-                          ////// Birthdate
+                          ////// email
                           child: DisplayBox(
-                              text:
-                                  "Birthdate: ${context.read<AuthProvider>().preferences!.getString('birthdate')}"),
+                            text:
+                                "Email: ${context.read<AuthProvider>().preferences!.getString('email')}",
+                          ),
                         ),
                       ],
                     ),
                   ),
-                  // }),
 
+                  /// Birthdate display
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 5),
+                    child: DisplayBox(
+                        text:
+                            "Birthdate: ${context.read<AuthProvider>().preferences!.getString('birthdate')}"),
+                  ),
+
+                  /// Location display: to change click on username
                   Padding(
                       padding: const EdgeInsets.only(bottom: 5),
-                      ////// location
                       child: DisplayBox(
                         text: 'Location: Still need to figure this out',
-                      )), // Figure out how to do that... depends on google api
+                      )),
 
-                  // Navigation Buttons
+                  // Incoming Requests Navigation Button
                   MaterialButton(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -215,7 +204,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       }),
                   const SizedBox(height: 5),
 
-                  // Custom Navigation button
+                  // My Partners Navigation Button
                   MaterialButton(
                       color: Theme.of(context).primaryColor,
                       shape: RoundedRectangleBorder(
