@@ -233,7 +233,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   MaterialButton(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
-                          side: BorderSide(color: Theme.of(context).hintColor)),
+                          side: BorderSide(
+                              color: Theme.of(context).hintColor, width: 2)),
                       padding: const EdgeInsets.symmetric(
                           vertical: 18, horizontal: 15),
                       child: Row(
@@ -243,7 +244,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             'Incoming Requests',
                             style: TextStyle(
                                 fontSize: 16,
-                                color: Theme.of(context).hintColor),
+                                color: Theme.of(context).hintColor,
+                                fontWeight: FontWeight.w800),
                           ),
                           Icon(
                             Icons.navigate_next,
