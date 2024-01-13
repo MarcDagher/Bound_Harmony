@@ -12,7 +12,7 @@ class ProfileController extends Controller
     // query approach used here is called Eloquent ORM (Object-Relational Mapping)
     // get email or user id from token then change he user's username
     //NOTE: STILL NEED TO FIGURE OUT LOCATION. WHAT SUGGESTIONS NEED, WHAT TO GET, HOW TO STORE
-    public function update_profile(Request $request){
+    public function change_username(Request $request){
 
         $token = Auth::user();
         $request -> validate([

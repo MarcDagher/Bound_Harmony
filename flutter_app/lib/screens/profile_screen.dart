@@ -127,7 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                       .getInstance();
                                               final token =
                                                   preferences.get('token');
-                                              await value.updateProfileInfo(
+                                              await value.changeUsername(
                                                   token, formData[0]);
                                               if (value.newUsernameSuccess ==
                                                   true) {

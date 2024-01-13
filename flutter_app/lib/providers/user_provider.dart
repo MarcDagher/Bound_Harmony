@@ -6,12 +6,12 @@ class UserProvider extends ChangeNotifier {
   String newDefaultUsername = "";
   bool newUsernameSuccess = false;
 
-  updateProfileInfo(token, String newUsername) async {
+  changeUsername(token, String newUsername) async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
 
     try {
-      final response = await dio.post('$baseUrl/update_profile',
+      final response = await dio.post('$baseUrl/change_username',
           data: {"username": newUsername},
           options: Options(headers: {"authorization": "Bearer $token"}));
       if (response.data["status"] == "success") {

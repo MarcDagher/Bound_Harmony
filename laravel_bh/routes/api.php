@@ -18,7 +18,7 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::controller(ProfileController::class)->group(function () {
-    Route::post('/update_profile', 'update_profile');
+    Route::post('/change_username', 'change_username');
     Route::post('/edit_image', 'edit_image');
 });
 
