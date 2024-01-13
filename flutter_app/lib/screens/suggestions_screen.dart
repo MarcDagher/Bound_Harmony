@@ -22,11 +22,6 @@ class SuggestionsScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
         child: Column(children: [
-          const Text(
-            'Check your personalized suggestions:',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-          ),
-          const SizedBox(height: 20),
           Expanded(
             child: Column(
               mainAxisSize: MainAxisSize.max,
