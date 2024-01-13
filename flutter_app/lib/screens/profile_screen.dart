@@ -82,7 +82,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     Color buttonColor =
                                         Theme.of(context).primaryColor;
                                     return AlertDialog(
-                                      title: const Text("Edit Profile Info"),
+                                      //// Styling Alert Diolog
+                                      ///
+                                      backgroundColor: Colors.white,
+                                      surfaceTintColor: Colors.white,
+                                      shadowColor: Colors.black,
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                              horizontal: 10, vertical: 20),
+                                      actionsPadding:
+                                          const EdgeInsets.symmetric(
+                                              horizontal: 10, vertical: 20),
+                                      titlePadding: const EdgeInsets.only(
+                                          left: 10, right: 10, top: 20),
+
+                                      /// Alert Dialog Title
+                                      ///
+                                      title: Text(
+                                        "Edit Profile Info",
+                                        style: TextStyle(
+                                            color: Theme.of(context).hintColor,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+
+                                      /// Alert Dialog Content
+                                      ///
                                       content: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -110,6 +134,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           ),
                                         ],
                                       ),
+
+                                      /// Alert Dialog actions
+                                      ///
                                       actions: [
                                         ///// Alert Submit Button
                                         ///
