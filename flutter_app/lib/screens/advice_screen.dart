@@ -11,6 +11,7 @@ class AdviceScreen extends StatefulWidget {
 }
 
 class _AdviceScreenState extends State<AdviceScreen> {
+  late TextEditingController inputController = TextEditingController();
   List<Message> messages = [
     Message(
         text: 'Yes Sure!',
@@ -34,7 +35,17 @@ class _AdviceScreenState extends State<AdviceScreen> {
         isSentByMe: true),
   ].reversed.toList();
 
-  final TextEditingController inputController = TextEditingController();
+  // @override
+  // void iniState() {
+  //   super.initState();
+  //   inputController = TextEditingController();
+  // }
+
+  // @override
+  // void dispose() {
+  //   inputController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -58,9 +69,12 @@ class _AdviceScreenState extends State<AdviceScreen> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color.fromARGB(255, 247, 182, 182),
-              Color.fromARGB(255, 248, 239, 239),
+              // Color.fromARGB(255, 247, 182, 182),
+              // Color.fromARGB(255, 248, 239, 239),
+              Color.fromARGB(255, 255, 255, 255),
+              Color.fromARGB(255, 250, 180, 180),
             ],
+            transform: GradientRotation(10),
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -72,6 +86,8 @@ class _AdviceScreenState extends State<AdviceScreen> {
               ///
               ///
               child: GroupedListView<Message, DateTime>(
+                keyboardDismissBehavior:
+                    ScrollViewKeyboardDismissBehavior.onDrag,
                 // this child creates the time card and groups the elements (messages) according to their DateTime
                 padding: const EdgeInsets.all(8),
                 reverse: true,
@@ -167,13 +183,14 @@ class _AdviceScreenState extends State<AdviceScreen> {
                       backgroundColor: Theme.of(context).primaryColor,
                       elevation: 5,
                       onPressed: () {
+                        final message = Message(
+                            text: inputController.text,
+                            date: DateTime.now(),
+                            isSentByMe: true);
                         setState(() {
-                          final message = Message(
-                              text: inputController.text,
-                              date: DateTime.now(),
-                              isSentByMe: true);
                           return messages.add(message);
                         });
+                        inputController.clear();
                       },
                       child: const Icon(Icons.send, color: Colors.white),
                     ),
