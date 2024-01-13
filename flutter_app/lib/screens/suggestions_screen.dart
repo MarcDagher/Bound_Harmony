@@ -30,6 +30,8 @@ class SuggestionsScreen extends StatelessWidget {
 
                 Expanded(
                   child: NavigationBox(
+                      navigationButtonColor: Colors.white,
+                      textAndButtonColor: Theme.of(context).hintColor,
                       handlePressed: () {
                         context.goNamed('Date Builder');
                       },
@@ -44,6 +46,8 @@ class SuggestionsScreen extends StatelessWidget {
                 //////// ON CLICK - GO TO Date Bonding Activities
                 Expanded(
                   child: NavigationBox(
+                      navigationButtonColor: Colors.white,
+                      textAndButtonColor: Theme.of(context).hintColor,
                       handlePressed: () {
                         context.goNamed('Bonding Activities');
                       },
@@ -58,10 +62,12 @@ class SuggestionsScreen extends StatelessWidget {
                 // //////// ON CLICK - GO TO Date Bonding Activities
                 Expanded(
                   child: NavigationBox(
+                      navigationButtonColor: Colors.white,
+                      textAndButtonColor: Theme.of(context).hintColor,
                       handlePressed: () {
                         context.goNamed('Gift Ideas');
                       },
-                      imagePath: "assets/wallpaper 9.jpg",
+                      imagePath: "assets/wallpaper 10.jpg",
                       title: "Go To Gift Ideas"),
                 ),
               ],

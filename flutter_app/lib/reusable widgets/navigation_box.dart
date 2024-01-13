@@ -4,12 +4,17 @@ class NavigationBox extends StatelessWidget {
   final VoidCallback handlePressed;
   final String imagePath;
   final String title;
+  final Color? textAndButtonColor;
+  final Color? navigationButtonColor;
 
-  const NavigationBox(
-      {super.key,
-      required this.handlePressed,
-      required this.imagePath,
-      required this.title});
+  const NavigationBox({
+    super.key,
+    required this.handlePressed,
+    required this.imagePath,
+    required this.title,
+    required this.textAndButtonColor,
+    required this.navigationButtonColor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +27,14 @@ class NavigationBox extends StatelessWidget {
                 image: AssetImage("${imagePath}"),
                 fit: BoxFit.cover)),
         child: Align(
-          alignment: Alignment.bottomLeft,
+          alignment: Alignment.bottomCenter,
           child: MaterialButton(
             padding:
                 const EdgeInsets.only(left: 15, right: 5, top: 15, bottom: 15),
-            color: Colors.white,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            color: navigationButtonColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
             onPressed: handlePressed,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -38,11 +44,11 @@ class NavigationBox extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w800,
-                      color: Theme.of(context).hintColor),
+                      color: textAndButtonColor),
                 ),
                 Icon(
                   Icons.navigate_next,
-                  color: Theme.of(context).hintColor,
+                  color: textAndButtonColor,
                 )
               ],
             ),

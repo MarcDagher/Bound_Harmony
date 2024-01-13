@@ -30,6 +30,8 @@ class SurveysScreen extends StatelessWidget {
                 //////// PERSONAL SURVEY - ON CLICK - GO TO QUESTIONS
                 Expanded(
                   child: NavigationBox(
+                      navigationButtonColor: Colors.white,
+                      textAndButtonColor: Theme.of(context).hintColor,
                       title: "Go To Personal Survey",
                       handlePressed: () {
                         context
@@ -37,13 +39,15 @@ class SurveysScreen extends StatelessWidget {
                             .successSavingPersonalSurveyResponse = false;
                         context.goNamed("Personal Survey");
                       },
-                      imagePath: "assets/wallpaper 4.jpg"),
+                      imagePath: "assets/wallpaper 12.jpg"),
                 ),
                 const SizedBox(height: 10),
 
                 //////// Couples SURVEY - ON CLICK - GO TO QUESTIONS
                 Expanded(
                   child: NavigationBox(
+                      navigationButtonColor: Colors.white,
+                      textAndButtonColor: Theme.of(context).hintColor,
                       title: "Go To Couples Survey",
                       handlePressed: () {
                         context
@@ -51,7 +55,7 @@ class SurveysScreen extends StatelessWidget {
                             .successSavingCouplesSurveyResponse = false;
                         context.goNamed("Couples Survey");
                       },
-                      imagePath: "assets/wallpaper 8.jpg"),
+                      imagePath: "assets/wallpaper 13.jpg"),
                 ),
               ],
             ),
