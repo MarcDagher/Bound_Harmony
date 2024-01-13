@@ -60,7 +60,95 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           onTap: () {
                             buildBottomSheet(context);
                           },
-                        ))
+                        )),
+
+                    /// add image icon: on click open bottom sheet
+                    ///
+                    Consumer<UserProvider>(
+                      builder: (context, value, child) => Positioned(
+                          bottom: 0,
+                          left: -3,
+                          child: InkWell(
+                            child: const Icon(
+                              Icons.mode_edit_outline_outlined,
+                              color: Colors.black,
+                              size: 30,
+                            ),
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    List formData = ["", ""];
+                                    Color buttonColor =
+                                        Theme.of(context).primaryColor;
+                                    return AlertDialog(
+                                      title: const Text("Edit Profile Info"),
+                                      content: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          TextInputField(
+                                            placeholder: "New Username",
+                                            handleChange: (text) {
+                                              setState(() {
+                                                formData[0] = text;
+                                              });
+                                            },
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 5),
+                                            child: TextInputField(
+                                              placeholder: "New Location",
+                                              handleChange: (text) {
+                                                setState(() {
+                                                  formData[1] = text;
+                                                });
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      actions: [
+                                        ///// Alert Submit Button
+                                        ///
+                                        Button(
+                                            text: "Submit",
+                                            color: buttonColor,
+                                            handlePressed: () async {
+                                              if (formData[0].isNotEmpty ||
+                                                  formData[1].isNotEmpty) {
+                                                final SharedPreferences
+                                                    preferences =
+                                                    await SharedPreferences
+                                                        .getInstance();
+                                                final token =
+                                                    preferences.get('token');
+                                                if (formData[0].isNotEmpty) {
+                                                  await value.changeUsername(
+                                                      token, formData[0]);
+                                                }
+                                                if (formData[1].isNotEmpty) {
+                                                  await value.changeLocation(
+                                                      token, formData[1]);
+                                                }
+                                                if (value.newLocationSuccess ==
+                                                        true ||
+                                                    value.newUsernameSuccess ==
+                                                        true) {
+                                                  Navigator.of(context).pop();
+                                                }
+                                              }
+                                            })
+                                      ],
+                                    );
+                                  });
+                              ////// End of Dialog
+                              ///
+                            },
+                          )),
+                    ),
                   ],
                 ),
               ),
@@ -68,7 +156,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ///////////////////// Column: Username - email - birthdate - Location - NavButton x2  ///////////////////////
               Column(
                 children: [
-                  /// Username display + on click open dialog
+                  /// Username display: to change click on icon
                   Consumer<UserProvider>(
                     builder: (context, value, child) => Padding(
                         padding: const EdgeInsets.only(bottom: 5),
@@ -76,79 +164,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           text: value.newDefaultUsername == ""
                               ? "Username: ${context.read<AuthProvider>().preferences!.getString('username')}"
                               : "Username: ${value.newDefaultUsername}",
-                          handleTap: () {
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  List formData = ["", ""];
-                                  Color buttonColor =
-                                      Theme.of(context).primaryColor;
-                                  return AlertDialog(
-                                    title: const Text("Edit Profile Info"),
-                                    content: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        TextInputField(
-                                          placeholder: "New Username",
-                                          handleChange: (text) {
-                                            setState(() {
-                                              formData[0] = text;
-                                            });
-                                          },
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 5),
-                                          child: TextInputField(
-                                            placeholder: "New Location",
-                                            handleChange: (text) {
-                                              setState(() {
-                                                formData[1] = text;
-                                              });
-                                            },
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    actions: [
-                                      ///// Alert Submit Button
-                                      ///
-                                      Button(
-                                          text: "Submit",
-                                          color: buttonColor,
-                                          handlePressed: () async {
-                                            if (formData[0].isNotEmpty ||
-                                                formData[1].isNotEmpty) {
-                                              final SharedPreferences
-                                                  preferences =
-                                                  await SharedPreferences
-                                                      .getInstance();
-                                              final token =
-                                                  preferences.get('token');
-                                              if (formData[0].isNotEmpty) {
-                                                await value.changeUsername(
-                                                    token, formData[0]);
-                                              }
-                                              if (formData[1].isNotEmpty) {
-                                                await value.changeLocation(
-                                                    token, formData[1]);
-                                              }
-                                              if (value.newLocationSuccess ==
-                                                      true ||
-                                                  value.newUsernameSuccess ==
-                                                      true) {
-                                                Navigator.of(context).pop();
-                                              }
-                                            }
-                                          })
-                                    ],
-                                  );
-                                });
-                            ////// End of Dialog
-                            ///
-                          },
                         )),
                   ),
 
@@ -176,7 +191,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             "Birthdate: ${context.read<AuthProvider>().preferences!.getString('birthdate')}"),
                   ),
 
-                  /// Location display: to change click on username
+                  /// Location display: to change click on icon
                   Consumer<UserProvider>(
                     builder: (context, value, child) => Padding(
                         padding: const EdgeInsets.only(bottom: 5),
