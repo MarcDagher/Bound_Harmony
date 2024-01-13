@@ -284,6 +284,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   buildBottomSheet(context) {
     return showModalBottomSheet(
+        backgroundColor: Color.fromARGB(255, 99, 97, 97),
         context: context,
         builder: (context) {
           return Container(
@@ -292,8 +293,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
             margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Column(children: [
               const Text(
-                "Choose Profile Photo",
-                style: TextStyle(fontSize: 20),
+                "Change Profile Photo",
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 20),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -301,8 +305,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     onPressed: () async {
                       await cameraImagePicker();
                     },
-                    icon: const Icon(Icons.camera),
-                    label: const Text("Camera")),
+                    icon: const Icon(Icons.camera, color: Colors.white),
+                    label: const Text(
+                      "Camera",
+                      style: TextStyle(color: Colors.white),
+                    )),
                 TextButton.icon(
                     onPressed: () async {
                       await galleryImagePicker();
@@ -318,8 +325,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             .saveImage(token, _image);
                       }
                     },
-                    icon: const Icon(Icons.image),
-                    label: const Text("Gallery")),
+                    icon: const Icon(Icons.image, color: Colors.white),
+                    label: const Text("Gallery",
+                        style: TextStyle(color: Colors.white))),
               ])
             ]),
           );

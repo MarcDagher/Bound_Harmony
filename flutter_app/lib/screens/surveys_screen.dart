@@ -51,7 +51,7 @@ class SurveysScreen extends StatelessWidget {
                             .successSavingCouplesSurveyResponse = false;
                         context.goNamed("Couples Survey");
                       },
-                      imagePath: "assets/wallpaper 6.jpg"),
+                      imagePath: "assets/wallpaper 8.jpg"),
                 ),
               ],
             ),
