@@ -33,12 +33,12 @@ class SuggestionsScreen extends StatelessWidget {
                       handlePressed: () {
                         context.goNamed('Date Builder');
                       },
-                      imagePath: "assets/wallpaper 4.jpg",
+                      imagePath: "assets/wallpaper 8.jpg",
                       title: "Date Builder"),
                 ),
 
                 const SizedBox(
-                  height: 15,
+                  height: 5,
                 ),
 
                 //////// ON CLICK - GO TO Date Bonding Activities
@@ -47,12 +47,12 @@ class SuggestionsScreen extends StatelessWidget {
                       handlePressed: () {
                         context.goNamed('Bonding Activities');
                       },
-                      imagePath: "assets/wallpaper 4.jpg",
+                      imagePath: "assets/wallpaper 7.jpg",
                       title: "Bonding Activities"),
                 ),
 
                 const SizedBox(
-                  height: 15,
+                  height: 5,
                 ),
 
                 // //////// ON CLICK - GO TO Date Bonding Activities
@@ -61,7 +61,7 @@ class SuggestionsScreen extends StatelessWidget {
                       handlePressed: () {
                         context.goNamed('Gift Ideas');
                       },
-                      imagePath: "assets/wallpaper 4.jpg",
+                      imagePath: "assets/wallpaper 9.jpg",
                       title: "Go To Gift Ideas"),
                 ),
               ],

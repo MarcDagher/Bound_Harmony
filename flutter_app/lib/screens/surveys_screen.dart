@@ -37,7 +37,7 @@ class SurveysScreen extends StatelessWidget {
                             .successSavingPersonalSurveyResponse = false;
                         context.goNamed("Personal Survey");
                       },
-                      imagePath: "assets/wallpaper 5.jpg"),
+                      imagePath: "assets/wallpaper 4.jpg"),
                 ),
                 const SizedBox(height: 10),
 
