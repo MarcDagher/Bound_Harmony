@@ -12,11 +12,11 @@ class AdviceScreen extends StatefulWidget {
 
 class _AdviceScreenState extends State<AdviceScreen> {
   late TextEditingController inputController = TextEditingController();
+
+  /// This will be retreived from the database and organized in the provider to be put here
+  /// the history needs to be retreived from the DB
   List<Message> messages = [
-    Message(
-        text: 'Yes Sure!',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
-        isSentByMe: false),
+    Message(text: 'Yes Sure!', date: DateTime.now(), isSentByMe: false),
     Message(
         text: 'Yes Sure!',
         date: DateTime.now().subtract(const Duration(minutes: 1)),
@@ -35,18 +35,6 @@ class _AdviceScreenState extends State<AdviceScreen> {
         isSentByMe: true),
   ].reversed.toList();
 
-  // @override
-  // void iniState() {
-  //   super.initState();
-  //   inputController = TextEditingController();
-  // }
-
-  // @override
-  // void dispose() {
-  //   inputController.dispose();
-  //   super.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,9 +43,7 @@ class _AdviceScreenState extends State<AdviceScreen> {
           padding: const EdgeInsets.only(left: 10),
           child: Text(
             'Advice',
-            style: TextStyle(
-                color: Theme.of(context).hintColor,
-                fontWeight: FontWeight.w700),
+            style: TextStyle(color: Theme.of(context).hintColor),
           ),
         ),
       ),

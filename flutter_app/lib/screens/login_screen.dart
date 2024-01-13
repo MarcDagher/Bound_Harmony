@@ -13,6 +13,7 @@ class LogInScreen extends StatefulWidget {
 }
 
 class _LogInScreenState extends State<LogInScreen> {
+  late TextEditingController inputController;
   final formKey = GlobalKey<FormState>();
   Map<String, String> formData = {'email': "", 'password': ""};
 
@@ -21,6 +22,20 @@ class _LogInScreenState extends State<LogInScreen> {
       formData[field] = newField;
     });
   }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   inputController = TextEditingController();
+  //   print("init");
+  // }
+
+  // @override
+  // void dispose() {
+  //   print("dispose");
+  //   inputController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
