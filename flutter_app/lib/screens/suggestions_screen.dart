@@ -1,3 +1,4 @@
+import 'package:bound_harmony/reusable%20widgets/navigation_box.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -32,13 +33,18 @@ class SuggestionsScreen extends StatelessWidget {
               children: [
                 //////// ON CLICK - GO TO Date Builder
 
-                buildSuggestionBox(
-                    'Date Builder',
-                    const Color.fromARGB(255, 226, 217, 215),
-                    const Color(0xFF5CD3FF),
-                    'Date Builder',
-                    context),
-                const SizedBox(height: 15),
+                Expanded(
+                  child: NavigationBox(
+                      handlePressed: () {
+                        context.goNamed('Date Builder');
+                      },
+                      imagePath: "assets/wallpaper 4.jpg",
+                      title: "Date Builder"),
+                ),
+
+                const SizedBox(
+                  height: 15,
+                ),
 
                 //////// ON CLICK - GO TO Date Bonding Activities
                 buildSuggestionBox(
