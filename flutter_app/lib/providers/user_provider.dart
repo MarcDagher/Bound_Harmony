@@ -24,8 +24,6 @@ class UserProvider extends ChangeNotifier {
         newUsernameSuccess = true;
         notifyListeners();
       }
-
-      print("in changeUsername: ${response.data}");
     } catch (e) {
       print(e);
     }
@@ -42,11 +40,8 @@ class UserProvider extends ChangeNotifier {
       if (response.data["status"] == "success") {
         newDefaultLocation = newLocation;
         newLocationSuccess = true;
-        print("in changeLocation: $newDefaultLocation");
         notifyListeners();
       }
-
-      // print("in changeLocation: ${response.data}");
     } catch (e) {
       print(e);
     }
