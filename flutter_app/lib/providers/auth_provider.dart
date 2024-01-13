@@ -85,7 +85,7 @@ class AuthProvider extends ChangeNotifier {
             JwtDecoder.decode(response.data['authorisation']['token']);
 
         await initializePreferences();
-
+        print("In sign in data: $token");
         // adding token payload to the Preferences
         preferences?.setString(
             'token', response.data['authorisation']['token']);
@@ -96,6 +96,11 @@ class AuthProvider extends ChangeNotifier {
         preferences?.setString('connection_status', token['connection status']);
         preferences?.setString(
             'couple_survey_status', token['couple survey status']);
+        if (token["location"] == null) {
+          preferences?.setString('location', 'n/a');
+        } else {
+          preferences?.setString('location', token['location']);
+        }
       }
     } on DioException catch (error) {
       if (error.response!.statusCode == 401) {

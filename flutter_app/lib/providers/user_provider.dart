@@ -42,10 +42,11 @@ class UserProvider extends ChangeNotifier {
       if (response.data["status"] == "success") {
         newDefaultLocation = newLocation;
         newLocationSuccess = true;
+        print("in changeLocation: $newDefaultLocation");
         notifyListeners();
       }
 
-      print("in changeLocation: ${response.data}");
+      // print("in changeLocation: ${response.data}");
     } catch (e) {
       print(e);
     }

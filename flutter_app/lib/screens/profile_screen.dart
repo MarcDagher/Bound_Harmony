@@ -127,13 +127,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                       .getInstance();
                                               final token =
                                                   preferences.get('token');
-                                              await value.changeUsername(
-                                                  token, formData[0]);
-                                              if (value.newUsernameSuccess ==
-                                                  true) {
+                                              if (formData[0].isNotEmpty) {
+                                                await value.changeUsername(
+                                                    token, formData[0]);
+                                              }
+                                              if (formData[1].isNotEmpty) {
+                                                await value.changeLocation(
+                                                    token, formData[1]);
+                                              }
+                                              if (value.newLocationSuccess ==
+                                                      true ||
+                                                  value.newUsernameSuccess ==
+                                                      true) {
                                                 Navigator.of(context).pop();
-                                                value.newUsernameSuccess =
-                                                    false;
                                               }
                                             }
                                           })
@@ -171,11 +177,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
 
                   /// Location display: to change click on username
-                  Padding(
-                      padding: const EdgeInsets.only(bottom: 5),
-                      child: DisplayBox(
-                        text: 'Location: Still need to figure this out',
-                      )),
+                  Consumer<UserProvider>(
+                    builder: (context, value, child) => Padding(
+                        padding: const EdgeInsets.only(bottom: 5),
+                        child: DisplayBox(
+                          text: value.newDefaultLocation == ""
+                              ? "Location: ${context.read<AuthProvider>().preferences!.getString('location')}"
+                              : "Location: ${value.newDefaultLocation}",
+                        )),
+                  ),
 
                   // Incoming Requests Navigation Button
                   MaterialButton(
