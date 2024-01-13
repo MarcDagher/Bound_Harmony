@@ -34,6 +34,8 @@ class _AdviceScreenState extends State<AdviceScreen> {
         isSentByMe: true),
   ].reversed.toList();
 
+  final TextEditingController inputController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +43,7 @@ class _AdviceScreenState extends State<AdviceScreen> {
         title: Padding(
           padding: const EdgeInsets.only(left: 10),
           child: Text(
-            'Chat with Cupid',
+            'Advice',
             style: TextStyle(
                 color: Theme.of(context).hintColor,
                 fontWeight: FontWeight.w700),
@@ -74,8 +76,8 @@ class _AdviceScreenState extends State<AdviceScreen> {
                 padding: const EdgeInsets.all(8),
                 reverse: true,
                 order: GroupedListOrder.DESC,
-                useStickyGroupSeparators: true,
-                floatingHeader: true,
+                useStickyGroupSeparators: false,
+                floatingHeader: false,
                 // elements are the items that will be filling our list
                 elements: messages,
                 // sets the condition upon which the elements will be grouped
@@ -85,22 +87,19 @@ class _AdviceScreenState extends State<AdviceScreen> {
 
                 /// building the group header (Date card)
                 ///
-                groupHeaderBuilder: (Message message) => SizedBox(
-                  child: Center(
-                    child: Card(
-                      color: Colors.grey[400],
-                      child: Padding(
-                        padding: const EdgeInsets.all(8),
-
-                        /// styling the card
-                        ///
-                        child: Text(
-                          DateFormat.yMMMd().format(message.date),
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600),
-                        ),
+                groupHeaderBuilder: (Message message) => Center(
+                  /// styling the card
+                  ///
+                  child: Card(
+                    color: Colors.grey[400],
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Text(
+                        DateFormat.yMMMd().format(message.date),
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600),
                       ),
                     ),
                   ),
@@ -143,6 +142,7 @@ class _AdviceScreenState extends State<AdviceScreen> {
                 children: [
                   Expanded(
                     child: TextField(
+                      controller: inputController,
                       style: TextStyle(color: Theme.of(context).hintColor),
                       decoration: InputDecoration(
                           filled: true,
@@ -155,17 +155,6 @@ class _AdviceScreenState extends State<AdviceScreen> {
                           hintText: 'Type your message here...',
                           hintStyle:
                               TextStyle(color: Theme.of(context).hintColor)),
-
-                      /// Input Field
-                      ///
-                      ///// FOR THE HANDLING OF THE MESSAGES, USE ONCHANGED AND CREATE A CONTROLLER. THEN HAVE A BUTTON SUBMIT THE CHANGED VALUES ONCLICK
-                      onSubmitted: (text) {
-                        final message = Message(
-                            text: text, date: DateTime.now(), isSentByMe: true);
-                        setState(() {
-                          return messages.add(message);
-                        });
-                      },
                     ),
                   ),
 
@@ -177,7 +166,15 @@ class _AdviceScreenState extends State<AdviceScreen> {
                     child: FloatingActionButton(
                       backgroundColor: Theme.of(context).primaryColor,
                       elevation: 5,
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          final message = Message(
+                              text: inputController.text,
+                              date: DateTime.now(),
+                              isSentByMe: true);
+                          return messages.add(message);
+                        });
+                      },
                       child: const Icon(Icons.send, color: Colors.white),
                     ),
                   )
