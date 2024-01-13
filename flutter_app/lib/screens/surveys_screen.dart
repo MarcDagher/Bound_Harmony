@@ -30,6 +30,7 @@ class SurveysScreen extends StatelessWidget {
                 //////// PERSONAL SURVEY - ON CLICK - GO TO QUESTIONS
                 Expanded(
                   child: NavigationBox(
+                      title: "Go To Personal Survey",
                       handlePressed: () {
                         context
                             .read<SurveysProvider>()
@@ -42,47 +43,15 @@ class SurveysScreen extends StatelessWidget {
 
                 //////// Couples SURVEY - ON CLICK - GO TO QUESTIONS
                 Expanded(
-                  child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          image: DecorationImage(
-                              colorFilter: ColorFilter.mode(
-                                  Colors.black.withOpacity(0.4),
-                                  BlendMode.darken),
-                              image: const AssetImage("assets/wallpaper 4.jpg"),
-                              fit: BoxFit.cover)),
-                      child: Align(
-                        alignment: Alignment.bottomLeft,
-                        child: MaterialButton(
-                          padding: const EdgeInsets.only(
-                              left: 15, right: 5, top: 15, bottom: 15),
-                          color: Theme.of(context).primaryColor,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          onPressed: () {
-                            context
-                                .read<SurveysProvider>()
-                                .successSavingCouplesSurveyResponse = false;
-                            context.goNamed("Couples Survey");
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Go To Couple's Survey",
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w800,
-                                    color: Colors.white),
-                              ),
-                              Icon(
-                                Icons.navigate_next,
-                                color: Colors.white,
-                              )
-                            ],
-                          ),
-                        ),
-                      )),
+                  child: NavigationBox(
+                      title: "Go To Couples Survey",
+                      handlePressed: () {
+                        context
+                            .read<SurveysProvider>()
+                            .successSavingCouplesSurveyResponse = false;
+                        context.goNamed("Couples Survey");
+                      },
+                      imagePath: "assets/wallpaper 4.jpg"),
                 ),
               ],
             ),

@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 class NavigationBox extends StatelessWidget {
   final VoidCallback handlePressed;
   final String imagePath;
+  final String title;
 
   const NavigationBox(
-      {super.key, required this.handlePressed, required this.imagePath});
+      {super.key,
+      required this.handlePressed,
+      required this.imagePath,
+      required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -26,20 +30,11 @@ class NavigationBox extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             onPressed: handlePressed,
-            // ()
-
-            // {
-
-            // context
-            //     .read<SurveysProvider>()
-            //     .successSavingPersonalSurveyResponse = false;
-            // context.goNamed("Personal Survey");
-            // },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Go To Personal Survey',
+                  title,
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w800,
