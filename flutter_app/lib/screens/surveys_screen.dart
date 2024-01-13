@@ -1,4 +1,5 @@
 import 'package:bound_harmony/providers/survey_provider.dart';
+import 'package:bound_harmony/reusable%20widgets/navigation_box.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -28,47 +29,14 @@ class SurveysScreen extends StatelessWidget {
               children: [
                 //////// PERSONAL SURVEY - ON CLICK - GO TO QUESTIONS
                 Expanded(
-                  child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          image: DecorationImage(
-                              colorFilter: ColorFilter.mode(
-                                  Colors.black.withOpacity(0.4),
-                                  BlendMode.darken),
-                              image: const AssetImage("assets/wallpaper 4.jpg"),
-                              fit: BoxFit.cover)),
-                      child: Align(
-                        alignment: Alignment.bottomLeft,
-                        child: MaterialButton(
-                          padding: const EdgeInsets.only(
-                              left: 15, right: 5, top: 15, bottom: 15),
-                          color: Colors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          onPressed: () {
-                            context
-                                .read<SurveysProvider>()
-                                .successSavingPersonalSurveyResponse = false;
-                            context.goNamed("Personal Survey");
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Go To Personal Survey',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w800,
-                                    color: Theme.of(context).hintColor),
-                              ),
-                              Icon(
-                                Icons.navigate_next,
-                                color: Theme.of(context).hintColor,
-                              )
-                            ],
-                          ),
-                        ),
-                      )),
+                  child: NavigationBox(
+                      handlePressed: () {
+                        context
+                            .read<SurveysProvider>()
+                            .successSavingPersonalSurveyResponse = false;
+                        context.goNamed("Personal Survey");
+                      },
+                      imagePath: "assets/wallpaper 5.jpg"),
                 ),
                 const SizedBox(height: 10),
 
@@ -88,7 +56,7 @@ class SurveysScreen extends StatelessWidget {
                         child: MaterialButton(
                           padding: const EdgeInsets.only(
                               left: 15, right: 5, top: 15, bottom: 15),
-                          color: Colors.white,
+                          color: Theme.of(context).primaryColor,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
                           onPressed: () {
@@ -105,11 +73,11 @@ class SurveysScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w800,
-                                    color: Theme.of(context).hintColor),
+                                    color: Colors.white),
                               ),
                               Icon(
                                 Icons.navigate_next,
-                                color: Theme.of(context).hintColor,
+                                color: Colors.white,
                               )
                             ],
                           ),
