@@ -38,7 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     _image != null
                         ? CircleAvatar(
-                            radius: 80.0,
+                            radius: 100,
                             backgroundImage: FileImage(File(_image!.path)),
                           )
                         : const Icon(
@@ -52,9 +52,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         bottom: 0,
                         right: 0,
                         child: InkWell(
-                          child: const Icon(
+                          child: Icon(
                             Icons.add_a_photo_rounded,
-                            color: Colors.black,
+                            color: Theme.of(context).hintColor,
                             size: 30,
                           ),
                           onTap: () {
@@ -69,9 +69,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           bottom: 0,
                           left: -3,
                           child: InkWell(
-                            child: const Icon(
+                            child: Icon(
                               Icons.mode_edit_outline_outlined,
-                              color: Colors.black,
+                              color: Theme.of(context).hintColor,
                               size: 30,
                             ),
                             onTap: () {
