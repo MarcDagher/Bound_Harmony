@@ -31,9 +31,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Column(
             children: [
               //////
-              ///////////////////// Stack :Circle Avatar + Add Image Icon ///////////////////////
+              ///////////////////// Stack :Circle Avatar + Add Image Icon + Edit Info Icon ///////////////////////
               Padding(
-                padding: const EdgeInsets.only(top: 20, bottom: 40),
+                padding: const EdgeInsets.only(top: 20, bottom: 25),
                 child: Stack(
                   children: [
                     _image != null
@@ -46,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             size: 200,
                           ),
 
-                    /// add image icon: on click open bottom sheet
+                    /// Add image icon: on click open bottom sheet
                     ///
                     Positioned(
                         bottom: 0,
@@ -62,7 +62,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           },
                         )),
 
-                    /// add image icon: on click open bottom sheet
+                    /// Edit info icon: on click open alert
                     ///
                     Consumer<UserProvider>(
                       builder: (context, value, child) => Positioned(
