@@ -41,7 +41,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             radius: 100,
                             backgroundImage: FileImage(File(_image!.path)),
                           )
-                        : const Icon(
+                        : Icon(
+                            color: Theme.of(context).hintColor,
                             Icons.account_circle,
                             size: 200,
                           ),
