@@ -22,94 +22,99 @@ class SurveysScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
         child: Column(children: [
-          const Row(
-            children: [
-              Text(
-                'Pick a survey',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-              ),
-            ],
-          ),
-          const SizedBox(height: 30),
           Expanded(
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 //////// PERSONAL SURVEY - ON CLICK - GO TO QUESTIONS
                 Expanded(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
+                  child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          image: DecorationImage(
+                              colorFilter: ColorFilter.mode(
+                                  Colors.black.withOpacity(0.4),
+                                  BlendMode.darken),
+                              image: const AssetImage("assets/wallpaper 4.jpg"),
+                              fit: BoxFit.cover)),
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: MaterialButton(
+                          padding: const EdgeInsets.only(
+                              left: 15, right: 5, top: 15, bottom: 15),
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          onPressed: () {
                             context
                                 .read<SurveysProvider>()
                                 .successSavingPersonalSurveyResponse = false;
-                            context.goNamed('Personal Survey');
+                            context.goNamed("Personal Survey");
                           },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              gradient: const LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  colors: [
-                                    Color.fromARGB(255, 226, 217, 215),
-                                    Color(0xFF5CD3FF)
-                                  ]),
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.grey,
-                            ),
-                            child: const Center(
-                                child: Text(
-                              'Personal Survey',
-                              style: TextStyle(
-                                  fontSize: 25,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600),
-                            )),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Go To Personal Survey',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w800,
+                                    color: Theme.of(context).hintColor),
+                              ),
+                              Icon(
+                                Icons.navigate_next,
+                                color: Theme.of(context).hintColor,
+                              )
+                            ],
                           ),
                         ),
-                      ),
-                    ],
-                  ),
+                      )),
                 ),
-                const SizedBox(height: 25),
+                const SizedBox(height: 10),
 
                 //////// Couples SURVEY - ON CLICK - GO TO QUESTIONS
                 Expanded(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
+                  child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          image: DecorationImage(
+                              colorFilter: ColorFilter.mode(
+                                  Colors.black.withOpacity(0.4),
+                                  BlendMode.darken),
+                              image: const AssetImage("assets/wallpaper 4.jpg"),
+                              fit: BoxFit.cover)),
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: MaterialButton(
+                          padding: const EdgeInsets.only(
+                              left: 15, right: 5, top: 15, bottom: 15),
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          onPressed: () {
                             context
                                 .read<SurveysProvider>()
                                 .successSavingCouplesSurveyResponse = false;
-                            context.goNamed('Couples Survey');
+                            context.goNamed("Couples Survey");
                           },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              gradient: const LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  colors: [
-                                    Color.fromARGB(255, 241, 214, 174),
-                                    Color.fromARGB(255, 236, 55, 70)
-                                  ]),
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.grey,
-                            ),
-                            child: const Center(
-                                child: Text("Couple's Survey",
-                                    style: TextStyle(
-                                        fontSize: 25,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600))),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Go To Couple's Survey",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w800,
+                                    color: Theme.of(context).hintColor),
+                              ),
+                              Icon(
+                                Icons.navigate_next,
+                                color: Theme.of(context).hintColor,
+                              )
+                            ],
                           ),
                         ),
-                      ),
-                    ],
-                  ),
+                      )),
                 ),
               ],
             ),
