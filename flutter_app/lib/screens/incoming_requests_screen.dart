@@ -43,7 +43,76 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
 
       body: Consumer<ConnectionProvider>(builder: (context, value, child) {
         if (value.currentPartner == true) {
-          return const Center(child: Text("You're already in a relationship!"));
+          return Center(
+              child: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(0),
+              color: Color.fromARGB(255, 134, 133, 133),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  const Column(
+                    children: [
+                      Icon(
+                        Icons.warning_amber_rounded,
+                        color: Colors.white,
+                        size: 100,
+                      ),
+                      Text(
+                        textAlign: TextAlign.center,
+                        "You're Already In A Relationship!",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25,
+                            fontWeight: FontWeight.w900),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 50),
+                        child: NavigationButton(
+                            text: "Go To Suggestions",
+                            textAndRightIconColor: Colors.white,
+                            buttonColor: Theme.of(context).primaryColor,
+                            handlePressed: () {
+                              context.goNamed("Suggestions");
+                            }),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: NavigationButton(
+                            text: "Go To Advice",
+                            textAndRightIconColor:
+                                Theme.of(context).primaryColor,
+                            buttonColor: Colors.white,
+                            handlePressed: () {
+                              context.goNamed("Advice");
+                            }),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: NavigationButton(
+                            text: "Go To Couples Survey",
+                            textAndRightIconColor: Colors.white,
+                            buttonColor: Theme.of(context).hintColor,
+                            handlePressed: () {
+                              context.goNamed("Couples Survey");
+                            }),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ));
         } else if (value.currentPartner == false) {
           /// If User doesn't have any requests
           ///
