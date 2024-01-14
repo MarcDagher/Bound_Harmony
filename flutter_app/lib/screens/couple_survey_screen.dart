@@ -2,6 +2,7 @@ import 'package:bound_harmony/models/survey_model.dart';
 import 'package:bound_harmony/providers/connection_provider.dart';
 import 'package:bound_harmony/providers/survey_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/button.dart';
+import 'package:bound_harmony/reusable%20widgets/navigation_button.dart';
 import 'package:bound_harmony/reusable%20widgets/text_input.dart';
 import 'package:bound_harmony/widgets%20for%20conditional%20UI/connection_status_false.dart';
 import 'package:flutter/material.dart';
@@ -96,9 +97,76 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
         ),
       ),
       //////////// END OF APPBAR
+      ///
       body: Consumer<SurveysProvider>(builder: (context, value, child) {
+        /// Responses saved successfully
+        ///
         if (value.successSavingCouplesSurveyResponse == true) {
-          return const Center(child: Text("Your responses have been saved."));
+          return Center(
+              child: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(0),
+              color: Color.fromARGB(255, 134, 133, 133),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  const Column(
+                    children: [
+                      Icon(
+                        // Icons.article,
+                        // Icons.add_task_outlined,
+                        Icons.check_box,
+                        color: Colors.white,
+                        size: 100,
+                      ),
+                      Text(
+                        textAlign: TextAlign.center,
+                        "Your responses have been saved.",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25,
+                            fontWeight: FontWeight.w900),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 50),
+                        child: NavigationButton(
+                            text: "Go To Suggestions",
+                            textAndRightIconColor: Colors.white,
+                            buttonColor: Theme.of(context).primaryColor,
+                            handlePressed: () {
+                              context.goNamed("Suggestions");
+                            }),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: NavigationButton(
+                            text: "Go To Advice",
+                            textAndRightIconColor:
+                                Theme.of(context).primaryColor,
+                            buttonColor: Colors.white,
+                            handlePressed: () {
+                              context.goNamed("Advice");
+                            }),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ));
+
+          /// If user doesn't have a current partner
+          ///
         } else if (value.couplesSurveyRejected == true) {
           return Consumer<ConnectionProvider>(
               builder: (context, value, child) => NotConnectedBox(
@@ -112,6 +180,9 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
                   handlePressedAdvice: () {
                     context.goNamed("Advice");
                   }));
+
+          /// If user has a current partner
+          ///
         } else {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -154,7 +225,7 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
                                   questionIndex: questionIndex),
 
                           /// If checkbox.
-                          /// I used i from the for loop, to give it as an indicator and have access to isChecked
+                          /// I used "i" from the for loop, to give it as an indicator and have access to isChecked
                           ///
                           if (value.questions[questionIndex]!.type ==
                               "checkbox")
