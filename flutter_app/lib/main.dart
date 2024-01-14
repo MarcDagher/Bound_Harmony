@@ -30,7 +30,6 @@ class MyApp extends StatelessWidget {
           create: (context) => SurveysProvider(),
         ),
       ],
-      // Should I use builder or child here?
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         title: 'Bound Harmony',
@@ -59,20 +58,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// Screens 
-//AdviceScreen,   
-//BondingActivitiesScreen, 
-//ConnectionSetupScreen, [Good] 
-//DateBuilderScreen,  
-//GiftIdeasScreen, 
-//IncomingRequestsScreen, [Good] 
-//LogInScreen, [Good]  
-//MyPartnersScreen, [Good]
-//OnBoardingScreen,  
-//ProfileScreen, [Good] [Minor detail: Last button is cut when i scroll down which looks ugly]
-//SignUpScreen,  [Good]
-//SuggestionsScreen, 
-//SurveysScreen, 
-//TakeSurveyScreen 
-//] 
