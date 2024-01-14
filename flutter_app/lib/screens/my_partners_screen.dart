@@ -74,7 +74,8 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
               }
             }
 
-            // If no partners, display a message and input request bar
+            /// If no partners, display Box: message and input request bar
+            ///
             if (value.listOfPartners.isEmpty && value.listOfPartners.isEmpty) {
               widgets.add(Padding(
                 padding: EdgeInsets.only(
@@ -92,6 +93,8 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+                      /// Box Message
+                      ///
                       const Padding(
                         padding: EdgeInsets.only(bottom: 30),
                         child: Text(
@@ -105,6 +108,8 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                       ),
                       Column(
                         children: [
+                          /// Box Input Field
+                          ///
                           Form(
                             key: formKey,
                             child: TextInputField(
@@ -124,6 +129,9 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                                 placeholder: "Enter your partner's email"),
                           ),
                           const SizedBox(height: 5),
+
+                          /// Box Send Request button
+                          ///
                           Button(
                               text: 'Send Request',
                               handlePressed: () async {
@@ -141,7 +149,10 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                           if (value.messageSendRequest.isNotEmpty)
                             Padding(
                               padding: const EdgeInsets.only(top: 10),
-                              child: Text(value.messageSendRequest),
+                              child: Text(
+                                value.messageSendRequest,
+                                style: const TextStyle(color: Colors.white),
+                              ),
                             )
                         ],
                       ),
@@ -202,7 +213,8 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
               );
             }
 
-            // If has partners and a current, display all except the last one. The last one is Slidable
+            /// If has partners and a current, display all except the last one. The last one is Slidable
+            ///
             if (value.listOfPartners.isNotEmpty &&
                 value.currentPartner == true) {
               for (int i = 0; i < value.listOfPartners.length - 1; i++) {
@@ -221,7 +233,8 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                 );
               }
 
-              // Creating Slidable that can disconnect on click
+              /// Creating Slidable that can disconnect on click
+              ///
               widgets.add(Slidable(
                   endActionPane:
                       ActionPane(motion: const BehindMotion(), children: [

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bound_harmony/providers/auth_provider.dart';
+import 'package:bound_harmony/providers/connection_provider.dart';
 import 'package:bound_harmony/providers/user_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/button.dart';
 import 'package:bound_harmony/reusable%20widgets/display_box.dart';
@@ -283,6 +284,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ],
                       ),
                       onPressed: () {
+                        context.read<ConnectionProvider>().successSendRequest =
+                            false;
+                        context.read<ConnectionProvider>().messageSendRequest =
+                            "";
+
                         context.goNamed('My Partners');
                       })
                 ],
