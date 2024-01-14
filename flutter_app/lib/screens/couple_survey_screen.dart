@@ -80,7 +80,14 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Couple's Survey"),
+        leadingWidth: 30,
+        leading: BackButton(
+          color: Theme.of(context).hintColor,
+        ),
+        title: Text(
+          "Couple's Survey",
+          style: TextStyle(color: Theme.of(context).hintColor),
+        ),
       ),
       //////////// END OF APPBAR
       body: Consumer<SurveysProvider>(builder: (context, value, child) {

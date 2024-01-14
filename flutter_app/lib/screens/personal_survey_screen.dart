@@ -75,7 +75,12 @@ class _PersonalSurveyScreenState extends State<PersonalSurveyScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Personal Survey"),
+        leading: BackButton(color: Theme.of(context).hintColor),
+        leadingWidth: 30,
+        title: Text(
+          "Personal Survey",
+          style: TextStyle(color: Theme.of(context).hintColor),
+        ),
       ),
       //////////// END OF APPBAR
       body: Consumer<SurveysProvider>(builder: (context, value, child) {

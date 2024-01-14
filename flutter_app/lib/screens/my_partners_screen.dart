@@ -34,6 +34,7 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(color: Theme.of(context).hintColor),
+        leadingWidth: 30,
         backgroundColor: Colors.white,
         title: Text(
           'My Partners',

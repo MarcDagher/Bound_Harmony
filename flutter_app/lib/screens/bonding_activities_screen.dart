@@ -40,10 +40,10 @@ class BondingActivitiesScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Padding(
-          padding: EdgeInsets.only(left: 10),
-          child: Text('Bonding Activities'),
-        ),
+        leading: BackButton(color: Theme.of(context).hintColor),
+        leadingWidth: 30,
+        title: Text('Bonding Activities',
+            style: TextStyle(color: Theme.of(context).hintColor)),
       ),
 
       ///// END OF APPBAR

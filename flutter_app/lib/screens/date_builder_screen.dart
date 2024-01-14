@@ -40,10 +40,10 @@ class DateBuilderScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Padding(
-          padding: EdgeInsets.only(left: 10),
-          child: Text('Date Builder'),
-        ),
+        leading: BackButton(color: Theme.of(context).hintColor),
+        leadingWidth: 30,
+        title: Text('Date Builder',
+            style: TextStyle(color: Theme.of(context).hintColor)),
       ),
 
       ///// END OF APPBAR

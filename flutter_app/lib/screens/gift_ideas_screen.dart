@@ -22,10 +22,10 @@ class GiftIdeasScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Padding(
-          padding: EdgeInsets.only(left: 10),
-          child: Text('Gift Ideas'),
-        ),
+        leading: BackButton(color: Theme.of(context).hintColor),
+        leadingWidth: 30,
+        title: Text('Gift Ideas',
+            style: TextStyle(color: Theme.of(context).hintColor)),
       ),
 
       //// End of AppBar
