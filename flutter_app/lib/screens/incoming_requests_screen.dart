@@ -78,6 +78,8 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
                             textAndRightIconColor: Colors.white,
                             buttonColor: Theme.of(context).primaryColor,
                             handlePressed: () {
+                              value.successSendRequest = false;
+                              value.messageSendRequest = "";
                               context.goNamed("My Partners");
                             }),
                         Padding(
