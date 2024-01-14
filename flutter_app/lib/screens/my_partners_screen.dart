@@ -100,7 +100,7 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                         padding: EdgeInsets.only(bottom: 30),
                         child: Text(
                           textAlign: TextAlign.center,
-                          "Don't have a partner? No Problem! \nGo to my partners and send a request or go get some advice!",
+                          "Haven't connected to your partner yet?\nGo ahead and send them a request!",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 17,

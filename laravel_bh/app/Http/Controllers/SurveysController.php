@@ -92,14 +92,17 @@ class SurveysController extends Controller
                     ]);
                 }
             }
-
+            
         }
-    
         
+        $user_in_model = User::find($user -> id);
+        $user_in_model -> couple_survey_status = "complete";
+        $user_in_model -> save();
 
         return response() -> json([
             "status" => "success",
-            "message" => "Your responses have been saved"
+            "message" => "Your responses have been saved",
+            "updated user" => $user_in_model
         ]); 
     }
 }
