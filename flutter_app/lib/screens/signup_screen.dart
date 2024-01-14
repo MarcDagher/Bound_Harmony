@@ -38,7 +38,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: Image.asset(
                     "assets/logo.png",
                   ),
-                ), // when keyboard appears hide logo
+                ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: Text(
@@ -182,8 +182,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       context.goNamed('Log In');
                     },
                     child: Text(
-                      "If you have an account Sign In",
-                      style: TextStyle(color: Theme.of(context).primaryColor),
+                      "Already have an account? Log In",
+                      style: TextStyle(
+                          color: Theme.of(context).primaryColor, fontSize: 16),
                     ),
                   ),
                 )
