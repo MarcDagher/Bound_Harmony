@@ -66,7 +66,13 @@ class ConnectionSetupScreen extends StatelessWidget {
                                     : !RegExp(r'^[\w-]+(\.[\w-]+)*@(hotmail\.com|gmail\.com|yahoo\.com|outlook\.com)$')
                                             .hasMatch(emailController.text)
                                         ? "Invalid email format"
-                                        : null,
+                                        : email ==
+                                                context
+                                                    .read<AuthProvider>()
+                                                    .preferences!
+                                                    .get("email")
+                                            ? "Don't send requests to yourself"
+                                            : null,
                                 placeholder: "Enter your partner's email"),
                           ),
                         ),
