@@ -2,10 +2,12 @@ import 'package:bound_harmony/models/user.dart';
 import 'package:bound_harmony/providers/auth_provider.dart';
 import 'package:bound_harmony/providers/connection_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/button.dart';
+import 'package:bound_harmony/reusable%20widgets/navigation_button.dart';
 import 'package:bound_harmony/reusable%20widgets/text_input.dart';
 import 'package:bound_harmony/reusable%20widgets/user_tile_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class MyPartnersScreen extends StatefulWidget {
@@ -73,25 +75,86 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
             }
 
             // If no partners, display a message and input request bar
-            if (value.listOfPartners.isEmpty) {
-              widgets.add(
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 80),
+            if (value.listOfPartners.isEmpty && value.listOfPartners.isEmpty) {
+              widgets.add(Padding(
+                padding: EdgeInsets.only(
+                    left: 25,
+                    right: 25,
+                    top: MediaQuery.of(context).size.height * 0.2),
+                child: Container(
+                  height: 260,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Theme.of(context).hintColor,
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text("You don't have any previous partners"),
-                      SizedBox(height: 5),
+                      const Padding(
+                        padding: EdgeInsets.only(bottom: 30),
+                        child: Text(
+                          textAlign: TextAlign.center,
+                          "Don't have a partner? No Problem! \nGo to my partners and send a request or go get some advice!",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                      Column(
+                        children: [
+                          Form(
+                            key: formKey,
+                            child: TextInputField(
+                                handleChangeController: requestController,
+                                handleValidation: (email) => email!.isEmpty
+                                    ? "Email is required"
+                                    : !RegExp(r'^[\w-]+(\.[\w-]+)*@(hotmail\.com|gmail\.com|yahoo\.com|outlook\.com)$')
+                                            .hasMatch(requestController.text)
+                                        ? "Invalid email format"
+                                        : email ==
+                                                context
+                                                    .read<AuthProvider>()
+                                                    .preferences!
+                                                    .get("email")
+                                            ? "Don't send requests to yourself"
+                                            : null,
+                                placeholder: "Enter your partner's email"),
+                          ),
+                          const SizedBox(height: 5),
+                          Button(
+                              text: 'Send Request',
+                              handlePressed: () async {
+                                if (formKey.currentState!.validate()) {
+                                  final token = await context
+                                      .read<AuthProvider>()
+                                      .getToken();
+                                  // ignore: use_build_context_synchronously
+                                  await context
+                                      .read<ConnectionProvider>()
+                                      .sendRequest(
+                                          requestController.text, token);
+                                }
+                              }),
+                          if (value.messageSendRequest.isNotEmpty)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: Text(value.messageSendRequest),
+                            )
+                        ],
+                      ),
                     ],
                   ),
                 ),
-              );
+              ));
             }
 
             // Create input field and the button if:
             // if has partner without current, or no partners at all
             if ((value.listOfPartners.isNotEmpty &&
-                    value.currentPartner == false) ||
-                (value.listOfPartners.isEmpty)) {
+                value.currentPartner == false)) {
               widgets.add(
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),

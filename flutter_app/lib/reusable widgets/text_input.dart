@@ -26,6 +26,8 @@ class TextInputField extends StatelessWidget {
       onTap: handleOnTap,
       // styling
       decoration: InputDecoration(
+          fillColor: Colors.white,
+          filled: true,
           border: OutlineInputBorder(
             borderSide: BorderSide(
                 strokeAlign: double.infinity,
