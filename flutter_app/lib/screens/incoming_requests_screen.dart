@@ -1,8 +1,10 @@
 import 'package:bound_harmony/providers/auth_provider.dart';
 import 'package:bound_harmony/providers/connection_provider.dart';
+import 'package:bound_harmony/reusable%20widgets/navigation_button.dart';
 import 'package:bound_harmony/reusable%20widgets/user_tile_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class IncomingRequestsScreen extends StatefulWidget {
@@ -25,10 +27,14 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
     getdata();
     return Scaffold(
       appBar: AppBar(
+        leading: BackButton(
+          color: Theme.of(context).hintColor,
+        ),
         backgroundColor: Colors.white,
-        title: const Text(
+        title: Text(
           'Incoming Requests',
-          style: TextStyle(fontWeight: FontWeight.w600),
+          style: TextStyle(
+              fontWeight: FontWeight.w600, color: Theme.of(context).hintColor),
         ),
       ),
 
@@ -41,11 +47,54 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
           /// If User doesn't have any requests
           ///
           if (value.noRequests == true) {
-            return Center(
-              child: Text(
-                value.messageDisplayRequests,
-                style:
-                    TextStyle(color: Theme.of(context).hintColor, fontSize: 17),
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: Center(
+                child: Container(
+                  height: 260,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Theme.of(context).hintColor,
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.only(bottom: 30),
+                        child: Text(
+                          textAlign: TextAlign.center,
+                          "Don't have a partner? No Problem! \nGo to my partners and send a request or go get some advice!",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                      Column(children: [
+                        NavigationButton(
+                            text: "My Partners",
+                            textAndRightIconColor: Colors.white,
+                            buttonColor: Theme.of(context).primaryColor,
+                            handlePressed: () {
+                              context.goNamed("My Partners");
+                            }),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                          child: NavigationButton(
+                              text: "Advice",
+                              textAndRightIconColor:
+                                  Theme.of(context).primaryColor,
+                              buttonColor: Colors.white,
+                              handlePressed: () {
+                                context.goNamed("Advice");
+                              }),
+                        ),
+                      ]),
+                    ],
+                  ),
+                ),
               ),
             );
 
