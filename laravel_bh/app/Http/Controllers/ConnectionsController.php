@@ -101,29 +101,42 @@ class ConnectionsController extends Controller
         // query connections where user is the responder and status is pending 
 
         $user = Auth::user();
-        $incoming_requests = Connection::where(['status'=>'pending', 'responder'=>$user->id])->get();
-        
+        $incoming_requests = Connection::where(['status'=>'pending', 'responder'=>$user->id])-> get();
+
         if (isset($incoming_requests[0])){
             $response_array = [];
 
             foreach($incoming_requests as $request){
-                
-                $requester_email = User::find($request->requester)->email;
-                $requester_name = User::find($request->requester)->username;
-                $responder_email = User::find($request->responder)->email;
-                $response_array[] = [
-                    "id" => $request -> id,
-                    "requester" => $requester_email,
-                    "requester_name" => $requester_name,
-                    "responder" => $responder_email,
-                    "status" => $request->status
-                ]; 
+
+                if ($request -> requester_user -> connection_status == "false"){
+
+                        // Using the belongsTo relation method requester_user() and responder_user()
+                        $requester_email = $request -> requester_user -> email; 
+                        $requester_name = $request -> requester_user -> username;
+                        $responder_email = $request -> responder_user ->email;
+                        $response_array[] = [
+                            "id" => $request -> id,
+                            "requester" => $requester_email,
+                            "requester_name" => $requester_name,
+                            "responder" => $responder_email,
+                            "status" => $request->status
+                        ]; 
+
+                }
+            }
+            
+            if (count($response_array) > 0){
+                return response() -> json([
+                    "status" => "success",
+                    "requests" => $response_array
+                ]); 
+            } else {
+                return response() -> json([
+                    "status" => "No requests",
+                    "message" => "You don't have any new requests"
+                ]);
             }
 
-            return response() -> json([
-                "status" => "success",
-                "requests" => $response_array
-            ]); 
 
         } else {
             return response() -> json([
