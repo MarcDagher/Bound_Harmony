@@ -7,12 +7,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthProvider extends ChangeNotifier {
   final dio = Dio();
   // SignUp variables
-  bool? successSignUp;
-  bool? emailTaken;
+  bool successSignUp = false;
+  bool emailTaken = false;
 
   // LogIn Variables
-  bool? successLogin;
-  bool? wrongCredentials;
+  bool successLogin = false;
+  bool wrongCredentials = false;
 
   // Shared preferences variables
   SharedPreferences? preferences;
@@ -83,7 +83,7 @@ class AuthProvider extends ChangeNotifier {
             JwtDecoder.decode(response.data['authorisation']['token']);
 
         await initializePreferences();
-        print("In sign in data: $token");
+
         // adding token payload to the Preferences
         preferences?.setString(
             'token', response.data['authorisation']['token']);

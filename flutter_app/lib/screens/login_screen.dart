@@ -126,31 +126,43 @@ class _LogInScreenState extends State<LogInScreen> {
             ///////////////////// Column: BUTTON + Text ///////////////////////
             Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 40),
-                  child: Button(
-                    text: 'Log In',
-                    handlePressed: () async {
-                      if (formKey.currentState!.validate()) {
-                        await context.read<AuthProvider>().logInRequest(
-                            formData['email'], formData['password']);
+                Consumer<AuthProvider>(
+                  builder: (context, value, child) => Padding(
+                    padding: const EdgeInsets.only(top: 40),
+                    child: Button(
+                      text: 'Log In',
+                      handlePressed: () async {
+                        if (formKey.currentState!.validate()) {
+                          await context.read<AuthProvider>().logInRequest(
+                              formData['email'], formData['password']);
 
-                        if (context.read<AuthProvider>().successLogin == true) {
-                          // context.goNamed('Connection Setup');
-                          context.goNamed('Profile');
+                          if (value.successLogin == true) {
+                            // context.goNamed('Connection Setup');
+
+                            context.goNamed('Profile');
+                          }
                         }
-                      }
-                    },
+                      },
+                    ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 15, bottom: 0),
-                  child: GestureDetector(
-                    onTap: () => context.goNamed('Sign Up'),
-                    child: Text(
-                      "Don't have an account? Sign Up",
-                      style: TextStyle(
-                          color: Theme.of(context).primaryColor, fontSize: 16),
+                Consumer<AuthProvider>(
+                  builder: (context, value, child) => Padding(
+                    padding: const EdgeInsets.only(top: 15, bottom: 0),
+                    child: GestureDetector(
+                      onTap: () {
+                        value.emailTaken = false;
+                        value.successLogin = false;
+                        value.successSignUp = false;
+                        value.wrongCredentials = false;
+                        context.goNamed('Sign Up');
+                      },
+                      child: Text(
+                        "Don't have an account? Sign Up",
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: 16),
+                      ),
                     ),
                   ),
                 )
