@@ -190,7 +190,10 @@ class ConnectionsController extends Controller
                 
                 $connection -> status = "disconnected";
                 $user1 -> connection_status = 'false';
+                $user1 -> couple_survey_status = 'incomplete';
+                
                 $user2 -> connection_status = 'false';
+                $user2 -> couple_survey_status = 'incomplete';
     
                 $connection -> save();
                 $user1 -> save();
@@ -199,7 +202,10 @@ class ConnectionsController extends Controller
             return response() -> json([
                 "status" => "success",
                 "message" => "Disconnected successfully",
-                "connection" => $connection]);
+                "connection" => $connection,
+                "first user" => $user1,
+                "second iser" => $user2
+            ]);
             
 
             } else {
