@@ -54,8 +54,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
             ///////////////////// Column: INPUT FIELDs  ///////////////////////
 
-            // context.read<Provider>()....
-            // context.watch<Provider>()....
             Consumer<AuthProvider>(
               builder: (context, value, child) {
                 return Form(

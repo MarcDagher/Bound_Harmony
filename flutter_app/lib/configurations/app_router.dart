@@ -52,7 +52,7 @@ class AppNavigation {
 
       /// Go Router Configuration, initial route that the application will navigate to when it starts
       // initialLocation: '/login',
-      initialLocation: '/login',
+      initialLocation: '/onBoarding',
       // turn true and check debug console for routes
       debugLogDiagnostics: false,
 

@@ -6,18 +6,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends ChangeNotifier {
   final dio = Dio();
+  // SignUp variables
   bool? successSignUp;
   bool? emailTaken;
 
+  // LogIn Variables
   bool? successLogin;
   bool? wrongCredentials;
 
+  // Shared preferences variables
   SharedPreferences? preferences;
-  String? prefId;
-  String? prefUsername;
-  String? prefEmail;
-  String? prefConnectionStatus;
-  String? prefCoupleSurveyStatus;
 
   // Get an instance of preferences
   initializePreferences() async {
