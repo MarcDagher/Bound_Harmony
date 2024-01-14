@@ -5,6 +5,7 @@ import 'package:bound_harmony/providers/connection_provider.dart';
 import 'package:bound_harmony/providers/user_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/button.dart';
 import 'package:bound_harmony/reusable%20widgets/display_box.dart';
+import 'package:bound_harmony/reusable%20widgets/navigation_button.dart';
 import 'package:bound_harmony/reusable%20widgets/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -236,7 +237,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                           side: BorderSide(
-                              color: Theme.of(context).hintColor, width: 2)),
+                              color: Theme.of(context).hintColor, width: 2.5)),
                       padding: const EdgeInsets.symmetric(
                           vertical: 18, horizontal: 15),
                       child: Row(
@@ -258,32 +259,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onPressed: () {
                         context.goNamed("Incoming Requests");
                       }),
+
                   const SizedBox(height: 5),
 
                   // My Partners Navigation Button
-                  MaterialButton(
-                      color: Theme.of(context).primaryColor,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 18, horizontal: 15),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'My Partners',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w800,
-                                color: Colors.white),
-                          ),
-                          Icon(
-                            Icons.navigate_next,
-                            color: Colors.white,
-                          )
-                        ],
-                      ),
-                      onPressed: () {
+                  NavigationButton(
+                      text: "My Partners",
+                      textAndRightIconColor: Colors.white,
+                      buttonColor: Theme.of(context).primaryColor,
+                      handlePressed: () {
                         context.read<ConnectionProvider>().successSendRequest =
                             false;
                         context.read<ConnectionProvider>().messageSendRequest =
