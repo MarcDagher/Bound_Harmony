@@ -31,10 +31,11 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: BackButton(color: Theme.of(context).hintColor),
         backgroundColor: Colors.white,
-        title: const Text(
-          'My History',
-          style: TextStyle(fontWeight: FontWeight.w600),
+        title: Text(
+          'My Partners',
+          style: TextStyle(color: Theme.of(context).hintColor),
         ),
       ),
 
@@ -105,7 +106,13 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                                 : !RegExp(r'^[\w-]+(\.[\w-]+)*@(hotmail\.com|gmail\.com|yahoo\.com|outlook\.com)$')
                                         .hasMatch(requestController.text)
                                     ? "Invalid email format"
-                                    : null,
+                                    : email ==
+                                            context
+                                                .read<AuthProvider>()
+                                                .preferences!
+                                                .get("email")
+                                        ? "Don't send requests to yourself"
+                                        : null,
                             placeholder: "Enter your partner's email"),
                       ),
                       const SizedBox(height: 5),
@@ -122,7 +129,10 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                             }
                           }),
                       if (value.messageSendRequest.isNotEmpty)
-                        Text(value.messageSendRequest)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Text(value.messageSendRequest),
+                        )
                     ],
                   ),
                 ),
