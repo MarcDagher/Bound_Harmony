@@ -13,7 +13,7 @@ class LogInScreen extends StatefulWidget {
 }
 
 class _LogInScreenState extends State<LogInScreen> {
-  late TextEditingController inputController;
+  // late TextEditingController inputController;
   final formKey = GlobalKey<FormState>();
   Map<String, String> formData = {'email': "", 'password': ""};
 
@@ -104,8 +104,6 @@ class _LogInScreenState extends State<LogInScreen> {
 
                       // success
                       if (value.successLogin == true)
-                        // Navigator.popAndPushNamed(
-                        //             context, "Connection Setup"),
                         const Text(
                           "Success.",
                           style: TextStyle(color: Colors.red),
@@ -137,9 +135,12 @@ class _LogInScreenState extends State<LogInScreen> {
                               formData['email'], formData['password']);
 
                           if (value.successLogin == true) {
-                            // context.goNamed('Connection Setup');
-
-                            context.goNamed('Profile');
+                            context.goNamed('Connection Setup');
+                            // context.goNamed('Profile');
+                            value.emailTaken = false;
+                            value.successLogin = false;
+                            value.successSignUp = false;
+                            value.wrongCredentials = false;
                           }
                         }
                       },

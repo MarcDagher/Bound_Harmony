@@ -5,9 +5,14 @@ class Button extends StatelessWidget {
       handlePressed; //  a type definition that represents a callback function that takes no arguments and returns void
   final String text;
   final Color? color;
+  final Color? borderAndTextColor;
 
   const Button(
-      {super.key, required this.text, required this.handlePressed, this.color});
+      {super.key,
+      required this.text,
+      required this.handlePressed,
+      this.color,
+      this.borderAndTextColor});
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +21,20 @@ class Button extends StatelessWidget {
         Expanded(
           child: MaterialButton(
             color: color ?? Theme.of(context).primaryColor,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+              side: borderAndTextColor != null
+                  ? BorderSide(color: borderAndTextColor as Color, width: 2)
+                  : BorderSide.none,
+            ),
             onPressed: handlePressed,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 17),
               child: Text(text,
-                  style: const TextStyle(
-                      color: Colors.white,
+                  style: TextStyle(
+                      color: borderAndTextColor != null
+                          ? borderAndTextColor as Color
+                          : Colors.white,
                       fontWeight: FontWeight.w600,
                       fontSize: 20)),
             ),
