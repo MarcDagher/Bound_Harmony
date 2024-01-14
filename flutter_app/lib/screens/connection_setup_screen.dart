@@ -121,7 +121,7 @@ class ConnectionSetupScreen extends StatelessWidget {
                               "I'll do that later, take me to profile",
                               style: TextStyle(
                                   color: Theme.of(context).hintColor,
-                                  fontSize: 16),
+                                  fontSize: 14),
                             ),
                           ),
                         ),

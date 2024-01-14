@@ -1,7 +1,9 @@
 import 'package:bound_harmony/models/survey_model.dart';
 import 'package:bound_harmony/providers/survey_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/button.dart';
+import 'package:bound_harmony/reusable%20widgets/navigation_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -149,7 +151,45 @@ class _PersonalSurveyScreenState extends State<PersonalSurveyScreen> {
             ),
           );
         } else if (value.successSavingPersonalSurveyResponse == true) {
-          return const Center(child: Text("Your answers have been saved."));
+          return Center(
+              child: Container(
+            height: MediaQuery.of(context).size.height * 0.4,
+            width: MediaQuery.of(context).size.width * 0.8,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: Theme.of(context).hintColor,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                const Icon(
+                  // Icons.article,
+                  Icons.add_task_outlined,
+                  color: Colors.green,
+                  size: 100,
+                ),
+                const Text(
+                  textAlign: TextAlign.center,
+                  "Your answers have been saved.",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w900),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10, top: 50),
+                  child: NavigationButton(
+                      text: "Go To Couple's Survey",
+                      textAndRightIconColor: Theme.of(context).hintColor,
+                      buttonColor: Colors.white,
+                      handlePressed: () {
+                        context.goNamed("Couples Survey");
+                      }),
+                )
+              ],
+            ),
+          ));
         } else {
           return const Center(child: Text("Loading..."));
         }
