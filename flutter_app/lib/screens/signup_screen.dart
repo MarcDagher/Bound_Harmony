@@ -166,11 +166,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                   ),
                 ),
-                GestureDetector(
-                  onTap: () => context.goNamed('Log In'),
-                  child: Text(
-                    "If you have an account Sign In",
-                    style: TextStyle(color: Theme.of(context).primaryColor),
+                Consumer<AuthProvider>(
+                  builder: (context, value, child) => GestureDetector(
+                    onTap: () {
+                      value.emailTaken = false;
+                      value.successLogin = false;
+                      value.successSignUp = false;
+                      value.wrongCredentials = false;
+                      context.goNamed('Log In');
+                    },
+                    child: Text(
+                      "If you have an account Sign In",
+                      style: TextStyle(color: Theme.of(context).primaryColor),
+                    ),
                   ),
                 )
               ],
