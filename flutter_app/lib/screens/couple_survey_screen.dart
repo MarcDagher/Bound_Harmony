@@ -1,9 +1,12 @@
 import 'package:bound_harmony/models/survey_model.dart';
+import 'package:bound_harmony/providers/connection_provider.dart';
 import 'package:bound_harmony/providers/survey_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/button.dart';
 import 'package:bound_harmony/reusable%20widgets/text_input.dart';
+import 'package:bound_harmony/widgets%20for%20conditional%20UI/connection_status_false.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -97,7 +100,18 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
         if (value.successSavingCouplesSurveyResponse == true) {
           return const Center(child: Text("Your responses have been saved."));
         } else if (value.couplesSurveyRejected == true) {
-          return Center(child: Text("You need a girlfriend brotha"));
+          return Consumer<ConnectionProvider>(
+              builder: (context, value, child) => NotConnectedBox(
+                  text:
+                      "You need a partner to access this page.\nGo to my partners and send a request or get some advice!",
+                  handlePressedMyPartners: () {
+                    value.successSendRequest = false;
+                    value.messageSendRequest = "";
+                    context.goNamed("My Partners");
+                  },
+                  handlePressedAdvice: () {
+                    context.goNamed("Advice");
+                  }));
         } else {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),

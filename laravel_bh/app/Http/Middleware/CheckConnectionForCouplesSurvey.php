@@ -21,13 +21,13 @@ class CheckConnectionForCouplesSurvey
             ["survey_id" => "required|integer|in:1,2"]
         ]);
         $user = Auth::user();
-        if ($user -> connection_status == "true" && $request->survey_id == 2){
-            return $next($request);
-        } else {
+        if ($user -> connection_status == "false" && $request->survey_id == 2){
             return response()->json([
                 "status" => "rejected",
                 "message" => "User needs to be connected"
             ], 403);
+        } else {
+            return $next($request);
         }
     }
 }
