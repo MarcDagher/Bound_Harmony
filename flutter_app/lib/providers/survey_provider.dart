@@ -22,8 +22,6 @@ class SurveysProvider extends ChangeNotifier {
     final dio = Dio();
     List<Question> localQuestionsList = [];
     try {
-      // final preferences = await SharedPreferences.getInstance();
-      // final token = preferences.get('token');
       final response = await dio.get("$baseUrl/get_survey",
           data: {"survey_id": surveyId},
           options: Options(headers: {"authorization": "Bearer $token"}));
