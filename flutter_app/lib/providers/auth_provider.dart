@@ -1,4 +1,5 @@
 import 'package:bound_harmony/configurations/request.configuration.dart';
+import 'package:bound_harmony/providers/connection_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -106,7 +107,16 @@ class AuthProvider extends ChangeNotifier {
         wrongCredentials = true;
       }
     }
-
+    print("In Login username: ${preferences!.get('username')}");
+    print("In Login email: ${preferences!.get('email')}");
+    print("In Login birthdate: ${preferences!.get('birthdate')}");
+    print(
+        "In Login connection_status: ${preferences!.get('connection_status')}");
+    print(
+        "In Login couple_survey_status: ${preferences!.get('couple_survey_status')}");
+    print("In Login location: ${preferences!.get('location')}");
+    print(
+        "In Login connection provider currentP: ${ConnectionProvider().currentPartner}");
     notifyListeners();
   }
 }

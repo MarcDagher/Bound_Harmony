@@ -62,7 +62,10 @@ class _PersonalSurveyScreenState extends State<PersonalSurveyScreen> {
   Widget build(BuildContext context) {
     /// Fetch Survey questions according to given ID
     getSurveyRequest(id) async {
-      await context.read<SurveysProvider>().getSurvey(id);
+      final SharedPreferences preferences =
+          await SharedPreferences.getInstance();
+      final token = preferences.get('token');
+      await context.read<SurveysProvider>().getSurvey(id, token);
     }
 
     /// On build of the screen, fetch questions and options

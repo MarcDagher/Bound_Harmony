@@ -15,7 +15,9 @@ class SurveysController extends Controller
     // query questions and options of the survey
     public function get_survey (Request $request) {
 
+        // $user = Auth::user();
         $request -> validate(["survey_id" => "required|integer|in:1,2"]);
+
 
         $response_array = [];
         $questions = Question::where('survey_id', $request -> survey_id) -> get();

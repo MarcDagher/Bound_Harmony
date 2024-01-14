@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SurveysProvider extends ChangeNotifier {
   // in getSurvey, to store all questions with their options
   List<Question?> questions = [];
+  bool couplesSurveyRejected = false;
 
   // in saveSurveyResponse, to toggle UI for a successfuly save request
   bool successSavingPersonalSurveyResponse = false;
@@ -16,32 +17,42 @@ class SurveysProvider extends ChangeNotifier {
   // in saveCouplesSurveyResponse, to toggle UI for a successfuly save request
   bool successSavingCouplesSurveyResponse = false;
 
-  getSurvey(int surveyId) async {
+  getSurvey(int surveyId, token) async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
     List<Question> localQuestionsList = [];
     try {
-      final preferences = await SharedPreferences.getInstance();
-      final token = preferences.get('token');
+      // final preferences = await SharedPreferences.getInstance();
+      // final token = preferences.get('token');
       final response = await dio.get("$baseUrl/get_survey",
           data: {"survey_id": surveyId},
           options: Options(headers: {"authorization": "Bearer $token"}));
-      for (int i = 0; i < response.data["survey"].length; i++) {
-        List listOfOptions = [];
 
-        for (int j = 0; j < response.data["survey"][i]["options"].length; j++) {
-          listOfOptions.add(response.data["survey"][i]["options"][j]["option"]);
+      if (response.data["status"] == "success") {
+        for (int i = 0; i < response.data["survey"].length; i++) {
+          List listOfOptions = [];
+
+          for (int j = 0;
+              j < response.data["survey"][i]["options"].length;
+              j++) {
+            listOfOptions
+                .add(response.data["survey"][i]["options"][j]["option"]);
+          }
+          localQuestionsList.add(Question(
+            id: response.data["survey"][i]["question"]["question_id"],
+            options: listOfOptions,
+            question: response.data["survey"][i]["question"]["question"],
+            type: response.data["survey"][i]["question"]["question_type"],
+          ));
         }
-        localQuestionsList.add(Question(
-          id: response.data["survey"][i]["question"]["question_id"],
-          options: listOfOptions,
-          question: response.data["survey"][i]["question"]["question"],
-          type: response.data["survey"][i]["question"]["question_type"],
-        ));
+        questions = localQuestionsList;
+        notifyListeners();
       }
-      questions = localQuestionsList;
-      notifyListeners();
     } on DioException catch (error) {
+      if (error.response!.statusCode == 403) {
+        couplesSurveyRejected = true;
+        notifyListeners();
+      }
       print("In getSurvey error: $error");
     }
   }

@@ -73,7 +73,10 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
   Widget build(BuildContext context) {
     // This method will fetch all questions and options of the Couple's Survey
     getSurveyRequest(id) async {
-      await context.read<SurveysProvider>().getSurvey(id);
+      final SharedPreferences preferences =
+          await SharedPreferences.getInstance();
+      final token = preferences.get('token');
+      await context.read<SurveysProvider>().getSurvey(id, token);
     }
 
     getSurveyRequest(2);
@@ -93,6 +96,8 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
       body: Consumer<SurveysProvider>(builder: (context, value, child) {
         if (value.successSavingCouplesSurveyResponse == true) {
           return const Center(child: Text("Your responses have been saved."));
+        } else if (value.couplesSurveyRejected == true) {
+          return Center(child: Text("You need a girlfriend brotha"));
         } else {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),

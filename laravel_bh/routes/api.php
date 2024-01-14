@@ -32,8 +32,11 @@ Route::controller(ConnectionsController::class)->group(function () {
 });
 
 Route::controller(SurveysController::class)->group(function (){
-    Route::get('/get_survey', 'get_survey');
     Route::post('/save_responses', 'save_responses');
+});
+
+Route::middleware('check.if.connected.for.couples.survey')->group(function(){
+    Route::get('/get_survey', [SurveysController::class ,'get_survey']);
 });
 
 Route::controller(ChatBotController::class) -> group (function (){
