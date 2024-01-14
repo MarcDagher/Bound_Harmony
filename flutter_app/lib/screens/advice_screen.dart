@@ -39,12 +39,11 @@ class _AdviceScreenState extends State<AdviceScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: Text(
-            'Advice',
-            style: TextStyle(color: Theme.of(context).hintColor),
-          ),
+        toolbarHeight: 35,
+        backgroundColor: const Color.fromARGB(255, 122, 116, 116),
+        title: const Text(
+          'Advice',
+          style: TextStyle(color: Colors.white),
         ),
       ),
 
@@ -57,8 +56,10 @@ class _AdviceScreenState extends State<AdviceScreen> {
             colors: [
               // Color.fromARGB(255, 247, 182, 182),
               // Color.fromARGB(255, 248, 239, 239),
-              Color.fromARGB(255, 255, 255, 255),
-              Color.fromARGB(255, 250, 180, 180),
+              // Color.fromARGB(255, 255, 255, 255),
+              // Color.fromARGB(255, 250, 180, 180),
+              Color.fromARGB(255, 63, 60, 60),
+              Color.fromARGB(255, 122, 116, 116),
             ],
             transform: GradientRotation(10),
             begin: Alignment.topLeft,
@@ -117,7 +118,7 @@ class _AdviceScreenState extends State<AdviceScreen> {
                     color: message.isSentByMe
                         ? const Color.fromARGB(255, 241, 241, 241)
                         : const Color.fromARGB(255, 247, 83, 83),
-                    elevation: 1,
+                    elevation: 3,
                     child: Padding(
                       padding: const EdgeInsets.all(12),
                       child: Text(
@@ -139,24 +140,30 @@ class _AdviceScreenState extends State<AdviceScreen> {
             /// Styling input field
             ///
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 5),
+              padding: const EdgeInsets.only(left: 5, bottom: 5),
               child: Row(
                 children: [
                   Expanded(
                     child: TextField(
+                      cursorColor: Colors.white,
                       controller: inputController,
-                      style: TextStyle(color: Theme.of(context).hintColor),
+                      style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
-                          filled: true,
-                          fillColor: const Color.fromARGB(62, 201, 199, 199),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: Color.fromARGB(255, 119, 118, 118)),
+                              borderRadius: BorderRadius.circular(15)),
+                          filled: false,
+                          fillColor: const Color.fromARGB(255, 85, 82, 82),
                           border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(20)),
+                              borderSide: const BorderSide(
+                                color: Color.fromARGB(255, 119, 118, 118),
+                              ),
+                              borderRadius: BorderRadius.circular(15)),
                           contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 20),
+                              horizontal: 10, vertical: 16),
                           hintText: 'Type your message here...',
-                          hintStyle:
-                              TextStyle(color: Theme.of(context).hintColor)),
+                          hintStyle: const TextStyle(color: Colors.white)),
                     ),
                   ),
 
@@ -164,10 +171,18 @@ class _AdviceScreenState extends State<AdviceScreen> {
                   ///
                   ///
                   Padding(
-                    padding: const EdgeInsets.only(left: 2),
-                    child: FloatingActionButton(
-                      backgroundColor: Theme.of(context).primaryColor,
-                      elevation: 5,
+                    padding: const EdgeInsets.only(left: 5, right: 5),
+                    child: MaterialButton(
+                      shape: RoundedRectangleBorder(
+                        // side: const BorderSide(
+                        //     color: Color.fromARGB(255, 119, 118, 118),
+                        //     width: 0.5),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      height: 48,
+                      minWidth: 0,
+                      // color: Theme.of(context).primaryColor,
+                      child: const Icon(Icons.send, color: Colors.white),
                       onPressed: () {
                         final message = Message(
                             text: inputController.text,
@@ -178,7 +193,6 @@ class _AdviceScreenState extends State<AdviceScreen> {
                         });
                         inputController.clear();
                       },
-                      child: const Icon(Icons.send, color: Colors.white),
                     ),
                   )
                 ],
