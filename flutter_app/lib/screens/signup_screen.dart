@@ -56,6 +56,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
             Consumer<AuthProvider>(
               builder: (context, value, child) {
+                if (value.successSignUp == true) {
+                  usernameController.clear();
+                  emailController.clear();
+                  birthdateController.clear();
+                  passwordController.clear();
+                }
                 return Form(
                   key: formKey,
                   child: Column(
