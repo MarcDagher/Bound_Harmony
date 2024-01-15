@@ -13,7 +13,6 @@ class LogInScreen extends StatefulWidget {
 }
 
 class _LogInScreenState extends State<LogInScreen> {
-  // late TextEditingController inputController;
   final formKey = GlobalKey<FormState>();
   Map<String, String> formData = {'email': "", 'password': ""};
 
@@ -22,6 +21,10 @@ class _LogInScreenState extends State<LogInScreen> {
       formData[field] = newField;
     });
   }
+
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  // late TextEditingController inputController;
 
   // @override
   // void initState() {
@@ -80,6 +83,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         Padding(
                           padding: const EdgeInsets.only(top: 60),
                           child: TextInputField(
+                            handleChangeController: usernameController,
                             handleChange: (text) {
                               handleInput('email', text);
                             },
@@ -95,6 +99,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         Padding(
                           padding: const EdgeInsets.only(top: 5, bottom: 20),
                           child: TextInputField(
+                            handleChangeController: passwordController,
                             handleChange: (text) {
                               handleInput('password', text);
                             },
@@ -139,12 +144,14 @@ class _LogInScreenState extends State<LogInScreen> {
                                 formData['email'], formData['password']);
 
                             if (value.successLogin == true) {
-                              context.goNamed('Connection Setup');
-                              // context.goNamed('Profile');
                               value.emailTaken = false;
                               value.successLogin = false;
                               value.successSignUp = false;
                               value.wrongCredentials = false;
+                              context.goNamed('Connection Setup');
+                              usernameController.clear();
+                              passwordController.clear();
+                              // context.goNamed('Profile');
                             }
                           }
                         },
