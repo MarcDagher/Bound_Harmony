@@ -50,10 +50,14 @@ class UserProvider extends ChangeNotifier {
   saveImage(token, imageFile) async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
+    // An XFile is a cross-platform file
+    // Change XFile to a list of bytes
     List<int> imageBytes = await imageFile.readAsBytes();
+
+    /// Create a MultipartFile from a chunked stream of bytes
     final newImage =
-        await MultipartFile.fromBytes(imageBytes, filename: 'profile_pic');
-    // print("In saveImage: $imageFile");
+        MultipartFile.fromBytes(imageBytes, filename: 'profile_pic');
+
     try {
       final response = await dio.post('$baseUrl/edit_image',
           data: FormData.fromMap({"profile_pic_url": newImage}),
