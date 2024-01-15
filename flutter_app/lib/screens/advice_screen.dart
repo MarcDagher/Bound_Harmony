@@ -115,12 +115,15 @@ class _AdviceScreenState extends State<AdviceScreen> {
                       ? Alignment.centerRight
                       : Alignment.centerLeft,
                   child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
                     color: message.isSentByMe
                         ? const Color.fromARGB(255, 241, 241, 241)
                         : const Color.fromARGB(255, 247, 83, 83),
                     elevation: 3,
                     child: Padding(
-                      padding: const EdgeInsets.all(12),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 10),
                       child: Text(
                         message.text,
                         style: TextStyle(
@@ -177,21 +180,24 @@ class _AdviceScreenState extends State<AdviceScreen> {
                         // side: const BorderSide(
                         //     color: Color.fromARGB(255, 119, 118, 118),
                         //     width: 0.5),
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(20),
                       ),
                       height: 48,
                       minWidth: 0,
-                      // color: Theme.of(context).primaryColor,
+                      // color: const Color.fromARGB(255, 85, 82, 82),
+                      color: Theme.of(context).primaryColor,
                       child: const Icon(Icons.send, color: Colors.white),
                       onPressed: () {
-                        final message = Message(
-                            text: inputController.text,
-                            date: DateTime.now(),
-                            isSentByMe: true);
-                        setState(() {
-                          return messages.add(message);
-                        });
-                        inputController.clear();
+                        if (inputController.text.isNotEmpty) {
+                          final message = Message(
+                              text: inputController.text,
+                              date: DateTime.now(),
+                              isSentByMe: true);
+                          setState(() {
+                            return messages.add(message);
+                          });
+                          inputController.clear();
+                        }
                       },
                     ),
                   )

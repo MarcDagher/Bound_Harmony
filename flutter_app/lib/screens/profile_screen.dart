@@ -33,7 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Column(
             children: [
               //////
-              ///////////////////// Stack :Circle Avatar + Add Image Icon + Edit Info Icon ///////////////////////
+              ////// Stack :Circle Avatar + Add Image Icon + Edit Info Icon
               Padding(
                 padding: const EdgeInsets.only(top: 20, bottom: 25),
                 child: Stack(
@@ -183,7 +183,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
 
-              ///////////////////// Column: Username - email - birthdate - Location - NavButton x2  ///////////////////////
+              ////// Column: Username - email - birthdate - Location - NavButton x2
               Column(
                 children: [
                   /// Username display: to change click on icon
