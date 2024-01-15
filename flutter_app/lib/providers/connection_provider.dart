@@ -53,20 +53,28 @@ class ConnectionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Display incoming requests
+  /// Display user's pending incoming requests
   displayIncomingRequests(token) async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
     try {
       final response = await dio.get("$baseUrl/display_requests",
           options: Options(headers: {'authorization': 'Bearer $token'}));
+      // success
       if (response.data["status"] == "success") {
         successDisplayRequests = true;
         noRequests = false;
         listOfRequests = response.data["requests"];
-      } else if (response.data["status"] == "No requests") {
+      }
+      // user doeasn't have incoming requests
+      else if (response.data["status"] == "No requests") {
         noRequests = true;
         messageDisplayRequests = response.data["message"];
+      }
+      // user is already connected
+      else if (response.data["status"] == "rejected") {
+        noRequests = false;
+        currentPartner = true;
       }
     } on DioException catch (error) {
       print(
@@ -114,7 +122,6 @@ class ConnectionProvider extends ChangeNotifier {
   }
 
   /// Display user's partners
-  ///
   getPartners(token) async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();

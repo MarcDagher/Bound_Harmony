@@ -105,7 +105,7 @@ class ConnectionsController extends Controller
         if ($user -> connection_status == "true"){
 
             return response() -> json([
-                "status" => "rejectd",
+                "status" => "rejected",
                 "message" => "Already in a relationship"
             ]);
 
@@ -117,7 +117,6 @@ class ConnectionsController extends Controller
                 foreach($incoming_requests as $request){
     
                     if ($request -> requester_user -> connection_status == "false"){
-    
                             // Using the belongsTo relation method requester_user() and responder_user()
                             $requester_email = $request -> requester_user -> email; 
                             $requester_name = $request -> requester_user -> username;
@@ -129,7 +128,6 @@ class ConnectionsController extends Controller
                                 "responder" => $responder_email,
                                 "status" => $request->status
                             ]; 
-    
                     }
                 }
                 

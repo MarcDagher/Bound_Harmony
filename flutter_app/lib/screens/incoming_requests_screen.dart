@@ -42,6 +42,7 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
       //// END OF APPBAR /////
 
       body: Consumer<ConnectionProvider>(builder: (context, value, child) {
+        /// If user is connected to a partner
         if (value.currentPartner == true) {
           return Center(
               child: Container(
@@ -113,7 +114,10 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
               ),
             ),
           ));
-        } else if (value.currentPartner == false) {
+        }
+
+        // If user isn't connected to a partner
+        else if (value.currentPartner == false) {
           /// If User doesn't have any requests
           ///
           if (value.noRequests == true) {
