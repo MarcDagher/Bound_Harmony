@@ -340,7 +340,11 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: RadioListTile(
-        title: Text(option, overflow: TextOverflow.clip),
+        title: Text(option,
+            overflow: TextOverflow.clip,
+            style: TextStyle(
+                color: Theme.of(context).hintColor,
+                fontWeight: FontWeight.w600)),
         value: option,
         groupValue: chosenOption,
         onChanged: (chosenResponse) {
@@ -379,7 +383,10 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: CheckboxListTile(
-        title: Text(option),
+        title: Text(option,
+            style: TextStyle(
+                color: Theme.of(context).hintColor,
+                fontWeight: FontWeight.w600)),
         controlAffinity: ListTileControlAffinity.leading,
         activeColor: Theme.of(context).primaryColor,
         checkColor: Colors.white,

@@ -252,7 +252,12 @@ class _PersonalSurveyScreenState extends State<PersonalSurveyScreen> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: RadioListTile(
-        title: Text(option, overflow: TextOverflow.clip),
+        title: Text(
+          option,
+          overflow: TextOverflow.clip,
+          style: TextStyle(
+              color: Theme.of(context).hintColor, fontWeight: FontWeight.w600),
+        ),
         value: option,
         groupValue: personalSurveyResponses[questionIndex].response,
         onChanged: (chosenResponse) {
