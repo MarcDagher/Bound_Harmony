@@ -386,7 +386,7 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
             side: BorderSide(color: Theme.of(context).hintColor),
             borderRadius: BorderRadius.circular(8)),
 
-        /// value is the bool inside the question's isChecked array inside the model at index indicator
+        /// value is the bool inside the question's isChecked array, inside the model at index "indicator"
         ///
         value: coupleSurveyResponses[questionIndex].isChecked![indicator],
 
