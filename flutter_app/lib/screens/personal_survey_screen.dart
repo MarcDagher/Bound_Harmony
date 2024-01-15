@@ -87,8 +87,12 @@ class _PersonalSurveyScreenState extends State<PersonalSurveyScreen> {
           style: TextStyle(color: Theme.of(context).hintColor),
         ),
       ),
+
       //////////// END OF APPBAR
+
       body: Consumer<SurveysProvider>(builder: (context, value, child) {
+        /// Display question and options
+        ///
         if (value.successSavingPersonalSurveyResponse == false) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -150,16 +154,18 @@ class _PersonalSurveyScreenState extends State<PersonalSurveyScreen> {
               ],
             ),
           );
-        } else if (value.successSavingPersonalSurveyResponse == true) {
-          /// Answers Saved Successfully Card
-          ///
+        }
+
+        /// Answers Saved Successfully Card
+        ///
+        else if (value.successSavingPersonalSurveyResponse == true) {
           return Center(
               child: Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(0),
-              color: Color.fromARGB(255, 134, 133, 133),
+              color: const Color.fromARGB(255, 134, 133, 133),
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
