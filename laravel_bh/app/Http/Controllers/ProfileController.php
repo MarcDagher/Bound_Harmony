@@ -69,11 +69,11 @@ class ProfileController extends Controller
         if ($request->hasFile('profile_pic_url')){
             $user = User::find($token->id);
             // image path is in storage/app/public/images
-            $imagePath = $request->file('profile_pic_url')->store('images', 'public');
-            $user->profile_pic_url = $imagePath;
+            $image_path = $request->file('profile_pic_url')->store('images', 'public');
+            $user->profile_pic_url = $image_path;
             $user->save();
             //Use the File class to retrieve image file
-            // $imageFile = File::get(storage_path('app/public/'.$imagePath));
+            // $imageFile = File::get(storage_path('app/public/'.$image_path));
             return response()->json([
                 "status" => "success",
                 "message" => "Image changed successfully",
@@ -98,10 +98,25 @@ class ProfileController extends Controller
                     "message" => "no image"
                 ]);
             } else {
-                return response() -> json([
-                    "status" => "success",
-                    "message" => "this is the image"
-                ]);
+
+                // search image on the file path
+                $image_path = $user->profile_pic_url;
+                $full_path = storage_path('app/public/' . $image_path);
+
+                if(file_exists($full_path)){
+                    $file_content = file_get_contents($full_path);
+                    $base64_image = base64_encode($file_content);
+                    return response() -> json([
+                        "status" => "success",
+                        "image" => $base64_image
+                    ]);
+                } else {
+                    return response() -> json([
+                        "status" => "failed",
+                        "message" => "image not found"
+                    ]);
+                }
+
             }
         
     }
