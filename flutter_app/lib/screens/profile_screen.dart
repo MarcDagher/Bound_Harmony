@@ -276,15 +276,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         context.goNamed('My Partners');
                       }),
 
-                  Padding(
-                    padding: const EdgeInsets.only(top: 5),
-                    child: Consumer<AuthProvider>(
-                        builder: (context, value, child) => Button(
+                  Consumer<AuthProvider>(
+                      builder: (context, value, child) => Padding(
+                            padding: const EdgeInsets.only(top: 5),
+                            child: Button(
                               text: "Logout",
-                              handlePressed: () {},
+                              handlePressed: () async {
+                                final preferences =
+                                    await SharedPreferences.getInstance();
+                                final token = preferences.get('token');
+                                await value.logout(token);
+                                context.goNamed("Log In");
+                              },
                               color: const Color.fromARGB(255, 95, 95, 95),
-                            )),
-                  ),
+                            ),
+                          )),
                 ],
               ),
             ],

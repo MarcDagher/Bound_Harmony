@@ -102,7 +102,7 @@ class AuthProvider extends ChangeNotifier {
         }
       }
     } on DioException catch (error) {
-      if (error.response!.statusCode == 401) {
+      if (error.response?.statusCode == 401) {
         successLogin = false;
         wrongCredentials = true;
       }
@@ -120,12 +120,13 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future logout() async {
+  Future logout(token) async {
     final dio = Dio();
     final baseUrl = Requests.baseUrl;
 
     try {
-      final response = await dio.post("$baseUrl/logout");
+      final response = await dio.post("$baseUrl/logout",
+          options: Options(headers: {"authorization": "Bearer $token"}));
       print("In logout: ${response.data}");
     } on DioException catch (error) {
       print(error);
