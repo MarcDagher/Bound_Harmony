@@ -99,7 +99,6 @@ class ProfileController extends Controller
                 ]);
             } else {
 
-                // search image on the file path
                 $image_path = $user->profile_pic_url;
                 $full_path = storage_path('app/public/' . $image_path);
 

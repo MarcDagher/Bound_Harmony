@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:bound_harmony/configurations/request.configuration.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -77,11 +80,15 @@ class UserProvider extends ChangeNotifier {
     final dio = Dio();
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     final token = preferences.get('token');
-
+    print("WE'RE INSIDE GET IMAGE");
     try {
       final response = await dio.get("$baseUrl/get_profile_photo",
-          options: Options(headers: {"authorization": "Bearer $token"}));
-      print("in getImage: ${response.data}");
+          options: Options(
+              headers: {"authorization": "Bearer $token"},
+              contentType: "application/json"));
+      // print("in getImage response: ${response.data}");
+      final image = base64Decode(response.data["image"]);
+      // print("in getImage response: $image");
     } on DioException catch (error) {
       print("in getImage: ${error}");
     }

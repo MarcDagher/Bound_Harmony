@@ -132,12 +132,12 @@ class _LogInScreenState extends State<LogInScreen> {
                                 emailController.text, passwordController.text);
 
                             if (value.successLogin == true) {
-                              await context.read<UserProvider>().getImage();
                               value.emailTaken = false;
                               value.successLogin = false;
                               value.successSignUp = false;
                               value.wrongCredentials = false;
                               context.goNamed('Connection Setup');
+                              await context.read<UserProvider>().getImage();
                               emailController.clear();
                               passwordController.clear();
                               // context.goNamed('Profile');
