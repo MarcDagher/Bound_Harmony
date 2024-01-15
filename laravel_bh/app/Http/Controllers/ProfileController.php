@@ -89,18 +89,20 @@ class ProfileController extends Controller
     }
 
     public function get_profile_photo(){
-        $user = Auth::user();
 
-        if ($user -> profile_pic_url != "no image") {
-            return response() -> json([
-                "status" => "rejected",
-                "message" => "no image"
-            ]);
-        } else {
-            return response() -> json([
-                "status" => "success",
-                "message" => "this is the image"
-            ]);
-        }
+            $user = Auth::user();
+    
+            if ($user -> profile_pic_url == "no image") {
+                return response() -> json([
+                    "status" => "rejected",
+                    "message" => "no image"
+                ]);
+            } else {
+                return response() -> json([
+                    "status" => "success",
+                    "message" => "this is the image"
+                ]);
+            }
+        
     }
 }

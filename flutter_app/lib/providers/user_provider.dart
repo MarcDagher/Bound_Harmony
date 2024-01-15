@@ -79,7 +79,8 @@ class UserProvider extends ChangeNotifier {
     final token = preferences.get('token');
 
     try {
-      final response = await dio.get("$baseUrl/get_image");
+      final response = await dio.get("$baseUrl/get_profile_photo",
+          options: Options(headers: {"authorization": "Bearer $token"}));
       print("in getImage: ${response.data}");
     } on DioException catch (error) {
       print("in getImage: ${error}");
