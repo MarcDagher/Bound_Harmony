@@ -235,10 +235,12 @@ class _PersonalSurveyScreenState extends State<PersonalSurveyScreen> {
         },
         shape: ContinuousRectangleBorder(
             side: BorderSide(color: Theme.of(context).hintColor),
-            borderRadius: BorderRadius.circular(8)),
+            borderRadius: BorderRadius.circular(20)),
         contentPadding: const EdgeInsets.only(left: 6),
+        fillColor: MaterialStateColor.resolveWith(
+            (states) => Theme.of(context).primaryColor),
+        tileColor: const Color.fromARGB(61, 207, 207, 207),
         activeColor: Theme.of(context).primaryColor,
-        selectedTileColor: Colors.amber,
       ),
     );
   }

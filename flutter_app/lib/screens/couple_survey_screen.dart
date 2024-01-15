@@ -362,10 +362,12 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
         },
         shape: ContinuousRectangleBorder(
             side: BorderSide(color: Theme.of(context).hintColor),
-            borderRadius: BorderRadius.circular(8)),
+            borderRadius: BorderRadius.circular(20)),
         contentPadding: const EdgeInsets.only(left: 6),
         activeColor: Theme.of(context).primaryColor,
-        selectedTileColor: Colors.amber,
+        fillColor: MaterialStateColor.resolveWith(
+            (states) => Theme.of(context).primaryColor),
+        tileColor: const Color.fromARGB(40, 161, 161, 161),
       ),
     );
   }
@@ -381,10 +383,12 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
         controlAffinity: ListTileControlAffinity.leading,
         activeColor: Theme.of(context).primaryColor,
         checkColor: Colors.white,
+        side: BorderSide(color: Theme.of(context).primaryColor, width: 1.5),
+        tileColor: const Color.fromARGB(61, 207, 207, 207),
         contentPadding: const EdgeInsets.only(left: 7, right: 0),
         shape: ContinuousRectangleBorder(
             side: BorderSide(color: Theme.of(context).hintColor),
-            borderRadius: BorderRadius.circular(8)),
+            borderRadius: BorderRadius.circular(20)),
 
         /// value is the bool inside the question's isChecked array, inside the model at index "indicator"
         ///
