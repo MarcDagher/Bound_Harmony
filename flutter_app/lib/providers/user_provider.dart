@@ -47,18 +47,22 @@ class UserProvider extends ChangeNotifier {
     }
   }
 
-  saveImage(token, image) async {
+  saveImage(token, imageFile) async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
-    final newImage = await MultipartFile.fromFile(image);
+    List<int> imageBytes = await imageFile.readAsBytes();
+    final newImage =
+        await MultipartFile.fromBytes(imageBytes, filename: 'profile_pic');
+    // print("In saveImage: $imageFile");
     try {
       final response = await dio.post('$baseUrl/edit_image',
-          data: {"profile_pic_url": newImage},
-          options: Options(headers: {
-            "authorization": "Bearer $token",
-            "Accept": "application/json"
-          }));
-      // print("In provider response: ${response.data}");
+          data: FormData.fromMap({"profile_pic_url": newImage}),
+          options: Options(
+            headers: {
+              "authorization": "Bearer $token",
+            },
+          ));
+      print("In provider response: ${response.data}");
     } catch (e) {
       print("In saveImage error: $e");
     }
