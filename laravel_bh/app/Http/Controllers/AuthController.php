@@ -31,15 +31,15 @@ class AuthController extends Controller
             // Carbon is a class that handles date type
         ]);
 
-        $token = Auth::login($user);
+        // $token = Auth::login($user);
         return response()->json([
             'status' => 'success',
             'message' => 'User created successfully',
             'user' => $user,
-            'authorisation' => [
-                'token' => $token,
-                'type' => 'bearer',
-            ]
+            // 'authorisation' => [
+            //     'token' => $token,
+            //     'type' => 'bearer',
+            // ]
         ]);
     }
 

@@ -119,4 +119,16 @@ class AuthProvider extends ChangeNotifier {
     //     "In Login connection provider currentP: ${ConnectionProvider().currentPartner}");
     notifyListeners();
   }
+
+  Future logout() async {
+    final dio = Dio();
+    final baseUrl = Requests.baseUrl;
+
+    try {
+      final response = await dio.post("$baseUrl/logout");
+      print("In logout: ${response.data}");
+    } on DioException catch (error) {
+      print(error);
+    }
+  }
 }
