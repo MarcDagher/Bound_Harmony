@@ -35,7 +35,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               //////
               ////// Stack :Circle Avatar + Add Image Icon + Edit Info Icon
               Padding(
-                padding: const EdgeInsets.only(top: 20, bottom: 25),
+                padding: const EdgeInsets.only(top: 0, bottom: 10),
                 child: Stack(
                   children: [
                     _image != null
@@ -274,7 +274,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             "";
 
                         context.goNamed('My Partners');
-                      })
+                      }),
+
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5),
+                    child: Consumer<AuthProvider>(
+                        builder: (context, value, child) => Button(
+                              text: "Logout",
+                              handlePressed: () {},
+                              color: const Color.fromARGB(255, 95, 95, 95),
+                            )),
+                  ),
                 ],
               ),
             ],
