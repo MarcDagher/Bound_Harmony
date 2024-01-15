@@ -1,4 +1,5 @@
 import 'package:bound_harmony/providers/auth_provider.dart';
+import 'package:bound_harmony/providers/user_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:bound_harmony/reusable%20widgets/button.dart';
@@ -131,6 +132,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                 emailController.text, passwordController.text);
 
                             if (value.successLogin == true) {
+                              await context.read<UserProvider>().getImage();
                               value.emailTaken = false;
                               value.successLogin = false;
                               value.successSignUp = false;

@@ -183,7 +183,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
 
-              ////// Column: Username - email - birthdate - Location - NavButton x2
+              ////// Column contains: Username - email - birthdate - Location - NavButton x2
               Column(
                 children: [
                   /// Username display: to change click on icon

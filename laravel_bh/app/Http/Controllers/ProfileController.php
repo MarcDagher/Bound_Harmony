@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\File;
 
 class ProfileController extends Controller
 {
-    // get email or user id from token then change he user's username
+    
     public function change_username(Request $request){
 
         $token = Auth::user();
@@ -65,7 +65,7 @@ class ProfileController extends Controller
         $request -> validate([
             "profile_pic_url" => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
-
+        
         if ($request->hasFile('profile_pic_url')){
             $user = User::find($token->id);
             // image path is in storage/app/public/images
@@ -84,6 +84,22 @@ class ProfileController extends Controller
             return response()->json([
                 "status" => "failed",
                 "message" => "please insert an image"
+            ]);
+        }
+    }
+
+    public function get_profile_photo(){
+        $user = Auth::user();
+
+        if ($user -> profile_pic_url != "no image") {
+            return response() -> json([
+                "status" => "rejected",
+                "message" => "no image"
+            ]);
+        } else {
+            return response() -> json([
+                "status" => "success",
+                "message" => "this is the image"
             ]);
         }
     }

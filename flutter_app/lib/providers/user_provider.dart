@@ -1,6 +1,7 @@
 import 'package:bound_harmony/configurations/request.configuration.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProvider extends ChangeNotifier {
   // changeUsername method
@@ -66,9 +67,22 @@ class UserProvider extends ChangeNotifier {
               "authorization": "Bearer $token",
             },
           ));
-      print("In provider response: ${response.data}");
     } catch (e) {
       print("In saveImage error: $e");
+    }
+  }
+
+  getImage() async {
+    final baseUrl = Requests.baseUrl;
+    final dio = Dio();
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    final token = preferences.get('token');
+
+    try {
+      final response = await dio.get("$baseUrl/get_image");
+      print("in getImage: ${response.data}");
+    } on DioException catch (error) {
+      print("in getImage: ${error}");
     }
   }
 }
