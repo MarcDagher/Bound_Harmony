@@ -155,41 +155,64 @@ class _PersonalSurveyScreenState extends State<PersonalSurveyScreen> {
           ///
           return Center(
               child: Container(
-            height: MediaQuery.of(context).size.height * 0.4,
-            width: MediaQuery.of(context).size.width * 0.8,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: Theme.of(context).hintColor,
+              borderRadius: BorderRadius.circular(0),
+              color: Color.fromARGB(255, 134, 133, 133),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                const Icon(
-                  // Icons.article,
-                  Icons.add_task_outlined,
-                  color: Colors.green,
-                  size: 100,
-                ),
-                const Text(
-                  textAlign: TextAlign.center,
-                  "Your answers have been saved.",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w900),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10, top: 50),
-                  child: NavigationButton(
-                      text: "Go To Couple's Survey",
-                      textAndRightIconColor: Theme.of(context).hintColor,
-                      buttonColor: Colors.white,
-                      handlePressed: () {
-                        context.goNamed("Couples Survey");
-                      }),
-                )
-              ],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  const Column(
+                    children: [
+                      Icon(
+                        // Icons.article,
+                        // Icons.add_task_outlined,
+                        Icons.check_box,
+                        color: Colors.white,
+                        size: 100,
+                      ),
+                      Text(
+                        textAlign: TextAlign.center,
+                        "Your responses have been saved.",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25,
+                            fontWeight: FontWeight.w900),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 50),
+                        child: NavigationButton(
+                            text: "Go To Couple's Survey",
+                            textAndRightIconColor: Colors.white,
+                            buttonColor: Theme.of(context).primaryColor,
+                            handlePressed: () {
+                              context.goNamed("Couples Survey");
+                            }),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: NavigationButton(
+                            text: "Go To Advice",
+                            textAndRightIconColor:
+                                Theme.of(context).primaryColor,
+                            buttonColor: Colors.white,
+                            handlePressed: () {
+                              context.goNamed("Advice");
+                            }),
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
           ));
         } else {
