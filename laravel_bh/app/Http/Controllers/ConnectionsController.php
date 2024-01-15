@@ -11,8 +11,8 @@ use function PHPUnit\Framework\isEmpty;
 
 class ConnectionsController extends Controller
 {
+    // query the records with accepted or disconnected related to the user
     public function display_history (){
-        // query the records with accepted or disconnected related to the user
         $token = Auth::user();
         
         // records where status is [accepted or disconnected] and requester or responder are the current user
@@ -49,9 +49,9 @@ class ConnectionsController extends Controller
 
     }
 
+    // sends a request only when users don't have a connection or if their previous connections are [rejected, disconnected]
+    // if status is [pending, connected] request will not be sent
     public function send_request(Request $request){
-        // sends a request only when users don't have a connection or if their previous connections are [rejected, disconnected]
-        // if status is [pending, connected] request will not be sent
 
         $request -> validate([
             "email" => "required|max:100"
@@ -96,60 +96,70 @@ class ConnectionsController extends Controller
     }
 
 
+    // receiving end of a request
+    // query connections where user is the responder and status is pending 
     public function display_requests() {
-        // receiving end of a request
-        // query connections where user is the responder and status is pending 
 
         $user = Auth::user();
         $incoming_requests = Connection::where(['status'=>'pending', 'responder'=>$user->id])-> get();
+        if ($user -> connection_status == "true"){
 
-        if (isset($incoming_requests[0])){
-            $response_array = [];
+            return response() -> json([
+                "status" => "rejectd",
+                "message" => "Already in a relationship"
+            ]);
 
-            foreach($incoming_requests as $request){
+        } else {
 
-                if ($request -> requester_user -> connection_status == "false"){
-
-                        // Using the belongsTo relation method requester_user() and responder_user()
-                        $requester_email = $request -> requester_user -> email; 
-                        $requester_name = $request -> requester_user -> username;
-                        $responder_email = $request -> responder_user ->email;
-                        $response_array[] = [
-                            "id" => $request -> id,
-                            "requester" => $requester_email,
-                            "requester_name" => $requester_name,
-                            "responder" => $responder_email,
-                            "status" => $request->status
-                        ]; 
-
+            if (isset($incoming_requests[0])){
+                $response_array = [];
+    
+                foreach($incoming_requests as $request){
+    
+                    if ($request -> requester_user -> connection_status == "false"){
+    
+                            // Using the belongsTo relation method requester_user() and responder_user()
+                            $requester_email = $request -> requester_user -> email; 
+                            $requester_name = $request -> requester_user -> username;
+                            $responder_email = $request -> responder_user ->email;
+                            $response_array[] = [
+                                "id" => $request -> id,
+                                "requester" => $requester_email,
+                                "requester_name" => $requester_name,
+                                "responder" => $responder_email,
+                                "status" => $request->status
+                            ]; 
+    
+                    }
                 }
-            }
-            
-            if (count($response_array) > 0){
-                return response() -> json([
-                    "status" => "success",
-                    "requests" => $response_array
-                ]); 
+                
+                if (count($response_array) > 0){
+                    return response() -> json([
+                        "status" => "success",
+                        "requests" => $response_array
+                    ]); 
+                } else {
+                    return response() -> json([
+                        "status" => "No requests",
+                        "message" => "You don't have any new requests"
+                    ]);
+                }
+    
+    
             } else {
                 return response() -> json([
                     "status" => "No requests",
                     "message" => "You don't have any new requests"
                 ]);
             }
-
-
-        } else {
-            return response() -> json([
-                "status" => "No requests",
-                "message" => "You don't have any new requests"
-            ]);
         }
+
     }
 
 
+    // receiving end of a request
+    // accept - reject a request (Change the value of status to [accepted, rejected])
     public function respond_to_request(Request $request){ 
-        // receiving end of a request
-        // accept - reject a request (Change the value of status to [accepted, rejected])
         $request -> validate([
             'request_id' => 'required|integer', // on display of requests we will also have the details  of each request
             'response' => 'required|in:rejected,accepted'
@@ -186,9 +196,9 @@ class ConnectionsController extends Controller
 
     }
 
+    // Change connection status to disconnected
+    // Change user's connection_status to false
     public function disconnect(Request $request){
-        // Change connection status to disconnected
-        // Change user's connection_status to false
         $request -> validate([
             'connection_id' => 'required|integer', // on display of requests we will also have the details  of each request
             // 'status' => 'required|in:disconnected'

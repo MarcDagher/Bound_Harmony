@@ -28,7 +28,8 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       backgroundColor: const Color.fromARGB(255, 233, 232, 232),
-      selectedItemColor: const Color.fromARGB(255, 243, 67, 67),
+      selectedItemColor: const Color.fromARGB(255, 170, 167, 167),
+      // selectedItemColor: const Color.fromARGB(255, 243, 67, 67),
       unselectedItemColor: const Color.fromARGB(255, 170, 167, 167),
       selectedLabelStyle:
           const TextStyle(color: Color.fromARGB(255, 190, 186, 186)),
