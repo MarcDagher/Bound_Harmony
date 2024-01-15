@@ -14,15 +14,8 @@ class LogInScreen extends StatefulWidget {
 
 class _LogInScreenState extends State<LogInScreen> {
   final formKey = GlobalKey<FormState>();
-  Map<String, String> formData = {'email': "", 'password': ""};
 
-  void handleInput(String field, String newField) {
-    setState(() {
-      formData[field] = newField;
-    });
-  }
-
-  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   // late TextEditingController inputController;
 
@@ -83,15 +76,12 @@ class _LogInScreenState extends State<LogInScreen> {
                         Padding(
                           padding: const EdgeInsets.only(top: 60),
                           child: TextInputField(
-                            handleChangeController: usernameController,
-                            handleChange: (text) {
-                              handleInput('email', text);
-                            },
+                            handleChangeController: emailController,
                             placeholder: 'Email',
                             handleValidation: (email) => email!.isEmpty
                                 ? "Email is required"
                                 : !RegExp(r'^[\w-]+(\.[\w-]+)*@(hotmail\.com|gmail\.com|yahoo\.com|outlook\.com)$')
-                                        .hasMatch(formData['email']!)
+                                        .hasMatch(email)
                                     ? "Invalid email format"
                                     : null,
                           ),
@@ -100,9 +90,6 @@ class _LogInScreenState extends State<LogInScreen> {
                           padding: const EdgeInsets.only(top: 5, bottom: 20),
                           child: TextInputField(
                             handleChangeController: passwordController,
-                            handleChange: (text) {
-                              handleInput('password', text);
-                            },
                             placeholder: 'Password',
                             handleValidation: (password) => password!.isEmpty
                                 ? "Password is required"
@@ -141,7 +128,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         handlePressed: () async {
                           if (formKey.currentState!.validate()) {
                             await context.read<AuthProvider>().logInRequest(
-                                formData['email'], formData['password']);
+                                emailController.text, passwordController.text);
 
                             if (value.successLogin == true) {
                               value.emailTaken = false;
@@ -149,7 +136,7 @@ class _LogInScreenState extends State<LogInScreen> {
                               value.successSignUp = false;
                               value.wrongCredentials = false;
                               context.goNamed('Connection Setup');
-                              usernameController.clear();
+                              emailController.clear();
                               passwordController.clear();
                               // context.goNamed('Profile');
                             }
