@@ -29,7 +29,7 @@ class MessagesController extends Controller
         } catch (\Exception $e) {
             return response() -> json([
                 "status" => "failed",
-                "message" => $e->getMessage()
+                "message" => $e
             ]); 
         }           
     }

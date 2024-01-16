@@ -1,7 +1,9 @@
 import 'package:bound_harmony/models/message.dart';
+import 'package:bound_harmony/providers/messages_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class AdviceScreen extends StatefulWidget {
   const AdviceScreen({super.key});
@@ -15,13 +17,13 @@ class _AdviceScreenState extends State<AdviceScreen> {
 
   /// This will be retreived from the database and organized in the provider to be put here
   /// the history needs to be retreived from the DB
-  List<Message> messages = [
-    Message(text: 'Yes Sure!', date: DateTime.now(), isSentByMe: false),
-    Message(text: 'Yes Sure!', date: DateTime.now(), isSentByMe: false),
-    Message(text: 'Yes Sure!', date: DateTime.now(), isSentByMe: true),
-    Message(text: 'Yes Sure!', date: DateTime.now(), isSentByMe: false),
-    Message(text: 'Yes Sure!', date: DateTime.now(), isSentByMe: true),
-  ];
+  // List<Message> messages = [
+  //   Message(text: 'Yes Sure!', date: DateTime.now(), isSentByMe: false),
+  //   Message(text: 'Yes Sure!', date: DateTime.now(), isSentByMe: false),
+  //   Message(text: 'Yes Sure!', date: DateTime.now(), isSentByMe: true),
+  //   Message(text: 'Yes Sure!', date: DateTime.now(), isSentByMe: false),
+  //   Message(text: 'Yes Sure!', date: DateTime.now(), isSentByMe: true),
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -58,68 +60,70 @@ class _AdviceScreenState extends State<AdviceScreen> {
         child: Column(
           children: [
             Expanded(
-              /// create the time card and groups the elements (messages) according to their DateTime
+              /// create the time card and group elements (messages) according to their DateTime
               ///
               ///
-              child: GroupedListView<Message, DateTime>(
-                keyboardDismissBehavior:
-                    ScrollViewKeyboardDismissBehavior.onDrag,
-                padding: const EdgeInsets.all(8),
-                reverse: true,
-                order: GroupedListOrder.DESC,
-                useStickyGroupSeparators: false,
-                floatingHeader: false,
-                // elements are the items that will be filling our list
-                elements: messages,
-                // sets the condition upon which the elements will be grouped
-                // elements of the same date will be a group
-                groupBy: (message) => DateTime(
-                    message.date.year, message.date.month, message.date.day),
+              child: Consumer<MessagesProvider>(
+                builder: (context, value, child) =>
+                    GroupedListView<Message, DateTime>(
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
+                  padding: const EdgeInsets.all(8),
+                  reverse: true,
+                  order: GroupedListOrder.DESC,
+                  useStickyGroupSeparators: false,
+                  floatingHeader: false,
+                  // elements are the items found in the list
+                  elements: value.conversation,
+                  // sets the grouping condition: same date
+                  groupBy: (message) => DateTime(
+                      message.date.year, message.date.month, message.date.day),
 
-                /// building the group header (Date card)
-                ///
-                groupHeaderBuilder: (Message message) => Center(
-                  /// styling the card
+                  /// building the group header (Date card)
                   ///
-                  child: Card(
-                    color: Colors.grey[400],
-                    child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Text(
-                        DateFormat.yMMMd().format(message.date),
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600),
+                  groupHeaderBuilder: (Message message) => Center(
+                    /// styling the card
+                    ///
+                    child: Card(
+                      color: Colors.grey[400],
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Text(
+                          DateFormat.yMMMd().format(message.date),
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600),
+                        ),
                       ),
                     ),
                   ),
-                ),
 
-                /// Building messages Card
-                /// if its my message =>  align right : else left
-                itemBuilder: (context, Message message) => Align(
-                  alignment: message.isSentByMe
-                      ? Alignment.centerRight
-                      : Alignment.centerLeft,
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    color: message.isSentByMe
-                        ? const Color.fromARGB(255, 241, 241, 241)
-                        : const Color.fromARGB(255, 247, 83, 83),
-                    elevation: 3,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 10),
-                      child: Text(
-                        message.text,
-                        style: TextStyle(
-                          color: message.isSentByMe
-                              ? Theme.of(context).hintColor
-                              : Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 15,
+                  /// Building messages Card
+                  /// if its my message =>  align right : else left
+                  itemBuilder: (context, Message message) => Align(
+                    alignment: message.isSentByMe
+                        ? Alignment.centerRight
+                        : Alignment.centerLeft,
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      color: message.isSentByMe
+                          ? const Color.fromARGB(255, 241, 241, 241)
+                          : const Color.fromARGB(255, 247, 83, 83),
+                      elevation: 3,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 10),
+                        child: Text(
+                          message.text,
+                          style: TextStyle(
+                            color: message.isSentByMe
+                                ? Theme.of(context).hintColor
+                                : Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15,
+                          ),
                         ),
                       ),
                     ),
@@ -175,15 +179,18 @@ class _AdviceScreenState extends State<AdviceScreen> {
                       // color: const Color.fromARGB(255, 85, 82, 82),
                       color: Theme.of(context).primaryColor,
                       child: const Icon(Icons.send, color: Colors.white),
-                      onPressed: () {
+                      onPressed: () async {
                         if (inputController.text.isNotEmpty) {
                           final message = Message(
                               text: inputController.text,
                               date: DateTime.now(),
                               isSentByMe: true);
-                          setState(() {
-                            return messages.add(message);
-                          });
+                          await context
+                              .read<MessagesProvider>()
+                              .sendMessage(message);
+                          // setState(() {
+                          //   messages.add(message);
+                          // });
                           inputController.clear();
                         }
                       },
