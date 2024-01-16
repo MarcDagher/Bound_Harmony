@@ -30,15 +30,13 @@ class SuggestionsMiddleware
         }
 
         // get user's partner
-        $partner_as_requester = Connection::where(['status' => 'accepted', "responder" => $user -> id]) -> get('requester');
-        $partner_as_responder = Connection::where(['status' => 'accepted', "requester" => $user -> id]) -> get('responder');
-        
+        $partner_as_requester = Connection::where(['status' => 'accepted', "responder" => $user -> id]) -> with("requester_user") -> get('requester') -> first();
+        $partner_as_responder = Connection::where(['status' => 'accepted', "requester" => $user -> id]) -> with("responder_user") -> get('responder') -> first();
+
         // check if user's partner completed couple's survey
         // user is the requester
-        if (count($partner_as_requester) > 0) {
-            
-            $partner_couple_survey_status = User::find($partner_as_requester[0]["requester"]) -> couple_survey_status;
-            if ($partner_couple_survey_status == "incomplete"){
+        if ($partner_as_requester) {
+            if ($partner_as_requester['requester_user']['couple_survey_status'] == "incomplete"){
                 return response() -> json([
                     "status" => "failed",
                     "message" => "Make sure your partner submitted their couple's survey"
@@ -46,17 +44,15 @@ class SuggestionsMiddleware
             }
 
         // user is the responder
-        } else if (count($partner_as_responder) > 0) {
-
-            $partner_couple_survey_status = User::find($partner_as_responder[0]["responder"]) -> couple_survey_status;
-            if ($partner_couple_survey_status == "incomplete"){
+        } else if ($partner_as_responder) {
+            if ($partner_as_responder['requester_user']['couple_survey_status'] == "incomplete"){
                 return response() -> json([
                     "status" => "failed",
                     "message" => "Make sure your partner submitted their couple's survey"
                 ]); 
             }
         }
-
         return $next($request);
     }
 }
+// https://laravel-news.com/openai-for-laravel
