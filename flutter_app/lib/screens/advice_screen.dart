@@ -17,30 +17,18 @@ class _AdviceScreenState extends State<AdviceScreen> {
   /// the history needs to be retreived from the DB
   List<Message> messages = [
     Message(text: 'Yes Sure!', date: DateTime.now(), isSentByMe: false),
-    Message(
-        text: 'Yes Sure!',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
-        isSentByMe: false),
-    Message(
-        text: 'Yes Sure!',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
-        isSentByMe: true),
-    Message(
-        text: 'Yes Sure!',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
-        isSentByMe: false),
-    Message(
-        text: 'Yes Sure!',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
-        isSentByMe: true),
-  ].reversed.toList();
+    Message(text: 'Yes Sure!', date: DateTime.now(), isSentByMe: false),
+    Message(text: 'Yes Sure!', date: DateTime.now(), isSentByMe: true),
+    Message(text: 'Yes Sure!', date: DateTime.now(), isSentByMe: false),
+    Message(text: 'Yes Sure!', date: DateTime.now(), isSentByMe: true),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 35,
-        backgroundColor: const Color.fromARGB(255, 122, 116, 116),
+        backgroundColor: Theme.of(context).hintColor,
         title: const Text(
           'Advice',
           style: TextStyle(color: Colors.white),
@@ -51,31 +39,31 @@ class _AdviceScreenState extends State<AdviceScreen> {
       ///
       ///
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              // Color.fromARGB(255, 247, 182, 182),
-              // Color.fromARGB(255, 248, 239, 239),
-              // Color.fromARGB(255, 255, 255, 255),
-              // Color.fromARGB(255, 250, 180, 180),
-              Color.fromARGB(255, 63, 60, 60),
-              Color.fromARGB(255, 122, 116, 116),
-            ],
-            transform: GradientRotation(10),
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+        decoration: BoxDecoration(
+          // gradient: LinearGradient(
+          //   colors: [
+          //     // Color.fromARGB(255, 247, 182, 182),
+          //     // Color.fromARGB(255, 248, 239, 239),
+          //     // Color.fromARGB(255, 255, 255, 255),
+          //     // Color.fromARGB(255, 250, 180, 180),
+          //     Color.fromARGB(255, 63, 60, 60),
+          //     Color.fromARGB(255, 122, 116, 116),
+          //   ],
+          //   // transform: GradientRotation(10),
+          //   begin: Alignment.topLeft,
+          //   end: Alignment.bottomRight,
+          // ),
+          color: Theme.of(context).hintColor,
         ),
         child: Column(
           children: [
             Expanded(
-              ///// Just like a regural ListView, I used this to group messages by date
+              /// create the time card and groups the elements (messages) according to their DateTime
               ///
               ///
               child: GroupedListView<Message, DateTime>(
                 keyboardDismissBehavior:
                     ScrollViewKeyboardDismissBehavior.onDrag,
-                // this child creates the time card and groups the elements (messages) according to their DateTime
                 padding: const EdgeInsets.all(8),
                 reverse: true,
                 order: GroupedListOrder.DESC,

@@ -1,13 +1,10 @@
-import 'package:bound_harmony/models/user.dart';
 import 'package:bound_harmony/providers/auth_provider.dart';
 import 'package:bound_harmony/providers/connection_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/button.dart';
-import 'package:bound_harmony/reusable%20widgets/navigation_button.dart';
 import 'package:bound_harmony/reusable%20widgets/text_input.dart';
 import 'package:bound_harmony/reusable%20widgets/user_tile_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class MyPartnersScreen extends StatefulWidget {
@@ -228,7 +225,6 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                           context: context,
                           icon: Icons.accessibility_sharp,
                           iconColor: Theme.of(context).hintColor),
-                      const SizedBox(height: 5),
                     ],
                   ),
                 );
