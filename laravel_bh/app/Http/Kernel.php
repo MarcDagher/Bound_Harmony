@@ -66,6 +66,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'auth.user' => \App\Http\Middleware\AuthMiddleware::class, // this was a tester
         'validate.for.couples.survey' => \App\Http\Middleware\ValidationForCouplesSurvey::class,
-
+        'validate.for.suggestions' => \App\Http\Middleware\SuggestionsMiddleware::class
     ];
 }

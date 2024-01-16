@@ -131,7 +131,6 @@ class ConnectionProvider extends ChangeNotifier {
           options: Options(headers: {"authorization": "Bearer $token"}));
 
       listOfPartners = response.data["connections"];
-
       int count = 0;
       for (int i = 0; i < response.data["connections"].length; i++) {
         if (response.data["connections"][i]['status'] == 'accepted') {

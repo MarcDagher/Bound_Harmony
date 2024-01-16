@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ConnectionsController;
 use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SuggestionsController;
 use App\Http\Controllers\SurveysController;
 use App\Http\Middleware\AuthMiddleware;
 
@@ -45,6 +46,10 @@ Route::controller(MessagesController::class) -> group (function (){
 /// checks if user connection_status == true and if personal_survey_status == true
 Route::middleware('validate.for.couples.survey')->group(function(){
     Route::get('/get_survey', [SurveysController::class ,'get_survey']);
+});
+
+Route::middleware('validate.for.suggestions') -> group(function(){
+    Route::get('/get_suggestions', [SuggestionsController::class, 'get_suggestions']);
 });
 
 // Route::middleware('auth.user')->group(function () {
