@@ -78,4 +78,8 @@ class MessagesController extends Controller
         // Send user's prompt to openAI 
         // Get openAI's response
     }
+
+    
+
+
 }

@@ -29,9 +29,12 @@ class SuggestionsMiddleware
             ]);
         }
 
-        // get user's partner
-        $partner_as_requester = Connection::where(['status' => 'accepted', "responder" => $user -> id]) -> with("requester_user") -> get('requester') -> first();
-        $partner_as_responder = Connection::where(['status' => 'accepted', "requester" => $user -> id]) -> with("responder_user") -> get('responder') -> first();
+        // search for user's partner using their connection's relation
+        $partner_as_requester = Connection::where(['status' => 'accepted', "responder" => $user -> id]) 
+                                -> with("requester_user") -> get('requester') -> first();
+
+        $partner_as_responder = Connection::where(['status' => 'accepted', "requester" => $user -> id]) 
+                                -> with("responder_user") -> get('responder') -> first();
 
         // check if user's partner completed couple's survey
         // user is the requester
