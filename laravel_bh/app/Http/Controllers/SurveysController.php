@@ -58,7 +58,6 @@ class SurveysController extends Controller
 
         $user = Auth::user();
     
-    
         foreach($jsonData as $data){
             $question_id = $data['question_id'];
             $response = $data['response'];            
@@ -94,10 +93,17 @@ class SurveysController extends Controller
             }
             
         }
-        
+
+        // check which survey we're answering and change its status to complete
+        $survey_id = Question::find($jsonData[0]['question_id']) -> survey_id;
         $user_in_model = User::find($user -> id);
-        $user_in_model -> couple_survey_status = "complete";
-        $user_in_model -> save();
+        if ( $survey_id == 2) {
+            $user_in_model -> couple_survey_status = "complete";
+            $user_in_model -> save();
+        } else if ($survey_id == 1) {
+            $user_in_model -> personal_survey_status = "complete";
+            $user_in_model -> save();
+        }
 
         return response() -> json([
             "status" => "success",

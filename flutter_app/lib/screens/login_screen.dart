@@ -137,7 +137,7 @@ class _LogInScreenState extends State<LogInScreen> {
                               value.successSignUp = false;
                               value.wrongCredentials = false;
                               context.goNamed('Connection Setup');
-                              await context.read<UserProvider>().getImage();
+                              // await context.read<UserProvider>().getImage();
                               emailController.clear();
                               passwordController.clear();
                               // context.goNamed('Profile');
