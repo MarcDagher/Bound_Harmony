@@ -41,6 +41,7 @@ Route::controller(SurveysController::class)->group(function (){
 Route::controller(MessagesController::class) -> group (function (){
     Route::post('/save_user_prompt', 'save_user_prompt');
     Route::get('/get_conversation', 'get_conversation');
+    Route::get('/send_user_prompt_to_ai', 'send_user_prompt_to_ai');
 });
 
 /// checks if user connection_status == true and if personal_survey_status == true
