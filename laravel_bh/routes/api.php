@@ -42,7 +42,8 @@ Route::controller(MessagesController::class) -> group (function (){
     Route::get('/get_conversation', 'get_conversation');
 });
 
-Route::middleware('check.if.connected.for.couples.survey')->group(function(){
+/// checks if user connection_status == true and if personal_survey_status == true
+Route::middleware('validate.for.couples.survey')->group(function(){
     Route::get('/get_survey', [SurveysController::class ,'get_survey']);
 });
 

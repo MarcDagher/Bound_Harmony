@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckConnectionForCouplesSurvey
+class ValidationForCouplesSurvey
 {
     /**
      * Handle an incoming request.
@@ -25,6 +25,11 @@ class CheckConnectionForCouplesSurvey
             return response()->json([
                 "status" => "rejected",
                 "message" => "User needs to be connected"
+            ], 403);
+        } else if ($user -> personal_survey_status == "incomplete" && $request->survey_id == 2) {
+            return response()->json([
+                "status" => "rejected",
+                "message" => "User needs to complete personal survey"
             ], 403);
         } else {
             return $next($request);

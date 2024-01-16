@@ -171,7 +171,8 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
           return Consumer<ConnectionProvider>(
               builder: (context, value, child) => NotConnectedBox(
                   text:
-                      "You need a partner to access this page.\nGo to my partners and send a request or get some advice!",
+                      "Complete your personal survey and\n make sure you are connected to your partner.",
+                  //  Go to my partners and send a request or get some advice!"
                   handlePressedMyPartners: () {
                     value.successSendRequest = false;
                     value.messageSendRequest = "";
