@@ -39,6 +39,7 @@ Route::controller(SurveysController::class)->group(function (){
 
 Route::controller(MessagesController::class) -> group (function (){
     Route::post('/save_user_prompt', 'save_user_prompt');
+    Route::get('/get_conversation', 'get_conversation');
 });
 
 Route::middleware('check.if.connected.for.couples.survey')->group(function(){

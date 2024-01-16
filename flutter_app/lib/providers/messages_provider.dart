@@ -15,9 +15,25 @@ class MessagesProvider extends ChangeNotifier {
         isSentByMe: false)
   ];
 
-  getHistoryOfMessages() {}
+  // fetch get_conversation -- NOT TESTED -
+  Future getConversation() async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    final token = preferences.get('token');
+    try {
+      final response = await _dio.post(
+        '${Requests.baseUrl}/get_conversation',
+        options: Options(headers: {"authorization": "Bearer $token"}),
+      );
+      if (response.data['status'] == "success") {
+        print("In successful, conversation: ${response.data["conversation"]}");
+      }
+      print("In getConversation: ${response.data}");
+    } on DioException catch (error) {
+      print("In getConversation: $error");
+    }
+  }
 
-  sendMessage(Message userMessage) async {
+  Future sendMessage(Message userMessage) async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     final token = preferences.get('token');
     try {
