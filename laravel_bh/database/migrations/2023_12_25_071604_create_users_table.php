@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('profile_pic_url')->default('no image')->nullable();
             $table->enum('connection_status', ['true', 'false'])->default('false');
             $table->enum('couple_survey_status', ['complete', 'incomplete'])->default('incomplete');
+            $table->enum('personal_survey_status', ['complete', 'incomplete'])->default('incomplete');
             $table->timestamps();
             
             $table->foreign('role_id')->references('id')->on('roles');

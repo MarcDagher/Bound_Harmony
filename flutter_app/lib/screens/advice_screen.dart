@@ -110,7 +110,7 @@ class _AdviceScreenState extends State<AdviceScreen> {
                           borderRadius: BorderRadius.circular(10)),
                       color: message.isSentByMe
                           ? const Color.fromARGB(255, 241, 241, 241)
-                          : const Color.fromARGB(255, 247, 83, 83),
+                          : Theme.of(context).primaryColor,
                       elevation: 3,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
