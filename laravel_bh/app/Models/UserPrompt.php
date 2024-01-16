@@ -16,7 +16,7 @@ class UserPrompt extends Model
         'prompt'
     ];
 
-    public function user_prompt() : HasOne{
+    public function response_to_user_prompt() : HasOne{
         return $this -> hasOne(AiResponse::class, 'user_prompt_id');
     }
 }
