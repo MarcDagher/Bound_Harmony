@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class MessagesProvider extends ChangeNotifier {
   final _dio = Dio();
-  bool? successSavingMessage;
+  String somethingWentWrong = "";
 
   List<Message> conversation = [
     Message(
@@ -28,14 +28,13 @@ class MessagesProvider extends ChangeNotifier {
       );
       if (response.data["status"] == "success") {
         conversation.add(userMessage);
-        successSavingMessage = true;
         notifyListeners();
       }
 
       print("In sendMessage() response: ${response.data}");
     } on DioException catch (error) {
       print("In sendMessage() error: $error");
-      successSavingMessage = false;
+      somethingWentWrong = "Something went worng, please try sending again";
       notifyListeners();
     }
   }

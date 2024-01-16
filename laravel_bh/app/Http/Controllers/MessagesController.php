@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Auth;
 
 class MessagesController extends Controller
 {
+
+    public function get_conversation() {
+        $user = Auth::user();
+        // fetch messages from ai_responses
+    }
+
+
     public function save_user_prompt (Request $request) {
         // save prompt in user_prompts 
         

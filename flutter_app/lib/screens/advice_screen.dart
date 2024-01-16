@@ -132,6 +132,24 @@ class _AdviceScreenState extends State<AdviceScreen> {
               ),
             ),
 
+            // If error in saving prompt
+            Consumer<MessagesProvider>(
+              builder: (context, value, child) {
+                if (value.somethingWentWrong.isNotEmpty) {
+                  return Text(
+                    value.somethingWentWrong,
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.w800),
+                  );
+                } else {
+                  return const SizedBox(
+                    height: 5,
+                  );
+                }
+              },
+            ),
+
             /// Styling input field
             ///
             Padding(
@@ -188,10 +206,12 @@ class _AdviceScreenState extends State<AdviceScreen> {
                           await context
                               .read<MessagesProvider>()
                               .sendMessage(message);
-                          // setState(() {
-                          //   messages.add(message);
-                          // });
-                          inputController.clear();
+                          if (context
+                              .read<MessagesProvider>()
+                              .somethingWentWrong
+                              .isEmpty) {
+                            inputController.clear();
+                          }
                         }
                       },
                     ),

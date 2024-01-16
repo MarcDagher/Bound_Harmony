@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class UserPrompt extends Model
 {
@@ -15,8 +16,7 @@ class UserPrompt extends Model
         'prompt'
     ];
 
-    // user_id is the foreign key in UserPrompt that references to User
-    public function user_of_the_prompt() : BelongsTo {
-        return $this -> belongsTo(User::class, 'user_id');
+    public function user_prompt() : HasOne{
+        return $this -> hasOne(AiResponse::class, 'user_prompt_id');
     }
 }
