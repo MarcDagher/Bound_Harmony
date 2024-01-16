@@ -57,6 +57,8 @@ class MessagesController extends Controller
                 "user_id" => $token -> id,
                 "prompt" => $request -> prompt
             ]);
+
+            //// send_user_prompt_to_ai(){} return the response
     
             return response() -> json([
                 "status" => "success",
@@ -72,7 +74,7 @@ class MessagesController extends Controller
         }           
     }
 
-    public function handle_response () {
+    public function send_user_prompt_to_ai () {
         // Send user's prompt to openAI 
         // Get openAI's response
     }
