@@ -1,5 +1,4 @@
 import 'package:bound_harmony/configurations/request.configuration.dart';
-import 'package:bound_harmony/providers/connection_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -127,7 +126,6 @@ class AuthProvider extends ChangeNotifier {
     try {
       final response = await dio.post("$baseUrl/logout",
           options: Options(headers: {"authorization": "Bearer $token"}));
-      print("In logout: ${response.data}");
     } on DioException catch (error) {
       print(error);
     }

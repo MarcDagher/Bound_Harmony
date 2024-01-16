@@ -3,8 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ChatBotController;
 use App\Http\Controllers\ConnectionsController;
+use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SurveysController;
 use App\Http\Middleware\AuthMiddleware;
@@ -36,12 +36,13 @@ Route::controller(SurveysController::class)->group(function (){
     Route::post('/save_responses', 'save_responses');
 });
 
-Route::middleware('check.if.connected.for.couples.survey')->group(function(){
-    Route::get('/get_survey', [SurveysController::class ,'get_survey']);
+
+Route::controller(MessagesController::class) -> group (function (){
+    Route::post('/save_user_prompt', 'save_user_prompt');
 });
 
-Route::controller(ChatBotController::class) -> group (function (){
-    Route::post('/save_user_prompt', 'save_user_prompt');
+Route::middleware('check.if.connected.for.couples.survey')->group(function(){
+    Route::get('/get_survey', [SurveysController::class ,'get_survey']);
 });
 
 // Route::middleware('auth.user')->group(function () {

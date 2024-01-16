@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
-class ChatBotController extends Controller
+class MessagesController extends Controller
 {
     public function save_user_prompt (Request $request) {
         // save prompt in user_prompts 
@@ -16,14 +16,15 @@ class ChatBotController extends Controller
         $token = Auth::user();
 
         try {
-            UserPrompt::create([
+            $prompt = UserPrompt::create([
                 "user_id" => $token -> id,
                 "prompt" => $request -> prompt
             ]);
     
             return response() -> json([
                 "status" => "success",
-                "message" => "Awaiting response"
+                "message" => "Awaiting response",
+                "user_prompt" => $prompt
             ]);        
         } catch (\Exception $e) {
             return response() -> json([
