@@ -42,20 +42,6 @@ class MessagesController extends Controller
         }
     }
 
-    public function send_user_prompt_to_ai () {
-        // Send user's prompt to openAI 
-        // Get openAI's response
-        $result = OpenAI::chat()->create([
-            'model' => 'gpt-3.5-turbo',
-            'messages' => [
-                ['role' => 'user', 'content' => 'Hello!'],
-            ],
-            
-        ]);
-        
-        echo $result->choices[0]->message->content;
-    }
-
     // Save user prompts, then send request to OpenAi.
     // Receive response from OpenAi
     // Return ai_response to the user
@@ -73,13 +59,12 @@ class MessagesController extends Controller
             ]);
 
             //// send_user_prompt_to_ai(){} return the response
-            $this -> send_user_prompt_to_ai($request -> prompt);
 
-            // return response() -> json([
-            //     "status" => "success",
-            //     "message" => "Awaiting response",
-            //     "user_prompt" => $prompt
-            // ]);        
+            return response() -> json([
+                "status" => "success",
+                "message" => "Awaiting response",
+                "user_prompt" => $prompt
+            ]);        
 
         } catch (\Exception $e) {
             return response() -> json([
@@ -87,6 +72,26 @@ class MessagesController extends Controller
                 "message" => $e
             ]); 
         }           
+    }
+
+    public function send_user_prompt_to_ai () {
+        // Send user's prompt to openAI 
+        // Get openAI's response
+        $result = OpenAI::chat()->create([
+            'model' => 'gpt-3.5-turbo',
+            'messages' => [
+                ['role' => 'user', 'content' => 'Hello!'],
+            ],
+            'max_tokens' => 30,
+            
+        ]);
+        
+        $result = $result;
+        
+        return response()->json([
+            'status' => 'success',
+            'openai' => $result,
+        ]);
     }
 
 }
