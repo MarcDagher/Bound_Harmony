@@ -20,14 +20,26 @@ class MessagesProvider extends ChangeNotifier {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     final token = preferences.get('token');
     try {
-      final response = await _dio.post(
+      final response = await _dio.get(
         '${Requests.baseUrl}/get_conversation',
         options: Options(headers: {"authorization": "Bearer $token"}),
       );
       if (response.data['status'] == "success") {
-        print("In successful, conversation: ${response.data["conversation"]}");
+        for (Map message in response.data["conversation"]) {
+          conversation.add(Message(
+              text: message["user_prompt"],
+              date: DateTime.parse(message['user_prompt_date']),
+              isSentByMe: true));
+          // print("User Prompt: ${message["user_prompt"]}");
+          conversation.add(Message(
+              text: message['ai_response'],
+              date: DateTime.parse(message['ai_response_date']),
+              isSentByMe: false));
+          // print("User Prompt: ${message["ai_response_date"]}");
+        }
+        notifyListeners();
+        print("In successful, conversation: ${response.data}");
       }
-      print("In getConversation: ${response.data}");
     } on DioException catch (error) {
       print("In getConversation: $error");
     }
@@ -42,9 +54,13 @@ class MessagesProvider extends ChangeNotifier {
         data: {"prompt": userMessage.text},
         options: Options(headers: {"authorization": "Bearer $token"}),
       );
+      conversation.add(userMessage);
+      notifyListeners();
       if (response.data["status"] == "success") {
-        conversation.add(userMessage);
-        notifyListeners();
+        conversation.add(Message(
+            text: response.data["ai_response"],
+            date: DateTime.now(),
+            isSentByMe: false));
       }
 
       print("In sendMessage() response: ${response.data}");

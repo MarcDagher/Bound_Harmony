@@ -84,7 +84,6 @@ class MessagesController extends Controller
     // main helper function: handling couple's conditions and preparing prompt
     public function send_user_prompt_to_ai ($user, $user_prompt) {
         // im preparing the conditions to know which prompt to give based on what data I have
-        // $user = Auth::user(); // this will be a parameter
         $partner = $this -> search_for_partner($user);
 
         // if user has a partner (is connected)

@@ -1,4 +1,5 @@
 import 'package:bound_harmony/providers/auth_provider.dart';
+import 'package:bound_harmony/providers/messages_provider.dart';
 import 'package:bound_harmony/providers/user_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/text_input.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +39,10 @@ class _LogInScreenState extends State<LogInScreen> {
   Widget build(BuildContext context) {
     // final isKeyboard = MediaQuery.of(context).viewInsets.bottom !=
     //     0; // check if keyboard is in the UI
+    Future getConversation() async {
+      await context.read<MessagesProvider>().getConversation();
+    }
+
     return Scaffold(
       body: SafeArea(
           child: SizedBox(
@@ -138,6 +143,7 @@ class _LogInScreenState extends State<LogInScreen> {
                               value.wrongCredentials = false;
                               emailController.clear();
                               passwordController.clear();
+                              getConversation();
                               context.goNamed('Connection Setup');
                               // await context.read<UserProvider>().getImage();
                               // context.goNamed('Profile');
