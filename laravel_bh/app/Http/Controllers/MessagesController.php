@@ -13,12 +13,11 @@ use OpenAI\Laravel\Facades\OpenAI;
 
 class MessagesController extends Controller
 {
-    protected $description = "You a relationship expert, love expert, personal development/life guide. Your ideas will be about my romantic relationship, my love life and their development";
-    protected $purpose = "You will answer my questions, ask me necessary questions that will be thought provoking and will help me solve my life problems and figure out what I want in life and in my romantic relationship and how to make my romantic relationship with my partner better. Any time you notice questions that are not related to my romantic relationship or self-developent or relationships in general, you will redirect the conversation to the topic of me, my romantic relationship, and both of their development";
-    protected $tone_of_speech = "You will be thoughtful, understanding, friendly, empathetic, supportive, encouraging and take emotions into consideration";
-    protected $removals = "state your answers directly and DO NOT return any text or explanation or notes before or after your response (example: I would love to answer your question ...). be human and don't be robotic. ";
-    
-    protected $conditional_response = "";
+    protected $description = "You are a relationship expert, love expert, personal development/life guide. Your ideas will be about my romantic relationship, my love life.";
+    protected $purpose = "You will answer my questions, help me figure out what I want in life and in a romantic relationship and how to make my romantic relationship with my partner better. Any time you notice questions that are not related to my romantic relationship or self-developent or relationships in general, you will redirect the conversation to the topic of me, my romantic relationship, and both of their development. ";
+    protected $tone_of_speech = "You will be thoughtful, understanding, friendly, empathetic, supportive, encouraging and take emotions into consideration. ";
+    protected $end_statements = "Occasionally, You will end with necessary questions that will be thought provoking and of the types/context I mentioned earlier, note that the question is not to be answered back, its only to leave me with ideas that will help. You will also occasionally suggest solutions";
+    protected $removals = "make your answers concise and not too long. state your answers directly and DO NOT return any text or explanation or notes before or after your response. be human and don't be robotic. your answers should be in texts not bullet points and most importantly give one idea per response";
 
 
     // helper method 
@@ -133,11 +132,31 @@ class MessagesController extends Controller
 
         } else {
 
-            /// give a prompt whre user is not connected
-            echo "you are not connected";
+            // If user has no relationship (connection_status == "false")
+            //  prompt includes the user's personal survey answers and conditional request
+            $my_interests = "I am currently not in a reltionship and these are my interests:\n";
+
+            // get user's interests (questions + answer)
+            $personal_survey_responses = SurveyResponse::where(['user_id' => $user -> id]) -> with('question', 'option') -> get();
+            foreach ($personal_survey_responses as $personal_response){
+                $my_interests .= $personal_response['question']['question'] . ": " . $personal_response['option']['option'] . "\n";
+            }
+
+            $my_interests .= "Take all of my interests into consideration when sending your response.";
+            $system_config = $this -> description . $this -> purpose . $my_interests . $this -> tone_of_speech . $this -> removals ;
+            $result = OpenAI::chat()->create([
+                'model' => 'gpt-4',
+                'messages' => [
+                    ["role"=> "system_config", "content" => $system_config], 
+                    ["role"=> "user", "content" => "Hello, how can I start finding a girlfriend?"],
+                ],
+                'max_tokens' => 2500, 
+            ]);
+            return response()->json([
+                'status' => 'success',
+                'openai' => $result,
+            ]);
         }
-
-
 
         // $result = OpenAI::chat()->create([
         //     'model' => 'gpt-3.5-turbo',
