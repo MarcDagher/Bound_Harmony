@@ -67,7 +67,9 @@ class MessagesController extends Controller
         return $summary_of_responses;
     }
 
+    // helper method
     public function send_to_open_ai_api($system_config, $user_prompt){
+        
         $result = OpenAI::chat()->create([
             'model' => 'gpt-4',
             'messages' => [
@@ -76,12 +78,150 @@ class MessagesController extends Controller
             ],
             'max_tokens' => 3000, 
         ]);
-        return response()->json([
-            'status' => 'success',
-            'openai' => $result,
-        ]);
+        return $result;
     }
 
+    // main helper function: handling couple's conditions and preparing prompt
+    public function send_user_prompt_to_ai ($user, $user_prompt) {
+        // im preparing the conditions to know which prompt to give based on what data I have
+        // $user = Auth::user(); // this will be a parameter
+        $partner = $this -> search_for_partner($user);
+
+        // if user has a partner (is connected)
+        if ($user -> connection_status == "true") {
+            
+            // if partner answered couple's survey and user answered couple survey
+            if ($partner -> couple_survey_status == "complete" && $user ->  couple_survey_status == "complete"){
+
+                $user_couple_responses = SurveyResponse::where(['user_id' => $user -> id, "partner_id" => $partner -> id]) 
+                                                    -> whereHas('question', function ($query){$query -> where ('survey_id', 2);}) 
+                                                    -> with('question', 'option') -> get();
+
+                $partner_couple_responses = SurveyResponse::where(['user_id' => $partner -> id, "partner_id" =>  $user -> id]) 
+                                                    -> whereHas('question', function ($query){$query -> where ('survey_id', 2);}) 
+                                                    -> with('question', 'option') -> get();
+
+                $user_summary_of_responses = $this -> summary_of_couple_survey_answers($user_couple_responses); // string
+                $partners_summary_of_responses = $this -> summary_of_couple_survey_answers($partner_couple_responses); // string
+
+
+                $our_interests = "This is my opinion on my current relationship: " . $user_summary_of_responses;
+                $our_interests .= " and this my partner's opinion of our current relationship: ". $partners_summary_of_responses;
+                $our_interests .= "Take our opinions of eachother into consideration, in order to guide us and support us more accurately. If I ever mention finding another partner or lover, you will strictly not support me. You will tell me to make things work with my partner and in only the hopeless cases, you will tell me to slightly consider searching for someone else. ";
+                $system_config = $this -> description . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals;
+                
+                return $this -> send_to_open_ai_api($system_config, $user_prompt);
+
+            } else  // if partner did not answer couple's survey and user answered couple survey
+                if ($partner -> couple_survey_status == "incomplete" && $user ->  couple_survey_status == "complete" ) {
+                    $user_couple_responses = SurveyResponse::where(['user_id' => $user -> id, "partner_id" => $partner -> id]) 
+                                                    -> whereHas('question', function ($query){$query -> where ('survey_id', 2);}) 
+                                                    -> with('question', 'option') -> get();
+
+                    $user_summary_of_responses = $this -> summary_of_couple_survey_answers($user_couple_responses); // string
+
+                    $our_interests = "This is my opinion on my current relationship: " . $user_summary_of_responses;
+                    
+                    $our_interests .= "Take my opinions of the relationship into consideration, in order to guide us and support us more accurately. If I ever mention finding another partner or lover, you will strictly not support me. You will tell me to make things work with my partner and in only the hopeless cases, you will tell me to slightly consider searching for someone else. Make sure to mention at the end of your response, that It would be advisable to have my partner fill the couple's survey to give you more insight.";
+                    $system_config = $this -> description . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals;
+                    
+                    return $this -> send_to_open_ai_api($system_config, $user_prompt);
+                    
+
+            } else // if partner answered couple's survey and user did not answered couple survey
+                if ($partner -> couple_survey_status == "complete" && $user ->  couple_survey_status == "incomplete"){
+
+                    $partner_couple_responses = SurveyResponse::where(['user_id' => $partner -> id, "partner_id" =>  $user -> id]) 
+                                                    -> whereHas('question', function ($query){$query -> where ('survey_id', 2);}) 
+                                                    -> with('question', 'option') -> get();
+
+                    $partners_summary_of_responses = $this -> summary_of_couple_survey_answers($partner_couple_responses); // string
+                    
+                    $our_interests = " This my partner's opinion of our current relationship: ". $partners_summary_of_responses;
+                    $our_interests .= "Take our opinions of eachother into consideration, in order to guide us and support us more accurately. If I ever mention finding another partner or lover, you will strictly not support me. You will tell me to make things work with my partner and in only the hopeless cases, you will tell me to slightly consider searching for someone else. Make sure to mention at the end of your response, that It would be advisable for me to fill the couple's survey to give you more insight.";
+                    $system_config = $this -> description . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals;
+                    
+                    return $this -> send_to_open_ai_api($system_config, $user_prompt);
+                    
+
+            } else // if none of them answered couples survey
+                if ($partner -> couple_survey_status == "incomplete" && $user ->  couple_survey_status == "incomplete"){
+                    $our_interests = "These are my interests:\n";
+
+                    // get user's interests (questions + answer)
+                    $users_personal_survey_responses = $this -> get_personal_survey_responses($user, 1);
+                    $partners_personal_survey_responses = $this -> get_personal_survey_responses($partner, 1);
+
+                    foreach ($users_personal_survey_responses as $personal_response){
+                        $our_interests .= $personal_response['question']['question'] . ": " . $personal_response['option']['option'] . "\n";
+                    }
+
+                    $our_interests .= " Now, these are my partner's interests";
+
+                    foreach ($partners_personal_survey_responses as $personal_response){
+                        $our_interests .= $personal_response['question']['question'] . ": " . $personal_response['option']['option'] . "\n";
+                    }
+
+                    $our_interests .= "We are in a romantic relationship, Take all of our interests into consideration and use them occasionally when sending your response. If I ever mention finding another partner or lover, you will strictly not support me. You will tell me to make things work with my partner and in only the hopeless cases, you will tell me to slightly consider searching for someone else. Make sure to mention at the end of your response, that It would be advisable for both me and my partner to fill the couple's survey to give you more insight.";
+                    $system_config = $this -> description . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals ;
+                    
+                    return $this -> send_to_open_ai_api($system_config, $user_prompt);
+
+            } 
+
+        } else {
+            // If user has no relationship (connection_status == "false")
+            //  prompt includes the user's personal survey answers and conditional request
+            $my_interests = "I am currently not in a reltionship and these are my interests:\n";
+
+            // get user's interests (questions + answer)
+            $personal_survey_responses = $this -> get_personal_survey_responses($user, 1);
+
+            foreach ($personal_survey_responses as $personal_response){
+                $my_interests .= $personal_response['question']['question'] . ": " . $personal_response['option']['option'] . "\n";
+            }
+
+            $my_interests .= "Take all of my interests into consideration and use them occasionally when sending your response.";
+            $system_config = $this -> description . $this -> purpose . $my_interests . $this -> tone_of_speech . $this -> removals ;
+            
+            return $this -> send_to_open_ai_api($system_config, $user_prompt);
+        }
+
+        
+    }
+
+
+    // Save user prompts, then send request to OpenAi.
+    // Receive response from OpenAi
+    // Return ai_response to the user
+    public function save_user_prompt (Request $request) {
+        // save prompt in user_prompts 
+        
+        $request -> validate(["prompt" => "required|string"]);
+        $user = Auth::user();
+
+        try {
+
+            $prompt = UserPrompt::create([
+                "user_id" => $user -> id,
+                "prompt" => $request -> prompt
+            ]);
+
+            //// send_user_prompt_to_ai(){} return the response
+            $openAi_response = $this -> send_user_prompt_to_ai($user, $request -> prompt);
+
+            return response() -> json([
+                "status" => "success",
+                "ai_response" => $openAi_response
+            ]);        
+
+        } catch (\Exception $e) {
+            return response() -> json([
+                "status" => "failed",
+                "message" => $e
+            ]); 
+        }           
+    }
 
     public function get_conversation() {
         $user = Auth::user();
@@ -112,147 +252,4 @@ class MessagesController extends Controller
             ]);
         }
     }
-
-    // Save user prompts, then send request to OpenAi.
-    // Receive response from OpenAi
-    // Return ai_response to the user
-    public function save_user_prompt (Request $request) {
-        // save prompt in user_prompts 
-        
-        $request -> validate(["prompt" => "required|string"]);
-        $token = Auth::user();
-
-        try {
-
-            $prompt = UserPrompt::create([
-                "user_id" => $token -> id,
-                "prompt" => $request -> prompt
-            ]);
-
-            //// send_user_prompt_to_ai(){} return the response
-
-            return response() -> json([
-                "status" => "success",
-                "message" => "Awaiting response",
-                "user_prompt" => $prompt
-            ]);        
-
-        } catch (\Exception $e) {
-            return response() -> json([
-                "status" => "failed",
-                "message" => $e
-            ]); 
-        }           
-    }
-
-    public function send_user_prompt_to_ai ($user, $user_prompt) {
-        // im preparing the conditions to know which prompt to give based on what data I have
-        // $user = Auth::user(); // this will be a parameter
-        $partner = $this -> search_for_partner($user);
-
-        // if user has a partner (is connected)
-        if ($user -> connection_status == "true") {
-            
-            // if partner answered couple's survey and user answered couple survey
-            if ($partner -> couple_survey_status == "complete" && $user ->  couple_survey_status == "complete"){
-                
-                $user_couple_responses = SurveyResponse::where(['user_id' => $user -> id, "partner_id" => $partner -> id]) 
-                                                    -> whereHas('question', function ($query){$query -> where ('survey_id', 2);}) 
-                                                    -> with('question', 'option') -> get();
-
-                $partner_couple_responses = SurveyResponse::where(['user_id' => $partner -> id, "partner_id" =>  $user -> id]) 
-                                                    -> whereHas('question', function ($query){$query -> where ('survey_id', 2);}) 
-                                                    -> with('question', 'option') -> get();
-
-                $user_summary_of_responses = $this -> summary_of_couple_survey_answers($user_couple_responses); // string
-                $partners_summary_of_responses = $this -> summary_of_couple_survey_answers($partner_couple_responses); // string
-
-
-                $our_interests = "This is my opinion on my current relationship: " . $user_summary_of_responses;
-                $our_interests .= " and this my partner's opinion of our current relationship: ". $partners_summary_of_responses;
-                $our_interests .= "Take our opinions of eachother into consideration, in order to guide us and support us more accurately. If I ever mention finding another girlfriend, partner or lover, you will strictly not support me. You will tell me to make things work with my partner and in only the hopeless cases, you will tell me to slightly consider searching for someone else. ";
-                $system_config = $this -> description . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals;
-                
-                $this -> send_to_open_ai_api($system_config, $user_prompt);
-
-            } else  // if partner did not answer couple's survey and user answered couple survey
-                if ($partner -> couple_survey_status == "incomplete" && $user ->  couple_survey_status == "complete" ) {
-
-                    $user_couple_responses = SurveyResponse::where(['user_id' => $user -> id, "partner_id" => $partner -> id]) 
-                                                    -> whereHas('question', function ($query){$query -> where ('survey_id', 2);}) 
-                                                    -> with('question', 'option') -> get();
-
-                    $user_summary_of_responses = $this -> summary_of_couple_survey_answers($user_couple_responses); // string
-
-                    $our_interests = "This is my opinion on my current relationship: " . $user_summary_of_responses;
-                    
-                    $our_interests .= "Take my opinions of the relationship into consideration, in order to guide us and support us more accurately. If I ever mention finding another girlfriend, partner or lover, you will strictly not support me. You will tell me to make things work with my partner and in only the hopeless cases, you will tell me to slightly consider searching for someone else. Make sure to mention at the end of your response, that It would be advisable to have my partner fill the couple's survey to give you more insight.";
-                    $system_config = $this -> description . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals;
-                    
-                    $this -> send_to_open_ai_api($system_config, $user_prompt);
-                    
-
-            } else // if partner answered couple's survey and user did not answered couple survey
-                if ($partner -> couple_survey_status == "complete" && $user ->  couple_survey_status == "incomplete"){
-
-                    $partner_couple_responses = SurveyResponse::where(['user_id' => $partner -> id, "partner_id" =>  $user -> id]) 
-                                                    -> whereHas('question', function ($query){$query -> where ('survey_id', 2);}) 
-                                                    -> with('question', 'option') -> get();
-
-                    $partners_summary_of_responses = $this -> summary_of_couple_survey_answers($partner_couple_responses); // string
-                    
-                    $our_interests = " This my partner's opinion of our current relationship: ". $partners_summary_of_responses;
-                    $our_interests .= "Take our opinions of eachother into consideration, in order to guide us and support us more accurately. If I ever mention finding another girlfriend, partner or lover, you will strictly not support me. You will tell me to make things work with my partner and in only the hopeless cases, you will tell me to slightly consider searching for someone else. Make sure to mention at the end of your response, that It would be advisable to me fill the couple's survey to give you more insight.";
-                    $system_config = $this -> description . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals;
-                    
-                    $this -> send_to_open_ai_api($system_config, $user_prompt);
-                    
-
-            } else // if none of them answered couples survey
-                if ($partner -> couple_survey_status == "incomplete" && $user ->  couple_survey_status == "incomplete"){
-
-                    $our_interests = "These are my interests:\n";
-
-                    // get user's interests (questions + answer)
-                    $users_personal_survey_responses = $this -> get_personal_survey_responses($user, 1);
-                    $partners_personal_survey_responses = $this -> get_personal_survey_responses($partner, 1);
-
-                    foreach ($users_personal_survey_responses as $personal_response){
-                        $our_interests .= $personal_response['question']['question'] . ": " . $personal_response['option']['option'] . "\n";
-                    }
-
-                    $our_interests .= " Now, these are my partner's interests";
-
-                    foreach ($partners_personal_survey_responses as $personal_response){
-                        $our_interests .= $personal_response['question']['question'] . ": " . $personal_response['option']['option'] . "\n";
-                    }
-
-                    $our_interests .= "We are in a romantic relationship, Take all of our interests into consideration and use them occasionally when sending your response. If I ever mention finding another partner or lover, you will strictly not support me. You will tell me to make things work with my partner and in only the hopeless cases, you will tell me to slightly consider searching for someone else. Make sure to mention at the end of your response, that It would be advisable for both me and my partner to fill the couple's survey to give you more insight.";
-                    $system_config = $this -> description . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals ;
-                    
-                    $this -> send_to_open_ai_api($system_config, $user_prompt);
-
-            } 
-
-        } else {
-            // If user has no relationship (connection_status == "false")
-            //  prompt includes the user's personal survey answers and conditional request
-            $my_interests = "I am currently not in a reltionship and these are my interests:\n";
-
-            // get user's interests (questions + answer)
-            $personal_survey_responses = $this -> get_personal_survey_responses($user, 1);
-
-            foreach ($personal_survey_responses as $personal_response){
-                $my_interests .= $personal_response['question']['question'] . ": " . $personal_response['option']['option'] . "\n";
-            }
-
-            $my_interests .= "Take all of my interests into consideration and use them occasionally when sending your response.";
-            $system_config = $this -> description . $this -> purpose . $my_interests . $this -> tone_of_speech . $this -> removals ;
-            
-            $this -> send_to_open_ai_api($system_config, $user_prompt);
-        }
-
-        
-    }
-
 }
