@@ -80,10 +80,10 @@ class MessagesController extends Controller
             'model' => 'gpt-3.5-turbo',
             'messages' => [
                 ["role"=> "system",
-                "content" => "You are a poetic assistant, skilled in explaining complex programming concepts with creative flair."], 
+                "content" => "You are a dog."], 
 
                 ["role"=> "user",
-                "content" => "Compose a poem that explains the concept of recursion in programming."],
+                "content" => "Tell me how was your day?"],
 
             ],
             'max_tokens' => 4000,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Connection;
 use App\Models\Option;
 use App\Models\Question;
 use App\Models\SurveyResponse;
@@ -11,6 +12,25 @@ use Illuminate\Support\Facades\Auth;
 
 class SurveysController extends Controller
 {
+    // helper method 
+    public function search_for_partner($user){
+        // search for user's partner using their connection's relation
+        $partner_as_requester = Connection::where(['status' => 'accepted', "responder" => $user -> id]) 
+                                -> with("requester_user") -> get('requester') -> first();
+
+        $partner_as_responder = Connection::where(['status' => 'accepted', "requester" => $user -> id]) 
+                                -> with("responder_user") -> get('responder') -> first();
+
+        // check if user's partner completed couple's survey
+        // user is the requester
+        if ($partner_as_requester) {
+            return $partner_as_requester['requester_user'];
+
+        // user is the responder
+        } else if ($partner_as_responder) {
+            return $partner_as_responder['responder_user'];
+        }
+    }
     
     // query questions and options of the survey
     public function get_survey (Request $request) {
@@ -55,34 +75,56 @@ class SurveysController extends Controller
         //  $request->json() will return an instance of Illuminate\Http\JsonResponse
         // all() will convert the json into accessible arrays 
         $jsonData = $request->json()->all();
-
         $user = Auth::user();
+        $survey_id = Question::find($jsonData[0]['question_id']) -> survey_id; // find survey_id to add my partner's id if survey is for couples
     
         foreach($jsonData as $data){
             $question_id = $data['question_id'];
             $response = $data['response'];            
 
-            /// If a question has a type text, it doesn't have options. Add it to the text column in survey_responses
+            /// If a question has a type text, it doesn't have options. Add response to the text column in survey_responses
             if (Question::find($data['question_id']) -> question_type == "text"){
 
-                SurveyResponse::create([
-                    "user_id" => $user->id,
-                    "question_id" => $question_id,
-                    "option_id" => 100,
-                    "text_input" => $response
-                ]);
+                // if couple's survey find my partner and add id to my response
+                if ($survey_id == 2){
+                    $partner = $this -> search_for_partner($user);
+                    SurveyResponse::create([
+                        "user_id" => $user->id,
+                        "question_id" => $question_id,
+                        "option_id" => 100,
+                        "partner_id" => $partner -> id,
+                        "text_input" => $response
+                    ]);
+                } elseif ($survey_id == 1) {
+                    SurveyResponse::create([
+                        "user_id" => $user->id,
+                        "question_id" => $question_id,
+                        "option_id" => 100,
+                        "text_input" => $response
+                    ]);
+                }
                 
             } else {
                 // check if the option exists in options table
                 $response_validation = Option::where(["question_id" => $question_id, "option" => $response]) -> get();
                 
                 if (isset($response_validation[0])){
-
-                    SurveyResponse::create([
-                        "user_id" => $user->id,
-                        "question_id" => $question_id,
-                        "option_id" => $response_validation[0] -> id
-                    ]);
+                    // if couple's survey find my partner and add id to my response
+                    if ($survey_id == 2){
+                        $partner = $this -> search_for_partner($user);
+                        SurveyResponse::create([
+                            "user_id" => $user->id,
+                            "question_id" => $question_id,
+                            "option_id" => $response_validation[0] -> id,
+                            "partner_id" => $partner -> id
+                        ]);    
+                    } elseif ($survey_id == 1) {
+                        SurveyResponse::create([
+                            "user_id" => $user->id,
+                            "question_id" => $question_id,
+                            "option_id" => $response_validation[0] -> id
+                        ]);
+                    }
     
                 } else {
                     return response() -> json([
@@ -94,8 +136,7 @@ class SurveysController extends Controller
             
         }
 
-        // check which survey we're answering and change its status to complete
-        $survey_id = Question::find($jsonData[0]['question_id']) -> survey_id;
+        // check which survey we're answering and change the user's survey status to complete
         $user_in_model = User::find($user -> id);
         if ( $survey_id == 2) {
             $user_in_model -> couple_survey_status = "complete";
@@ -111,4 +152,6 @@ class SurveysController extends Controller
             "updated user" => $user_in_model
         ]); 
     }
+
+    
 }
