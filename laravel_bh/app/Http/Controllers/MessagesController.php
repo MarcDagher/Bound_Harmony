@@ -75,23 +75,26 @@ class MessagesController extends Controller
     }
 
     public function send_user_prompt_to_ai () {
-        // Send user's prompt to openAI 
-        // Get openAI's response
+ 
         $result = OpenAI::chat()->create([
             'model' => 'gpt-3.5-turbo',
             'messages' => [
-                ['role' => 'user', 'content' => 'Hello!'],
+                ["role"=> "system",
+                "content" => "You are a poetic assistant, skilled in explaining complex programming concepts with creative flair."], 
+
+                ["role"=> "user",
+                "content" => "Compose a poem that explains the concept of recursion in programming."],
+
             ],
-            'max_tokens' => 30,
+            'max_tokens' => 4000,
             
         ]);
-        
-        $result = $result;
         
         return response()->json([
             'status' => 'success',
             'openai' => $result,
         ]);
+        
     }
 
 }
