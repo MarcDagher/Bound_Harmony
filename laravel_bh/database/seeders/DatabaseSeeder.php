@@ -16,6 +16,6 @@ class DatabaseSeeder extends Seeder
         // $this -> call([UsersSeeder::class]);
         // $this -> call([SurveySeeder::class]);
         // $this -> call([QuestionsSeeder::class]);
-        // $this -> call([OptionsSeeder::class]);
+        $this -> call([OptionsSeeder::class]);
     }
 }

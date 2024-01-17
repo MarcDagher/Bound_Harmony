@@ -12,6 +12,7 @@ class AiResponse extends Model
 
     protected $fillable = [
         'user_prompt_id',
+        'user_id',
         'response'   
     ];
 
