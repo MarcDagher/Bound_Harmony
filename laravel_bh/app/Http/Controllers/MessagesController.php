@@ -97,23 +97,35 @@ class MessagesController extends Controller
 
     public function send_user_prompt_to_ai () {
         $user = Auth::user();
-        $partner = $this -> search_for_partner($user); // prameter should be $user -> id
+        $partner = $this -> search_for_partner($user);
 
-        // if partner answered couple's survey
-        if ($partner -> couple_survey_status == "complete"){
-            $partner_responses = SurveyResponse::where(['user_id' => $partner -> id, "partner_id" =>  $user -> id]) 
-            -> with('question', 'option') -> get();
-            echo $partner_responses;
-        } else {
-            echo "your partner has no responses\n";
-        }
+        // if user has a partner (is connected)
+        if ($user -> connection_status == "true") {
+            
+            // if partner answered couple's survey
+            if ($partner -> couple_survey_status == "complete"){
+                $partner_responses = SurveyResponse::where(['user_id' => $partner -> id, "partner_id" =>  $user -> id]) 
+                -> with('question', 'option') -> get();
+            } else {
+                echo "your partner has no responses\n";
+            }
 
-        // if the user answered couple's survey
-        if ($user -> couple_survey_status == "complete"){
-            $user_responses = SurveyResponse::where(['user_id' => $user -> id, "partner_id" => $partner -> id]) 
-            -> with('question', 'option') -> get();
+            // if the user answered couple's survey
+            if ($user -> couple_survey_status == "complete"){
+                $user_responses = SurveyResponse::where(['user_id' => $user -> id, "partner_id" => $partner -> id]) 
+                -> with('question', 'option') -> get();
+            } else {
+                echo "you have no responses\n";
+            }
+
+            /// if only user answered: give a prompt with context of user's answers
+            /// if only partner answered: give a prompt with context of partner's answers
+            /// if both answered: give a prompt with context of both partners' answers
+
         } else {
-            echo "you have no responses\n";
+
+            /// give a prompt whre user is not connected
+            echo "you are not connected";
         }
 
 
