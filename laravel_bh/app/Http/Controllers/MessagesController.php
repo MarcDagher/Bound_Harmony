@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AiResponse;
 use App\Models\Connection;
+use App\Models\SurveyResponse;
 use App\Models\UserPrompt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -95,25 +96,46 @@ class MessagesController extends Controller
     }
 
     public function send_user_prompt_to_ai () {
- 
-        $result = OpenAI::chat()->create([
-            'model' => 'gpt-3.5-turbo',
-            'messages' => [
-                ["role"=> "system",
-                "content" => "You are a dog."], 
+        $user = Auth::user();
+        $partner = $this -> search_for_partner($user); // prameter should be $user -> id
 
-                ["role"=> "user",
-                "content" => "Tell me how was your day?"],
+        // if partner answered couple's survey
+        if ($partner -> couple_survey_status == "complete"){
+            $partner_responses = SurveyResponse::where(['user_id' => $partner -> id, "partner_id" =>  $user -> id]) 
+            -> with('question', 'option') -> get();
+            echo $partner_responses;
+        } else {
+            echo "your partner has no responses\n";
+        }
 
-            ],
-            'max_tokens' => 4000,
+        // if the user answered couple's survey
+        if ($user -> couple_survey_status == "complete"){
+            $user_responses = SurveyResponse::where(['user_id' => $user -> id, "partner_id" => $partner -> id]) 
+            -> with('question', 'option') -> get();
+        } else {
+            echo "you have no responses\n";
+        }
+
+
+
+        // $result = OpenAI::chat()->create([
+        //     'model' => 'gpt-3.5-turbo',
+        //     'messages' => [
+        //         ["role"=> "system",
+        //         "content" => "You are a dog."], 
+
+        //         ["role"=> "user",
+        //         "content" => "Tell me how was your day?"],
+
+        //     ],
+        //     'max_tokens' => 4000,
             
-        ]);
+        // ]);
         
-        return response()->json([
-            'status' => 'success',
-            'openai' => $result,
-        ]);
+        // return response()->json([
+        //     'status' => 'success',
+        //     'openai' => $result,
+        // ]);
         
     }
 

@@ -17,6 +17,11 @@ class Question extends Model
         'question_type'
     ];
 
+    protected $hidden = [
+        'updated_at',
+        'created_at'
+    ];
+
     // one to one relation with Surveys table - one question belongs to one specific survey
     // foreign key in Question represents Survey
     public function survey() : BelongsTo {

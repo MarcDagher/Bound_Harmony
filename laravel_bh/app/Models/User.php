@@ -31,6 +31,7 @@ class User extends Authenticatable implements JWTSubject
         'personal_survey_status'
     ];
 
+    
 
     // one to one relation with roles table - one user belongs to one role
     // foreign key in User represents Role

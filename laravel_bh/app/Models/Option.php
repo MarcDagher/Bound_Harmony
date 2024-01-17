@@ -15,6 +15,11 @@ class Option extends Model
         'question_id'
     ];
 
+    protected $hidden = [
+        'updated_at',
+        'created_at'
+    ];
+
     public function survey_responses() : HasMany{
         return $this -> hasMany(SurveyResponse::class, 'option_id');
     }

@@ -18,8 +18,25 @@ class SurveyResponse extends Model
         'text_input'
     ];
 
+    protected $hidden = [
+        'updated_at',
+        'created_at'
+    ];
+
     // foreign key in SurveyResponse belongs to User
     public function user() : BelongsTo{
-        return $this -> belongsTo(User::class);
+        return $this -> belongsTo(User::class, 'user_id');
+    }
+
+    public function partner() : BelongsTo{
+        return $this -> belongsTo(User::class, 'partner_id');
+    }
+
+    public function option() : BelongsTo{
+        return $this -> belongsTo(Option::class, 'option_id');
+    }
+
+    public function question() : BelongsTo{
+        return $this -> belongsTo(Question::class, 'question_id');
     }
 }
