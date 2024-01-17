@@ -210,7 +210,7 @@ class MessagesController extends Controller
             $openAi_response = $this -> send_user_prompt_to_ai($user, $request -> prompt);
 
             AiResponse::create([
-                "user_prompt_id" => $prompt -> user_id,
+                "user_prompt_id" => $prompt -> id,
                 "response" => $openAi_response -> choices[0] -> message -> content 
             ]);
 

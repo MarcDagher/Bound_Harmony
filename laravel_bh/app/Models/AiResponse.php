@@ -16,7 +16,7 @@ class AiResponse extends Model
     ];
 
     // user_prompt_id inside AiResponse references to the UserPrompt
-    public function user_prompt_in_ai_responses() : BelongsTo{
+    public function user_prompt() : BelongsTo{
         return $this -> belongsTo(UserPrompt::class, 'user_prompt_id');
     }
 }
