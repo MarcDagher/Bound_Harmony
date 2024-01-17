@@ -67,6 +67,22 @@ class MessagesController extends Controller
         return $summary_of_responses;
     }
 
+    public function send_to_open_ai_api($system_config, $user_prompt){
+        $result = OpenAI::chat()->create([
+            'model' => 'gpt-4',
+            'messages' => [
+                ["role"=> "system", "content" => $system_config], 
+                ["role"=> "user", "content" => $user_prompt],
+            ],
+            'max_tokens' => 3000, 
+        ]);
+        return response()->json([
+            'status' => 'success',
+            'openai' => $result,
+        ]);
+    }
+
+
     public function get_conversation() {
         $user = Auth::user();
         // fetch user_prompts + ai_responses 
@@ -129,9 +145,9 @@ class MessagesController extends Controller
         }           
     }
 
-    public function send_user_prompt_to_ai () {
+    public function send_user_prompt_to_ai ($user, $user_prompt) {
         // im preparing the conditions to know which prompt to give based on what data I have
-        $user = Auth::user(); // this will be a parameter
+        // $user = Auth::user(); // this will be a parameter
         $partner = $this -> search_for_partner($user);
 
         // if user has a partner (is connected)
@@ -157,18 +173,7 @@ class MessagesController extends Controller
                 $our_interests .= "Take our opinions of eachother into consideration, in order to guide us and support us more accurately. If I ever mention finding another girlfriend, partner or lover, you will strictly not support me. You will tell me to make things work with my partner and in only the hopeless cases, you will tell me to slightly consider searching for someone else. ";
                 $system_config = $this -> description . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals;
                 
-                $result = OpenAI::chat()->create([
-                'model' => 'gpt-4',
-                'messages' => [
-                    ["role"=> "system", "content" => $system_config], 
-                    ["role"=> "user", "content" => "Hello, how can I start finding a girlfriend?"],
-                ],
-                'max_tokens' => 4000, 
-                ]);
-                return response()->json([
-                    'status' => 'success in both complete',
-                    'openai' => $result,
-                ]);
+                $this -> send_to_open_ai_api($system_config, $user_prompt);
 
             } else  // if partner did not answer couple's survey and user answered couple survey
                 if ($partner -> couple_survey_status == "incomplete" && $user ->  couple_survey_status == "complete" ) {
@@ -184,18 +189,7 @@ class MessagesController extends Controller
                     $our_interests .= "Take my opinions of the relationship into consideration, in order to guide us and support us more accurately. If I ever mention finding another girlfriend, partner or lover, you will strictly not support me. You will tell me to make things work with my partner and in only the hopeless cases, you will tell me to slightly consider searching for someone else. Make sure to mention at the end of your response, that It would be advisable to have my partner fill the couple's survey to give you more insight.";
                     $system_config = $this -> description . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals;
                     
-                    $result = OpenAI::chat()->create([
-                    'model' => 'gpt-4',
-                    'messages' => [
-                        ["role"=> "system", "content" => $system_config], 
-                        ["role"=> "user", "content" => "Hello, how can I start finding a girlfriend?"],
-                    ],
-                    'max_tokens' => 4000, 
-                    ]);
-                    return response()->json([
-                        'status' => 'success in both complete',
-                        'openai' => $result,
-                    ]);
+                    $this -> send_to_open_ai_api($system_config, $user_prompt);
                     
 
             } else // if partner answered couple's survey and user did not answered couple survey
@@ -211,24 +205,12 @@ class MessagesController extends Controller
                     $our_interests .= "Take our opinions of eachother into consideration, in order to guide us and support us more accurately. If I ever mention finding another girlfriend, partner or lover, you will strictly not support me. You will tell me to make things work with my partner and in only the hopeless cases, you will tell me to slightly consider searching for someone else. Make sure to mention at the end of your response, that It would be advisable to me fill the couple's survey to give you more insight.";
                     $system_config = $this -> description . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals;
                     
-                    $result = OpenAI::chat()->create([
-                    'model' => 'gpt-4',
-                    'messages' => [
-                        ["role"=> "system", "content" => $system_config], 
-                        ["role"=> "user", "content" => "Hello, how can I start finding a girlfriend?"],
-                    ],
-                    'max_tokens' => 4000, 
-                    ]);
-                    return response()->json([
-                        'status' => 'success in both complete',
-                        'openai' => $result,
-                    ]);
+                    $this -> send_to_open_ai_api($system_config, $user_prompt);
                     
 
             } else // if none of them answered couples survey
                 if ($partner -> couple_survey_status == "incomplete" && $user ->  couple_survey_status == "incomplete"){
 
-                    echo "incomplete for both";
                     $our_interests = "These are my interests:\n";
 
                     // get user's interests (questions + answer)
@@ -248,23 +230,11 @@ class MessagesController extends Controller
                     $our_interests .= "We are in a romantic relationship, Take all of our interests into consideration and use them occasionally when sending your response. If I ever mention finding another partner or lover, you will strictly not support me. You will tell me to make things work with my partner and in only the hopeless cases, you will tell me to slightly consider searching for someone else. Make sure to mention at the end of your response, that It would be advisable for both me and my partner to fill the couple's survey to give you more insight.";
                     $system_config = $this -> description . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals ;
                     
-                    $result = OpenAI::chat()->create([
-                        'model' => 'gpt-4',
-                        'messages' => [
-                            ["role"=> "system", "content" => $system_config], 
-                            ["role"=> "user", "content" => "We want to go on a date, suugest a place"],
-                        ],
-                        'max_tokens' => 3000, 
-                    ]);
-                    return response()->json([
-                        'status' => 'success in icomplete for both',
-                        'openai' => $result,
-                    ]);
+                    $this -> send_to_open_ai_api($system_config, $user_prompt);
 
             } 
 
         } else {
-
             // If user has no relationship (connection_status == "false")
             //  prompt includes the user's personal survey answers and conditional request
             $my_interests = "I am currently not in a reltionship and these are my interests:\n";
@@ -279,39 +249,10 @@ class MessagesController extends Controller
             $my_interests .= "Take all of my interests into consideration and use them occasionally when sending your response.";
             $system_config = $this -> description . $this -> purpose . $my_interests . $this -> tone_of_speech . $this -> removals ;
             
-            $result = OpenAI::chat()->create([
-                'model' => 'gpt-4',
-                'messages' => [
-                    ["role"=> "system", "content" => $system_config], 
-                    ["role"=> "user", "content" => "Hello, how can I start finding a girlfriend?"],
-                ],
-                'max_tokens' => 3000, 
-            ]);
-            return response()->json([
-                'status' => 'success in single',
-                'openai' => $result,
-            ]);
+            $this -> send_to_open_ai_api($system_config, $user_prompt);
         }
 
         
     }
 
 }
-// $result = OpenAI::chat()->create([
-        //     'model' => 'gpt-3.5-turbo',
-        //     'messages' => [
-        //         ["role"=> "system",
-        //         "content" => "You are a dog."], 
-
-        //         ["role"=> "user",
-        //         "content" => "Tell me how was your day?"],
-
-        //     ],
-        //     'max_tokens' => 4000,
-            
-        // ]);
-        
-        // return response()->json([
-        //     'status' => 'success',
-        //     'openai' => $result,
-        // ]);
