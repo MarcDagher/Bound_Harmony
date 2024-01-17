@@ -211,7 +211,8 @@ class MessagesController extends Controller
 
             AiResponse::create([
                 "user_prompt_id" => $prompt -> id,
-                "response" => $openAi_response -> choices[0] -> message -> content 
+                "response" => $openAi_response -> choices[0] -> message -> content,
+                "user_id" => $user -> id 
             ]);
 
             return response() -> json([
@@ -231,17 +232,17 @@ class MessagesController extends Controller
     public function get_conversation() {
         $user = Auth::user();
         // fetch user_prompts + ai_responses 
-        $messages = AiResponse::where('user_prompt_id', $user->id) -> get();
-
+        $messages = AiResponse::where('user_id', $user->id) -> with('user_prompt') -> get();
+        
         if (count($messages) > 0){
             $ordered_conversation = [];
             foreach ($messages as $message){
                 $ordered_conversation[] = [
                     // user_prompt_in_ai_responses is in AiResponse model realtions
-                    "user_prompt" => $message -> user_prompt_in_ai_responses -> prompt,
-                    "user_prompt_date" => $message -> user_prompt_in_ai_responses -> created_at,
-                    "ai_response" => $message -> response,
-                    "ai_response_date" => $message -> created_at
+                    "user_prompt" => $message['user_prompt']['prompt'],
+                    "user_prompt_date" => $message['user_prompt']['created_at'],
+                    "ai_response" => $message["response"],
+                    "ai_response_date" => $message["created_at"]
                 ];
             }
 
