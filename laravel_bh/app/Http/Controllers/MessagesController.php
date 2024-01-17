@@ -172,7 +172,6 @@ class MessagesController extends Controller
 
             } else  // if partner did not answer couple's survey and user answered couple survey
                 if ($partner -> couple_survey_status == "incomplete" && $user ->  couple_survey_status == "complete" ) {
-                    echo "true for me no for her";
 
                     $user_couple_responses = SurveyResponse::where(['user_id' => $user -> id, "partner_id" => $partner -> id]) 
                                                     -> whereHas('question', function ($query){$query -> where ('survey_id', 2);}) 
@@ -230,6 +229,37 @@ class MessagesController extends Controller
                 if ($partner -> couple_survey_status == "incomplete" && $user ->  couple_survey_status == "incomplete"){
 
                     echo "incomplete for both";
+                    $our_interests = "These are my interests:\n";
+
+                    // get user's interests (questions + answer)
+                    $users_personal_survey_responses = $this -> get_personal_survey_responses($user, 1);
+                    $partners_personal_survey_responses = $this -> get_personal_survey_responses($partner, 1);
+
+                    foreach ($users_personal_survey_responses as $personal_response){
+                        $our_interests .= $personal_response['question']['question'] . ": " . $personal_response['option']['option'] . "\n";
+                    }
+
+                    $our_interests .= " Now, these are my partner's interests";
+
+                    foreach ($partners_personal_survey_responses as $personal_response){
+                        $our_interests .= $personal_response['question']['question'] . ": " . $personal_response['option']['option'] . "\n";
+                    }
+
+                    $our_interests .= "We are in a romantic relationship, Take all of our interests into consideration and use them occasionally when sending your response. If I ever mention finding another partner or lover, you will strictly not support me. You will tell me to make things work with my partner and in only the hopeless cases, you will tell me to slightly consider searching for someone else. Make sure to mention at the end of your response, that It would be advisable for both me and my partner to fill the couple's survey to give you more insight.";
+                    $system_config = $this -> description . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals ;
+                    
+                    $result = OpenAI::chat()->create([
+                        'model' => 'gpt-4',
+                        'messages' => [
+                            ["role"=> "system", "content" => $system_config], 
+                            ["role"=> "user", "content" => "We want to go on a date, suugest a place"],
+                        ],
+                        'max_tokens' => 3000, 
+                    ]);
+                    return response()->json([
+                        'status' => 'success in icomplete for both',
+                        'openai' => $result,
+                    ]);
 
             } 
 
@@ -255,7 +285,7 @@ class MessagesController extends Controller
                     ["role"=> "system", "content" => $system_config], 
                     ["role"=> "user", "content" => "Hello, how can I start finding a girlfriend?"],
                 ],
-                'max_tokens' => 2500, 
+                'max_tokens' => 3000, 
             ]);
             return response()->json([
                 'status' => 'success in single',
