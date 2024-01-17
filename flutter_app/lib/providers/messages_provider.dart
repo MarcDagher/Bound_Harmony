@@ -26,19 +26,18 @@ class MessagesProvider extends ChangeNotifier {
       );
       if (response.data['status'] == "success") {
         for (Map message in response.data["conversation"]) {
+          // add users message
           conversation.add(Message(
               text: message["user_prompt"],
               date: DateTime.parse(message['user_prompt_date']),
               isSentByMe: true));
-          // print("User Prompt: ${message["user_prompt"]}");
+          // add ai response
           conversation.add(Message(
               text: message['ai_response'],
               date: DateTime.parse(message['ai_response_date']),
               isSentByMe: false));
-          // print("User Prompt: ${message["ai_response_date"]}");
         }
         notifyListeners();
-        print("In successful, conversation: ${response.data}");
       }
     } on DioException catch (error) {
       print("In getConversation: $error");
@@ -62,8 +61,6 @@ class MessagesProvider extends ChangeNotifier {
             date: DateTime.now(),
             isSentByMe: false));
       }
-
-      print("In sendMessage() response: ${response.data}");
     } on DioException catch (error) {
       print("In sendMessage() error: $error");
       somethingWentWrong = "Something went worng, please try sending again";
