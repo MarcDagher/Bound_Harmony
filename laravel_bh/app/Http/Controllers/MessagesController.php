@@ -48,6 +48,25 @@ class MessagesController extends Controller
         return $survey_responses;
     }
 
+    // helper method
+    public function summary_of_couple_survey_answers($user_responses){
+            $summary_of_responses = ""; 
+            $previous_question = "";
+        foreach($user_responses as $response){
+
+            $current_question = $response['question']['question'];
+            $current_option = $response['option']['option'];
+
+            if ($previous_question == $current_question){
+                $summary_of_responses .= ", " . $current_option;
+            } else {
+                $summary_of_responses .= "\n" . $current_question . ": " . $current_option;
+                $previous_question = $current_question;
+            }
+        } 
+        return $summary_of_responses;
+    }
+
     public function get_conversation() {
         $user = Auth::user();
         // fetch user_prompts + ai_responses 
@@ -129,45 +148,22 @@ class MessagesController extends Controller
                                                     -> whereHas('question', function ($query){$query -> where ('survey_id', 2);}) 
                                                     -> with('question', 'option') -> get();
 
-                $user_summary_of_responses = "";
-                $partners_summary_of_responses = ""; 
-                $previous_question = "";
+                $user_summary_of_responses = $this -> summary_of_couple_survey_answers($user_couple_responses); // string
+                $partners_summary_of_responses = $this -> summary_of_couple_survey_answers($partner_couple_responses); // string
 
-                foreach($user_couple_responses as $response){
-                    $current_question = $response['question']['question'];
-                    $current_option = $response['option']['option'];
-
-                    if ($previous_question == $current_question){
-                        $user_summary_of_responses .= ", " . $current_option;
-                    } else {
-                        $user_summary_of_responses .= "\n" . $current_question . ": " . $current_option;
-                        $previous_question = $current_question;
-                    }
-                } 
-                
-                foreach($partner_couple_responses as $response){
-                    $current_question = $response['question']['question'];
-                    $current_option = $response['option']['option'];
-                    if ($previous_question == $current_question){
-                        $partners_summary_of_responses .=  ", " . $current_option ;
-                    } else {
-                        $partners_summary_of_responses .= "\n". $current_question . ": " . $current_option ;
-                        $previous_question = $current_question;
-                    }
-                } 
 
                 $our_interests = "This is my opinion on my current relationship: " . $user_summary_of_responses;
                 $our_interests .= " and this my partner's opinion of our current relationship: ". $partners_summary_of_responses;
                 $our_interests .= "Take our opinions of eachother into consideration, in order to guide us and support us more accurately. If I ever mention finding another girlfriend, partner or lover, you will strictly not support me. You will tell me to make things work with my partner and in only the hopeless cases, you will tell me to slightly consider searching for someone else. ";
                 $system_config = $this -> description . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals;
-
+                
                 $result = OpenAI::chat()->create([
                 'model' => 'gpt-4',
                 'messages' => [
                     ["role"=> "system", "content" => $system_config], 
                     ["role"=> "user", "content" => "Hello, how can I start finding a girlfriend?"],
                 ],
-                'max_tokens' => 3500, 
+                'max_tokens' => 4000, 
                 ]);
                 return response()->json([
                     'status' => 'success in both complete',
@@ -177,17 +173,26 @@ class MessagesController extends Controller
             } else  // if partner did not answer couple's survey and user answered couple survey
                 if ($partner -> couple_survey_status == "incomplete" && $user ->  couple_survey_status == "complete" ) {
 
-                    // 
+                    $user_couple_responses = SurveyResponse::where(['user_id' => $user -> id, "partner_id" => $partner -> id]) 
+                                                    -> whereHas('question', function ($query){$query -> where ('survey_id', 2);}) 
+                                                    -> with('question', 'option') -> get();
+
+                    $user_summary_of_responses = $this -> summary_of_couple_survey_answers($user_couple_responses); // string
+                    
 
             } else // if partner answered couple's survey and user did not answered couple survey
                 if ($partner -> couple_survey_status == "complete" && $user ->  couple_survey_status == "incomplete"){
 
-                    echo "success";
+                    $partner_couple_responses = SurveyResponse::where(['user_id' => $partner -> id, "partner_id" =>  $user -> id]) 
+                                                    -> whereHas('question', function ($query){$query -> where ('survey_id', 2);}) 
+                                                    -> with('question', 'option') -> get();
+                                                    
+                    $partners_summary_of_responses = $this -> summary_of_couple_survey_answers($partner_couple_responses); // string
 
             } else // if none of them answered couples survey
                 if ($partner -> couple_survey_status == "incomplete" && $user ->  couple_survey_status == "incomplete"){
 
-                    //
+                    echo "incomplete for both";
 
             } else {
                 echo "you have no responses\n";
@@ -245,11 +250,3 @@ class MessagesController extends Controller
         //     'status' => 'success',
         //     'openai' => $result,
         // ]);
-
-
-
-// $user_personal_responses = $this ->  get_personal_survey_responses($user);
-                // $partner_personal_responses = $this -> get_personal_survey_responses($partner);
-                // foreach ($personal_survey_responses as $personal_response){
-                //     $my_interests .= $personal_response['question']['question'] . ": " . $personal_response['option']['option'] . "\n";
-                // }
