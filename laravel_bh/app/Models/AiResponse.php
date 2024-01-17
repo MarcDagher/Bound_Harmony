@@ -10,7 +10,7 @@ class AiResponse extends Model
 {
     use HasFactory;
 
-    protected $filable = [
+    protected $fillable = [
         'user_prompt_id',
         'response'   
     ];

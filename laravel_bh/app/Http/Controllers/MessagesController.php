@@ -210,12 +210,18 @@ class MessagesController extends Controller
             //// send_user_prompt_to_ai(){} return the response
             $openAi_response = $this -> send_user_prompt_to_ai($user, $request -> prompt);
 
+            AiResponse::create([
+                "user_prompt_id" => $prompt -> user_id,
+                "response" => $openAi_response -> choices[0] -> message -> content 
+            ]);
+
             return response() -> json([
                 "status" => "success",
-                "ai_response" => $openAi_response
+                "ai_response" => $openAi_response -> choices[0] -> message -> content
             ]);        
 
         } catch (\Exception $e) {
+            echo $e;
             return response() -> json([
                 "status" => "failed",
                 "message" => $e
