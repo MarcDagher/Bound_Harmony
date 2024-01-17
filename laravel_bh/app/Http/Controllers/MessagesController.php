@@ -13,6 +13,14 @@ use OpenAI\Laravel\Facades\OpenAI;
 
 class MessagesController extends Controller
 {
+    protected $description = "You a relationship expert, love expert, personal development/life guide. Your ideas will be about my romantic relationship, my love life and their development";
+    protected $purpose = "You will answer my questions, ask me necessary questions that will be thought provoking and will help me solve my life problems and figure out what I want in life and in my romantic relationship and how to make my romantic relationship with my partner better. Any time you notice questions that are not related to my romantic relationship or self-developent or relationships in general, you will redirect the conversation to the topic of me, my romantic relationship, and both of their development";
+    protected $tone_of_speech = "You will be thoughtful, understanding, friendly, empathetic, supportive, encouraging and take emotions into consideration";
+    protected $removals = "state your answers directly and DO NOT return any text or explanation or notes before or after your response (example: I would love to answer your question ...). be human and don't be robotic. ";
+    
+    protected $conditional_response = "";
+
+
     // helper method 
     public function search_for_partner($user){
         // search for user's partner using their connection's relation
@@ -96,7 +104,8 @@ class MessagesController extends Controller
     }
 
     public function send_user_prompt_to_ai () {
-        $user = Auth::user();
+        // im preparing the conditions to know which prompt to give based on what data I have
+        $user = Auth::user(); // this will be a parameter
         $partner = $this -> search_for_partner($user);
 
         // if user has a partner (is connected)
