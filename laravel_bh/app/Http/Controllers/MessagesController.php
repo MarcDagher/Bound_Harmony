@@ -40,6 +40,15 @@ class MessagesController extends Controller
         }
     }
 
+    // helper method
+    public function get_personal_survey_responses($user){
+        $survey_responses = SurveyResponse::where(['user_id' => $user -> id])
+                                        -> whereHas('question', function ($query) { $query 
+                                        -> where('survey_id', 1);}) -> with('question', 'option') -> get();
+        return $survey_responses;
+    }
+
+
     public function get_conversation() {
         $user = Auth::user();
         // fetch user_prompts + ai_responses 
@@ -110,25 +119,41 @@ class MessagesController extends Controller
         // if user has a partner (is connected)
         if ($user -> connection_status == "true") {
             
-            // if partner answered couple's survey
-            if ($partner -> couple_survey_status == "complete"){
-                $partner_responses = SurveyResponse::where(['user_id' => $partner -> id, "partner_id" =>  $user -> id]) 
-                -> with('question', 'option') -> get();
-            } else {
-                echo "your partner has no responses\n";
-            }
+            // if partner answered couple's survey and user answered couple survey
+            if ($partner -> couple_survey_status == "complete" && $user ->  couple_survey_status == "complete"){
+                
+                $user_personal_responses = $this ->  get_personal_survey_responses($user);
+                $partner_personal_responses = $this -> get_personal_survey_responses($partner);
 
-            // if the user answered couple's survey
-            if ($user -> couple_survey_status == "complete"){
-                $user_responses = SurveyResponse::where(['user_id' => $user -> id, "partner_id" => $partner -> id]) 
-                -> with('question', 'option') -> get();
+                
+                $partner_couple_responses = SurveyResponse::where(['user_id' => $partner -> id, "partner_id" =>  $user -> id]) 
+                                                    -> whereHas('question', function ($query){$query -> where ('survey_id', 2);}) 
+                                                    -> with('question', 'option') -> get();
+                
+                $user_couple_responses = SurveyResponse::where(['user_id' => $user -> id, "partner_id" => $partner -> id]) 
+                                                    -> whereHas('question', function ($query){$query -> where ('survey_id', 2);}) 
+                                                    -> with('question', 'option') -> get();
+
+                echo $user_couple_responses;
+                
+            } else  // if partner did not answer couple's survey and user answered couple survey
+                if ($partner -> couple_survey_status == "incomplete" && $user ->  couple_survey_status == "complete" ) {
+
+                    // 
+
+            } else // if partner answered couple's survey and user did not answered couple survey
+                if ($partner -> couple_survey_status == "complete" && $user ->  couple_survey_status == "incomplete"){
+
+                    echo "success";
+
+            } else // if none of them answered couples survey
+                if ($partner -> couple_survey_status == "incomplete" && $user ->  couple_survey_status == "incomplete"){
+
+                    //
+
             } else {
                 echo "you have no responses\n";
             }
-
-            /// if only user answered: give a prompt with context of user's answers
-            /// if only partner answered: give a prompt with context of partner's answers
-            /// if both answered: give a prompt with context of both partners' answers
 
         } else {
 
@@ -137,25 +162,27 @@ class MessagesController extends Controller
             $my_interests = "I am currently not in a reltionship and these are my interests:\n";
 
             // get user's interests (questions + answer)
-            $personal_survey_responses = SurveyResponse::where(['user_id' => $user -> id]) -> with('question', 'option') -> get();
+            $personal_survey_responses = $this -> get_personal_survey_responses($user, 1);
+
             foreach ($personal_survey_responses as $personal_response){
                 $my_interests .= $personal_response['question']['question'] . ": " . $personal_response['option']['option'] . "\n";
             }
 
-            $my_interests .= "Take all of my interests into consideration when sending your response.";
+            $my_interests .= "Take all of my interests into consideration and use them occasionally when sending your response.";
             $system_config = $this -> description . $this -> purpose . $my_interests . $this -> tone_of_speech . $this -> removals ;
-            $result = OpenAI::chat()->create([
-                'model' => 'gpt-4',
-                'messages' => [
-                    ["role"=> "system_config", "content" => $system_config], 
-                    ["role"=> "user", "content" => "Hello, how can I start finding a girlfriend?"],
-                ],
-                'max_tokens' => 2500, 
-            ]);
-            return response()->json([
-                'status' => 'success',
-                'openai' => $result,
-            ]);
+            
+            // $result = OpenAI::chat()->create([
+            //     'model' => 'gpt-4',
+            //     'messages' => [
+            //         ["role"=> "system_config", "content" => $system_config], 
+            //         ["role"=> "user", "content" => "Hello, how can I start finding a girlfriend?"],
+            //     ],
+            //     'max_tokens' => 2500, 
+            // ]);
+            // return response()->json([
+            //     'status' => 'success',
+            //     'openai' => $result,
+            // ]);
         }
 
         // $result = OpenAI::chat()->create([
