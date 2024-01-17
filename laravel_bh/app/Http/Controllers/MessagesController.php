@@ -172,12 +172,31 @@ class MessagesController extends Controller
 
             } else  // if partner did not answer couple's survey and user answered couple survey
                 if ($partner -> couple_survey_status == "incomplete" && $user ->  couple_survey_status == "complete" ) {
+                    echo "true for me no for her";
 
                     $user_couple_responses = SurveyResponse::where(['user_id' => $user -> id, "partner_id" => $partner -> id]) 
                                                     -> whereHas('question', function ($query){$query -> where ('survey_id', 2);}) 
                                                     -> with('question', 'option') -> get();
 
                     $user_summary_of_responses = $this -> summary_of_couple_survey_answers($user_couple_responses); // string
+
+                    $our_interests = "This is my opinion on my current relationship: " . $user_summary_of_responses;
+                    
+                    $our_interests .= "Take my opinions of the relationship into consideration, in order to guide us and support us more accurately. If I ever mention finding another girlfriend, partner or lover, you will strictly not support me. You will tell me to make things work with my partner and in only the hopeless cases, you will tell me to slightly consider searching for someone else. Make sure to mention at the end of your response, that It would be advisable to have my partner fill the couple's survey to give you more insight.";
+                    $system_config = $this -> description . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals;
+                    
+                    $result = OpenAI::chat()->create([
+                    'model' => 'gpt-4',
+                    'messages' => [
+                        ["role"=> "system", "content" => $system_config], 
+                        ["role"=> "user", "content" => "Hello, how can I start finding a girlfriend?"],
+                    ],
+                    'max_tokens' => 4000, 
+                    ]);
+                    return response()->json([
+                        'status' => 'success in both complete',
+                        'openai' => $result,
+                    ]);
                     
 
             } else // if partner answered couple's survey and user did not answered couple survey
@@ -186,17 +205,33 @@ class MessagesController extends Controller
                     $partner_couple_responses = SurveyResponse::where(['user_id' => $partner -> id, "partner_id" =>  $user -> id]) 
                                                     -> whereHas('question', function ($query){$query -> where ('survey_id', 2);}) 
                                                     -> with('question', 'option') -> get();
-                                                    
+
                     $partners_summary_of_responses = $this -> summary_of_couple_survey_answers($partner_couple_responses); // string
+                    
+                    $our_interests = " This my partner's opinion of our current relationship: ". $partners_summary_of_responses;
+                    $our_interests .= "Take our opinions of eachother into consideration, in order to guide us and support us more accurately. If I ever mention finding another girlfriend, partner or lover, you will strictly not support me. You will tell me to make things work with my partner and in only the hopeless cases, you will tell me to slightly consider searching for someone else. Make sure to mention at the end of your response, that It would be advisable to me fill the couple's survey to give you more insight.";
+                    $system_config = $this -> description . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals;
+                    
+                    $result = OpenAI::chat()->create([
+                    'model' => 'gpt-4',
+                    'messages' => [
+                        ["role"=> "system", "content" => $system_config], 
+                        ["role"=> "user", "content" => "Hello, how can I start finding a girlfriend?"],
+                    ],
+                    'max_tokens' => 4000, 
+                    ]);
+                    return response()->json([
+                        'status' => 'success in both complete',
+                        'openai' => $result,
+                    ]);
+                    
 
             } else // if none of them answered couples survey
                 if ($partner -> couple_survey_status == "incomplete" && $user ->  couple_survey_status == "incomplete"){
 
                     echo "incomplete for both";
 
-            } else {
-                echo "you have no responses\n";
-            }
+            } 
 
         } else {
 
