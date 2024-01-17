@@ -48,7 +48,6 @@ class MessagesController extends Controller
         return $survey_responses;
     }
 
-
     public function get_conversation() {
         $user = Auth::user();
         // fetch user_prompts + ai_responses 
@@ -122,20 +121,59 @@ class MessagesController extends Controller
             // if partner answered couple's survey and user answered couple survey
             if ($partner -> couple_survey_status == "complete" && $user ->  couple_survey_status == "complete"){
                 
-                $user_personal_responses = $this ->  get_personal_survey_responses($user);
-                $partner_personal_responses = $this -> get_personal_survey_responses($partner);
-
-                
-                $partner_couple_responses = SurveyResponse::where(['user_id' => $partner -> id, "partner_id" =>  $user -> id]) 
-                                                    -> whereHas('question', function ($query){$query -> where ('survey_id', 2);}) 
-                                                    -> with('question', 'option') -> get();
-                
                 $user_couple_responses = SurveyResponse::where(['user_id' => $user -> id, "partner_id" => $partner -> id]) 
                                                     -> whereHas('question', function ($query){$query -> where ('survey_id', 2);}) 
                                                     -> with('question', 'option') -> get();
 
-                echo $user_couple_responses;
+                $partner_couple_responses = SurveyResponse::where(['user_id' => $partner -> id, "partner_id" =>  $user -> id]) 
+                                                    -> whereHas('question', function ($query){$query -> where ('survey_id', 2);}) 
+                                                    -> with('question', 'option') -> get();
+
+                $user_summary_of_responses = "";
+                $partners_summary_of_responses = ""; 
+                $previous_question = "";
+
+                foreach($user_couple_responses as $response){
+                    $current_question = $response['question']['question'];
+                    $current_option = $response['option']['option'];
+
+                    if ($previous_question == $current_question){
+                        $user_summary_of_responses .= ", " . $current_option;
+                    } else {
+                        $user_summary_of_responses .= "\n" . $current_question . ": " . $current_option;
+                        $previous_question = $current_question;
+                    }
+                } 
                 
+                foreach($partner_couple_responses as $response){
+                    $current_question = $response['question']['question'];
+                    $current_option = $response['option']['option'];
+                    if ($previous_question == $current_question){
+                        $partners_summary_of_responses .=  ", " . $current_option ;
+                    } else {
+                        $partners_summary_of_responses .= "\n". $current_question . ": " . $current_option ;
+                        $previous_question = $current_question;
+                    }
+                } 
+
+                $our_interests = "This is my opinion on my current relationship: " . $user_summary_of_responses;
+                $our_interests .= " and this my partner's opinion of our current relationship: ". $partners_summary_of_responses;
+                $our_interests .= "Take our opinions of eachother into consideration, in order to guide us and support us more accurately. If I ever mention finding another girlfriend, partner or lover, you will strictly not support me. You will tell me to make things work with my partner and in only the hopeless cases, you will tell me to slightly consider searching for someone else. ";
+                $system_config = $this -> description . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals;
+
+                $result = OpenAI::chat()->create([
+                'model' => 'gpt-4',
+                'messages' => [
+                    ["role"=> "system", "content" => $system_config], 
+                    ["role"=> "user", "content" => "Hello, how can I start finding a girlfriend?"],
+                ],
+                'max_tokens' => 3500, 
+                ]);
+                return response()->json([
+                    'status' => 'success in both complete',
+                    'openai' => $result,
+                ]);
+
             } else  // if partner did not answer couple's survey and user answered couple survey
                 if ($partner -> couple_survey_status == "incomplete" && $user ->  couple_survey_status == "complete" ) {
 
@@ -171,21 +209,25 @@ class MessagesController extends Controller
             $my_interests .= "Take all of my interests into consideration and use them occasionally when sending your response.";
             $system_config = $this -> description . $this -> purpose . $my_interests . $this -> tone_of_speech . $this -> removals ;
             
-            // $result = OpenAI::chat()->create([
-            //     'model' => 'gpt-4',
-            //     'messages' => [
-            //         ["role"=> "system_config", "content" => $system_config], 
-            //         ["role"=> "user", "content" => "Hello, how can I start finding a girlfriend?"],
-            //     ],
-            //     'max_tokens' => 2500, 
-            // ]);
-            // return response()->json([
-            //     'status' => 'success',
-            //     'openai' => $result,
-            // ]);
+            $result = OpenAI::chat()->create([
+                'model' => 'gpt-4',
+                'messages' => [
+                    ["role"=> "system", "content" => $system_config], 
+                    ["role"=> "user", "content" => "Hello, how can I start finding a girlfriend?"],
+                ],
+                'max_tokens' => 2500, 
+            ]);
+            return response()->json([
+                'status' => 'success in single',
+                'openai' => $result,
+            ]);
         }
 
-        // $result = OpenAI::chat()->create([
+        
+    }
+
+}
+// $result = OpenAI::chat()->create([
         //     'model' => 'gpt-3.5-turbo',
         //     'messages' => [
         //         ["role"=> "system",
@@ -203,7 +245,11 @@ class MessagesController extends Controller
         //     'status' => 'success',
         //     'openai' => $result,
         // ]);
-        
-    }
 
-}
+
+
+// $user_personal_responses = $this ->  get_personal_survey_responses($user);
+                // $partner_personal_responses = $this -> get_personal_survey_responses($partner);
+                // foreach ($personal_survey_responses as $personal_response){
+                //     $my_interests .= $personal_response['question']['question'] . ": " . $personal_response['option']['option'] . "\n";
+                // }
