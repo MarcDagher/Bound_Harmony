@@ -123,7 +123,7 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
           if (value.noRequests == true) {
             return NotConnectedBox(
                 text:
-                    "Don't have a partner? No Problem!\nGo to my partners and send a request or go get some advice!",
+                    "Don't have a partner? No Problem!\nGo to My Partners and send a request or go get some advice!",
                 textFirstButton: "My Partners",
                 handlePressedFirstButton: () {
                   value.successSendRequest = false;
