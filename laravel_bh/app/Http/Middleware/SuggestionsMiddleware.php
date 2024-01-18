@@ -48,7 +48,7 @@ class SuggestionsMiddleware
 
         // user is the responder
         } else if ($partner_as_responder) {
-            if ($partner_as_responder['requester_user']['couple_survey_status'] == "incomplete"){
+            if ($partner_as_responder['responder_user']['couple_survey_status'] == "incomplete"){
                 return response() -> json([
                     "status" => "failed",
                     "message" => "Make sure your partner submitted their couple's survey"
@@ -58,4 +58,3 @@ class SuggestionsMiddleware
         return $next($request);
     }
 }
-// https://laravel-news.com/openai-for-laravel
