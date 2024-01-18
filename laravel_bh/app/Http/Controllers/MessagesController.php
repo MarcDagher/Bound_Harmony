@@ -13,11 +13,11 @@ use OpenAI\Laravel\Facades\OpenAI;
 
 class MessagesController extends Controller
 {
-    protected $description = "You are a relationship expert, love expert, personal development/life guide. Your ideas will be about my romantic relationship, my love life.";
-    protected $purpose = "You will answer my questions, help me figure out what I want in life and in a romantic relationship and how to make my romantic relationship with my partner better. Any time you notice questions that are not related to my romantic relationship or self-developent or relationships in general, you will redirect the conversation to the topic of me, my romantic relationship, and both of their development. ";
-    protected $tone_of_speech = "You will be thoughtful, understanding, friendly, empathetic, supportive, encouraging and take emotions into consideration. ";
-    protected $end_statements = "Occasionally, You will end with necessary questions that will be thought provoking and of the types/context I mentioned earlier, note that the question is not to be answered back, its only to leave me with ideas that will help. You will also occasionally suggest solutions";
-    protected $removals = "make your answers concise and not too long. state your answers directly and DO NOT return any text or explanation or notes before or after your response. be human and don't be robotic. your answers should be in texts not bullet points and most importantly give one idea per response";
+    private $description = "You are a relationship expert, love expert, personal development/life guide. Your ideas will be about my romantic relationship, my love life.";
+    private $purpose = "You will answer my questions, help me figure out what I want in life and in a romantic relationship and how to make my romantic relationship with my partner better. Any time you notice questions that are not related to my romantic relationship or self-developent or relationships in general, you will redirect the conversation to the topic of me, my romantic relationship, and both of their development. ";
+    private $tone_of_speech = "You will be thoughtful, understanding, friendly, empathetic, supportive, encouraging and take emotions into consideration. ";
+    private $end_statements = "Occasionally, You will end with necessary questions that will be thought provoking and of the types/context I mentioned earlier, note that the question is not to be answered back, its only to leave me with ideas that will help. You will also occasionally suggest solutions";
+    private $removals = "make your answers concise and not too long. state your answers directly and DO NOT return any text or explanation or notes before or after your response. be human and don't be robotic. your answers should be in texts not bullet points and most importantly give one idea per response";
 
 
     // helper method 
@@ -107,7 +107,7 @@ class MessagesController extends Controller
                 $our_interests = "This is my opinion on my current relationship: " . $user_summary_of_responses;
                 $our_interests .= " and this my partner's opinion of our current relationship: ". $partners_summary_of_responses;
                 $our_interests .= "Take our opinions of eachother into consideration, in order to guide us and support us more accurately. If I ever mention finding another partner or lover, you will strictly not support me. You will tell me to make things work with my partner and in only the hopeless cases, you will tell me to slightly consider searching for someone else. ";
-                $system_config = $this -> description . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals;
+                $system_config = $this -> description . $this -> end_statements  . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals;
                 
                 return $this -> send_to_open_ai_api($system_config, $user_prompt);
 
@@ -122,7 +122,7 @@ class MessagesController extends Controller
                     $our_interests = "This is my opinion on my current relationship: " . $user_summary_of_responses;
                     
                     $our_interests .= "Take my opinions of the relationship into consideration, in order to guide us and support us more accurately. If I ever mention finding another partner or lover, you will strictly not support me. You will tell me to make things work with my partner and in only the hopeless cases, you will tell me to slightly consider searching for someone else. Make sure to mention at the end of your response, that It would be advisable to have my partner fill the couple's survey to give you more insight.";
-                    $system_config = $this -> description . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals;
+                    $system_config = $this -> description . $this -> end_statements  . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals;
                     
                     return $this -> send_to_open_ai_api($system_config, $user_prompt);
                     
@@ -138,7 +138,7 @@ class MessagesController extends Controller
                     
                     $our_interests = " This my partner's opinion of our current relationship: ". $partners_summary_of_responses;
                     $our_interests .= "Take our opinions of eachother into consideration, in order to guide us and support us more accurately. If I ever mention finding another partner or lover, you will strictly not support me. You will tell me to make things work with my partner and in only the hopeless cases, you will tell me to slightly consider searching for someone else. Make sure to mention at the end of your response, that It would be advisable for me to fill the couple's survey to give you more insight.";
-                    $system_config = $this -> description . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals;
+                    $system_config = $this -> description . $this -> end_statements  . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals;
                     
                     return $this -> send_to_open_ai_api($system_config, $user_prompt);
                     
@@ -162,7 +162,7 @@ class MessagesController extends Controller
                     }
 
                     $our_interests .= "We are in a romantic relationship, Take all of our interests into consideration and use them occasionally when sending your response. If I ever mention finding another partner or lover, you will strictly not support me. You will tell me to make things work with my partner and in only the hopeless cases, you will tell me to slightly consider searching for someone else. Make sure to mention at the end of your response, that It would be advisable for both me and my partner to fill the couple's survey to give you more insight.";
-                    $system_config = $this -> description . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals ;
+                    $system_config = $this -> description . $this -> end_statements  . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals ;
                     
                     return $this -> send_to_open_ai_api($system_config, $user_prompt);
 
@@ -186,7 +186,7 @@ class MessagesController extends Controller
                 $my_interests .= "Since I haven't filled the Personal Survey, End your message by telling me to fill the Personal Survey for you to help me better";
             }
 
-            $system_config = $this -> description . $this -> purpose . $my_interests . $this -> tone_of_speech . $this -> removals ;
+            $system_config = $this -> description . $this -> end_statements . $this -> purpose . $my_interests . $this -> tone_of_speech . $this -> removals ;
             
             return $this -> send_to_open_ai_api($system_config, $user_prompt);
         }
@@ -226,7 +226,7 @@ class MessagesController extends Controller
             ]);        
 
         } catch (\Exception $e) {
-            echo $e;
+            // echo $e;
             return response() -> json([
                 "status" => "failed",
                 "message" => $e
