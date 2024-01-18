@@ -79,16 +79,38 @@ class SuggestionsController extends Controller
         // if user answers yes to Q25 : open to experiencing my partner's activities and interests
         $user_Q25_couple_survey_response = SurveyResponse::where(["user_id" => $user -> id, "connection_id" => $connection_id, "question_id" => 25])
                                           -> with('option') -> latest() -> first('option_id')['option']['option'];
+
+        // echo $user_Q25_couple_survey_response; 
         if ($user_Q25_couple_survey_response == "yes"){
+
             // add partners interests
         }
 
-        // add my interests
-        $my_interests = SurveyResponse::where(["user_id" => $user -> id, "survey_id" => 1]) -> with('question', 'option') -> get(['question_id', 'option_id']);
+        // add user interests (as google places queries) to $couples_combined_interests
+        $my_interests = SurveyResponse::where(["user_id" => $user -> id, "survey_id" => 1]) -> get(['question_id', 'option_id']);
         foreach($my_interests as $interest){
-            // echo $interest['question']['question'] .': '. $interest['option']['option'] ."\n";   
-            // echo $interest; 
-            // issue now is, how will I extract a query from the question. I need to assign a query or a type, to each interest
+            switch($interest){ // consider the opposite case. if crowded = no then calm
+                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 1: array_push($couples_combined_interests, "crowded"); break; 
+                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 2: array_push($couples_combined_interests, "nightlife"); break; 
+                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 3: array_push($couples_combined_interests, "outdoor"); break; 
+                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 4: array_push($couples_combined_interests, "nature"); break; 
+                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 5: array_push($couples_combined_interests, "museum", "art gallery"); break; 
+                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 6: array_push($couples_combined_interests, "culture", "education"); break; 
+                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 7: array_push($couples_combined_interests, "book"); break; 
+                case $interest['option_id'] % 2 != 0 && $interest['question_id'] == 8: array_push($couples_combined_interests, "religion"); break; 
+                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 9: array_push($couples_combined_interests, "calm"); break; 
+                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 10: array_push($couples_combined_interests, "spiritual"); break; 
+                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 11: array_push($couples_combined_interests, "self-care"); break; 
+                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 12: array_push($couples_combined_interests, "shopping"); break; 
+                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 13: array_push($couples_combined_interests, "exercise"); break; 
+                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 14: array_push($couples_combined_interests, "restaurant"); break; 
+                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 15: array_push($couples_combined_interests, "shopping"); break; 
+                case $interest['option_id'] % 2 != 0 && $interest['question_id'] == 16: array_push($couples_combined_interests, "shopping"); break; 
+                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 17: array_push($couples_combined_interests, "sports"); break; 
+                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 18: array_push($couples_combined_interests, "home activities"); break; 
+                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 19: array_push($couples_combined_interests, "movie"); break;  
+                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 20: array_push($couples_combined_interests, "animals"); break;  
+            }
         }
 
         print_r(array_unique($couples_combined_interests));
