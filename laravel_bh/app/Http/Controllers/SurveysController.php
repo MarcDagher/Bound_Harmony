@@ -90,14 +90,14 @@ class SurveysController extends Controller
                     $connection_and_partner = $this -> search_for_connection_and_partner($user);
                     // echo($connection_and_partner['connection_id']);
                     // echo($connection_and_partner['partner_id']);
-                    // SurveyResponse::create([
-                    //     "user_id" => $user->id,
-                    //     "question_id" => $question_id,
-                    //     "option_id" => 100,
-                    //     "partner_id" => $connection_and_partner['partner_id'],
-                    //     "text_input" => $response
-                    //     //// 'connection_id' => $connection_and_partner['connection_id']
-                    // ]);
+                    SurveyResponse::create([
+                        "user_id" => $user->id,
+                        "question_id" => $question_id,
+                        "option_id" => 100,
+                        "partner_id" => $connection_and_partner['partner_id'],
+                        "text_input" => $response,
+                        'connection_id' => $connection_and_partner['connection_id']
+                    ]);
                 } elseif ($survey_id == 1) {
                     SurveyResponse::create([
                         "user_id" => $user->id,
@@ -115,13 +115,13 @@ class SurveysController extends Controller
                     // if couple's survey find my partner and add id to my response
                     if ($survey_id == 2){
                         $connection_and_partner = $this -> search_for_connection_and_partner($user);
-                        // SurveyResponse::create([
-                        //     "user_id" => $user->id,
-                        //     "question_id" => $question_id,
-                        //     "option_id" => $response_validation[0] -> id,
-                        //     "partner_id" => $connection_and_partner['partner_id']
-                        //     //// 'connection_id' => $connection_and_partner['connection_id']
-                        // ]);    
+                        SurveyResponse::create([
+                            "user_id" => $user->id,
+                            "question_id" => $question_id,
+                            "option_id" => $response_validation[0] -> id,
+                            "partner_id" => $connection_and_partner['partner_id'],
+                            'connection_id' => $connection_and_partner['connection_id']
+                        ]);    
                     } elseif ($survey_id == 1) {
                         SurveyResponse::create([
                             "user_id" => $user->id,

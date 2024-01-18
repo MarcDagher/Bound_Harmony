@@ -15,6 +15,7 @@ class SurveyResponse extends Model
         'question_id',
         'partner_id',
         'option_id',
+        'connection_id',
         'text_input'
     ];
 
