@@ -30,18 +30,37 @@ class SuggestionsController extends Controller
         }
     }
 
+    public function get_couple_survey_Q_responses($user_id, $connection_id, $question_id){
+        $user_Q_couple_survey_response = SurveyResponse::where(['connection_id' => $connection_id, 'user_id' => $user_id, "question_id" => $question_id]) 
+                                        -> with('option') -> get('option_id');
+        return $user_Q_couple_survey_response;
+    }
+
     //I need to know th user's interests to know what to suggest.
     //User has to have a partner in order to get to here.
     
     public function get_suggestions(){
         $user = Auth::user();
-        $connection_and_partner = $this -> search_for_connection_and_partner($user);
-        echo $connection_and_partner['connection_id'];
-        echo $connection_and_partner['partner_id'];
+        $couples_combined_interests = [];
         //get the connection id of this user's relationship
-        //get CSR of the user
-        // SurveyResponse::where('');
+        $connection_and_partner_ids = $this -> search_for_connection_and_partner($user);
+        $connection_id = $connection_and_partner_ids['connection_id'];
+        $partner_id = $connection_and_partner_ids['partner_id'];
 
-        return "\n Hello, this is sugestions";
+        //get Couple Survey Responses of the user (Q = question)
+        $user_Q28_couple_survey_response = $this -> get_couple_survey_Q_responses($user -> id, $connection_id, 28);
+        $partner_Q28_couple_survey_response = $this -> get_couple_survey_Q_responses($partner_id, $connection_id, 28);
+
+        foreach ($user_Q28_couple_survey_response as $option) {
+            if (!in_array($option['option']['option'], $couples_combined_interests)){
+                array_push($couples_combined_interests, $option['option']['option']);    
+            }
+        }
+        foreach ($partner_Q28_couple_survey_response as $option) {
+            if (!in_array($option['option']['option'], $couples_combined_interests)){
+                array_push($couples_combined_interests, $option['option']['option']);    
+            }
+        }
+                
     }
 }
