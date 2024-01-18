@@ -221,8 +221,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         padding: const EdgeInsets.only(bottom: 8),
                         child: DisplayBox(
                           text: value.newDefaultLocation == ""
-                              ? "Location: ${context.read<AuthProvider>().preferences!.getString('location')}"
-                              : "Location: ${value.newDefaultLocation}",
+                              ? "Country: ${context.read<AuthProvider>().preferences!.getString('location')}"
+                              : "Country: ${value.newDefaultLocation}",
                         )),
                   ),
 
@@ -231,7 +231,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                           side: BorderSide(
-                              color: Theme.of(context).hintColor, width: 2.5)),
+                              color: Theme.of(context).hintColor, width: 2)),
                       padding: const EdgeInsets.symmetric(
                           vertical: 18, horizontal: 15),
                       child: Row(
