@@ -16,34 +16,114 @@ class UsersSeeder extends Seeder
     {
         User::create([
             "role_id" => 2,
-            "username" => "mouse",
-            "email" => "mouse@hotmail.com",
+            "username" => "Mousa",
+            "email" => "mousa@hotmail.com",
             "password" => Hash::make("123456"),
             "birthdate" => "2001-01-15",
         ]);
 
         User::create([
             "role_id" => 2,
-            "username" => "speaker",
-            "email" => "speaker@hotmail.com",
+            "username" => "Kevin",
+            "email" => "kevin@hotmail.com",
             "password" => Hash::make("123456"),
             "birthdate" => "2001-01-15",
         ]);
 
         User::create([
             "role_id" => 2,
-            "username" => "screen",
-            "email" => "screen@hotmail.com",
+            "username" => "Charbel",
+            "email" => "charbel@hotmail.com",
             "password" => Hash::make("123456"),
             "birthdate" => "2001-01-15",
         ]);
 
         User::create([
             "role_id" => 2,
-            "username" => "box",
-            "email" => "box@hotmail.com",
+            "username" => "Riyad",
+            "email" => "riyad@gmail.com",
             "password" => Hash::make("123456"),
             "birthdate" => "2001-01-15",
+        ]);
+        ///////////////////////////////////////////////
+        User::create([
+            "role_id" => 2,
+            "username" => "Rita",
+            "email" => "rita@hotmail.com",
+            "password" => Hash::make("123456"),
+            "birthdate" => "2001-01-15",
+        ]);
+
+        User::create([
+            "role_id" => 2,
+            "username" => "Marwa",
+            "email" => "marwa@hotmail.com",
+            "password" => Hash::make("123456"),
+            "birthdate" => "2001-01-15",
+        ]);
+
+        User::create([
+            "role_id" => 2,
+            "username" => "Basma",
+            "email" => "basma@hotmail.com",
+            "password" => Hash::make("123456"),
+            "birthdate" => "2001-01-15",
+        ]);
+
+        User::create([
+            "role_id" => 2,
+            "username" => "Nancy",
+            "email" => "nancy@hotmail.com",
+            "password" => Hash::make("123456"),
+            "birthdate" => "2001-01-15",
+        ]);
+
+        User::create([
+            "role_id" => 2,
+            "username" => "Haifa",
+            "email" => "haifa@hotmail.com",
+            "password" => Hash::make("123456"),
+            "birthdate" => "2001-01-15",
+        ]);
+
+        User::create([
+            "role_id" => 2,
+            "username" => "Ricardo",
+            "email" => "ricardo@hotmail.com",
+            "password" => Hash::make("123456"),
+            "birthdate" => "2001-01-15",
+        ]);
+
+        User::create([
+            "role_id" => 2,
+            "username" => "John",
+            "email" => "john@hotmail.com",
+            "password" => Hash::make("123456"),
+            "birthdate" => "2001-01-15",
+        ]);
+
+        User::create([
+            "role_id" => 2,
+            "username" => "Pia",
+            "email" => "pia@hotmail.com",
+            "password" => Hash::make("123456"),
+            "birthdate" => "2001-01-15",
+        ]);
+
+        User::create([
+            "role_id" => 2,
+            "username" => "Mia",
+            "email" => "mia@hotmail.com",
+            "password" => Hash::make("123456"),
+            "birthdate" => "1997-10-15",
+        ]);
+
+        User::create([
+            "role_id" => 2,
+            "username" => "Tia",
+            "email" => "tia@hotmail.com",
+            "password" => Hash::make("123456"),
+            "birthdate" => "2004-07-10",
         ]);
     }
 }
