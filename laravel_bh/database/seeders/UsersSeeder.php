@@ -45,7 +45,7 @@ class UsersSeeder extends Seeder
             "password" => Hash::make("123456"),
             "birthdate" => "2001-01-15",
         ]);
-        ///////////////////////////////////////////////
+        
         User::create([
             "role_id" => 2,
             "username" => "Rita",
