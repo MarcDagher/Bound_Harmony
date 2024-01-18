@@ -41,7 +41,7 @@ class SuggestionsController extends Controller
     
     public function get_suggestions(){
         $user = Auth::user();
-        $couples_combined_interests = [];
+        $couples_combined_interests = []; // answers of Q28 + user's + partner's(if Q25 is yes)
         //get the connection id of this user's relationship
         $connection_and_partner_ids = $this -> search_for_connection_and_partner($user);
         $connection_id = $connection_and_partner_ids['connection_id'];
@@ -61,6 +61,16 @@ class SuggestionsController extends Controller
                 array_push($couples_combined_interests, $option['option']['option']);    
             }
         }
+
+        // if user answers yes to Q25 : open to experiencing my partner's activities and interests
+        $user_Q25_couple_survey_response = SurveyResponse::where(["user_id" => $user -> id, "connection_id" => $connection_id, "question_id" => 25])
+                                          -> with('option') -> latest() -> first('option_id')['option']['option'];
+        // if ($user_Q25_couple_survey_response == "yes"){
+        //     // add partners interests
+        // }
+
+        // add my interests
+        // $my_interests = SurveyResponse::where(["user_id" => $user -> id]) -> with('option');
                 
     }
 }

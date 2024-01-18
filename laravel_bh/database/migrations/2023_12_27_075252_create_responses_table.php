@@ -16,12 +16,14 @@ return new class extends Migration
             $table -> unsignedBigInteger('user_id');
             $table -> unsignedBigInteger('partner_id') -> nullable();
             $table -> unsignedBigInteger('connection_id') -> nullable();
+            $table -> unsignedBigInteger('survey_id');
             $table -> unsignedBigInteger('question_id');
             $table -> unsignedBigInteger('option_id');
             $table -> string('text_input') -> nullable();
             $table -> timestamps();
 
             $table -> foreign('user_id') -> references('id') -> on('users');
+            $table -> foreign('survey_id') -> references('id') -> on('surveys');
             $table -> foreign('question_id') -> references('id') -> on('questions');
             $table -> foreign("option_id") -> references('id') ->on ('options');
             $table -> foreign("partner_id") -> references('id') -> on('users');
