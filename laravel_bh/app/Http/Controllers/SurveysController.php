@@ -13,22 +13,22 @@ use Illuminate\Support\Facades\Auth;
 class SurveysController extends Controller
 {
     // helper method 
-    public function search_for_partner($user){
-        // search for user's partner using their connection's relation
-        $partner_as_requester = Connection::where(['status' => 'accepted', "responder" => $user -> id]) 
-                                -> with("requester_user") -> get('requester') -> first();
+    public function search_for_connection_and_partner($user){
+        // search for user's partner
+        $connection_where_partner_is_requester = Connection::where(['status' => 'accepted', "responder" => $user -> id]) -> get() -> first();
+        $connection_where_partner_is_responder = Connection::where(['status' => 'accepted', "requester" => $user -> id]) -> get() -> first();
 
-        $partner_as_responder = Connection::where(['status' => 'accepted', "requester" => $user -> id]) 
-                                -> with("responder_user") -> get('responder') -> first();
+        // user's partner is the requester
+        if ($connection_where_partner_is_requester) {
+            $connection_id = $connection_where_partner_is_requester['id'];
+            $partner_id = $connection_where_partner_is_requester['requester'];
+            return ["partner_id" => $partner_id, "connection_id" => $connection_id];
 
-        // check if user's partner completed couple's survey
-        // user is the requester
-        if ($partner_as_requester) {
-            return $partner_as_requester['requester_user'];
-
-        // user is the responder
-        } else if ($partner_as_responder) {
-            return $partner_as_responder['responder_user'];
+        // user's partner is the responder
+        } else if ($connection_where_partner_is_responder) {
+            $connection_id = $connection_where_partner_is_responder['id'];
+            $partner_id = $connection_where_partner_is_responder['responder'];
+            return ["partner_id" => $partner_id, "connection_id" => $connection_id];
         }
     }
     
@@ -87,14 +87,17 @@ class SurveysController extends Controller
 
                 // if couple's survey find my partner and add id to my response
                 if ($survey_id == 2){
-                    $partner = $this -> search_for_partner($user);
-                    SurveyResponse::create([
-                        "user_id" => $user->id,
-                        "question_id" => $question_id,
-                        "option_id" => 100,
-                        "partner_id" => $partner -> id,
-                        "text_input" => $response
-                    ]);
+                    $connection_and_partner = $this -> search_for_connection_and_partner($user);
+                    // echo($connection_and_partner['connection_id']);
+                    // echo($connection_and_partner['partner_id']);
+                    // SurveyResponse::create([
+                    //     "user_id" => $user->id,
+                    //     "question_id" => $question_id,
+                    //     "option_id" => 100,
+                    //     "partner_id" => $connection_and_partner['partner_id'],
+                    //     "text_input" => $response
+                    //     //// 'connection_id' => $connection_and_partner['connection_id']
+                    // ]);
                 } elseif ($survey_id == 1) {
                     SurveyResponse::create([
                         "user_id" => $user->id,
@@ -111,13 +114,14 @@ class SurveysController extends Controller
                 if (isset($response_validation[0])){
                     // if couple's survey find my partner and add id to my response
                     if ($survey_id == 2){
-                        $partner = $this -> search_for_partner($user);
-                        SurveyResponse::create([
-                            "user_id" => $user->id,
-                            "question_id" => $question_id,
-                            "option_id" => $response_validation[0] -> id,
-                            "partner_id" => $partner -> id
-                        ]);    
+                        $partner = $this -> search_for_connection_and_partner($user);
+                        // SurveyResponse::create([
+                        //     "user_id" => $user->id,
+                        //     "question_id" => $question_id,
+                        //     "option_id" => $response_validation[0] -> id,
+                        //     "partner_id" => $partner -> id
+                        //     //// add connection_id
+                        // ]);    
                     } elseif ($survey_id == 1) {
                         SurveyResponse::create([
                             "user_id" => $user->id,
@@ -149,7 +153,6 @@ class SurveysController extends Controller
         return response() -> json([
             "status" => "success",
             "message" => "Your responses have been saved",
-            "updated user" => $user_in_model
         ]); 
     }
 
