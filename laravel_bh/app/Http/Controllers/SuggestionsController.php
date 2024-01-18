@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class SuggestionsController extends Controller
 {
 
-    // helper method 
+    // helper method: gets user's current partner 
     public function search_for_connection_and_partner($user){
         // search for user's partner where connection_status is accepted
         $connection_where_partner_is_requester = Connection::where(['status' => 'accepted', "responder" => $user -> id]) -> get() -> first();
@@ -30,14 +30,14 @@ class SuggestionsController extends Controller
         }
     }
 
-    // helper method
+    // helper method: gets the couple survey responses of the given question_id and user_id 
     public function get_couple_survey_Q_responses($user_id, $connection_id, $question_id){
         $user_Q_couple_survey_response = SurveyResponse::where(['connection_id' => $connection_id, 'user_id' => $user_id, "question_id" => $question_id]) 
                                         -> get('option_id');
         return $user_Q_couple_survey_response;
     }
 
-    // helper method: change user's options to Google Places Api query parameter
+    // helper method: change user's options to useable Google Places Api query parameters
     public function filter_Q28_responses($option){
         switch ($option){
             case ($option["option_id"] == "93") : return ["outdoor", "nature"]; break;
@@ -50,7 +50,7 @@ class SuggestionsController extends Controller
         }
     }
 
-    // helper method: change user's options to Google Places Api query parameter
+    // helper method: change user's options to useable Google Places Api query parameters
     public function filter_Q25_responses($interest){
         switch($interest){ // consider the opposite case. if crowded = no then calm
                 case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 1:  return "crowded"; break; 
