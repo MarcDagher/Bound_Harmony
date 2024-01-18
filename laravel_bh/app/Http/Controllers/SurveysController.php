@@ -114,13 +114,13 @@ class SurveysController extends Controller
                 if (isset($response_validation[0])){
                     // if couple's survey find my partner and add id to my response
                     if ($survey_id == 2){
-                        $partner = $this -> search_for_connection_and_partner($user);
+                        $connection_and_partner = $this -> search_for_connection_and_partner($user);
                         // SurveyResponse::create([
                         //     "user_id" => $user->id,
                         //     "question_id" => $question_id,
                         //     "option_id" => $response_validation[0] -> id,
-                        //     "partner_id" => $partner -> id
-                        //     //// add connection_id
+                        //     "partner_id" => $connection_and_partner['partner_id']
+                        //     //// 'connection_id' => $connection_and_partner['connection_id']
                         // ]);    
                     } elseif ($survey_id == 1) {
                         SurveyResponse::create([
