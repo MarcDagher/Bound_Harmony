@@ -37,7 +37,20 @@ class SuggestionsController extends Controller
         return $user_Q_couple_survey_response;
     }
 
-    // helper method
+    // helper method: change user's options to Google Places Api query parameter
+    public function filter_Q28_responses($option){
+        switch ($option){
+            case ($option["option_id"] == "93") : return ["outdoor", "nature"]; break;
+            case ($option["option_id"] == "94") : return ["social", "entertainment"]; break;
+            case ($option["option_id"] == "95") : return ["sports", "physical activity"]; break;
+            case ($option["option_id"] == "96") : return ["yoga", "spa"]; break;
+            case ($option["option_id"] == "97") : return ["meditation"]; break;
+            case ($option["option_id"] == "98") : return ["museum", "history"]; break;
+            case ($option["option_id"] == "99") : return ["movies", "amusement"]; break;
+        }
+    }
+
+    // helper method: change user's options to Google Places Api query parameter
     public function filter_Q25_responses($interest){
         switch($interest){ // consider the opposite case. if crowded = no then calm
                 case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 1:  return "crowded"; break; 
@@ -79,27 +92,25 @@ class SuggestionsController extends Controller
 
         // activities which the user enjoys with their partner 
         foreach ($user_Q28_couple_survey_response as $option) {
-            switch ($option){
-                case ($option["option_id"] == "93") : array_push($couples_combined_interests, "outdoor", "nature"); break;
-                case ($option["option_id"] == "94") : array_push($couples_combined_interests, "social", "entertainment"); break;
-                case ($option["option_id"] == "95") : array_push($couples_combined_interests, "sports", "physical activity"); break;
-                case ($option["option_id"] == "96") : array_push($couples_combined_interests, "yoga", "spa"); break;
-                case ($option["option_id"] == "97") : array_push($couples_combined_interests, "meditation"); break;
-                case ($option["option_id"] == "98") : array_push($couples_combined_interests, "museum", "history"); break;
-                case ($option["option_id"] == "99") : array_push($couples_combined_interests, "movies", "amusement"); break;
+            $value = $this -> filter_Q28_responses($option);
+            if (is_array($value)){
+                foreach($value as $new_value){
+                    array_push($couples_combined_interests, $new_value);    
+                }
+            } elseif (is_string($value)){
+                array_push($couples_combined_interests, $value);
             }
         }
 
         // activities which the partner enjoys with the user 
         foreach ($partner_Q28_couple_survey_response as $option) {
-            switch ($option){
-                case ($option["option_id"] == "93") : array_push($couples_combined_interests, "outdoor", "nature"); break;
-                case ($option["option_id"] == "94") : array_push($couples_combined_interests, "social", "entertainment"); break;
-                case ($option["option_id"] == "95") : array_push($couples_combined_interests, "sports", "physical activity"); break;
-                case ($option["option_id"] == "96") : array_push($couples_combined_interests, "yoga", "spa"); break;
-                case ($option["option_id"] == "97") : array_push($couples_combined_interests, "meditation"); break;
-                case ($option["option_id"] == "98") : array_push($couples_combined_interests, "museum", "history"); break;
-                case ($option["option_id"] == "99") : array_push($couples_combined_interests, "movies", "amusement"); break;
+            $value = $this -> filter_Q28_responses($option);
+            if (is_array($value)){
+                foreach($value as $new_value){
+                    array_push($couples_combined_interests, $new_value);    
+                }
+            } elseif (is_string($value)){
+                array_push($couples_combined_interests, $value);
             }
         }
 
