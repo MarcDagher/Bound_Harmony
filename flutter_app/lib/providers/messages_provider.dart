@@ -10,7 +10,8 @@ class MessagesProvider extends ChangeNotifier {
 
   List<Message> conversation = [
     Message(
-        text: "Hello, how can I help you?",
+        text:
+            "Talk to me about anything. I'm here to listen and i'm here to guide you!",
         date: DateTime.now(),
         isSentByMe: false)
   ];

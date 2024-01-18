@@ -234,6 +234,7 @@ class MessagesController extends Controller
         }           
     }
 
+    // get the history of messages between user and AI
     public function get_conversation() {
         $user = Auth::user();
         // fetch user_prompts + ai_responses 
