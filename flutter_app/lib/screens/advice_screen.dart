@@ -13,17 +13,7 @@ class AdviceScreen extends StatefulWidget {
 }
 
 class _AdviceScreenState extends State<AdviceScreen> {
-  late TextEditingController inputController = TextEditingController();
-
-  /// This will be retreived from the database and organized in the provider to be put here
-  /// the history needs to be retreived from the DB
-  // List<Message> messages = [
-  //   Message(text: 'Yes Sure!', date: DateTime.now(), isSentByMe: false),
-  //   Message(text: 'Yes Sure!', date: DateTime.now(), isSentByMe: false),
-  //   Message(text: 'Yes Sure!', date: DateTime.now(), isSentByMe: true),
-  //   Message(text: 'Yes Sure!', date: DateTime.now(), isSentByMe: false),
-  //   Message(text: 'Yes Sure!', date: DateTime.now(), isSentByMe: true),
-  // ];
+  final TextEditingController inputController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,19 +32,6 @@ class _AdviceScreenState extends State<AdviceScreen> {
       ///
       body: Container(
         decoration: BoxDecoration(
-          // gradient: LinearGradient(
-          //   colors: [
-          //     // Color.fromARGB(255, 247, 182, 182),
-          //     // Color.fromARGB(255, 248, 239, 239),
-          //     // Color.fromARGB(255, 255, 255, 255),
-          //     // Color.fromARGB(255, 250, 180, 180),
-          //     Color.fromARGB(255, 63, 60, 60),
-          //     Color.fromARGB(255, 122, 116, 116),
-          //   ],
-          //   // transform: GradientRotation(10),
-          //   begin: Alignment.topLeft,
-          //   end: Alignment.bottomRight,
-          // ),
           color: Theme.of(context).hintColor,
         ),
         child: Column(

@@ -171,16 +171,21 @@ class MessagesController extends Controller
         } else {
             // If user has no relationship (connection_status == "false")
             //  prompt includes the user's personal survey answers and conditional request
-            $my_interests = "I am currently not in a reltionship and these are my interests:\n";
+            $my_interests = "I am currently not in a reltionship. \n";
 
             // get user's interests (questions + answer)
             $personal_survey_responses = $this -> get_personal_survey_responses($user, 1);
-
-            foreach ($personal_survey_responses as $personal_response){
-                $my_interests .= $personal_response['question']['question'] . ": " . $personal_response['option']['option'] . "\n";
+            
+            if ($user -> personal_survey_status == "complete"){
+                $my_interests .= "and these are my interests: ";
+                foreach ($personal_survey_responses as $personal_response){
+                    $my_interests .= $personal_response['question']['question'] . ": " . $personal_response['option']['option'] . "\n";
+                }
+                $my_interests .= "Take all of my interests into consideration and use them occasionally when sending your response.";
+            } else {
+                $my_interests .= "Since I haven't filled the Personal Survey, End your message by telling me to fill the Personal Survey for you to help me better";
             }
 
-            $my_interests .= "Take all of my interests into consideration and use them occasionally when sending your response.";
             $system_config = $this -> description . $this -> purpose . $my_interests . $this -> tone_of_speech . $this -> removals ;
             
             return $this -> send_to_open_ai_api($system_config, $user_prompt);
