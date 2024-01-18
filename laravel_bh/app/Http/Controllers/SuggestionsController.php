@@ -12,7 +12,7 @@ class SuggestionsController extends Controller
 
     // helper method 
     public function search_for_connection_and_partner($user){
-        // search for user's partner
+        // search for user's partner where connection_status is accepted
         $connection_where_partner_is_requester = Connection::where(['status' => 'accepted', "responder" => $user -> id]) -> get() -> first();
         $connection_where_partner_is_responder = Connection::where(['status' => 'accepted', "requester" => $user -> id]) -> get() -> first();
 
@@ -76,7 +76,8 @@ class SuggestionsController extends Controller
             }
     }
 
-    
+    // adds user's interests (data is from personal survey) - adds user's and partner's interests (data is from couples survey) 
+    // if Q25 == "Yes" adds partner's interests (data is from personal survey)
     public function get_suggestions(){
         $user = Auth::user();
         $couples_combined_interests = []; // answers of Q28 + user's + partner's(if Q25 is yes)
@@ -114,7 +115,7 @@ class SuggestionsController extends Controller
             }
         }
 
-        // if user answers yes to Q25 : open to experiencing my partner's activities and interests
+        // if user answers yes to Q25 : "open to experiencing my partner's activities and interests"
         $user_Q25_couple_survey_response = SurveyResponse::where(["user_id" => $user -> id, "connection_id" => $connection_id, "question_id" => 25])
                                           -> with('option') -> latest() -> first('option_id')['option']['option'];
 
@@ -131,7 +132,7 @@ class SuggestionsController extends Controller
             }
         }
 
-        // add user interests to $couples_combined_interests
+        // add user's interests to $couples_combined_interests
         $my_interests = SurveyResponse::where(["user_id" => $user -> id, "survey_id" => 1]) -> get(['question_id', 'option_id']);
 
         foreach($my_interests as $interest){
@@ -142,7 +143,7 @@ class SuggestionsController extends Controller
             } elseif (is_string($value)){array_push($couples_combined_interests, $value);}
         }
 
-        print_r(array_unique($couples_combined_interests));
-                
+        // Parameters which will be used in Google Places api
+        $couples_combined_interests_without_duplicates = array_unique($couples_combined_interests);
     }
 }
