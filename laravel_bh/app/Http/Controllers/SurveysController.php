@@ -91,15 +91,17 @@ class SurveysController extends Controller
 
                     SurveyResponse::create([
                         "user_id" => $user->id,
+                        "partner_id" => $connection_and_partner['partner_id'],
+                        "survey_id" => $survey_id,
                         "question_id" => $question_id,
                         "option_id" => 100,
-                        "partner_id" => $connection_and_partner['partner_id'],
+                        'connection_id' => $connection_and_partner['connection_id'],
                         "text_input" => $response,
-                        'connection_id' => $connection_and_partner['connection_id']
                     ]);
                 } elseif ($survey_id == 1) {
                     SurveyResponse::create([
                         "user_id" => $user->id,
+                        "survey_id" => $survey_id,
                         "question_id" => $question_id,
                         "option_id" => 100,
                         "text_input" => $response
@@ -116,14 +118,16 @@ class SurveysController extends Controller
                         $connection_and_partner = $this -> search_for_connection_and_partner($user);
                         SurveyResponse::create([
                             "user_id" => $user->id,
+                            "partner_id" => $connection_and_partner['partner_id'],
+                            "survey_id" => $survey_id,
                             "question_id" => $question_id,
                             "option_id" => $response_validation[0] -> id,
-                            "partner_id" => $connection_and_partner['partner_id'],
                             'connection_id' => $connection_and_partner['connection_id']
                         ]);    
                     } elseif ($survey_id == 1) {
                         SurveyResponse::create([
                             "user_id" => $user->id,
+                            "survey_id" => $survey_id,
                             "question_id" => $question_id,
                             "option_id" => $response_validation[0] -> id
                         ]);
