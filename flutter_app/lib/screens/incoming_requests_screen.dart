@@ -124,12 +124,14 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
             return NotConnectedBox(
                 text:
                     "Don't have a partner? No Problem!\nGo to my partners and send a request or go get some advice!",
-                handlePressedMyPartners: () {
+                textFirstButton: "My Partners",
+                handlePressedFirstButton: () {
                   value.successSendRequest = false;
                   value.messageSendRequest = "";
                   context.goNamed("My Partners");
                 },
-                handlePressedAdvice: () {
+                textSecondButton: 'Advice',
+                handlePressedSecondButton: () {
                   context.goNamed("Advice");
                 });
 

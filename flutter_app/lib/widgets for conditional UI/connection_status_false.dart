@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 
 class NotConnectedBox extends StatelessWidget {
   final String text;
-  final VoidCallback handlePressedMyPartners;
-  final VoidCallback handlePressedAdvice;
+  final String textFirstButton;
+  final String textSecondButton;
+  final VoidCallback handlePressedFirstButton;
+  final VoidCallback handlePressedSecondButton;
   const NotConnectedBox(
       {super.key,
       required this.text,
-      required this.handlePressedMyPartners,
-      required this.handlePressedAdvice});
+      required this.textFirstButton,
+      required this.textSecondButton,
+      required this.handlePressedFirstButton,
+      required this.handlePressedSecondButton});
 
   @override
   Widget build(BuildContext context) {
@@ -40,17 +44,17 @@ class NotConnectedBox extends StatelessWidget {
               ),
               Column(children: [
                 NavigationButton(
-                    text: "My Partners",
+                    text: textFirstButton,
                     textAndRightIconColor: Colors.white,
                     buttonColor: Theme.of(context).primaryColor,
-                    handlePressed: handlePressedMyPartners),
+                    handlePressed: handlePressedFirstButton),
                 Padding(
                   padding: const EdgeInsets.only(top: 5),
                   child: NavigationButton(
-                      text: "Advice",
+                      text: textSecondButton,
                       textAndRightIconColor: Theme.of(context).primaryColor,
                       buttonColor: Colors.white,
-                      handlePressed: handlePressedAdvice),
+                      handlePressed: handlePressedSecondButton),
                 ),
               ]),
             ],
