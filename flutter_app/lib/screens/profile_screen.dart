@@ -276,6 +276,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         context.goNamed('My Partners');
                       }),
 
+                  // Logout button
                   Consumer<AuthProvider>(
                       builder: (context, value, child) => Padding(
                             padding: const EdgeInsets.only(top: 5),

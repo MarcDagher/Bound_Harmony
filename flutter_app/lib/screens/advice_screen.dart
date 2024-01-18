@@ -20,7 +20,7 @@ class _AdviceScreenState extends State<AdviceScreen> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 35,
-        backgroundColor: Theme.of(context).hintColor,
+        backgroundColor: const Color.fromARGB(255, 170, 167, 167),
         title: const Text(
           'Advice',
           style: TextStyle(color: Colors.white),
@@ -31,8 +31,8 @@ class _AdviceScreenState extends State<AdviceScreen> {
       ///
       ///
       body: Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).hintColor,
+        decoration: const BoxDecoration(
+          color: Color.fromARGB(255, 170, 167, 167),
         ),
         child: Column(
           children: [
@@ -62,7 +62,7 @@ class _AdviceScreenState extends State<AdviceScreen> {
                     /// styling the card
                     ///
                     child: Card(
-                      color: Colors.grey[400],
+                      color: Theme.of(context).hintColor,
                       child: Padding(
                         padding: const EdgeInsets.all(8),
                         child: Text(
@@ -82,24 +82,29 @@ class _AdviceScreenState extends State<AdviceScreen> {
                     alignment: message.isSentByMe
                         ? Alignment.centerRight
                         : Alignment.centerLeft,
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      color: message.isSentByMe
-                          ? const Color.fromARGB(255, 241, 241, 241)
-                          : Theme.of(context).primaryColor,
-                      elevation: 3,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 10),
-                        child: Text(
-                          message.text,
-                          style: TextStyle(
-                            color: message.isSentByMe
-                                ? Theme.of(context).hintColor
-                                : Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 15,
+                    child: Padding(
+                      padding: message.isSentByMe
+                          ? const EdgeInsets.only(left: 35)
+                          : const EdgeInsets.only(right: 35),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        color: message.isSentByMe
+                            ? const Color.fromARGB(255, 241, 241, 241)
+                            : Theme.of(context).primaryColor,
+                        elevation: 3,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 10),
+                          child: Text(
+                            message.text,
+                            style: TextStyle(
+                              color: message.isSentByMe
+                                  ? Theme.of(context).hintColor
+                                  : Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 15,
+                            ),
                           ),
                         ),
                       ),
@@ -135,13 +140,13 @@ class _AdviceScreenState extends State<AdviceScreen> {
                 children: [
                   Expanded(
                     child: TextField(
-                      cursorColor: Colors.white,
+                      cursorColor: Theme.of(context).hintColor,
                       controller: inputController,
                       style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Color.fromARGB(255, 119, 118, 118)),
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).hintColor),
                               borderRadius: BorderRadius.circular(15)),
                           filled: false,
                           fillColor: const Color.fromARGB(255, 85, 82, 82),

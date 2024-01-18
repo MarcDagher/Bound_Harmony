@@ -57,6 +57,7 @@ class MessagesProvider extends ChangeNotifier {
       conversation.add(userMessage);
       notifyListeners();
       if (response.data["status"] == "success") {
+        somethingWentWrong = "";
         conversation.add(Message(
             text: response.data["ai_response"],
             date: DateTime.now(),
