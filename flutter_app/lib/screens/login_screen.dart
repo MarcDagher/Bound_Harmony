@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:bound_harmony/reusable%20widgets/button.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
@@ -141,12 +142,17 @@ class _LogInScreenState extends State<LogInScreen> {
                               value.successLogin = false;
                               value.successSignUp = false;
                               value.wrongCredentials = false;
+                              final SharedPreferences preferences =
+                                  await SharedPreferences.getInstance();
+                              final role_id = preferences.get('role_id');
                               emailController.clear();
                               passwordController.clear();
-                              getConversation();
-                              context.goNamed('Connection Setup');
-                              // await context.read<UserProvider>().getImage();
-                              // context.goNamed('Profile');
+                              if (role_id == 2) {
+                                getConversation();
+                                context.goNamed('Connection Setup');
+                              } else if (role_id == 1) {
+                                context.goNamed('Admin');
+                              }
                             }
                           }
                         },

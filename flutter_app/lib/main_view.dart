@@ -23,7 +23,8 @@ class _MainViewState extends State<MainView> {
     if (currentNamedLocation == '/onBoarding' ||
         currentNamedLocation == '/login' ||
         currentNamedLocation == '/login/signup' ||
-        currentNamedLocation == '/login/connectionSetup') {
+        currentNamedLocation == '/login/connectionSetup' ||
+        currentNamedLocation == '/admin') {
       return Scaffold(
         /// If one of the above routes, return body without a navBar
         body: widget.navigationShell,
