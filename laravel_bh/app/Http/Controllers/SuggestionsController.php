@@ -41,13 +41,13 @@ class SuggestionsController extends Controller
     // helper method: change user's options to useable Google Places Api query parameters
     public function filter_Q28_responses($option){
         switch ($option){
-            case ($option["option_id"] == "93") : return ["outdoor", "nature"]; break;
-            case ($option["option_id"] == "94") : return ["social", "entertainment"]; break;
-            case ($option["option_id"] == "95") : return ["sports", "physical activity"]; break;
-            case ($option["option_id"] == "96") : return ["yoga", "spa"]; break;
-            case ($option["option_id"] == "97") : return ["meditation"]; break;
-            case ($option["option_id"] == "98") : return ["museum", "history"]; break;
-            case ($option["option_id"] == "99") : return ["movies", "amusement"]; break;
+            case ($option["option_id"] == "93") : return ["campground", "park"]; break; // outdoor and nature
+            case ($option["option_id"] == "94") : return ["cafe", "restaurant", "bar", "casino", "shopping_mall"]; break; // social and entertainment
+            case ($option["option_id"] == "95") : return ["gym"]; break; //sports, physical activity
+            case ($option["option_id"] == "96") : return [ "spa","beauty_salon", "hair_care"]; break; //yoga, spa
+            case ($option["option_id"] == "97") : return []; break; // meditation
+            case ($option["option_id"] == "98") : return ["art_gallery", "museum"]; break; // museum, history
+            case ($option["option_id"] == "99") : return ["amusement_park", "clothing_store", "bowling_alley", "movie_theater"]; break; // movies, amusement
         }
     }
 
@@ -78,7 +78,7 @@ class SuggestionsController extends Controller
     }
 
     public function get_places_from_google_places($location, $radius, $type, $key){
-        $response = Http::get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$location&radius=$radius&type=$type&key=$key");
+        $response = Http::get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$location&radius=$radius&types=$type&key=$key");
         if ($response->successful()) {
             $places_data = $response->json();
             return response()->json($places_data);
@@ -161,13 +161,15 @@ class SuggestionsController extends Controller
         // //     echo $interest . "\n";
         // // }
 
-        $location = '-33.8670522%2C151.1957362';
-        $radius = '1500';
-        $type = 'restaurant';
+        $location = '33.895234124742615%2C35.49990688179016'; // beirut
+        $radius = '10000';
+        $type = 'library';
         $key = env("GOOGLE_PLACES_API_KEY");
-        // echo $key;
         $places = $this -> get_places_from_google_places($location, $radius, $type, $key);
         return $places;
 
+        // location(longitude-latitude), a background color, a link to their place on google maps, name, open_now, place_id, reference, types(resto, pub...), Vicinity.
+        // Do you think its a good idea to list the details without the image?
+        // value field we can display: icon_background_color, icon_mask_base_uri, name, types, vicinity
     }
 }
