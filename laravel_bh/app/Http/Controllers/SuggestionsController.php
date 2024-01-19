@@ -146,4 +146,6 @@ class SuggestionsController extends Controller
         // Parameters which will be used in Google Places api
         $couples_combined_interests_without_duplicates = array_unique($couples_combined_interests);
     }
+
+    
 }
