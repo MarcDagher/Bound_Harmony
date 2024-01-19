@@ -156,20 +156,18 @@ class SuggestionsController extends Controller
         }
 
         // Parameters which will be used in Google Places api
-        // $couples_combined_interests_without_duplicates = array_unique($couples_combined_interests);
-        // // foreach($couples_combined_interests_without_duplicates as $interest){
-        // //     echo $interest . "\n";
-        // // }
+        $couples_combined_interests_without_duplicates = array_unique($couples_combined_interests);
+    
 
         $location = '33.895234124742615%2C35.49990688179016'; // beirut
         $radius = '40000';
-        $type = 'campground';
+        $type = $couples_combined_interests_without_duplicates[array_rand($couples_combined_interests_without_duplicates, 1)];
         $key = env("GOOGLE_PLACES_API_KEY");
+
         $places = $this -> get_places_from_google_places($location, $radius, $type, $key);
         return $places;
 
-        // location(longitude-latitude), a background color, a link to their place on google maps, name, open_now, place_id, reference, types(resto, pub...), Vicinity.
-        // Do you think its a good idea to list the details without the image?
+        // location(longitude-latitude), a background color, a link to their place on google maps, name, open_now, place_id, types(resto, pub...), Vicinity.
         // value field we can display: icon_background_color, icon_mask_base_uri, name, types, vicinity
     }
 }
