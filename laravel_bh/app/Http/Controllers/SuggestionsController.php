@@ -77,6 +77,17 @@ class SuggestionsController extends Controller
             }
     }
 
+    public function get_places_from_google_places($location, $radius, $type, $key){
+        $response = Http::get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$location&radius=$radius&type=$type&key=$key");
+        if ($response->successful()) {
+            $places_data = $response->json();
+            return response()->json($places_data);
+        } else {
+            $error = $response->json();
+            return response()->json($error, $response->status());
+        }
+    }
+
     // adds user's interests (data is from personal survey) - adds user's and partner's interests (data is from couples survey) 
     // if Q25 == "Yes" adds partner's interests (data is from personal survey)
     public function get_suggestions(){
@@ -154,13 +165,6 @@ class SuggestionsController extends Controller
         $radius = '1500';
         $type = 'restaurant';
         $key = 'AIzaSyAtp-bVCk5H499xK2TPgq9UF6QroTKjGrY';
-        $response = Http::get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$location&radius=$radius&type=$type&key=$key");
-        if ($response->successful()) {
-            $places_data = $response->json();
-            return response()->json($places_data);
-        } else {
-            $error = $response->json();
-            return response()->json($error, $response->status());
-        }
+        
     }
 }
