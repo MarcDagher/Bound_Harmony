@@ -75,7 +75,6 @@ class AuthProvider extends ChangeNotifier {
         "$baseUrl/login",
         data: {"email": email, "password": password},
       );
-
       if (response.data['status'] == "success") {
         successLogin = true;
         wrongCredentials = false;
@@ -83,7 +82,6 @@ class AuthProvider extends ChangeNotifier {
             JwtDecoder.decode(response.data['authorisation']['token']);
 
         await initializePreferences();
-
         // adding token payload to the Preferences
         preferences?.setString(
             'token', response.data['authorisation']['token']);
@@ -94,6 +92,7 @@ class AuthProvider extends ChangeNotifier {
         preferences?.setString('connection_status', token['connection status']);
         preferences?.setString(
             'couple_survey_status', token['couple survey status']);
+        preferences?.setInt('role_id', response.data['user']['role_id']);
         if (token["location"] == null) {
           preferences?.setString('location', 'n/a');
         } else {
@@ -106,16 +105,6 @@ class AuthProvider extends ChangeNotifier {
         wrongCredentials = true;
       }
     }
-    // print("In Login username: ${preferences!.get('username')}");
-    // print("In Login email: ${preferences!.get('email')}");
-    // print("In Login birthdate: ${preferences!.get('birthdate')}");
-    // print(
-    //     "In Login connection_status: ${preferences!.get('connection_status')}");
-    // print(
-    //     "In Login couple_survey_status: ${preferences!.get('couple_survey_status')}");
-    // print("In Login location: ${preferences!.get('location')}");
-    // print(
-    //     "In Login connection provider currentP: ${ConnectionProvider().currentPartner}");
     notifyListeners();
   }
 
@@ -124,7 +113,7 @@ class AuthProvider extends ChangeNotifier {
     final baseUrl = Requests.baseUrl;
 
     try {
-      final response = await dio.post("$baseUrl/logout",
+      await dio.post("$baseUrl/logout",
           options: Options(headers: {"authorization": "Bearer $token"}));
     } on DioException catch (error) {
       print(error);

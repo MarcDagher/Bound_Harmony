@@ -21,7 +21,7 @@ class AuthMiddleware
             return response()->json([
                 'status' => "failed",
                 "message" => "Wrong Credentials"
-            ], 403);
+            ], 401);
         } elseif ($user -> role_id == 1) {
             return $next($request);
         }
