@@ -10,14 +10,18 @@ use App\Http\Controllers\SuggestionsController;
 use App\Http\Controllers\SurveysController;
 use App\Http\Middleware\AuthMiddleware;
 
+// LogIn and Register Pages
 Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login');
     Route::post('/register', 'register');
     Route::post('/logout', 'logout');
     Route::post('/refresh', 'refresh');
-
 });
 
+// Admin page
+
+
+// Profile Page
 Route::controller(ProfileController::class)->group(function () {
     Route::post('/change_username', 'change_username');
     Route::post('change_location', 'change_location');
@@ -25,6 +29,7 @@ Route::controller(ProfileController::class)->group(function () {
     Route::get('/get_profile_photo', 'get_profile_photo');
 });
 
+// Incoming Requests - My Partners pages
 Route::controller(ConnectionsController::class)->group(function () {
     Route::get('/display_history', 'display_history');
     Route::post('/send_request', 'send_request');
@@ -33,22 +38,26 @@ Route::controller(ConnectionsController::class)->group(function () {
     Route::post('/disconnect', 'disconnect');
 });
 
-Route::controller(SurveysController::class)->group(function (){
-    Route::post('/save_responses', 'save_responses');
-});
-
-
-/// checks if user connection_status == true and if personal_survey_status == true
-Route::middleware('validate.for.couples.survey')->group(function(){
-    Route::get('/get_survey', [SurveysController::class ,'get_survey']);
-});
-
-Route::middleware('validate.for.suggestions') -> group(function(){
-    Route::get('/get_suggestions', [SuggestionsController::class, 'get_suggestions']);
-});
-
+// Advice Page
 Route::controller(MessagesController::class) -> group (function (){
     Route::post('/save_user_prompt', 'save_user_prompt');
     Route::get('/get_conversation', 'get_conversation');
     Route::get('/send_user_prompt_to_ai', 'send_user_prompt_to_ai');
 });
+
+// Suggestions Page
+Route::middleware('validate.for.suggestions') -> group(function(){
+    Route::get('/get_suggestions', [SuggestionsController::class, 'get_suggestions']);
+});
+
+/// Personal Survey - Couples Survey pages
+/// checks if user connection_status == true and if personal_survey_status == true
+Route::middleware('validate.for.couples.survey')->group(function(){
+    Route::get('/get_survey', [SurveysController::class ,'get_survey']);
+});
+
+// Personal Survey - Couples Survey pages
+Route::controller(SurveysController::class)->group(function (){
+    Route::post('/save_responses', 'save_responses');
+});
+

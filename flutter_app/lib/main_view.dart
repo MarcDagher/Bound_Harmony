@@ -23,35 +23,21 @@ class _MainViewState extends State<MainView> {
   Widget build(BuildContext context) {
     String currentNamedLocation =
         GoRouter.of(context).routeInformationProvider.value.uri.toString();
-    //// if user doesnt have account
-    /// take to register
-
-    //// if not loggied in
-    /// go to login
-
-    //// if logged in
-    ///
-    // if (hasAccount == true && loggedIn == true) {}
-    // print('Im here for you $currentNamedLocation');
-    // print(GoRouter.of(context).routeInformationProvider.value.uri);
 
     if (currentNamedLocation == '/onBoarding' ||
         currentNamedLocation == '/login' ||
         currentNamedLocation == '/login/signup' ||
         currentNamedLocation == '/login/connectionSetup') {
       return Scaffold(
-        /// depending on The shell branch
-        ///
+        /// If one of the above routes, return body without a navBar
         body: widget.navigationShell,
       );
     } else {
       return Scaffold(
-        /// depending on The shell branch
-        ///
+        /// If none of the above routes, return body with a navBar
         body: widget.navigationShell,
 
-        /// Shell branch handler is in navbar
-        ///
+        /// NavBar handles the branches(routes)
         bottomNavigationBar:
             MyNavigationBar(navigationShell: widget.navigationShell),
       );
