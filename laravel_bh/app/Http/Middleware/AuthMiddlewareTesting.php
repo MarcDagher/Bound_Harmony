@@ -16,19 +16,14 @@ class AuthMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-
-    // 1 -> write code here: get the user, authorize his existence.
-    // 2 -> Take the namespace path from above
-    // 3 -> go to kernel.php in Http folder
-    // 4 -> in kernel, write the name(aliasis) and full the path.
-    // 5 -> add it to the route
         $user = Auth::user();
-        if($user){
+        if($user -> role_id == 2){
+            return response()->json([
+                'status' => "failed",
+                "message" => "Wrong Credentials"
+            ], 403);
+        } elseif ($user -> role_id == 1) {
             return $next($request);
         }
-        return response()->json([
-            'status' => "failed",
-            "message" => "Fel 3a baytak"
-        ], 403);
     }
 }

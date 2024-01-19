@@ -19,7 +19,9 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 // Admin page
-
+Route::middleware('auth.admin')->group(function () {
+     //
+});
 
 // Profile Page
 Route::controller(ProfileController::class)->group(function () {

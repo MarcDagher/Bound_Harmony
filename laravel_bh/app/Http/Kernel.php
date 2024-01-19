@@ -64,8 +64,9 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'auth.user' => \App\Http\Middleware\AuthMiddleware::class, // this was a tester
-        'validate.for.couples.survey' => \App\Http\Middleware\ValidationForCouplesSurvey::class,
-        'validate.for.suggestions' => \App\Http\Middleware\SuggestionsMiddleware::class
+        
+        'auth.admin' => \App\Http\Middleware\AuthMiddleware::class, // admin
+        'validate.for.couples.survey' => \App\Http\Middleware\ValidationForCouplesSurvey::class, // couples survey
+        'validate.for.suggestions' => \App\Http\Middleware\SuggestionsMiddleware::class // suggestions
     ];
 }
