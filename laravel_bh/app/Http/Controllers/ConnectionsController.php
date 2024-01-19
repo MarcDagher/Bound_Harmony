@@ -11,7 +11,7 @@ use function PHPUnit\Framework\isEmpty;
 
 class ConnectionsController extends Controller
 {
-    // query the records with accepted or disconnected related to the user
+    // query the user's connection with status accepted or disconnected
     public function display_history (){
         $user = Auth::user();
         
@@ -26,8 +26,9 @@ class ConnectionsController extends Controller
             $response_array = [];
 
             foreach ($connections as $connection){
+                // if user is the requester
                 if ($connection['requester'] == $user -> id) {
-                    // partner is responder so return responder
+                    // partner is responder so add responder
                     $response_array[] = [
                         "id" => $connection -> id,
                         "partner_name" => $connection['responder_user']['username'],
@@ -35,7 +36,10 @@ class ConnectionsController extends Controller
                         "user_name" => $connection['requester_user']['username'],
                         "status" => $connection->status
                     ]; 
+
+                    // if user is the responder
                 } elseif ($connection['responder'] == $user -> id) {
+                    // partner is requester so add requester
                     $response_array[] = [
                         "id" => $connection -> id,
                         "partner_name" => $connection['requester_user']['username'],
