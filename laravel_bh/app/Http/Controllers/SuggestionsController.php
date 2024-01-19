@@ -164,7 +164,10 @@ class SuggestionsController extends Controller
         $location = '-33.8670522%2C151.1957362';
         $radius = '1500';
         $type = 'restaurant';
-        $key = 'AIzaSyAtp-bVCk5H499xK2TPgq9UF6QroTKjGrY';
-        
+        $key = env("GOOGLE_PLACES_API_KEY");
+        // echo $key;
+        $places = $this -> get_places_from_google_places($location, $radius, $type, $key);
+        return $places;
+
     }
 }
