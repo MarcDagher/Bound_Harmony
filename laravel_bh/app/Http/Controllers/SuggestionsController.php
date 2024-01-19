@@ -46,7 +46,7 @@ class SuggestionsController extends Controller
             case ($option["option_id"] == "95") : return ["gym"]; break; //sports, physical activity
             case ($option["option_id"] == "96") : return [ "spa","beauty_salon", "hair_care"]; break; //yoga, spa
             case ($option["option_id"] == "97") : return []; break; // meditation
-            case ($option["option_id"] == "98") : return ["art_gallery", "museum"]; break; // museum, history
+            case ($option["option_id"] == "98") : return ["art_gallery", "museum", "tourist_attraction"]; break; // museum, history
             case ($option["option_id"] == "99") : return ["amusement_park", "clothing_store", "bowling_alley", "movie_theater"]; break; // movies, amusement
         }
     }
@@ -54,26 +54,26 @@ class SuggestionsController extends Controller
     // helper method: change user's options to useable Google Places Api query parameters
     public function filter_Q25_responses($interest){
         switch($interest){ // consider the opposite case. if crowded = no then calm
-                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 1:  return "crowded"; break; 
-                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 2:  return "nightlife"; break; 
-                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 3:  return "outdoor"; break; 
-                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 4:  return "nature"; break; 
-                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 5:  return ["museum", "art gallery"]; break; 
-                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 6:  return ["culture", "education"]; break; 
-                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 7:  return "book"; break; 
-                case $interest['option_id'] % 2 != 0 && $interest['question_id'] == 8:  return "religion"; break; 
-                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 9:  return "calm"; break; 
-                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 10:  return "spiritual"; break; 
-                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 11:  return "self-care"; break; 
-                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 12:  return "shopping"; break; 
-                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 13:  return "exercise"; break; 
-                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 14:  return "restaurant"; break; 
-                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 15:  return "shopping"; break; 
-                case $interest['option_id'] % 2 != 0 && $interest['question_id'] == 16:  return "shopping"; break; 
-                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 17:  return "sports"; break; 
-                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 18:  return "home activities"; break; 
-                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 19:  return "movie"; break;  
-                case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 20:  return "animals"; break;  
+            case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 1:  return ["cafe", "amusement_park"]; break; // crowded
+            case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 2:  return ["night_club", "casino", "bar"]; break; // nightlife 
+            case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 3:  return "campground"; break; // outdoor
+            case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 4:  return "campground"; break; // nature
+            case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 5:  return ["museum", "art gallery"]; break; // art
+            case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 6:  return ["tourist_attraction", "museum"]; break; // culture
+            // case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 7:  return "book"; break; // books
+            // case $interest['option_id'] % 2 != 0 && $interest['question_id'] == 8:  return "religion"; break; // religion
+            // case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 9:  return "calm"; break; // calm
+            // case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 10:  return "spiritual"; break; // spiritual
+            case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 11:  return ["spa", "beauty_salon"]; break; // self-care
+            case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 12:  return ["shopping_mall", "clothing_store"]; break; // shopping clothes
+            case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 13:  return "gym"; break; // exercise
+            case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 14:  return "restaurant"; break; // restaurants
+            case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 15:  return ["shopping_mall", "department_store"]; break; // shopping grocery
+            case $interest['option_id'] % 2 != 0 && $interest['question_id'] == 16:  return "shopping_mall"; break; // shopping in general
+            case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 17:  return "gym"; break; // sports
+            // case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 18:  return "home activities"; break; // places that are not crowded
+            case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 19:  return "movie_theater"; break;  // movies
+            case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 20:  return "zoo"; break;   // animals
             }
     }
 
@@ -162,8 +162,8 @@ class SuggestionsController extends Controller
         // // }
 
         $location = '33.895234124742615%2C35.49990688179016'; // beirut
-        $radius = '10000';
-        $type = 'library';
+        $radius = '40000';
+        $type = 'campground';
         $key = env("GOOGLE_PLACES_API_KEY");
         $places = $this -> get_places_from_google_places($location, $radius, $type, $key);
         return $places;
