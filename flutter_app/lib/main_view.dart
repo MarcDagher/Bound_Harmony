@@ -6,7 +6,7 @@ class MainView extends StatefulWidget {
   const MainView({super.key, required this.navigationShell});
 
   // we use the navigationShell to customize a widget's behavior or appearance based on the current navigation state.
-  // To determing hoe the UI should be structerd based on the current Navigation state
+  // To determine how the UI should be structerd based on the current Navigation state
   // Different branches of the application may have distinct navigation structures, and the navigationShell provides information about the current structure.
   final StatefulNavigationShell navigationShell;
 
@@ -15,10 +15,6 @@ class MainView extends StatefulWidget {
 }
 
 class _MainViewState extends State<MainView> {
-  bool loggedIn = true;
-  bool hasAccount = true;
-  int selectedIndex = 3;
-
   @override
   Widget build(BuildContext context) {
     String currentNamedLocation =

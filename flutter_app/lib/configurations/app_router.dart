@@ -1,4 +1,5 @@
 import 'package:bound_harmony/main_view.dart';
+import 'package:bound_harmony/screens/admin_screen.dart';
 import 'package:bound_harmony/screens/advice_screen.dart';
 import 'package:bound_harmony/screens/bonding_activities_screen.dart';
 import 'package:bound_harmony/screens/connection_setup_screen.dart';
@@ -38,6 +39,8 @@ class AppNavigation {
       GlobalKey<NavigatorState>(debugLabel: 'shellAppStarters');
   static final rootNavigatorAuth =
       GlobalKey<NavigatorState>(debugLabel: 'shellAppAuth');
+  static final rootNavigatorAdmin =
+      GlobalKey<NavigatorState>(debugLabel: 'shellAdmin');
 
   /// The main router of the application
   ///
@@ -75,6 +78,15 @@ class AppNavigation {
             },
             //Each StatefulShellBranch represents a different "branch" or part of the application. A branch is essentially a section of the app that has its own navigation stack. In this example, there's a branch for the profile screen.
             branches: <StatefulShellBranch>[
+              StatefulShellBranch(navigatorKey: rootNavigatorAdmin, routes: [
+                GoRoute(
+                  path: '/admin',
+                  name: 'Admin',
+                  builder: (context, state) {
+                    return AdminScreen(key: state.pageKey);
+                  },
+                )
+              ]),
               // Branch Surveys
               StatefulShellBranch(navigatorKey: rootNavigatorSurveys, routes: [
                 GoRoute(
