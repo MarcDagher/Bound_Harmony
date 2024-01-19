@@ -57,7 +57,7 @@ class AppNavigation {
       // initialLocation: '/login/connectionSetup',
       initialLocation: '/login',
       // turn true and check debug console for routes
-      debugLogDiagnostics: false,
+      debugLogDiagnostics: true,
 
       /// route congiguration
       ///
@@ -78,15 +78,6 @@ class AppNavigation {
             },
             //Each StatefulShellBranch represents a different "branch" or part of the application. A branch is essentially a section of the app that has its own navigation stack. In this example, there's a branch for the profile screen.
             branches: <StatefulShellBranch>[
-              StatefulShellBranch(navigatorKey: rootNavigatorAdmin, routes: [
-                GoRoute(
-                  path: '/admin',
-                  name: 'Admin',
-                  builder: (context, state) {
-                    return AdminScreen(key: state.pageKey);
-                  },
-                )
-              ]),
               // Branch Surveys
               StatefulShellBranch(navigatorKey: rootNavigatorSurveys, routes: [
                 GoRoute(
@@ -275,6 +266,15 @@ class AppNavigation {
                         },
                       ),
                     ]),
+              ]),
+              StatefulShellBranch(navigatorKey: rootNavigatorAdmin, routes: [
+                GoRoute(
+                  path: '/admin',
+                  name: 'Admin',
+                  builder: (context, state) {
+                    return AdminScreen(key: state.pageKey);
+                  },
+                )
               ]),
             ])
       ]);
