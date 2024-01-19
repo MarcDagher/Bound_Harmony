@@ -6,6 +6,7 @@ use App\Models\Connection;
 use App\Models\SurveyResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class SuggestionsController extends Controller
 {
@@ -144,8 +145,22 @@ class SuggestionsController extends Controller
         }
 
         // Parameters which will be used in Google Places api
-        $couples_combined_interests_without_duplicates = array_unique($couples_combined_interests);
-    }
+        // $couples_combined_interests_without_duplicates = array_unique($couples_combined_interests);
+        // // foreach($couples_combined_interests_without_duplicates as $interest){
+        // //     echo $interest . "\n";
+        // // }
 
-    
+        $location = '-33.8670522%2C151.1957362';
+        $radius = '1500';
+        $type = 'restaurant';
+        $key = 'AIzaSyAtp-bVCk5H499xK2TPgq9UF6QroTKjGrY';
+        $response = Http::get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$location&radius=$radius&type=$type&key=$key");
+        if ($response->successful()) {
+            $places_data = $response->json();
+            return response()->json($places_data);
+        } else {
+            $error = $response->json();
+            return response()->json($error, $response->status());
+        }
+    }
 }
