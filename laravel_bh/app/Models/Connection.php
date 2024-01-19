@@ -16,6 +16,11 @@ class Connection extends Model
         'status'
     ];
 
+    protected $hidden = [
+        'updated_at',
+        'created_at'
+    ];
+
     // foreign key requester in Connections table referencing User
     public function requester_user() : BelongsTo {
         return $this -> belongsTo(User::class, 'requester');

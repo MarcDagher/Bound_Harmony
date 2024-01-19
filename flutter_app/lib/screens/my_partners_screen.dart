@@ -160,8 +160,7 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
               ));
             }
 
-            // Create input field and the button if:
-            // if has partner without current, or no partners at all
+            // if has partners without current
             if ((value.listOfPartners.isNotEmpty &&
                 value.currentPartner == false)) {
               widgets.add(

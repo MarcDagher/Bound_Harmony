@@ -13,27 +13,37 @@ class ConnectionsController extends Controller
 {
     // query the records with accepted or disconnected related to the user
     public function display_history (){
-        $token = Auth::user();
+        $user = Auth::user();
         
         // records where status is [accepted or disconnected] and requester or responder are the current user
-        $connections = Connection::whereIn('status', ['accepted', 'disconnected']) -> where (function ($query) use ($token)  {
-            $query -> where('requester', $token->id)->orWhere('responder', $token->id);
-        })->get();
+        $connections = Connection::whereIn('status', ['accepted', 'disconnected']) 
+                                -> with('requester_user', 'responder_user') 
+                                -> where (function ($query) use ($user)  {
+                                $query -> where('requester', $user->id)-> orWhere('responder', $user->id);}) 
+                                -> get();
 
         if (isset($connections[0])) {
             $response_array = [];
 
             foreach ($connections as $connection){
-                $requester_email = User::find($connection->requester)->email;
-                $requester_name = User::find($connection->requester)->username;
-                $responder_email = User::find($connection->responder)->email;
-                $response_array[] = [
-                    "id" => $connection -> id,
-                    "requester" => $requester_email,
-                    "requester_name" => $requester_name,
-                    "responder" => $responder_email,
-                    "status" => $connection->status
-                ]; 
+                if ($connection['requester'] == $user -> id) {
+                    // partner is responder so return responder
+                    $response_array[] = [
+                        "id" => $connection -> id,
+                        "partner_name" => $connection['responder_user']['username'],
+                        "partner_email" => $connection['responder_user']['email'],
+                        "user_name" => $connection['requester_user']['username'],
+                        "status" => $connection->status
+                    ]; 
+                } elseif ($connection['responder'] == $user -> id) {
+                    $response_array[] = [
+                        "id" => $connection -> id,
+                        "partner_name" => $connection['requester_user']['username'],
+                        "partner_email" => $connection['requester_user']['email'],
+                        "user_name" => $connection['responder_user']['username'],
+                        "status" => $connection->status
+                    ];
+                }
             }
 
             return response()->json([
