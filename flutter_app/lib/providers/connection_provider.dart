@@ -132,6 +132,7 @@ class ConnectionProvider extends ChangeNotifier {
 
       listOfPartners = response.data["connections"];
       int count = 0;
+      // searching for a connection with current partner (status == "accepted")
       for (int i = 0; i < response.data["connections"].length; i++) {
         if (response.data["connections"][i]['status'] == 'accepted') {
           count++;

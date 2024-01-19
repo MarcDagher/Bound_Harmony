@@ -50,7 +50,7 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
             // Widgets to be displayed conditionally
             List<Widget> widgets = [];
 
-            // If has partners without a current, display all + input request bar
+            // If has partners without a current (this is the display of partners. display of input is below)
             if (value.listOfPartners.isNotEmpty &&
                 value.currentPartner == false) {
               for (final partner in value.listOfPartners) {
@@ -60,8 +60,8 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: UserListTile(
-                            name: partner["requester_name"],
-                            email: partner["requester"],
+                            name: partner["partner_name"],
+                            email: partner["partner_email"],
                             context: context,
                             icon: Icons.accessibility_sharp,
                             iconColor: Theme.of(context).hintColor),
@@ -160,7 +160,7 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
               ));
             }
 
-            // if has partners without current
+            // if has partners without current (this is the input. display if partners is above)
             if ((value.listOfPartners.isNotEmpty &&
                 value.currentPartner == false)) {
               widgets.add(
@@ -219,8 +219,8 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                   Column(
                     children: [
                       UserListTile(
-                          name: value.listOfPartners[i]["requester_name"],
-                          email: value.listOfPartners[i]["requester"],
+                          name: value.listOfPartners[i]["partner_name"],
+                          email: value.listOfPartners[i]["partner_email"],
                           context: context,
                           icon: Icons.accessibility_sharp,
                           iconColor: Theme.of(context).hintColor),
@@ -255,10 +255,10 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                   child: UserListTile(
                       name:
                           value.listOfPartners[value.listOfPartners.length - 1]
-                              ["requester_name"],
+                              ["partner_name"],
                       email:
                           value.listOfPartners[value.listOfPartners.length - 1]
-                              ['requester'],
+                              ['partner_email'],
                       context: context,
                       icon: Icons.favorite,
                       iconColor: Theme.of(context).primaryColor)));
