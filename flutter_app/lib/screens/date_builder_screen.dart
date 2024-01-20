@@ -214,13 +214,17 @@ class DateBuilderScreen extends StatelessWidget {
               ),
               if (photos == "no photos")
                 const Text(
-                  "Location not listed for this place",
+                  "Link is not listed for this place",
                   style: TextStyle(color: Colors.white),
                 ),
               if (photos != "no photos")
                 MaterialButton(
                     color: Colors.white,
-                    child: Text('Check on Google Maps'),
+                    child: Text(
+                      'More Details',
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
+                    ),
                     padding: EdgeInsets.symmetric(vertical: 18),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15)),
@@ -229,9 +233,11 @@ class DateBuilderScreen extends StatelessWidget {
                       final match =
                           regex.firstMatch(photos[0]['html_attributions'][0]);
                       final String url = match?.group(1) ?? '';
+
                       final newUrl = Uri.parse(url);
-                      launchUrl(newUrl);
-                      // photos[0]['html_attributions'][0];
+                      if (!await launchUrl(newUrl)) {
+                        throw Exception('Could not launch $newUrl');
+                      }
                     })
             ]),
       ),
