@@ -17,12 +17,15 @@ class SuggestionsProvider extends ChangeNotifier {
       final response = await _dio.get("$_baseUrl/get_suggestions",
           data: {"place_type": type},
           options: Options(headers: {"authorization": "Bearer $token"}));
-      print("In suggestions provider success: ${response.data}");
+
       if (response.data["status"] == "failed") {
         status = "failed";
         failedMessage = response.data["message"];
       } else if (response.data["status"] == "success") {
         status = "success";
+        for (Map<String, dynamic> response in response.data['places']) {
+          print(response);
+        }
       }
     } catch (error) {
       print("In suggestions provider: $error");

@@ -13,7 +13,7 @@ class DateBuilderScreen extends StatelessWidget {
       return suggestions;
     }
 
-    getSuggestions();
+    // getSuggestions();
 
     Map<String, List<String>> places = {
       "date1": [
