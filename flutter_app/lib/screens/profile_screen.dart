@@ -55,7 +55,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       right: 0,
                       child: InkWell(
                         child: Icon(
-                          Icons.mode_edit_outline_outlined,
+                          Icons.edit_note_sharp,
                           color: Theme.of(context).hintColor,
                           size: 30,
                         ),
