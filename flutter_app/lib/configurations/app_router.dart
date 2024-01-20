@@ -1,7 +1,6 @@
 import 'package:bound_harmony/main_view.dart';
 import 'package:bound_harmony/screens/admin_screen.dart';
 import 'package:bound_harmony/screens/advice_screen.dart';
-import 'package:bound_harmony/screens/bonding_activities_screen.dart';
 import 'package:bound_harmony/screens/connection_setup_screen.dart';
 import 'package:bound_harmony/screens/couple_survey_screen.dart';
 import 'package:bound_harmony/screens/date_builder_and_bonding_activities_screen.dart';
@@ -134,18 +133,6 @@ class AppNavigation {
                             builder: (context, state) {
                               return DateBuilderAndBondingActivitiesScreen(
                                 type: state.pathParameters['type']!,
-                                key: state.pageKey,
-                              );
-                            },
-                          ),
-
-                          /// Suggestions sub-route Bonding Activities
-                          ///
-                          GoRoute(
-                            path: 'bondingActivities',
-                            name: 'Bonding Activities',
-                            builder: (context, state) {
-                              return BondingActivitiesScreen(
                                 key: state.pageKey,
                               );
                             },
