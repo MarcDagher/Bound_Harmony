@@ -4,9 +4,9 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class DateBuilderScreen extends StatelessWidget {
+class DateBuilderAndBondingActivitiesScreen extends StatelessWidget {
   final String type;
-  const DateBuilderScreen({super.key, required this.type});
+  const DateBuilderAndBondingActivitiesScreen({super.key, required this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +16,18 @@ class DateBuilderScreen extends StatelessWidget {
       return suggestions;
     }
 
-    getSuggestions(type);
+    if (type == "date") {
+      getSuggestions("date");
+    } else {
+      getSuggestions("bonding");
+    }
     // print(type);
 
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(color: Theme.of(context).hintColor),
         leadingWidth: 30,
-        title: Text('Date Builder',
+        title: Text(type == "date" ? 'Date Builder' : "Bonding Activities",
             style: TextStyle(color: Theme.of(context).hintColor)),
       ),
 

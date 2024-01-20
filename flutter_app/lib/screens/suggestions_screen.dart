@@ -33,7 +33,7 @@ class SuggestionsScreen extends StatelessWidget {
                       navigationButtonColor: Colors.white,
                       textAndButtonColor: Theme.of(context).hintColor,
                       handlePressed: () {
-                        context.goNamed('Date Builder',
+                        context.goNamed('Date Builder and Bonding Activities',
                             pathParameters: {'type': 'date'});
                       },
                       imagePath: "assets/wallpaper 8.jpg",
@@ -50,7 +50,8 @@ class SuggestionsScreen extends StatelessWidget {
                       navigationButtonColor: Colors.white,
                       textAndButtonColor: Theme.of(context).hintColor,
                       handlePressed: () {
-                        context.goNamed('Bonding Activities');
+                        context.goNamed('Date Builder and Bonding Activities',
+                            pathParameters: {'type': 'bonding'});
                       },
                       imagePath: "assets/wallpaper 7.jpg",
                       title: "Bonding Activities"),
