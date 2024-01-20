@@ -1,10 +1,19 @@
+import 'package:bound_harmony/providers/suggestions_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DateBuilderScreen extends StatelessWidget {
   const DateBuilderScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Future getSuggestions() async {
+      final suggestions = context.read<SuggestionsProvider>().getSuggestions();
+      return suggestions;
+    }
+
+    getSuggestions();
+
     Map<String, List<String>> places = {
       "date1": [
         "assets/logo.png",

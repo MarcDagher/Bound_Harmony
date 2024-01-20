@@ -25,7 +25,7 @@ class SuggestionsMiddleware
         if($user -> connection_status == "false" || $user -> couple_survey_status == "incomplete"){
             return response() -> json([
                 "status" => "failed",
-                "message" => "Make sure you are connected and your couple's survey is submitted"
+                "message" => "Make sure you are connected and your Couple's Survey is submitted"
             ]);
         }
 
@@ -42,7 +42,7 @@ class SuggestionsMiddleware
             if ($partner_as_requester['requester_user']['couple_survey_status'] == "incomplete"){
                 return response() -> json([
                     "status" => "failed",
-                    "message" => "Make sure your partner submitted their couple's survey"
+                    "message" => "Make sure your partner submitted their Couple's Survey"
                 ]); 
             }
 
@@ -51,7 +51,7 @@ class SuggestionsMiddleware
             if ($partner_as_responder['responder_user']['couple_survey_status'] == "incomplete"){
                 return response() -> json([
                     "status" => "failed",
-                    "message" => "Make sure your partner submitted their couple's survey"
+                    "message" => "Make sure your partner submitted their Couple's Survey"
                 ]); 
             }
         }

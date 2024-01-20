@@ -59,7 +59,7 @@ class SuggestionsScreen extends StatelessWidget {
                   height: 5,
                 ),
 
-                // //////// ON CLICK - GO TO Date Bonding Activities
+                // //////// ON CLICK - GO TO Gift Ideas
                 Expanded(
                   child: NavigationBox(
                       navigationButtonColor: Colors.white,
