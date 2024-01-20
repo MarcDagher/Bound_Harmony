@@ -20,7 +20,7 @@ class _AdviceScreenState extends State<AdviceScreen> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 35,
-        backgroundColor: const Color.fromARGB(255, 170, 167, 167),
+        backgroundColor: const Color.fromARGB(255, 141, 138, 138),
         title: const Text(
           'Advice',
           style: TextStyle(color: Colors.white),
@@ -32,7 +32,7 @@ class _AdviceScreenState extends State<AdviceScreen> {
       ///
       body: Container(
         decoration: const BoxDecoration(
-          color: Color.fromARGB(255, 170, 167, 167),
+          color: Color.fromARGB(255, 141, 138, 138),
         ),
         child: Column(
           children: [
