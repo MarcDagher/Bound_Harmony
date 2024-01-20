@@ -1,6 +1,8 @@
 import 'package:bound_harmony/providers/suggestions_provider.dart';
+import 'package:bound_harmony/widgets%20for%20conditional%20UI/connection_status_false.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -21,12 +23,11 @@ class DateBuilderAndBondingActivitiesScreen extends StatelessWidget {
     } else {
       getSuggestions("bonding");
     }
-    // print(type);
 
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(color: Theme.of(context).hintColor),
-        leadingWidth: 30,
+        leadingWidth: 50,
         title: Text(type == "date" ? 'Date Builder' : "Bonding Activities",
             style: TextStyle(color: Theme.of(context).hintColor)),
       ),
@@ -36,9 +37,17 @@ class DateBuilderAndBondingActivitiesScreen extends StatelessWidget {
       ///
       body: Consumer<SuggestionsProvider>(
         builder: (context, value, child) {
-          // print("In consumer ${value.places}");
           if (value.status == "failed") {
-            return Center(child: Text(value.failedMessage!));
+            return NotConnectedBox(
+                text: value.failedMessage!,
+                textFirstButton: "My Partners",
+                textSecondButton: "Couple's Survey",
+                handlePressedFirstButton: () {
+                  context.goNamed('My Partners');
+                },
+                handlePressedSecondButton: () {
+                  context.goNamed('Couples Survey');
+                });
           } else if (value.status == "success") {
             return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),

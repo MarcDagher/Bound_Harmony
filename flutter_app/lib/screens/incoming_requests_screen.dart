@@ -31,7 +31,7 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
         leading: BackButton(
           color: Theme.of(context).hintColor,
         ),
-        leadingWidth: 30,
+        leadingWidth: 50,
         backgroundColor: Colors.white,
         title: Text(
           'Incoming Requests',

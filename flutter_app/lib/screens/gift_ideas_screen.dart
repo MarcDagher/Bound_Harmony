@@ -23,7 +23,7 @@ class GiftIdeasScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(color: Theme.of(context).hintColor),
-        leadingWidth: 30,
+        leadingWidth: 50,
         title: Text('Gift Ideas',
             style: TextStyle(color: Theme.of(context).hintColor)),
       ),

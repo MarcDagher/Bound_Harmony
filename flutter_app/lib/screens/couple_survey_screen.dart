@@ -87,7 +87,7 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        leadingWidth: 30,
+        leadingWidth: 50,
         leading: BackButton(
           color: Theme.of(context).hintColor,
         ),

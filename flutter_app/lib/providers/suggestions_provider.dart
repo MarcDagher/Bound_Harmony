@@ -60,7 +60,7 @@ class SuggestionsProvider extends ChangeNotifier {
           notifyListeners();
         }
 
-        // print(places[places.length - 1].name);
+        print(response.data);
       }
     } on DioException catch (error) {
       print("In suggestions provider error: ${error}");
