@@ -2,6 +2,7 @@ import 'package:bound_harmony/providers/suggestions_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DateBuilderScreen extends StatelessWidget {
   const DateBuilderScreen({super.key});
@@ -123,7 +124,7 @@ class DateBuilderScreen extends StatelessWidget {
     // print("userRatingsTotal: $userRatingsTotal");
     // print("vicinity: $vicinity");
     // print("queryType: $queryType");
-    final validated_opening_hours = openingHours == "no opening hours"
+    final validatedOpeningHours = openingHours == "no opening hours"
         ? "Opening hours not listed for this place"
         : "Open now: ${openingHours['open_now']}";
     return Padding(
@@ -135,75 +136,104 @@ class DateBuilderScreen extends StatelessWidget {
             color: Theme.of(context).hintColor,
             borderRadius: BorderRadius.circular(15)),
         padding: const EdgeInsets.all(15),
-        child:
-            Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(businessStatus,
-                style: const TextStyle(color: Colors.white)), // Top texts 1
-            Text(validated_opening_hours,
-                style: const TextStyle(color: Colors.white)) // Top texts 2
-          ]),
-          //  SEPARATOR
-          const SizedBox(
-            height: 10,
-          ),
-          // SEPARATOR
-          Text(name,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20)), // Center text name
-          // RATINGS
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+        child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              RatingBar(
-                direction: Axis.horizontal,
-                itemCount: 5,
-                initialRating: (rating is int)
-                    ? rating.toDouble()
-                    : rating is double
-                        ? rating
-                        : 0,
-                maxRating: 5,
-                minRating: 0,
-                allowHalfRating: true,
-                glow: true,
-                glowColor: const Color.fromARGB(255, 255, 186, 57),
-                itemSize: 25,
-                unratedColor: const Color.fromARGB(255, 255, 186, 57),
-                ratingWidget: RatingWidget(
-                    full: const Icon(
-                      Icons.star_rounded,
-                      color: Color.fromARGB(255, 255, 186, 57),
-                    ),
-                    half: const Icon(
-                      Icons.star_half_rounded,
-                      color: Color.fromARGB(255, 255, 186, 57),
-                    ),
-                    empty: const Icon(
-                      Icons.star_border_rounded,
-                      color: Color.fromARGB(255, 255, 186, 57),
-                    )),
-                ignoreGestures: true,
-                onRatingUpdate: (value) => 0,
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text(businessStatus,
+                    style: const TextStyle(color: Colors.white)), // Top texts 1
+                Text(validatedOpeningHours,
+                    style: const TextStyle(color: Colors.white)) // Top texts 2
+              ]),
+              //  SEPARATOR
+              const SizedBox(
+                height: 15,
               ),
+              // SEPARATOR
+              Text(name,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20)), // Center text name
+              // RATINGS
+              const SizedBox(
+                height: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RatingBar(
+                    direction: Axis.horizontal,
+                    itemCount: 5,
+                    initialRating: (rating is int)
+                        ? rating.toDouble()
+                        : rating is double
+                            ? rating
+                            : 0,
+                    maxRating: 5,
+                    minRating: 0,
+                    allowHalfRating: true,
+                    glow: true,
+                    glowColor: const Color.fromARGB(255, 255, 186, 57),
+                    itemSize: 25,
+                    unratedColor: const Color.fromARGB(255, 255, 186, 57),
+                    ratingWidget: RatingWidget(
+                        full: const Icon(
+                          Icons.star_rounded,
+                          color: Color.fromARGB(255, 255, 186, 57),
+                        ),
+                        half: const Icon(
+                          Icons.star_half_rounded,
+                          color: Color.fromARGB(255, 255, 186, 57),
+                        ),
+                        empty: const Icon(
+                          Icons.star_border_rounded,
+                          color: Color.fromARGB(255, 255, 186, 57),
+                        )),
+                    ignoreGestures: true,
+                    onRatingUpdate: (value) => 0,
+                  ),
+                  Text(
+                    userRatingsTotal == "no total ratings"
+                        ? "0"
+                        : "$userRatingsTotal",
+                    style: const TextStyle(
+                        color: Color.fromARGB(255, 255, 186, 57), fontSize: 12),
+                  )
+                ],
+              ),
+              const SizedBox(height: 15),
               Text(
-                userRatingsTotal == "no total ratings"
-                    ? "0"
-                    : "$userRatingsTotal",
-                style: const TextStyle(
-                    color: Color.fromARGB(255, 255, 186, 57), fontSize: 12),
-              )
-            ],
-          ),
-          const SizedBox(height: 15),
-          Text(
-            vicinity,
-            style: const TextStyle(color: Colors.white),
-          ),
-        ]),
+                "Location: $vicinity",
+                style: const TextStyle(color: Colors.white),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              if (photos == "no photos")
+                const Text(
+                  "Location not listed for this place",
+                  style: TextStyle(color: Colors.white),
+                ),
+              if (photos != "no photos")
+                MaterialButton(
+                    color: Colors.white,
+                    child: Text('Check on Google Maps'),
+                    padding: EdgeInsets.symmetric(vertical: 18),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
+                    onPressed: () async {
+                      final RegExp regex = RegExp(r'href="([^"]+)"');
+                      final match =
+                          regex.firstMatch(photos[0]['html_attributions'][0]);
+                      final String url = match?.group(1) ?? '';
+                      final newUrl = Uri.parse(url);
+                      launchUrl(newUrl);
+                      // photos[0]['html_attributions'][0];
+                    })
+            ]),
       ),
     );
   }
