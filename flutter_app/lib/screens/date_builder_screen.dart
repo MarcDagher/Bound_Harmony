@@ -119,11 +119,7 @@ class DateBuilderScreen extends StatelessWidget {
     // print("plusCode: $plusCode");
     // print("photos: $photos");
     // print("types: $types");
-    print(rating is int
-        ? rating
-        : rating is double
-            ? rating
-            : 0);
+    print(photos == "no photos" ? photos : photos[0]['html_attributions'][0]);
     // print("userRatingsTotal: $userRatingsTotal");
     // print("vicinity: $vicinity");
     // print("queryType: $queryType");
@@ -201,6 +197,11 @@ class DateBuilderScreen extends StatelessWidget {
                     color: Color.fromARGB(255, 255, 186, 57), fontSize: 12),
               )
             ],
+          ),
+          const SizedBox(height: 15),
+          Text(
+            vicinity,
+            style: const TextStyle(color: Colors.white),
           ),
         ]),
       ),
