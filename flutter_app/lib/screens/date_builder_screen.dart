@@ -158,13 +158,11 @@ class DateBuilderScreen extends StatelessWidget {
                   color: Colors.white,
                   fontWeight: FontWeight.w700,
                   fontSize: 20)), // Center text name
-          if (rating == "no ratings")
-            const Center(
-                child:
-                    Text("No Ratings", style: TextStyle(color: Colors.white))),
-          if (rating != "no ratings")
-            Center(
-              child: RatingBar(
+          // RATINGS
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              RatingBar(
                 direction: Axis.horizontal,
                 itemCount: 5,
                 initialRating: (rating is int)
@@ -195,7 +193,15 @@ class DateBuilderScreen extends StatelessWidget {
                 ignoreGestures: true,
                 onRatingUpdate: (value) => 0,
               ),
-            ),
+              Text(
+                userRatingsTotal == "no total ratings"
+                    ? "0"
+                    : "$userRatingsTotal",
+                style: const TextStyle(
+                    color: Color.fromARGB(255, 255, 186, 57), fontSize: 12),
+              )
+            ],
+          ),
         ]),
       ),
     );
