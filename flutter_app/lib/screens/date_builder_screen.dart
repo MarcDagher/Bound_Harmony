@@ -142,6 +142,11 @@ class DateBuilderScreen extends StatelessWidget {
             Text(validated_opening_hours,
                 style: const TextStyle(color: Colors.white)) // Top texts 2
           ]),
+          //  SEPARATOR
+          const SizedBox(
+            height: 10,
+          ),
+          // SEPARATOR
           Text(name,
               textAlign: TextAlign.center,
               style: const TextStyle(
