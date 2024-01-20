@@ -164,8 +164,8 @@ class SuggestionsController extends Controller
         $type = $couples_combined_interests_without_duplicates[array_rand($couples_combined_interests_without_duplicates, 1)];
         $key = env("GOOGLE_PLACES_API_KEY");
 
-        $places = $this -> get_places_from_google_places($location, $radius, $type, $key);
-        return $places;
+        // $places = $this -> get_places_from_google_places($location, $radius, $type, $key); // google places
+        // return $places;
 
         // location(longitude-latitude), a background color, a link to their place on google maps, name, open_now, place_id, types(resto, pub...), Vicinity.
         // value field we can display: icon_background_color, icon_mask_base_uri, name, types, vicinity
