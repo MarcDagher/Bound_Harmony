@@ -43,26 +43,60 @@ class DateBuilderAndBondingActivitiesScreen extends StatelessWidget {
             return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: ListView.builder(
-                    itemCount: value.places.length,
+                    itemCount: type == "bonding"
+                        ? value.bondingActivities.length
+                        : value.dates.length,
                     itemBuilder: (context, index) {
                       // final place = places.entries.elementAt(index);
 
                       /////// CARD BUILDER METHOD
                       ///
                       return cardBuilder(
-                          context: context,
-                          businessStatus: value.places[index].businessStatus,
-                          name: value.places[index].name,
-                          openingHours: value.places[index].openingHours,
-                          photos: value.places[index].photos,
-                          placeId: value.places[index].placeId,
-                          plusCode: value.places[index].plusCode,
-                          rating: value.places[index].rating,
-                          types: value.places[index].types,
-                          userRatingsTotal:
-                              value.places[index].userRatingsTotal,
-                          vicinity: value.places[index].vicinity,
-                          queryType: value.places[index].queryType);
+                        context: context,
+                        businessStatus: type == "bonding"
+                            ? value.bondingActivities[index].businessStatus
+                            : value.dates[index].businessStatus,
+                        ////////////////////////////////////
+                        name: type == "bonding"
+                            ? value.bondingActivities[index].name
+                            : value.dates[index].name,
+                        ////////////////////////////////////
+                        openingHours: type == "bonding"
+                            ? value.bondingActivities[index].openingHours
+                            : value.dates[index].openingHours,
+                        ////////////////////////////////////
+                        photos: type == "bonding"
+                            ? value.bondingActivities[index].photos
+                            : value.dates[index].photos,
+                        ////////////////////////////////////
+                        placeId: type == "bonding"
+                            ? value.bondingActivities[index].placeId
+                            : value.dates[index].placeId,
+                        ////////////////////////////////////
+                        plusCode: type == "bonding"
+                            ? value.bondingActivities[index].plusCode
+                            : value.dates[index].plusCode,
+                        ////////////////////////////////////
+                        rating: type == "bonding"
+                            ? value.bondingActivities[index].rating
+                            : value.dates[index].rating,
+                        ////////////////////////////////////
+                        types: type == "bonding"
+                            ? value.bondingActivities[index].types
+                            : value.dates[index].types,
+                        ////////////////////////////////////
+                        userRatingsTotal: type == "bonding"
+                            ? value.bondingActivities[index].userRatingsTotal
+                            : value.dates[index].userRatingsTotal,
+                        ////////////////////////////////////
+                        vicinity: type == "bonding"
+                            ? value.bondingActivities[index].vicinity
+                            : value.dates[index].vicinity,
+                        ////////////////////////////////////
+                        queryType: type == "bonding"
+                            ? value.bondingActivities[index].queryType
+                            : value.dates[index].queryType,
+                      );
                     }));
           } else {
             return const Center(child: Text("Loading ... "));
