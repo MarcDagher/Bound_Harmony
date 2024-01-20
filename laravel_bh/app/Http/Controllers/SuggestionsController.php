@@ -83,16 +83,33 @@ class SuggestionsController extends Controller
         foreach ($list_of_interests as $date){
             if (in_array($date, $date_places)){array_push($filtered_types, $date);}
         }
+
         $type = $filtered_types[array_rand($filtered_types, 1)];
-        return $type;
-        // $response = Http::get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$location&radius=$radius&types=$type&key=$key");
-        // if ($response->successful()) {
-        //     $places_data = $response->json();
-        //     return response()->json($places_data);
-        // } else {
-        //     $error = $response->json();
-        //     return response()->json($error, $response->status());
-        // }
+        $response = Http::get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$location&radius=$radius&types=$type&key=$key");
+        if ($response->successful()) {
+            $places_data = $response->json();
+
+            $list_of_places = [];
+            foreach($places_data['results'] as $place){
+                $list_of_places[] = [
+                    "name" => isset($place["name"]) ? $place["name"] : "no name",
+                    "business_status" => isset($place["business_status"]) ? $place["business_status"] : "no business status",
+                    "opening_hours" => isset($place["opening_hours"]) ? $place["opening_hours"] : "no opening hours",
+                    "place_id" => isset($place["place_id"]) ? $place["place_id"] : "no place id",
+                    "plus_code" => isset($place["plus_code"]) ? $place["plus_code"] : "no plus code",
+                    "photos" => isset($place["photos"]) ? $place["photos"] : "no photos",
+                    "types" => isset($place["types"]) ? $place["types"] : "no types",
+                    "rating" => isset( $place["rating"]) ? $place["rating"] : "no ratings",
+                    "user_ratings_total" => isset($place["user_ratings_total"]) ? $place["user_ratings_total"] : "no total ratings",
+                    "vicinity" => isset($place["vicinity"]) ? $place["vicinity"] : "no vicinity",
+                ];
+            }
+            return $list_of_places;
+            
+        } else {
+            $error = $response->json();
+            return response()->json($error, $response->status());
+        }
     }
 
     // adds user's interests (data is from personal survey) - adds user's and partner's interests (data is from couples survey) 
@@ -174,7 +191,7 @@ class SuggestionsController extends Controller
         // return $places;
         return response() -> json([
             "status" => "success",
-            "interests" => $places
+            "places" => $places
         ]);
         // location(longitude-latitude), a background color, a link to their place on google maps, name, open_now, place_id, types(resto, pub...), Vicinity.
         // value field we can display: icon_background_color, icon_mask_base_uri, name, types, vicinity
