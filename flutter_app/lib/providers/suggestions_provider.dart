@@ -39,11 +39,11 @@ class SuggestionsProvider extends ChangeNotifier {
               vicinity: response['vicinity'],
               queryType: response['query_type']));
         }
-        print(places);
+        notifyListeners();
+        print(places[places.length - 1].name);
       }
     } catch (error) {
       print("In suggestions provider: $error");
     }
-    notifyListeners();
   }
 }

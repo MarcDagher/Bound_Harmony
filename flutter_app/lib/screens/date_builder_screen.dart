@@ -16,6 +16,7 @@ class DateBuilderScreen extends StatelessWidget {
     }
 
     // getSuggestions();
+    print("Build run again");
 
     Map<String, List<String>> places = {
       "date1": [
@@ -103,16 +104,16 @@ class DateBuilderScreen extends StatelessWidget {
   ///
   cardBuilder({
     required BuildContext context,
-    required String name,
-    required String businessStatus,
-    required dynamic openingHours,
+    required String name, // used
+    required String businessStatus, // used
+    required dynamic openingHours, // used
     required String placeId,
     required dynamic plusCode,
-    required dynamic photos,
+    required dynamic photos, // used
     required List types,
-    required dynamic rating,
-    required dynamic userRatingsTotal,
-    required dynamic vicinity,
+    required dynamic rating, // used
+    required dynamic userRatingsTotal, // used
+    required dynamic vicinity, // used
     required dynamic queryType,
   }) {
     // print("businessStatus: $businessStatus");
@@ -120,13 +121,17 @@ class DateBuilderScreen extends StatelessWidget {
     // print("plusCode: $plusCode");
     // print("photos: $photos");
     // print("types: $types");
-    print(photos == "no photos" ? photos : photos[0]['html_attributions'][0]);
+    // print(types.runtimeType);
+    // print(photos == "no photos" ? photos : photos[0]['html_attributions'][0]);
     // print("userRatingsTotal: $userRatingsTotal");
     // print("vicinity: $vicinity");
     // print("queryType: $queryType");
     final validatedOpeningHours = openingHours == "no opening hours"
         ? "Opening hours not listed for this place"
-        : "Open now: ${openingHours['open_now']}";
+        : openingHours['open_now'] == true
+            ? "Now Open"
+            : "Closed";
+
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 10,
@@ -146,72 +151,77 @@ class DateBuilderScreen extends StatelessWidget {
                 Text(validatedOpeningHours,
                     style: const TextStyle(color: Colors.white)) // Top texts 2
               ]),
-              //  SEPARATOR
-              const SizedBox(
-                height: 15,
-              ),
-              // SEPARATOR
-              Text(name,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20)), // Center text name
-              // RATINGS
-              const SizedBox(
-                height: 15,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  RatingBar(
-                    direction: Axis.horizontal,
-                    itemCount: 5,
-                    initialRating: (rating is int)
-                        ? rating.toDouble()
-                        : rating is double
-                            ? rating
-                            : 0,
-                    maxRating: 5,
-                    minRating: 0,
-                    allowHalfRating: true,
-                    glow: true,
-                    glowColor: const Color.fromARGB(255, 255, 186, 57),
-                    itemSize: 25,
-                    unratedColor: const Color.fromARGB(255, 255, 186, 57),
-                    ratingWidget: RatingWidget(
-                        full: const Icon(
-                          Icons.star_rounded,
-                          color: Color.fromARGB(255, 255, 186, 57),
-                        ),
-                        half: const Icon(
-                          Icons.star_half_rounded,
-                          color: Color.fromARGB(255, 255, 186, 57),
-                        ),
-                        empty: const Icon(
-                          Icons.star_border_rounded,
-                          color: Color.fromARGB(255, 255, 186, 57),
-                        )),
-                    ignoreGestures: true,
-                    onRatingUpdate: (value) => 0,
-                  ),
-                  Text(
-                    userRatingsTotal == "no total ratings"
-                        ? "0"
-                        : "$userRatingsTotal",
+
+              Padding(
+                padding: const EdgeInsets.only(top: 45, bottom: 15),
+                child: Text(name,
+                    textAlign: TextAlign.center,
                     style: const TextStyle(
-                        color: Color.fromARGB(255, 255, 186, 57), fontSize: 12),
-                  )
-                ],
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 22)),
+              ), // Center text name
+              //
+              // RATINGS
+              //
+              Padding(
+                padding: const EdgeInsets.only(bottom: 30),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    RatingBar(
+                      direction: Axis.horizontal,
+                      itemCount: 5,
+                      initialRating: (rating is int)
+                          ? rating.toDouble()
+                          : rating is double
+                              ? rating
+                              : 0,
+                      maxRating: 5,
+                      minRating: 0,
+                      allowHalfRating: true,
+                      glow: true,
+                      glowColor: const Color.fromARGB(255, 255, 186, 57),
+                      itemSize: 25,
+                      unratedColor: const Color.fromARGB(255, 255, 186, 57),
+                      ratingWidget: RatingWidget(
+                          full: const Icon(
+                            Icons.star_rounded,
+                            color: Color.fromARGB(255, 255, 186, 57),
+                          ),
+                          half: const Icon(
+                            Icons.star_half_rounded,
+                            color: Color.fromARGB(255, 255, 186, 57),
+                          ),
+                          empty: const Icon(
+                            Icons.star_border_rounded,
+                            color: Color.fromARGB(255, 255, 186, 57),
+                          )),
+                      ignoreGestures: true,
+                      onRatingUpdate: (value) => 0,
+                    ),
+                    Text(
+                      userRatingsTotal == "no total ratings"
+                          ? "0"
+                          : "$userRatingsTotal",
+                      style: const TextStyle(
+                          color: Color.fromARGB(255, 255, 186, 57),
+                          fontSize: 12),
+                    )
+                  ],
+                ),
               ),
-              const SizedBox(height: 15),
-              Text(
-                "Location: $vicinity",
-                style: const TextStyle(color: Colors.white),
+
+              Padding(
+                padding: const EdgeInsets.only(top: 15, bottom: 15),
+                child: Text(
+                  "Location: $vicinity",
+                  style: const TextStyle(color: Colors.white),
+                ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+
+              //// Location Button
+              ///
               if (photos == "no photos")
                 const Text(
                   "Link is not listed for this place",
@@ -219,26 +229,44 @@ class DateBuilderScreen extends StatelessWidget {
                 ),
               if (photos != "no photos")
                 MaterialButton(
-                    color: Colors.white,
-                    child: Text(
-                      'More Details',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
-                    ),
-                    padding: EdgeInsets.symmetric(vertical: 18),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                    onPressed: () async {
-                      final RegExp regex = RegExp(r'href="([^"]+)"');
-                      final match =
-                          regex.firstMatch(photos[0]['html_attributions'][0]);
-                      final String url = match?.group(1) ?? '';
+                  color: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 18),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
+                  onPressed: () async {
+                    final RegExp regex = RegExp(r'href="([^"]+)"');
+                    final match =
+                        regex.firstMatch(photos[0]['html_attributions'][0]);
+                    final String url = match?.group(1) ?? '';
 
-                      final newUrl = Uri.parse(url);
-                      if (!await launchUrl(newUrl)) {
-                        throw Exception('Could not launch $newUrl');
-                      }
-                    })
+                    final newUrl = Uri.parse(url);
+                    if (!await launchUrl(newUrl)) {
+                      throw Exception('Could not launch $newUrl');
+                    }
+                  },
+                  child: const Text(
+                    'More Details',
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
+                  ),
+                ),
+              Padding(
+                padding: const EdgeInsets.only(top: 15),
+                child: Wrap(
+                  alignment: WrapAlignment.spaceEvenly,
+                  spacing: 7,
+                  runSpacing: 2,
+                  children: [
+                    for (String type in types)
+                      Text(
+                        type,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      )
+                  ],
+                ),
+              )
             ]),
       ),
     );
