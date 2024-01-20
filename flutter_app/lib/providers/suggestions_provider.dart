@@ -10,11 +10,12 @@ class SuggestionsProvider extends ChangeNotifier {
   String? status;
   String? failedMessage;
 
-  Future getSuggestions() async {
+  Future getSuggestions(String type) async {
     final preferences = await SharedPreferences.getInstance();
     final token = preferences.get('token');
     try {
       final response = await _dio.get("$_baseUrl/get_suggestions",
+          data: {"place_type": type},
           options: Options(headers: {"authorization": "Bearer $token"}));
       print("In suggestions provider success: ${response.data}");
       if (response.data["status"] == "failed") {

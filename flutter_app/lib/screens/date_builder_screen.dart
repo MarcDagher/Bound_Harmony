@@ -9,7 +9,7 @@ class DateBuilderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Future getSuggestions() async {
       final suggestions =
-          await context.read<SuggestionsProvider>().getSuggestions();
+          await context.read<SuggestionsProvider>().getSuggestions("date");
       return suggestions;
     }
 
