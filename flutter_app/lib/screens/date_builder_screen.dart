@@ -58,18 +58,31 @@ class DateBuilderScreen extends StatelessWidget {
       ///// END OF APPBAR
       ///
       ///
-      body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: ListView.builder(
-              itemCount: places.length,
-              itemBuilder: (context, index) {
-                final place = places.entries.elementAt(index);
+      body: Consumer<SuggestionsProvider>(
+        builder: (context, value, child) {
+          print("In consumer");
+          print(value.status);
+          print(value.failedMessage);
+          if (value.status == "failed") {
+            return Center(child: Text(value.failedMessage!));
+          } else if (value.status == "success") {
+            return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: ListView.builder(
+                    itemCount: places.length,
+                    itemBuilder: (context, index) {
+                      final place = places.entries.elementAt(index);
 
-                /////// CARD BUILDER METHOD
-                ///
-                return cardBuilder(place.value[0], place.value[1],
-                    place.value[2], Theme.of(context).hintColor);
-              })),
+                      /////// CARD BUILDER METHOD
+                      ///
+                      return cardBuilder(place.value[0], place.value[1],
+                          place.value[2], Theme.of(context).hintColor);
+                    }));
+          } else {
+            return Center(child: Text("Loading ... "));
+          }
+        },
+      ),
     );
   }
 
