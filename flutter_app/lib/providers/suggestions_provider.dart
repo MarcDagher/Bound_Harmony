@@ -27,17 +27,17 @@ class SuggestionsProvider extends ChangeNotifier {
         status = "success";
         for (Map<String, dynamic> response in response.data['places']) {
           places.add(Place(
-            name: response['name'],
-            businessStatus: response['business_status'],
-            openingHours: response['opening_hours'],
-            placeId: response['place_id'],
-            plusCode: response['plus_code'],
-            photos: response['photos'],
-            types: response['types'],
-            rating: response['rating'],
-            userRatingsTotal: response['user_ratings_total'],
-            vicinity: response['vicinity'],
-          ));
+              name: response['name'],
+              businessStatus: response['business_status'],
+              openingHours: response['opening_hours'],
+              placeId: response['place_id'],
+              plusCode: response['plus_code'],
+              photos: response['photos'],
+              types: response['types'],
+              rating: response['rating'],
+              userRatingsTotal: response['user_ratings_total'],
+              vicinity: response['vicinity'],
+              queryType: response['query_type']));
         }
         print(places);
       }

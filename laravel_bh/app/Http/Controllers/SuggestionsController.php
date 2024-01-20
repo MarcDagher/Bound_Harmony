@@ -139,6 +139,7 @@ class SuggestionsController extends Controller
                     "rating" => isset( $place["rating"]) ? $place["rating"] : "no ratings",
                     "user_ratings_total" => isset($place["user_ratings_total"]) ? $place["user_ratings_total"] : "no total ratings",
                     "vicinity" => isset($place["vicinity"]) ? $place["vicinity"] : "no vicinity",
+                    "query_type" => $type
                 ];
             }
             return $list_of_places;

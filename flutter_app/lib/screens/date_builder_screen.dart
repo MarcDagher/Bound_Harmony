@@ -61,21 +61,33 @@ class DateBuilderScreen extends StatelessWidget {
       ///
       body: Consumer<SuggestionsProvider>(
         builder: (context, value, child) {
-          print("In consumer ${value.status}");
+          // print("In consumer ${value.places}");
           if (value.status == "failed") {
             return Center(child: Text(value.failedMessage!));
           } else if (value.status == "success") {
             return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: ListView.builder(
-                    itemCount: places.length,
+                    itemCount: value.places.length,
                     itemBuilder: (context, index) {
-                      final place = places.entries.elementAt(index);
+                      // final place = places.entries.elementAt(index);
 
                       /////// CARD BUILDER METHOD
                       ///
-                      return cardBuilder(place.value[0], place.value[1],
-                          place.value[2], Theme.of(context).hintColor);
+                      return cardBuilder(
+                          context: context,
+                          businessStatus: value.places[index].businessStatus,
+                          name: value.places[index].name,
+                          openingHours: value.places[index].openingHours,
+                          photos: value.places[index].photos,
+                          placeId: value.places[index].placeId,
+                          plusCode: value.places[index].plusCode,
+                          rating: value.places[index].rating,
+                          types: value.places[index].types,
+                          userRatingsTotal:
+                              value.places[index].userRatingsTotal,
+                          vicinity: value.places[index].vicinity,
+                          queryType: value.places[index].queryType);
                     }));
           } else {
             return Center(child: Text("Loading ... "));
@@ -87,68 +99,62 @@ class DateBuilderScreen extends StatelessWidget {
 
   //////// CARD BUILDER METHOD
   ///
-  cardBuilder(String image, String name, String description, Color nameColor) {
-    //// Padding between boxes
-    ///
+  cardBuilder({
+    required BuildContext context,
+    required String name,
+    required String businessStatus,
+    required dynamic openingHours,
+    required String placeId,
+    required dynamic plusCode,
+    required dynamic photos,
+    required List types,
+    required dynamic rating,
+    required dynamic userRatingsTotal,
+    required dynamic vicinity,
+    required dynamic queryType,
+  }) {
+    // print("businessStatus: $businessStatus");
+    // print("openingHours: $openingHours");
+    // print("plusCode: $plusCode");
+    // print("photos: $photos");
+    // print("types: $types");
+    // print("rating: $rating");
+    // print("userRatingsTotal: $userRatingsTotal");
+    // print("vicinity: $vicinity");
+    // print("queryType: $queryType");
+    final validated_opening_hours = openingHours == "no opening hours"
+        ? "Opening hours not listed for this place"
+        : "Open now: ${openingHours['open_now']}";
     return Padding(
-      padding: const EdgeInsets.only(top: 10, bottom: 10),
+      padding: const EdgeInsets.symmetric(
+        vertical: 10,
+      ),
       child: Container(
         decoration: BoxDecoration(
-            color: Colors.grey[300], borderRadius: BorderRadius.circular(15)),
-        child: Column(
-          children: [
-            //// this padding is for the white box to not take the full space
-            ///
-            Padding(
-              padding: const EdgeInsets.only(
-                  top: 15, left: 15, right: 15, bottom: 5),
-              ////// image container
-              ///
-              child: Container(
-                height: 150,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15)),
-                //// should be a real image
-                ///
-                child: Center(child: Text(image)),
-              ),
-            ),
-
-            ////// Aligning the texts to a column inside a row
-            ///
-            ///
-            Padding(
-              padding: const EdgeInsets.only(left: 15, bottom: 10),
-              child: Row(
-                children: [
-                  ////// THE FLEXIBLE WIDGET ALLOWS THE TEXT TO WRAP AND TAKE THE SPACE NECESSARY
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          name,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
-                              color: nameColor),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: Text(
-                            description,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+            color: Theme.of(context).hintColor,
+            borderRadius: BorderRadius.circular(15)),
+        padding: const EdgeInsets.all(15),
+        child:
+            Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(businessStatus,
+                style: const TextStyle(color: Colors.white)), // Top texts 1
+            Text(validated_opening_hours,
+                style: const TextStyle(color: Colors.white)) // Top texts 2
+          ]),
+          Text(name,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 20)), // Center text name
+        ]),
       ),
     );
   }
 }
+
+// openingHours: {open_now: true}
+// plusCode: {compound_code: 4M42+PW Byblos, Lebanon, global_code: 8G6Q4M42+PW}
+// photos: [{height: 2848, html_attributions: [<a href="https://maps.google.com/maps/contrib/118096579659904185522">Victory Byblos Hotel &amp; Spa</a>], photo_reference: AWU5eFgY5q91xs3FEJBESwx-1dHaJlNcEsPeNIGFKo8qfU8whpBnN_jMbPrgLsvWCF0azknvgwHoa2XA9xDe_WWk3j_EQOm9vjFbsUqgF0_VdPGLADiU69uHq3jk1-FwKUR9BQacH9v1Y7Gi5UJ3VHLtWgYG30oZ81_dg1z51ARLN-LGhVHW, width: 4288}]
+// types: [night_club, parking, bar, lodging, spa, point_of_interest, establishment]

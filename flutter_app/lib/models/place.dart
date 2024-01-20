@@ -9,17 +9,18 @@ class Place {
   final dynamic rating;
   final dynamic userRatingsTotal;
   final dynamic vicinity;
+  final String queryType;
 
-  Place({
-    required this.name,
-    required this.placeId,
-    required this.businessStatus,
-    required this.vicinity,
-    required this.openingHours,
-    required this.plusCode,
-    required this.photos,
-    required this.rating,
-    required this.types,
-    required this.userRatingsTotal,
-  });
+  Place(
+      {required this.name,
+      required this.placeId,
+      required this.businessStatus,
+      required this.vicinity,
+      required this.openingHours,
+      required this.plusCode,
+      required this.photos,
+      required this.rating,
+      required this.types,
+      required this.userRatingsTotal,
+      required this.queryType});
 }
