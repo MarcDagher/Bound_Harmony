@@ -77,6 +77,43 @@ class SuggestionsController extends Controller
             }
     }
 
+    // helper method: change user's options to useable Google Places Api query parameters
+    public function get_bonding_activities_places($location, $radius, $list_of_interests, $key){
+        $bonding_activities_places = ["campground","park", "cafe", "casino", "shopping_mall", "gym", "beauty_salon", "hair_care", "tourist_attraction", "amusement_park", "clothing_store", "bowling_alley", "night_club", "department_store", "zoo"];
+        $filtered_types = [];
+        foreach ($list_of_interests as $bonding_activity){
+            if (in_array($bonding_activity, $bonding_activities_places)){array_push($filtered_types, $bonding_activity);}
+        }
+
+        $type = $filtered_types[array_rand($filtered_types, 1)];
+        $response = Http::get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$location&radius=$radius&types=$type&key=$key");
+        if ($response->successful()) {
+            $places_data = $response->json();
+
+            $list_of_places = [];
+            foreach($places_data['results'] as $place){
+                $list_of_places[] = [
+                    "name" => isset($place["name"]) ? $place["name"] : "no name",
+                    "business_status" => isset($place["business_status"]) ? $place["business_status"] : "no business status",
+                    "opening_hours" => isset($place["opening_hours"]) ? $place["opening_hours"] : "no opening hours",
+                    "place_id" => isset($place["place_id"]) ? $place["place_id"] : "no place id",
+                    "plus_code" => isset($place["plus_code"]) ? $place["plus_code"] : "no plus code",
+                    "photos" => isset($place["photos"]) ? $place["photos"] : "no photos",
+                    "types" => isset($place["types"]) ? $place["types"] : "no types",
+                    "rating" => isset( $place["rating"]) ? $place["rating"] : "no ratings",
+                    "user_ratings_total" => isset($place["user_ratings_total"]) ? $place["user_ratings_total"] : "no total ratings",
+                    "vicinity" => isset($place["vicinity"]) ? $place["vicinity"] : "no vicinity",
+                ];
+            }
+            return $list_of_places;
+            
+        } else {
+            $error = $response->json();
+            return response()->json($error, $response->status());
+        }
+    }
+
+    // helper method: change user's options to useable Google Places Api query parameters
     public function get_date_places($location, $radius, $list_of_interests, $key){
         $date_places = ["bar", "restaurant", "movie_theater", "museum", "art gallery", "spa"];
         $filtered_types = [];
@@ -114,7 +151,12 @@ class SuggestionsController extends Controller
 
     // adds user's interests (data is from personal survey) - adds user's and partner's interests (data is from couples survey) 
     // if Q25 == "Yes" adds partner's interests (data is from personal survey)
-    public function get_suggestions(){
+    public function get_suggestions(Request $request){ // request will be a string "bonding" - "date"
+
+        $request->validate([
+            'place_type' => 'required|string',
+        ]);
+        
         $user = Auth::user();
         $couples_combined_interests = []; // answers of Q28 + user's + partner's(if Q25 is yes)
 
@@ -187,13 +229,18 @@ class SuggestionsController extends Controller
         $radius = '40000';
         $key = env("GOOGLE_PLACES_API_KEY");
 
-        $places = $this -> get_date_places($location, $radius, $couples_combined_interests_without_duplicates, $key); // google places
-        // return $places;
-        return response() -> json([
-            "status" => "success",
-            "places" => $places
-        ]);
-        // location(longitude-latitude), a background color, a link to their place on google maps, name, open_now, place_id, types(resto, pub...), Vicinity.
-        // value field we can display: icon_background_color, icon_mask_base_uri, name, types, vicinity
+        if ($request -> place_type == "bonding"){
+            $places = $this -> get_bonding_activities_places($location, $radius, $couples_combined_interests_without_duplicates, $key); // google places
+            return response() -> json([
+                "status" => "success",
+                "places" => $places
+            ]);
+        } else if ($request -> place_type == "date"){
+            $places = $this -> get_date_places($location, $radius, $couples_combined_interests_without_duplicates, $key); // google places
+            return response() -> json([
+                "status" => "success",
+                "places" => $places
+            ]);
+        }
     }
 }
