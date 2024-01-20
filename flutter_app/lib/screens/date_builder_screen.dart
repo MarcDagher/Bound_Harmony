@@ -8,7 +8,8 @@ class DateBuilderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future getSuggestions() async {
-      final suggestions = context.read<SuggestionsProvider>().getSuggestions();
+      final suggestions =
+          await context.read<SuggestionsProvider>().getSuggestions();
       return suggestions;
     }
 

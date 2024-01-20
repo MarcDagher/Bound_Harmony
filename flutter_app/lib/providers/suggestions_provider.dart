@@ -20,6 +20,8 @@ class SuggestionsProvider extends ChangeNotifier {
       if (response.data["status"] == "failed") {
         status = "failed";
         failedMessage = response.data["message"];
+      } else if (response.data["status"] == "success") {
+        status = "success";
       }
     } catch (error) {
       print("In suggestions provider: $error");
