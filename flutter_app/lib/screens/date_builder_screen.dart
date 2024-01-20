@@ -5,51 +5,19 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DateBuilderScreen extends StatelessWidget {
-  const DateBuilderScreen({super.key});
+  final String type;
+  const DateBuilderScreen({super.key, required this.type});
 
   @override
   Widget build(BuildContext context) {
-    Future getSuggestions() async {
+    Future getSuggestions(String type) async {
       final suggestions =
-          await context.read<SuggestionsProvider>().getSuggestions("date");
+          await context.read<SuggestionsProvider>().getSuggestions(type);
       return suggestions;
     }
 
-    // getSuggestions();
-    print("Build run again");
-
-    Map<String, List<String>> places = {
-      "date1": [
-        "assets/logo.png",
-        "Place/Activity Name",
-        "This is the description of the date"
-      ],
-      "date2": [
-        "assets/logo.png",
-        "Place/Activity Name",
-        "This is the description of the date"
-      ],
-      "date3": [
-        "assets/logo.png",
-        "Place/Activity Name",
-        "This is the description of the date"
-      ],
-      "date4": [
-        "assets/logo.png",
-        "Place/Activity Name",
-        "This is the description of the date"
-      ],
-      "date5": [
-        "assets/logo.png",
-        "Place/Activity Name",
-        "This is the description of the date"
-      ],
-      "date6": [
-        "assets/logo.png",
-        "Place/Activity Name",
-        "This is the description of the date"
-      ],
-    };
+    getSuggestions(type);
+    // print(type);
 
     return Scaffold(
       appBar: AppBar(
@@ -93,7 +61,7 @@ class DateBuilderScreen extends StatelessWidget {
                           queryType: value.places[index].queryType);
                     }));
           } else {
-            return Center(child: Text("Loading ... "));
+            return const Center(child: Text("Loading ... "));
           }
         },
       ),

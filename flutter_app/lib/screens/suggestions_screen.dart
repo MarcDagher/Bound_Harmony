@@ -33,7 +33,8 @@ class SuggestionsScreen extends StatelessWidget {
                       navigationButtonColor: Colors.white,
                       textAndButtonColor: Theme.of(context).hintColor,
                       handlePressed: () {
-                        context.goNamed('Date Builder');
+                        context.goNamed('Date Builder',
+                            pathParameters: {'type': 'date'});
                       },
                       imagePath: "assets/wallpaper 8.jpg",
                       title: "Date Builder"),

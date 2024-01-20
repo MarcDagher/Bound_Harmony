@@ -129,10 +129,11 @@ class AppNavigation {
                           /// Suggestions sub-route Date Builder
                           ///
                           GoRoute(
-                            path: 'dateBuilder',
+                            path: 'dateBuilder/:type',
                             name: 'Date Builder',
                             builder: (context, state) {
                               return DateBuilderScreen(
+                                type: state.pathParameters['type']!,
                                 key: state.pageKey,
                               );
                             },
