@@ -116,16 +116,6 @@ class DateBuilderScreen extends StatelessWidget {
     required dynamic vicinity, // used
     required dynamic queryType,
   }) {
-    // print("businessStatus: $businessStatus");
-    // print("openingHours: $openingHours");
-    // print("plusCode: $plusCode");
-    // print("photos: $photos");
-    // print("types: $types");
-    // print(types.runtimeType);
-    // print(photos == "no photos" ? photos : photos[0]['html_attributions'][0]);
-    // print("userRatingsTotal: $userRatingsTotal");
-    // print("vicinity: $vicinity");
-    // print("queryType: $queryType");
     final validatedOpeningHours = openingHours == "no opening hours"
         ? "Opening hours not listed for this place"
         : openingHours['open_now'] == true
@@ -138,8 +128,9 @@ class DateBuilderScreen extends StatelessWidget {
       ),
       child: Container(
         decoration: BoxDecoration(
-            color: Theme.of(context).hintColor,
-            borderRadius: BorderRadius.circular(15)),
+          color: const Color.fromARGB(255, 240, 240, 240),
+          borderRadius: BorderRadius.circular(15),
+        ),
         padding: const EdgeInsets.all(15),
         child: Column(
             mainAxisSize: MainAxisSize.max,
@@ -147,17 +138,21 @@ class DateBuilderScreen extends StatelessWidget {
             children: [
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text(businessStatus,
-                    style: const TextStyle(color: Colors.white)), // Top texts 1
+                    style: TextStyle(
+                        color: Theme.of(context).hintColor,
+                        fontWeight: FontWeight.w700)), // Top texts 1
                 Text(validatedOpeningHours,
-                    style: const TextStyle(color: Colors.white)) // Top texts 2
+                    style: TextStyle(
+                      color: Theme.of(context).hintColor,
+                    )) // Top texts 2
               ]),
 
               Padding(
                 padding: const EdgeInsets.only(top: 45, bottom: 15),
                 child: Text(name,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        color: Colors.white,
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor,
                         fontWeight: FontWeight.w700,
                         fontSize: 22)),
               ), // Center text name
@@ -213,60 +208,76 @@ class DateBuilderScreen extends StatelessWidget {
               ),
 
               Padding(
-                padding: const EdgeInsets.only(top: 15, bottom: 15),
+                padding: const EdgeInsets.only(top: 15, bottom: 8),
                 child: Text(
                   "Location: $vicinity",
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(
+                      color: Theme.of(context).hintColor,
+                      fontWeight: FontWeight.w700),
                 ),
               ),
 
               //// Location Button
               ///
               if (photos == "no photos")
-                const Text(
+                Text(
                   "Link is not listed for this place",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Theme.of(context).primaryColor),
                 ),
               if (photos != "no photos")
-                MaterialButton(
-                  color: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 18),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15)),
-                  onPressed: () async {
-                    final RegExp regex = RegExp(r'href="([^"]+)"');
-                    final match =
-                        regex.firstMatch(photos[0]['html_attributions'][0]);
-                    final String url = match?.group(1) ?? '';
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(colors: [
+                      Color.fromARGB(240, 240, 62, 62),
+                      Color.fromARGB(255, 250, 80, 68),
+                      Color.fromARGB(255, 248, 154, 117)
+                      // Color.fromARGB(209, 240, 62, 62),
+                      // Color.fromARGB(249, 223, 118, 99),
+                      // Color.fromARGB(255, 248, 170, 117)
+                    ], begin: Alignment.centerLeft, end: Alignment.centerRight),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: MaterialButton(
+                    textColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 18),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
+                    onPressed: () async {
+                      final RegExp regex = RegExp(r'href="([^"]+)"');
+                      final match =
+                          regex.firstMatch(photos[0]['html_attributions'][0]);
+                      final String url = match?.group(1) ?? '';
 
-                    final newUrl = Uri.parse(url);
-                    if (!await launchUrl(newUrl)) {
-                      throw Exception('Could not launch $newUrl');
-                    }
-                  },
-                  child: const Text(
-                    'More Details',
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
+                      final newUrl = Uri.parse(url);
+                      if (!await launchUrl(newUrl)) {
+                        throw Exception('Could not launch $newUrl');
+                      }
+                    },
+                    child: const Text(
+                      'More Details',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
+                    ),
                   ),
                 ),
-              Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: Wrap(
-                  alignment: WrapAlignment.spaceEvenly,
-                  spacing: 7,
-                  runSpacing: 2,
-                  children: [
-                    for (String type in types)
-                      Text(
-                        type,
-                        style: const TextStyle(
-                          color: Colors.white,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                      )
-                  ],
-                ),
-              )
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 15),
+              //   child: Wrap(
+              //     alignment: WrapAlignment.spaceEvenly,
+              //     spacing: 7,
+              //     runSpacing: 2,
+              //     children: [
+              //       for (String type in types)
+              //         Text(
+              //           type,
+              //           style: TextStyle(
+              //               color: Theme.of(context).hintColor,
+              //               fontWeight: FontWeight.w600),
+              //           overflow: TextOverflow.ellipsis,
+              //         )
+              //     ],
+              //   ),
+              // )
             ]),
       ),
     );
