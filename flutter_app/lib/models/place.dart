@@ -1,14 +1,14 @@
 class Place {
   final String name;
   final String businessStatus;
-  final String openingHours;
+  final dynamic openingHours;
   final String placeId;
-  final List plusCode;
-  final List photos;
+  final dynamic plusCode;
+  final dynamic photos;
   final List types;
-  final String rating;
-  final String userRatingsTotal;
-  final String vicinity;
+  final dynamic rating;
+  final dynamic userRatingsTotal;
+  final dynamic vicinity;
 
   Place({
     required this.name,
