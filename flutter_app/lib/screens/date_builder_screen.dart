@@ -61,9 +61,7 @@ class DateBuilderScreen extends StatelessWidget {
       ///
       body: Consumer<SuggestionsProvider>(
         builder: (context, value, child) {
-          print("In consumer");
-          print(value.status);
-          print(value.failedMessage);
+          print("In consumer ${value.status}");
           if (value.status == "failed") {
             return Center(child: Text(value.failedMessage!));
           } else if (value.status == "success") {

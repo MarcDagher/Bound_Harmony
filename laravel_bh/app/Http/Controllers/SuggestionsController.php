@@ -77,15 +77,22 @@ class SuggestionsController extends Controller
             }
     }
 
-    public function get_places_from_google_places($location, $radius, $type, $key){
-        $response = Http::get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$location&radius=$radius&types=$type&key=$key");
-        if ($response->successful()) {
-            $places_data = $response->json();
-            return response()->json($places_data);
-        } else {
-            $error = $response->json();
-            return response()->json($error, $response->status());
+    public function get_date_places($location, $radius, $list_of_interests, $key){
+        $date_places = ["bar", "restaurant", "movie_theater", "museum", "art gallery", "spa"];
+        $filtered_types = [];
+        foreach ($list_of_interests as $date){
+            if (in_array($date, $date_places)){array_push($filtered_types, $date);}
         }
+        $type = $filtered_types[array_rand($filtered_types, 1)];
+        return $type;
+        // $response = Http::get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$location&radius=$radius&types=$type&key=$key");
+        // if ($response->successful()) {
+        //     $places_data = $response->json();
+        //     return response()->json($places_data);
+        // } else {
+        //     $error = $response->json();
+        //     return response()->json($error, $response->status());
+        // }
     }
 
     // adds user's interests (data is from personal survey) - adds user's and partner's interests (data is from couples survey) 
@@ -161,14 +168,13 @@ class SuggestionsController extends Controller
 
         $location = '33.895234124742615%2C35.49990688179016'; // beirut
         $radius = '40000';
-        $type = $couples_combined_interests_without_duplicates[array_rand($couples_combined_interests_without_duplicates, 1)];
         $key = env("GOOGLE_PLACES_API_KEY");
 
-        // $places = $this -> get_places_from_google_places($location, $radius, $type, $key); // google places
+        $places = $this -> get_date_places($location, $radius, $couples_combined_interests_without_duplicates, $key); // google places
         // return $places;
         return response() -> json([
             "status" => "success",
-            "interests" => $couples_combined_interests_without_duplicates 
+            "interests" => $places
         ]);
         // location(longitude-latitude), a background color, a link to their place on google maps, name, open_now, place_id, types(resto, pub...), Vicinity.
         // value field we can display: icon_background_color, icon_mask_base_uri, name, types, vicinity
