@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -20,7 +21,7 @@ Route::controller(AuthController::class)->group(function () {
 
 // Admin page
 Route::middleware('auth.admin')->group(function () {
-     //
+     Route::get('/num_of_personal_surveys', [AdminController::class, 'get_number_of_personal_surveys']);
 });
 
 // Profile Page
