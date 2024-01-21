@@ -40,4 +40,28 @@ class AdminController extends Controller
             ]);
         }
     }
+
+    public function restore_deleted_user(Request $request){
+        $request -> validate([
+            'email' => 'required|email'
+        ]);
+
+        $user = User::withTrashed() -> where('email', $request -> email) -> first();
+        if($user){
+
+            $user -> restore();
+
+            return response() -> json([
+                'status' => 'success',
+                'message' => "user restored successfully",
+                'user' => $user
+            ]);
+
+        } else {
+            return response() -> json([
+                'status' => 'rejected',
+                'message' => "user doesn't exist"
+            ]);
+        }
+    }
 }
