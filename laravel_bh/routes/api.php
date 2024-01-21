@@ -24,7 +24,7 @@ Route::middleware('auth.admin')->group(function () {
      Route::post('/delete_user', [AdminController::class, 'delete_user']);
      Route::post('/restore_deleted_user', [AdminController::class, 'restore_deleted_user']);
      Route::get('/connection_and_surveys_stats', [AdminController::class, 'connection_and_surveys_stats']);
-     Route::get('/most_common_response', [AdminController::class, 'most_common_response']);
+     Route::get('/number_of_chosen_responses', [AdminController::class, 'number_of_chosen_responses']);
      Route::get('/users_age_range', [AdminController::class, 'users_age_range']);
 
     //  Route::get('/count_of_connection_status_type', [AdminController::class, 'count_of_connection_status_type']);

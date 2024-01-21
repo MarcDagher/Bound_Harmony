@@ -168,8 +168,8 @@ class AdminController extends Controller
     }
 
 
-
-    public function most_common_response(){
+    // returns the number of times each option was chosen
+    public function number_of_chosen_responses(){
         $responses = SurveyResponse::with('question', 'option') -> get(['question_id', 'option_id']);
         $divided_responses = [];
 
@@ -186,12 +186,11 @@ class AdminController extends Controller
             }
         }
 
-        // getting most common responses
-        $most_common_responses = [];
+        // getting the number of times each option was chosen
+        $number_of_options_chosen = [];
         foreach($divided_responses as $question => $response){
             $response_count = [];
 
-            /// finding the most common response in the array of response of the question
             for($i = 0; $i<count($response); $i++){
                 if (in_array($response[$i], array_keys($response_count))){
                     $response_count[$response[$i]] += 1;
@@ -199,23 +198,18 @@ class AdminController extends Controller
                     $response_count[$response[$i]] = 1;
                 }
             }
-
-            // after finding the most common answer, add it to the array
-            if (in_array($question, array_keys($most_common_responses))){
-                
-            } else {
-                $most_common_responses[$question] = $response_count;
-            }
+            // after string the options and their count, add it to the array    
+            $number_of_options_chosen[$question] = $response_count;
         }
-        return $most_common_responses;
         
         return response() -> json([
             'status' => 'success',
-            'divided responses' => $divided_responses
+            'Number of chosen responses' => $number_of_options_chosen
 
         ]);} catch (\Throwable $th){
             return response() -> json([
                 'status' => 'failed',
+                'message' => 'something went wrong',
                 'error' => $th -> getMessage()
             ]);
         }
