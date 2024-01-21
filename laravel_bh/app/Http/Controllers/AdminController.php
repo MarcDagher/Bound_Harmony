@@ -173,4 +173,8 @@ class AdminController extends Controller
         ]);
     }
 
+    public function number_of_accepted_connections_with_filled_couple_surveys () {
+        // query accepted connections
+        // query survey responses for connection id x.
+    }
 }
