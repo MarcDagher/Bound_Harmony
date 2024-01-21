@@ -69,7 +69,7 @@ class AdminController extends Controller
         try {
             $number_of_users = User::all();
             $survey_responses = SurveyResponse::where(["question_id" => 21]) -> orWhere(["question_id" => 1]) -> get();
-            $number_of_couples = Connection::where("status", "accepted") -> orWhere("status", "disconnected") -> get();
+            $connection_status_stats = $this -> count_of_connection_status_type();
 
             $couples_survey_responses = [];
             $personal_survey_responses = [];
@@ -81,13 +81,14 @@ class AdminController extends Controller
                     array_push($personal_survey_responses, $response);
                 }
             }
-            // return $couples_survey_responses;
-            //// Couple Survey - Personal Survey
             
             return response() -> json([
                 "status" => "success",
                 "number of users" => count($number_of_users),
-                "accepted-disconnected connections" => count($number_of_couples),
+                "pending connections" => $connection_status_stats['pending'],
+                "accepted connections" => $connection_status_stats['accepted'],
+                "disconnected connections" => $connection_status_stats['disconnected'],
+                "rejected connections" => $connection_status_stats['rejected'],
                 "Couple Survey Responses" => count($couples_survey_responses),
                 "Personal Survey Responses" => count($personal_survey_responses),
                 "All Survey Responses" => count($survey_responses)
@@ -157,14 +158,11 @@ class AdminController extends Controller
             if ($connection['status'] == "disconnected"){$count_of_disconnected_connections ++;};
             if ($connection['status'] == "pending"){$count_of_pending_connections ++;};
         }
-        return response() -> json([
-            "status" => "success",
-            "count of type" => [
+        return [
                 "accepted" => $count_of_accepted_connections, 
                 "rejected" => $count_of_rejected_connections, 
                 "disconnected" => $count_of_disconnected_connections, 
-                "pending" => $count_of_pending_connections]
-        ]);
+                "pending" => $count_of_pending_connections];
     }
 
 }
