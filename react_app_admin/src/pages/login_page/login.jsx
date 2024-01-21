@@ -17,6 +17,7 @@ const handle_change = (name, value) => {
 }
 
 const handle_submit = async (email, password) => {
+  
   try {
     const response = await send_request({
       route: "/login",
@@ -26,14 +27,19 @@ const handle_submit = async (email, password) => {
       },
       method: "POST"
     })
+
+    if (formData['email'] !== "admin123@hotmail.com"){
+      setSuccessMessage('')
+      setErrorMessage('Invalid Entry')
+    } else {
+      setErrorMessage('')
+      setSuccessMessage('success')
+      localStorage.setItem('token', response.data['authorisation']['token'])
+      localStorage.setItem('user_data', response.data['user'])
+      navigate('/admin')
+    }
     
     // console.log(response)
-    setErrorMessage('')
-    setSuccessMessage('success')
-    localStorage.setItem('token', response.data['authorisation']['token'])
-    localStorage.setItem('user_data', response.data['user'])
-
-    navigate('/admin')
     
   } catch (error) {
     setSuccessMessage('')
