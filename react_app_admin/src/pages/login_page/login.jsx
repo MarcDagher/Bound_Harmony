@@ -10,6 +10,7 @@ const [formData, setFormData] = useState({
 })
 const [errorMessage, setErrorMessage] = useState('')
 const [successMessage, setSuccessMessage] = useState('')
+const navigate = useNavigate()
 
 const handle_change = (name, value) => {
   setFormData((previous) =>  { return { ...previous, [name] : value}})
@@ -26,11 +27,21 @@ const handle_submit = async (email, password) => {
       method: "POST"
     })
     
-    console.log(response)
+    // console.log(response)
     setErrorMessage('')
     setSuccessMessage('success')
+    localStorage.setItem('token', response.data['authorisation']['token'])
+    localStorage.setItem('user_data', response.data['user'])
+
+    navigate('/admin')
+    
   } catch (error) {
-     setErrorMessage('Wrong credentials')
+    setSuccessMessage('')
+    if (formData['password'] === "" || formData['email'] === "") {
+      setErrorMessage('All fields are required')
+    } else {
+      setErrorMessage('Wrong credentials')
+    }
     console.log(`error in handle_submit ${error}`)
   }
 }
@@ -43,8 +54,8 @@ const handle_submit = async (email, password) => {
         <div className="box-container">
           <p>Welcome Back</p>
           <div className="input-container">
-            <input type="text" name="email" id="email" placeholder="email" onChange={(e) => handle_change("email", e.target.value)}/>
-            <input type="password" name="password" id="password" placeholder="password" onChange={(e) => handle_change("password", e.target.value)}/>
+            <input type="text" name="email" id="email" placeholder="email" onChange={(e) => {handle_change("email", e.target.value)}}/>
+            <input type="password" name="password" id="password" placeholder="password" onChange={(e) => {handle_change("password", e.target.value)}}/>
             {errorMessage !== "" ? <p className="error_message">{errorMessage}</p>  : null}
             {successMessage !== "" ? <p className="error_message">{successMessage}</p>  : null}
           </div>
