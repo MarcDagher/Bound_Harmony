@@ -15,10 +15,9 @@ const Admin = () => {
     pending_connections : '',
     rejected_connections : ''
   })
-  const [numberOfChosenResponses, setnumberOfChosenResponses] = useState({})
+  const [numberOfChosenResponses, setnumberOfChosenResponses] = useState()
 
   useEffect(() => {
-    console.log("hello")
     try {
       const response = send_request({
         body:{},
@@ -52,8 +51,10 @@ const Admin = () => {
       route: '/number_of_chosen_responses', 
       headerValue: `Bearer ${token}`, 
       method: "GET"}).then((value) => {
-        console.log(value.data)
-
+        // console.log(value.data)
+        const array = value.data['Number of chosen responses']
+        setnumberOfChosenResponses(value.data['Number of chosen responses'])
+        // console.log(numberOfChosenResponses)
       })
   }, [token])
 
