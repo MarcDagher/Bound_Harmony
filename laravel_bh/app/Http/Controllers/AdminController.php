@@ -7,6 +7,7 @@ use App\Models\Connection;
 use App\Models\SurveyResponse;
 use App\Models\User;
 use App\Models\UserPrompt;
+use Dotenv\Repository\RepositoryInterface;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -148,8 +149,28 @@ class AdminController extends Controller
         }
     }
 
-    public function count_of_connection_status_type(Request $request){
+    public function count_of_connection_status_type(){
+        $array_of_connections = Connection::all();
+        
+        $count_of_accepted_connections = 0;
+        $count_of_rejected_connections = 0;
+        $count_of_disconnected_connections = 0;
+        $count_of_pending_connections = 0;
 
+        foreach ($array_of_connections as $connection) {
+            if ($connection['status'] == "accepted"){$count_of_accepted_connections ++;};
+            if ($connection['status'] == "rejected"){$count_of_rejected_connections ++;};
+            if ($connection['status'] == "disconnected"){$count_of_disconnected_connections ++;};
+            if ($connection['status'] == "pending"){$count_of_pending_connections ++;};
+        }
+        return response() -> json([
+            "status" => "success",
+            "count of type" => [
+                "accepted" => $count_of_accepted_connections, 
+                "rejected" => $count_of_rejected_connections, 
+                "disconnected" => $count_of_disconnected_connections, 
+                "pending" => $count_of_pending_connections]
+        ]);
     }
 
 }
