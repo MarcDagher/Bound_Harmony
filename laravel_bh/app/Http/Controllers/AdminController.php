@@ -61,10 +61,8 @@ class AdminController extends Controller
         }
     }
 
-    // query answer where: find one question. That will count as a survey completed 
+     
     public function user_connection_surveys_stats (){
-        // get number of users - get number of answered(type)surveys 
-
         
         try {
             $number_of_users = User::all();
@@ -85,6 +83,7 @@ class AdminController extends Controller
             return response() -> json([
                 "status" => "success",
                 "number of users" => count($number_of_users),
+                "number of connections" => $connection_status_stats['number of connections'],
                 "pending connections" => $connection_status_stats['pending'],
                 "accepted connections" => $connection_status_stats['accepted'],
                 "disconnected connections" => $connection_status_stats['disconnected'],
@@ -159,6 +158,7 @@ class AdminController extends Controller
             if ($connection['status'] == "pending"){$count_of_pending_connections ++;};
         }
         return [
+                "number of connections" => count($array_of_connections),
                 "accepted" => $count_of_accepted_connections, 
                 "rejected" => $count_of_rejected_connections, 
                 "disconnected" => $count_of_disconnected_connections, 
