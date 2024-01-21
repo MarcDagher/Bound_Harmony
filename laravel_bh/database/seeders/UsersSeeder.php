@@ -48,6 +48,7 @@ class UsersSeeder extends Seeder
             "email" => "riyad@gmail.com",
             "password" => Hash::make("123456"),
             "birthdate" => "2001-01-15",
+            "connection_status" => "true"
         ]);
         
         User::create([
@@ -115,6 +116,7 @@ class UsersSeeder extends Seeder
             "email" => "pia@hotmail.com",
             "password" => Hash::make("123456"),
             "birthdate" => "2001-01-15",
+            "connection_status" => "true"
         ]);
 
         User::create([
