@@ -110,30 +110,43 @@ class AdminController extends Controller
     public function most_common_response(){
         $responses = SurveyResponse::with('question', 'option') -> get(['question_id', 'option_id']);
         $divided_responses = [];
+        $most_common_responses =[];
 
         try {
+        // organinzing queried responses in an array    
         foreach($responses as $response){
             $option = $response['option']['option'];
             $question = $response['question']['question'];
-
             if (in_array($question, array_keys($divided_responses))){
-
                 array_push($divided_responses[$question], $option);
-
             } else {
                 $divided_responses[$question] = [$option];
             }
+        }
+
+        // getting most common responses
+        foreach($divided_responses as $question => $response){
+
+            // $response_count = ['count' => 0, 'index' => 0];
+
+            // for ($i = 0; $i < count($response); $i ++){
+            //     $count = count($response[$i]);
+            //     if ($count > $response_count['count']){$response_count['count'] = $count; $response_count['index'] = $i;}
+            // }
+            // return $response_count;
         }
         
         return response() -> json([
             'status' => 'success',
             'divided responses' => $divided_responses
-            
+
         ]);} catch (\Throwable $th){
             return response() -> json([
                 'status' => 'failed',
-                'error' => $th
+                'error' => $th -> getMessage()
             ]);
         }
     }
+
+    
 }
