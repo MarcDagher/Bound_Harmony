@@ -25,7 +25,7 @@ const Admin = () => {
   })
 
   const getConnectionAndSurveyStats = async () => {
-    const response = await send_request({
+     await send_request({
       body:{},
       route: '/connection_and_surveys_stats',
       method: 'GET',
@@ -45,6 +45,18 @@ const Admin = () => {
       })
     })
   }
+
+  const getNumberOfChosenResponses = async () => {
+    await send_request({
+      body: {}, 
+      route: '/number_of_chosen_responses', 
+      headerValue: `Bearer ${token}`, 
+      method: "GET"}).then((value) => {
+        
+        setnumberOfChosenResponses(value.data['Number of chosen responses'])
+      })
+  }
+  
   ///connection_and_surveys_stats
   useEffect(() => {
     try {
@@ -57,16 +69,14 @@ const Admin = () => {
 
   // number_of_chosen_responses
   useEffect(() => {
-    const response = send_request({
-      body: {}, 
-      route: '/number_of_chosen_responses', 
-      headerValue: `Bearer ${token}`, 
-      method: "GET"}).then((value) => {
-        // console.log(value.data)
-        const array = value.data['Number of chosen responses']
-        setnumberOfChosenResponses(value.data['Number of chosen responses'])
-        console.log(numberOfChosenResponses)
-      })
+    try {
+      getNumberOfChosenResponses()
+      console.log("in numberOfChosenResponses")
+      console.log(numberOfChosenResponses)
+    } catch (error) {
+      console.log(error)
+    }
+    
   }, [token])
 
   useEffect(() => {
