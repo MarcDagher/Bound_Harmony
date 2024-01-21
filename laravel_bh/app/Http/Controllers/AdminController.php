@@ -65,11 +65,38 @@ class AdminController extends Controller
         }
     }
 
-    // query answer where: user_id - survey_id - question_id because a survey cant be misssing a question. so find one question, that will count as a survey completed 
-    public function number_of_completed_surveys (){
-        $personal_survey_responses = SurveyResponse::where(["survey_id" =>  1, "question_id" => 1]) -> get();
-        $couples_survey_responses = SurveyResponse::where(["survey_id" =>  2, "question_id" => 21]) -> get();
-        echo $personal_survey_responses;
+    // query answer where: find one question. That will count as a survey completed 
+    public function number_of_completed_surveys (Request $request){
+
+        $request -> validate([
+            'type' => 'required|string|in:couple,personal,all'
+        ]);
+        
+        try {if ($request -> type == "couple"){
+            $couples_survey_responses = SurveyResponse::where(["survey_id" =>  2, "question_id" => 21]) -> get();
+            return response() -> json([
+                "status" => "success",
+                "Couple Survey Responses" => count($couples_survey_responses)
+            ]);
+        } else if ($request -> type == "personal"){
+            $personal_survey_responses = SurveyResponse::where(["survey_id" =>  1, "question_id" => 1]) -> get();
+            return response() -> json([
+                "status" => "success",
+                "Personal Survey Responses" => count($personal_survey_responses)
+            ]);
+        } else if ($request -> type == "all"){
+            $number_of_responses = SurveyResponse::where("question_id", 1) -> orWhere("question_id", 21) -> get();
+            return response() -> json([
+                "status" => "success",
+                "Couple Survey Responses" => count($number_of_responses)
+            ]);
+        }} catch (\Throwable $th) {
+             return response() -> json([
+                "status" => "failed",
+                "message" => "something went wrong",
+                "error" => $th
+             ]);
+        }
     }
 
 }
