@@ -125,6 +125,13 @@ class AdminController extends Controller
                 "pending" => $count_of_pending_connections];
     }
 
+    public function users_age_range(){
+        $users = User::all();
+        echo "hello";
+    }
+
+
+
     public function most_common_response(){
         $responses = SurveyResponse::with('question', 'option') -> get(['question_id', 'option_id']);
         $divided_responses = [];

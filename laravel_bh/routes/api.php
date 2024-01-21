@@ -25,7 +25,9 @@ Route::middleware('auth.admin')->group(function () {
      Route::post('/restore_deleted_user', [AdminController::class, 'restore_deleted_user']);
      Route::get('/user_connection_surveys_stats', [AdminController::class, 'user_connection_surveys_stats']);
      Route::get('/most_common_response', [AdminController::class, 'most_common_response']);
-     Route::get('/count_of_connection_status_type', [AdminController::class, 'count_of_connection_status_type']);
+     Route::get('/users_age_range', [AdminController::class, 'users_age_range']);
+
+    //  Route::get('/count_of_connection_status_type', [AdminController::class, 'count_of_connection_status_type']);
 });
 
 // Profile Page
