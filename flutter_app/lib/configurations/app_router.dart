@@ -56,7 +56,7 @@ class AppNavigation {
       // initialLocation: '/login/connectionSetup',
       initialLocation: '/login',
       // turn true and check debug console for routes
-      debugLogDiagnostics: true,
+      debugLogDiagnostics: false,
 
       /// route congiguration
       ///
