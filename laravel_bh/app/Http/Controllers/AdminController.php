@@ -72,9 +72,11 @@ class AdminController extends Controller
         try {
             if ($request -> type == "couple"){
             $couples_survey_responses = SurveyResponse::where(["survey_id" =>  2, "question_id" => 21]) -> get();
+            $number_of_couples = Connection::where("status", "accepted") -> orWhere("status", "disconnected") -> get();
             return response() -> json([
                 "status" => "success",
                 "number of users" => count($number_of_users),
+                "accepted-disconnected connections" => count($number_of_couples),
                 "Couple Survey Responses" => count($couples_survey_responses)
             ]);
 
