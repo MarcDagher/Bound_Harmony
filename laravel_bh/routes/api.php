@@ -26,7 +26,6 @@ Route::middleware('auth.admin')->group(function () {
      Route::get('/number_of_completed_surveys', [AdminController::class, 'number_of_completed_surveys']);
      Route::get('/most_common_response', [AdminController::class, 'most_common_response']);
      Route::get('/count_of_connection_status_type', [AdminController::class, 'count_of_connection_status_type']);
-     Route::get('/number_of_accepted_connections_with_filled_couple_surveys', [AdminController::class, 'number_of_accepted_connections_with_filled_couple_surveys']);
 });
 
 // Profile Page

@@ -63,6 +63,8 @@ class AdminController extends Controller
 
     // query answer where: find one question. That will count as a survey completed 
     public function number_of_completed_surveys (Request $request){
+        // get number of users - get number of answered(type)surveys 
+
 
         $request -> validate([
             'type' => 'required|string|in:couple,personal,all'
@@ -74,6 +76,8 @@ class AdminController extends Controller
             if ($request -> type == "couple"){
             $couples_survey_responses = SurveyResponse::where(["survey_id" =>  2, "question_id" => 21]) -> get();
             $number_of_couples = Connection::where("status", "accepted") -> orWhere("status", "disconnected") -> get();
+            
+
             return response() -> json([
                 "status" => "success",
                 "number of users" => count($number_of_users),
@@ -96,7 +100,7 @@ class AdminController extends Controller
             return response() -> json([
                 "status" => "success",
                 "number of users" => count($number_of_users),
-                "Couple Survey Responses" => count($number_of_responses)
+                "All Survey Responses" => count($number_of_responses)
             ]);
 
         }} catch (\Throwable $th) {
@@ -173,8 +177,4 @@ class AdminController extends Controller
         ]);
     }
 
-    public function number_of_accepted_connections_with_filled_couple_surveys () {
-        // query accepted connections
-        // query survey responses for connection id x.
-    }
 }
