@@ -85,3 +85,9 @@
   font-weight: 700;
   font-size: 40px;
 }
+
+.error_message{
+  text-align: center;
+  color: rgb(228, 63, 57);
+  padding-top: 5px;
+}

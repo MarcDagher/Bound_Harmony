@@ -1,34 +1,39 @@
 import { useState } from "react"
 import send_request from "../../configurations/request_function"
 import "./login.css"
+import { useNavigate } from "react-router-dom"
 const Login = () => {
 
 const [formData, setFormData] = useState({
   email : "",
   password : ""
 })
+const [errorMessage, setErrorMessage] = useState('')
+const [successMessage, setSuccessMessage] = useState('')
 
 const handle_change = (name, value) => {
   setFormData((previous) =>  { return { ...previous, [name] : value}})
 }
 
 const handle_submit = async (email, password) => {
-  console.log("in button")
-  const response = await send_request({
-
-    route: "/login",
-    body: {
-      'email' : email,
-      'password' : password
-    },
-    method: "POST"
-
-  })
-  
-  console.log(response)
+  try {
+    const response = await send_request({
+      route: "/login",
+      body: {
+        'email' : email,
+        'password' : password
+      },
+      method: "POST"
+    })
+    
+    console.log(response)
+    setErrorMessage('')
+    setSuccessMessage('success')
+  } catch (error) {
+     setErrorMessage('Wrong credentials')
+    console.log(`error in handle_submit ${error}`)
+  }
 }
-  
-
 
   return <>
   <div className="wrapper">
@@ -40,6 +45,8 @@ const handle_submit = async (email, password) => {
           <div className="input-container">
             <input type="text" name="email" id="email" placeholder="email" onChange={(e) => handle_change("email", e.target.value)}/>
             <input type="password" name="password" id="password" placeholder="password" onChange={(e) => handle_change("password", e.target.value)}/>
+            {errorMessage !== "" ? <p className="error_message">{errorMessage}</p>  : null}
+            {successMessage !== "" ? <p className="error_message">{successMessage}</p>  : null}
           </div>
           <button type="button" onClick={ () => handle_submit(formData['email'], formData['password']) }>Log In</button>
         </div>
