@@ -62,7 +62,7 @@ class AdminController extends Controller
     }
 
     // query answer where: find one question. That will count as a survey completed 
-    public function number_of_completed_surveys (){
+    public function user_connection_surveys_stats (){
         // get number of users - get number of answered(type)surveys 
 
         

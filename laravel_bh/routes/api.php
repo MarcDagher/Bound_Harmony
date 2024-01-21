@@ -23,7 +23,7 @@ Route::controller(AuthController::class)->group(function () {
 Route::middleware('auth.admin')->group(function () {
      Route::post('/delete_user', [AdminController::class, 'delete_user']);
      Route::post('/restore_deleted_user', [AdminController::class, 'restore_deleted_user']);
-     Route::get('/number_of_completed_surveys', [AdminController::class, 'number_of_completed_surveys']);
+     Route::get('/user_connection_surveys_stats', [AdminController::class, 'user_connection_surveys_stats']);
      Route::get('/most_common_response', [AdminController::class, 'most_common_response']);
      Route::get('/count_of_connection_status_type', [AdminController::class, 'count_of_connection_status_type']);
 });
