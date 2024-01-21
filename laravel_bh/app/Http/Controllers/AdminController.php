@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AiResponse;
 use App\Models\Connection;
 use App\Models\SurveyResponse;
 use App\Models\User;
+use App\Models\UserPrompt;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -22,12 +24,6 @@ class AdminController extends Controller
 
         $user = User::where('email', $request -> email) -> first();
         if($user){
-            $connections = Connection::where('requester', $user -> id) -> orWhere('responder', $user -> id) -> get();
-            // $survey_responses = SurveyResponse::where('user_id', $user -> id);
-            // foreach ($connections as $connection){
-            //     // $connection -> delete();
-            //     echo $connection;
-            // }
 
             $user -> delete();
 
