@@ -73,11 +73,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   background-color: rgb(228, 63, 57);
   height: 100%;
-  width: 55%;
+  width: 45%;
   min-height: 100vh;
+  padding-top: 50px;
+  gap: 25px;
 }
 
 .image-container-box{
@@ -86,6 +88,12 @@
   font-size: 40px;
 }
 
+.image-container-box > img{
+  background-color: white;
+  padding: 5px;
+  border: none;
+  border-radius: 20px;
+}
 .error_message{
   text-align: center;
   color: rgb(228, 63, 57);

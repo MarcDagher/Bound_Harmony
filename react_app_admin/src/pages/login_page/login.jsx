@@ -63,7 +63,7 @@ const handle_submit = async (email, password) => {
         </div>
 
         <div className="image-container-box">
-          <img src="../../../public/Logo2.png" alt="img" />
+          <img src="/Logo2.png" alt="img" />
           <div className="image-container">
             <p>Bound Harmony</p>
           </div>
