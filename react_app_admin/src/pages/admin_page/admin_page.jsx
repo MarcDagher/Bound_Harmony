@@ -3,7 +3,6 @@ import './admin_page.css';
 import send_request from "../../configurations/request_function";
 
 const Admin = () => {
-  const token = localStorage.getItem('token')
 
   const [connectionAndSurveyStats, setconnectionAndSurveyStats] = useState({
     all_survey_responses : '',
@@ -57,10 +56,31 @@ const Admin = () => {
       })
   }
   
+  const getUsersAgeRange = async () => {
+    await send_request({
+      body:{},
+      route: '/users_age_range',
+      method: 'GET',
+      headerValue: `Bearer ${token}`
+    }).then((value) => {
+      // console.log(value.data)
+      setUsersAgeRange({
+        above_35 : value.data['above_35'],
+        below_18 : value.data['below_18'],
+        between_18_and_24 : value.data['between_18_and_24'],
+        between_24_and_35 : value.data['between_24_and_35'],
+        total_users : value.data['total users'],
+      })
+
+    })
+  }
+  
+  const token = localStorage.getItem('token')
   ///connection_and_surveys_stats
   useEffect(() => {
     try {
       getConnectionAndSurveyStats()
+      console.log("in connectionAndSurveyStats")
       console.log(connectionAndSurveyStats)
     } catch (error) {
       console.log(error)
@@ -68,7 +88,7 @@ const Admin = () => {
   } ,[token])
 
   // number_of_chosen_responses
-  useEffect(() => {
+  useEffect(()  => {
     try {
       getNumberOfChosenResponses()
       console.log("in numberOfChosenResponses")
@@ -78,26 +98,12 @@ const Admin = () => {
     }
     
   }, [token])
-
-  useEffect(() => {
+ 
+  // user age range
+  useEffect( () => {
     try {
-      const response = send_request({
-        body:{},
-        route: '/users_age_range',
-        method: 'GET',
-        headerValue: `Bearer ${token}`
-      }).then((value) => {
-        // console.log(value.data)
-        setUsersAgeRange({
-          above_35 : value.data['above_35'],
-          below_18 : value.data['below_18'],
-          between_18_and_24 : value.data['between_18_and_24'],
-          between_24_and_35 : value.data['between_24_and_35'],
-          total_users : value.data['total users'],
-        })
-
-      })
-      // console.log("we are here")
+      getUsersAgeRange()
+      console.log("in user age range")
       console.log(usersAgeRange)
     } catch (error) {
       console.log(error)
