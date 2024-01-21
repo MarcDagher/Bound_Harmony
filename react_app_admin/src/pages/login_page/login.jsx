@@ -1,5 +1,26 @@
+import { useState } from "react"
+import send_request from "../../configurations/request_function"
 import "./login.css"
 const Login = () => {
+
+const [formData, setFormData] = useState({
+  email : "",
+  password : ""
+})
+
+const handle_change = (name, value) => {
+  setFormData((previous) =>  { return { ...previous, [name] : value}})
+  console.log(formData)
+}
+
+const handle_submit = async () => {
+  await send_request({
+    route: "/login",
+    body: {},
+    method: "POST"
+  })
+}
+  
 
 
   return <>
@@ -8,16 +29,16 @@ const Login = () => {
     <div className="container">
 
         <div className="box-container">
-          <p>Log In</p>
+          <p>Welcome Back</p>
           <div className="input-container">
-            <input type="text" name="email" id="email" placeholder="email"/>
-            <input type="password" name="password" id="password" placeholder="password"/>
+            <input type="text" name="email" id="email" placeholder="email" onChange={(e) => handle_change("email", e.target.value)}/>
+            <input type="password" name="password" id="password" placeholder="password" onChange={(e) => handle_change("password", e.target.value)}/>
           </div>
           <button type="button">Log In</button>
         </div>
 
         <div className="image-container-box">
-          <img src="../.././public/Logo 2.png" alt="img" />
+          <img src="../../../public/Logo2.png" alt="img" />
           <div className="image-container">
             <p>Bound Harmony</p>
           </div>
