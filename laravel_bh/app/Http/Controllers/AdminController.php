@@ -88,7 +88,7 @@ class AdminController extends Controller
     }
 
      
-    public function user_connection_surveys_stats (){
+    public function connection_and_surveys_stats (){
         
         try {
             // $number_of_users = User::all();
