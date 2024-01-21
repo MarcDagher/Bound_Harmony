@@ -86,9 +86,11 @@ class UserProvider extends ChangeNotifier {
           options: Options(
               headers: {"authorization": "Bearer $token"},
               contentType: "application/json"));
-      // print("in getImage response: ${response.data}");
+
+      print("in getImage response: ${response.data}");
+
       final image = base64Decode(response.data["image"]);
-      // print("in getImage response: $image");
+      print(image);
     } on DioException catch (error) {
       print("in getImage: ${error}");
     }

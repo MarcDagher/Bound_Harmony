@@ -49,22 +49,25 @@ class MessagesProvider extends ChangeNotifier {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     final token = preferences.get('token');
     try {
+      conversation.add(userMessage);
+      notifyListeners();
       final response = await _dio.post(
         '${Requests.baseUrl}/save_user_prompt',
         data: {"prompt": userMessage.text},
         options: Options(headers: {"authorization": "Bearer $token"}),
       );
-      conversation.add(userMessage);
-      notifyListeners();
+
       if (response.data["status"] == "success") {
         somethingWentWrong = "";
         conversation.add(Message(
             text: response.data["ai_response"],
             date: DateTime.now(),
             isSentByMe: false));
+        notifyListeners();
       }
     } on DioException catch (error) {
       print("In sendMessage() error: $error");
+      conversation.remove(userMessage);
       somethingWentWrong = "Something went worng, please try sending again";
       notifyListeners();
     }

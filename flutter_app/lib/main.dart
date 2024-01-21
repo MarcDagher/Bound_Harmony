@@ -6,6 +6,7 @@ import 'package:bound_harmony/providers/suggestions_provider.dart';
 import 'package:bound_harmony/providers/survey_provider.dart';
 import 'package:bound_harmony/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 void main() {

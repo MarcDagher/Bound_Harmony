@@ -185,15 +185,10 @@ class _AdviceScreenState extends State<AdviceScreen> {
                               text: inputController.text,
                               date: DateTime.now(),
                               isSentByMe: true);
+                          inputController.clear();
                           await context
                               .read<MessagesProvider>()
                               .sendMessage(message);
-                          if (context
-                              .read<MessagesProvider>()
-                              .somethingWentWrong
-                              .isEmpty) {
-                            inputController.clear();
-                          }
                         }
                       },
                     ),

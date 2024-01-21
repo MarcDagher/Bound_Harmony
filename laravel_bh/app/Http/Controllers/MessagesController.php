@@ -76,7 +76,7 @@ class MessagesController extends Controller
                 ["role"=> "system", "content" => $system_config], 
                 ["role"=> "user", "content" => $user_prompt],
             ],
-            'max_tokens' => 3000, 
+            'max_tokens' => 2000, 
         ]);
         return $result;
     }
