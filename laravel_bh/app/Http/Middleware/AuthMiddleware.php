@@ -17,7 +17,7 @@ class AuthMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $user = Auth::user();
-        if($user -> role_id == 2){
+        if($user && $user -> role_id == 2){
             return response()->json([
                 'status' => "failed",
                 "message" => "Wrong Credentials"

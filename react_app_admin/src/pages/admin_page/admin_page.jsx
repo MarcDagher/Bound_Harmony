@@ -1,20 +1,52 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import './admin_page.css';
 import send_request from "../../configurations/request_function";
+
 const Admin = () => {
+  const token = localStorage.getItem('token')
 
+  const [connectionAndSurveyStats, setconnectionAndSurveyStats] = useState({
+    all_survey_responses : '',
+    couple_survey_responses : '',
+    personal_survey_responses : '',
+    accepted_connections : '',
+    disconnected_connections : '',
+    number_of_connections : '',
+    pending_connections : '',
+    rejected_connections : ''
+  })
 
-  const handle_request = async () => {
-    const response = await send_request({
-      route: "/users_age_range",
-      method: "GET",
-      body: ""
-    }).then().catch()
+  useEffect(() => {
+    console.log("hello")
+    try {
+      const response = send_request({
+        body:{},
+        route: '/connection_and_surveys_stats',
+        method: 'GET',
+        headerValue: `Bearer ${token}`
+      })
+      .then((value) => {
+        console.log(value.data)
+        setconnectionAndSurveyStats({
+          number_of_connections : value.data['number of connections'] ,
+          accepted_connections : value.data['accepted connections'],
+          all_survey_responses : value.data['All Survey Responses'],
+          couple_survey_responses : value.data['Couple Survey Responses'],
+          disconnected_connections : value.data['disconnected connections'],
+          pending_connections : value.data['pending connections'],
+          personal_survey_responses : value.data['Personal Survey Responses'],
+          rejected_connections : value.data['rejected connections'],
+        })
+        // console.log(connectionAndSurveyStats)
+      })
 
-    console.log(response)
-    return response
-  }
+    } catch (error) {
+      console.log(error)
+    }
+  } ,[token])
+
+  
+  
 
   return <>
     <p>Hello</p>

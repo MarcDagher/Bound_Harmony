@@ -2,14 +2,14 @@ import axios from "axios";
 
 
 // axios.defaults.baseURL = "http://192.168.1.66:8000/api";
-const send_request = async ({route, method = "GET", body}) => {
+const send_request = async ({route, method = "GET", body , headerValue}) => {
   try {
 
       const response = axios.request( {
         url: `http://192.168.1.66:8000/api${route}`,
         method: method,
         data: body,
-        headers: {"Content-Type" : "application/json"}
+        headers: {"Content-Type" : "application/json", "Authorization" : headerValue}
       } );
       return response;    
 
