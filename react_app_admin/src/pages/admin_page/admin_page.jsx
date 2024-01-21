@@ -16,7 +16,14 @@ const Admin = () => {
     rejected_connections : ''
   })
   const [numberOfChosenResponses, setnumberOfChosenResponses] = useState()
-
+  const [usersAgeRange, setUsersAgeRange] = useState({
+    above_35 : 0,
+    below_18 : 0,
+    between_18_and_24 : 0,
+    between_24_and_35 : 0,
+    total_users : 0,
+  })
+  ///connection_and_surveys_stats
   useEffect(() => {
     try {
       const response = send_request({
@@ -45,6 +52,7 @@ const Admin = () => {
     }
   } ,[token])
 
+  // number_of_chosen_responses
   useEffect(() => {
     const response = send_request({
       body: {}, 
@@ -58,7 +66,30 @@ const Admin = () => {
       })
   }, [token])
 
-  
+  useEffect(() => {
+    try {
+      const response = send_request({
+        body:{},
+        route: '/users_age_range',
+        method: 'GET',
+        headerValue: `Bearer ${token}`
+      }).then((value) => {
+        // console.log(value.data)
+        setUsersAgeRange({
+          above_35 : value.data['above_35'],
+          below_18 : value.data['below_18'],
+          between_18_and_24 : value.data['between_18_and_24'],
+          between_24_and_35 : value.data['between_24_and_35'],
+          total_users : value.data['total users'],
+        })
+        // setUsersAgeRange(value.data)
+      })
+      // console.log("we are here")
+      // console.log(usersAgeRange)
+    } catch (error) {
+      console.log(error)
+    }
+  },[token])
 
   return <>
     <p>Hello</p>
