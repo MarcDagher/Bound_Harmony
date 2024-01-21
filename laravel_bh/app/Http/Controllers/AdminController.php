@@ -64,4 +64,12 @@ class AdminController extends Controller
             ]);
         }
     }
+
+    // query answer where: user_id - survey_id - question_id because a survey cant be misssing a question. so find one question, that will count as a survey completed 
+    public function number_of_completed_surveys (){
+        $personal_survey_responses = SurveyResponse::where(["survey_id" =>  1, "question_id" => 1]) -> get();
+        $couples_survey_responses = SurveyResponse::where(["survey_id" =>  2, "question_id" => 21]) -> get();
+        echo $personal_survey_responses;
+    }
+
 }

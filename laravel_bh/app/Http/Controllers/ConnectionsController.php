@@ -21,45 +21,45 @@ class ConnectionsController extends Controller
                                 -> where (function ($query) use ($user)  {
                                 $query -> where('requester', $user->id)-> orWhere('responder', $user->id);}) 
                                 -> get();
-
-        if (isset($connections[0])) {
-            $response_array = [];
-
-            foreach ($connections as $connection){
-                // if user is the requester
-                if ($connection['requester'] == $user -> id) {
-                    // partner is responder so add responder
-                    $response_array[] = [
-                        "id" => $connection -> id,
-                        "partner_name" => $connection['responder_user']['username'],
-                        "partner_email" => $connection['responder_user']['email'],
-                        "user_name" => $connection['requester_user']['username'],
-                        "status" => $connection->status
-                    ]; 
-
-                    // if user is the responder
-                } elseif ($connection['responder'] == $user -> id) {
-                    // partner is requester so add requester
-                    $response_array[] = [
-                        "id" => $connection -> id,
-                        "partner_name" => $connection['requester_user']['username'],
-                        "partner_email" => $connection['requester_user']['email'],
-                        "user_name" => $connection['responder_user']['username'],
-                        "status" => $connection->status
-                    ];
+                                
+            if (isset($connections[0])) {
+                $response_array = [];
+    
+                foreach ($connections as $connection){
+                    // if user is the requester
+                    if ($connection['requester'] == $user -> id) {
+                        // partner is responder so add responder
+                        $response_array[] = [
+                            "id" => $connection -> id,
+                            "partner_name" => $connection['responder_user']['username'],
+                            "partner_email" => $connection['responder_user']['email'],
+                            "user_name" => $connection['requester_user']['username'],
+                            "status" => $connection->status
+                        ]; 
+    
+                        // if user is the responder
+                    } elseif ($connection['responder'] == $user -> id) {
+                        // partner is requester so add requester
+                        $response_array[] = [
+                            "id" => $connection -> id,
+                            "partner_name" => $connection['requester_user']['username'],
+                            "partner_email" => $connection['requester_user']['email'],
+                            "user_name" => $connection['responder_user']['username'],
+                            "status" => $connection->status
+                        ];
+                    }
                 }
-            }
-
-            return response()->json([
-                "status" => 'success',
-                "connections" => $response_array
-            ]);
-        } else {
-            return response()->json([
-                "status" => "failed",
-                "message" => "You don't have any past or current connections"
-            ]);
-        } 
+    
+                return response()->json([
+                    "status" => 'success',
+                    "connections" => $response_array
+                ]);
+            } else {
+                return response()->json([
+                    "status" => "failed",
+                    "message" => "You don't have any past or current connections"
+                ]);
+            } 
 
     }
 

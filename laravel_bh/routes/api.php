@@ -24,6 +24,7 @@ Route::middleware('auth.admin')->group(function () {
      Route::get('/num_of_personal_surveys', [AdminController::class, 'get_number_of_personal_surveys']);
      Route::post('/delete_user', [AdminController::class, 'delete_user']);
      Route::post('/restore_deleted_user', [AdminController::class, 'restore_deleted_user']);
+     Route::get('/number_of_completed_surveys', [AdminController::class, 'number_of_completed_surveys']);
 });
 
 // Profile Page
