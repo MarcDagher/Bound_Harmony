@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('responder');
             $table->enum('status', ['pending', 'accepted', 'rejected', 'disconnected'])->default('pending');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('requester')->references('id')->on('users');
             $table->foreign('responder')->references('id')->on('users');

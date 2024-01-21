@@ -21,6 +21,7 @@ return new class extends Migration
             $table -> unsignedBigInteger('option_id');
             $table -> string('text_input') -> nullable();
             $table -> timestamps();
+            $table->softDeletes();
 
             $table -> foreign('user_id') -> references('id') -> on('users');
             $table -> foreign('survey_id') -> references('id') -> on('surveys');

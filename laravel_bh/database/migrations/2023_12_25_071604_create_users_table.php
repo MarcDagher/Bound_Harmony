@@ -25,6 +25,7 @@ return new class extends Migration
             $table->enum('couple_survey_status', ['complete', 'incomplete'])->default('incomplete');
             $table->enum('personal_survey_status', ['complete', 'incomplete'])->default('incomplete');
             $table->timestamps();
+            $table->softDeletes();
             
             $table->foreign('role_id')->references('id')->on('roles');
         });

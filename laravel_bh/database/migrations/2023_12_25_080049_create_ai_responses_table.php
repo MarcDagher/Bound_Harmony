@@ -17,6 +17,7 @@ return new class extends Migration
             $table -> unsignedBigInteger('user_prompt_id');
             $table -> longText('response');
             $table -> timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_prompt_id')->references('id')->on('user_prompts');
             $table->foreign('user_id')->references('id')->on('users');
