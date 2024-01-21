@@ -148,5 +148,8 @@ class AdminController extends Controller
         }
     }
 
-    
+    public function count_of_connection_status_type(Request $request){
+
+    }
+
 }
