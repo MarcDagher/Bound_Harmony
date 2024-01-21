@@ -107,5 +107,7 @@ class AdminController extends Controller
         }
     }
 
-
+    public function most_common_response(){
+        
+    }
 }
