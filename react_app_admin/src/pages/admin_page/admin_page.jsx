@@ -26,7 +26,7 @@ const Admin = () => {
         headerValue: `Bearer ${token}`
       })
       .then((value) => {
-        console.log(value.data)
+        // console.log(value.data)
         setconnectionAndSurveyStats({
           number_of_connections : value.data['number of connections'] ,
           accepted_connections : value.data['accepted connections'],
@@ -45,7 +45,14 @@ const Admin = () => {
     }
   } ,[token])
 
-  
+  useEffect(() => {
+    const response = send_request({
+      body: {}, 
+      route: '/number_of_chosen_responses', 
+      headerValue: `Bearer ${token}`, 
+      method: "GET"}).then((value) => console.log(value.data))
+  }, [token])
+
   
 
   return <>
