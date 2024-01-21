@@ -62,48 +62,38 @@ class AdminController extends Controller
     }
 
     // query answer where: find one question. That will count as a survey completed 
-    public function number_of_completed_surveys (Request $request){
+    public function number_of_completed_surveys (){
         // get number of users - get number of answered(type)surveys 
 
-
-        $request -> validate([
-            'type' => 'required|string|in:couple,personal,all'
-        ]);
-
-        $number_of_users = User::all();
         
         try {
-            if ($request -> type == "couple"){
-            $couples_survey_responses = SurveyResponse::where(["survey_id" =>  2, "question_id" => 21]) -> get();
+            $number_of_users = User::all();
+            $survey_responses = SurveyResponse::where(["question_id" => 21]) -> orWhere(["question_id" => 1]) -> get();
             $number_of_couples = Connection::where("status", "accepted") -> orWhere("status", "disconnected") -> get();
-            
 
+            $couples_survey_responses = [];
+            $personal_survey_responses = [];
+
+            foreach($survey_responses as $response){
+                if ($response["survey_id"] == 2){
+                    array_push($couples_survey_responses, $response);
+                } else {
+                    array_push($personal_survey_responses, $response);
+                }
+            }
+            // return $couples_survey_responses;
+            //// Couple Survey - Personal Survey
+            
             return response() -> json([
                 "status" => "success",
                 "number of users" => count($number_of_users),
                 "accepted-disconnected connections" => count($number_of_couples),
-                "Couple Survey Responses" => count($couples_survey_responses)
+                "Couple Survey Responses" => count($couples_survey_responses),
+                "Personal Survey Responses" => count($personal_survey_responses),
+                "All Survey Responses" => count($survey_responses)
             ]);
 
-        } else if ($request -> type == "personal"){
-
-            $personal_survey_responses = SurveyResponse::where(["survey_id" =>  1, "question_id" => 1]) -> get();
-            return response() -> json([
-                "status" => "success",
-                "number of users" => count($number_of_users),
-                "Personal Survey Responses" => count($personal_survey_responses)
-            ]);
-
-        } else if ($request -> type == "all"){
-
-            $number_of_responses = SurveyResponse::where("question_id", 1) -> orWhere("question_id", 21) -> get();
-            return response() -> json([
-                "status" => "success",
-                "number of users" => count($number_of_users),
-                "All Survey Responses" => count($number_of_responses)
-            ]);
-
-        }} catch (\Throwable $th) {
+    } catch (\Throwable $th) {
              return response() -> json([
                 "status" => "failed",
                 "message" => "something went wrong",
