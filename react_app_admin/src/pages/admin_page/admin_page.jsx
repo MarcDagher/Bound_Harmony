@@ -23,30 +23,33 @@ const Admin = () => {
     between_24_and_35 : 0,
     total_users : 0,
   })
+
+  const getConnectionAndSurveyStats = async () => {
+    const response = await send_request({
+      body:{},
+      route: '/connection_and_surveys_stats',
+      method: 'GET',
+      headerValue: `Bearer ${token}`
+    })
+    .then((value) => {
+      // console.log(value.data)
+      setconnectionAndSurveyStats({
+        number_of_connections : value.data['number of connections'] ,
+        accepted_connections : value.data['accepted connections'],
+        all_survey_responses : value.data['All Survey Responses'],
+        couple_survey_responses : value.data['Couple Survey Responses'],
+        disconnected_connections : value.data['disconnected connections'],
+        pending_connections : value.data['pending connections'],
+        personal_survey_responses : value.data['Personal Survey Responses'],
+        rejected_connections : value.data['rejected connections'],
+      })
+    })
+  }
   ///connection_and_surveys_stats
   useEffect(() => {
     try {
-      const response = send_request({
-        body:{},
-        route: '/connection_and_surveys_stats',
-        method: 'GET',
-        headerValue: `Bearer ${token}`
-      })
-      .then((value) => {
-        // console.log(value.data)
-        setconnectionAndSurveyStats({
-          number_of_connections : value.data['number of connections'] ,
-          accepted_connections : value.data['accepted connections'],
-          all_survey_responses : value.data['All Survey Responses'],
-          couple_survey_responses : value.data['Couple Survey Responses'],
-          disconnected_connections : value.data['disconnected connections'],
-          pending_connections : value.data['pending connections'],
-          personal_survey_responses : value.data['Personal Survey Responses'],
-          rejected_connections : value.data['rejected connections'],
-        })
-        // console.log(connectionAndSurveyStats)
-      })
-
+      getConnectionAndSurveyStats()
+      console.log(connectionAndSurveyStats)
     } catch (error) {
       console.log(error)
     }
@@ -62,7 +65,7 @@ const Admin = () => {
         // console.log(value.data)
         const array = value.data['Number of chosen responses']
         setnumberOfChosenResponses(value.data['Number of chosen responses'])
-        // console.log(numberOfChosenResponses)
+        console.log(numberOfChosenResponses)
       })
   }, [token])
 
@@ -82,10 +85,10 @@ const Admin = () => {
           between_24_and_35 : value.data['between_24_and_35'],
           total_users : value.data['total users'],
         })
-        // setUsersAgeRange(value.data)
+
       })
       // console.log("we are here")
-      // console.log(usersAgeRange)
+      console.log(usersAgeRange)
     } catch (error) {
       console.log(error)
     }
