@@ -214,4 +214,9 @@ class AdminController extends Controller
             ]);
         }
     }
+
+    public function get_all_users(){
+        $users = User::all();
+        return $users;
+    }
 }
