@@ -14,10 +14,14 @@ export default function AgeRangeStats({usersAgeRange}) {
             { id: 2, value: usersAgeRange['between_18_and_24'], label: '18yrs - 35yrs' },
             { id: 3, value: usersAgeRange['between_24_and_35'], label: '24yrs - 35yrs' },
           ],
+          innerRadius: 30,
+          outerRadius: 100,
+          paddingAngle: 2,
+          cornerRadius: 10,
         },
       ]}
       width={400}
-      height={160}
+      height={200}
     />
   );
 }

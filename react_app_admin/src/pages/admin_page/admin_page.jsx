@@ -118,13 +118,13 @@ const Admin = () => {
 
   // const Bar = BarsDataset()
 
-
+  console.log(numberOfChosenResponses)
 
   return <>
   <div className='admin-wrapper'>
     
     <div className='admin-header'>
-        <p>Admin's Page</p>
+        <p>Admin's Dashboard</p>
     </div>
 
   <div className='admin-stat-cards'>
@@ -162,7 +162,19 @@ const Admin = () => {
         {/* </div> */}
         
       </div>
-        {AgeRangeStats({usersAgeRange})}
+        {/* {AgeRangeStats({usersAgeRange})} */}
+    </div>
+
+    <div className='admin-handle-user-cards'>
+
+        <div className='delete-user'>
+
+        </div>
+
+        <div className='restore-user'>
+
+        </div>
+
     </div>
 
   </div>
