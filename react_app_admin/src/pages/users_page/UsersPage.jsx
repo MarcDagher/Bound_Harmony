@@ -1,24 +1,28 @@
 import HandleUsersCard from "../../components/HandleUserCard/HandleUserCard"
+import SideBar from "../../components/SideBar/SideBar"
 import "./UsersPage.css"
 const Users = () => {
 
   return <>
-  <div className='admin-handle-user-cards'>
+  <div className="users-wrapper">
+    {<SideBar />}
+    <div className='admin-handle-user-cards'>
+        <p>Users</p>
+      <div className='delete-user'>
+          {HandleUsersCard({
+            buttonText: "Delete",
+            boxTitle: "Delete User's Account",
+            })}
+      </div>
 
-    <div className='delete-user'>
-        {HandleUsersCard({
-          buttonText: "Delete User",
-          boxTitle: "Enter User's Email",
-          })}
+      <div className='restore-user'>
+          {HandleUsersCard({
+            buttonText: "Restore",
+            boxTitle: "Restore User's Account"
+            })}
+      </div>
+
     </div>
-
-    <div className='restore-user'>
-        {HandleUsersCard({
-          buttonText: "Restore User",
-          boxTitle: "Enter User's Email"
-          })}
-    </div>
-
   </div>
   </>
 }
