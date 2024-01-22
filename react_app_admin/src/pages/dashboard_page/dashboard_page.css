@@ -7,17 +7,21 @@
 
 .admin-sidebar{
   width: 100%;
+  /* max-width: 120px; */
   height: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  /* color: var(--mainWhite); */
-  background-color: #837f7f;;
-  /* font-size: 30px;
-  font-weight: 600;
-  letter-spacing: 5px;
-  word-spacing: 5px; */
-  margin-bottom: 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  color: var(--mainWhite);
+  padding: 15px 5px 0 10px;
+  background-color: #5e5e5e;;
+  text-align: left;
+  gap: 20px;
+  font-size: 18px; 
+  font-weight: 400;
+  letter-spacing: 2px;
+  /* word-spacing: 5px;  */
 }
 
 .admin-stats-col-container{
@@ -77,9 +81,9 @@
 .admin-graphs{
   width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  /* flex-direction: column; */
+  /* align-items: center;
+  justify-content: center; */
 }
 
 .admin-bar-charts{

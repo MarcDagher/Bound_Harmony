@@ -120,7 +120,15 @@ const Dashboard = () => {
   <div className='admin-wrapper'>
     
     <div className='admin-sidebar'>
-        
+        <div className="dashboard">
+            <span>Dashboard</span>
+        </div>
+        <div className="users">
+            <span>Users</span>
+        </div>
+        <div className="survey-responses">
+            <span>Survey Responses</span>
+        </div>
     </div>
 
     <div className="admin-stats-col-container">
