@@ -216,7 +216,17 @@ class AdminController extends Controller
     }
 
     public function get_all_users(){
-        $users = User::all();
-        return $users;
+        try{
+            $users = User::where('role_id', 2) -> get(['id', 'username', 'email','deleted_at']);
+            return response() -> json([
+                "status" => "success",
+                "users" => $users
+            ]);
+        } catch (\Throwable $th){
+            return response() -> json([
+                "status" => "failed",
+                "error" => $th
+            ]);
+        }
     }
 }
