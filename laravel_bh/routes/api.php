@@ -26,6 +26,7 @@ Route::middleware('auth.admin')->group(function () {
      Route::get('/connection_and_surveys_stats', [AdminController::class, 'connection_and_surveys_stats']);
      Route::get('/number_of_chosen_responses', [AdminController::class, 'number_of_chosen_responses']);
      Route::get('/users_age_range', [AdminController::class, 'users_age_range']);
+     Route::get('/get_all_users', [AdminController::class, 'get_all_users']);
 
     //  Route::get('/count_of_connection_status_type', [AdminController::class, 'count_of_connection_status_type']);
 });
