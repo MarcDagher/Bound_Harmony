@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import './admin_page.css';
 import send_request from "../../configurations/request_function";
-import BarsDataset from '../../components/DatasetBarChart/DatasetBarChart';
+import BarsDataset from '../../components/DatasetBarChart/ConnectionsStats';
 import { BarChart } from '@mui/x-charts';
 import BasicBars from '../../components/BasicBarchart/BasicBarChart';
+import ConnectionsStats from '../../components/DatasetBarChart/ConnectionsStats';
 
 const Admin = () => {
 
@@ -83,7 +84,7 @@ const Admin = () => {
   useEffect(() => {
     try {
       getConnectionAndSurveyStats()
-      console.log("in connectionAndSurveyStats")
+      // console.log("in connectionAndSurveyStats")
     } catch (error) {
       console.log(error)
     }
@@ -94,7 +95,7 @@ const Admin = () => {
   useEffect(()  => {
     try {
       getNumberOfChosenResponses()
-      console.log("in numberOfChosenResponses")
+      // console.log("in numberOfChosenResponses")
     } catch (error) {
       console.log(error)
     }
@@ -106,7 +107,7 @@ const Admin = () => {
   useEffect( () => {
     try {
       getUsersAgeRange()
-      console.log("in user age range")
+      // console.log("in user age range")
     } catch (error) {
       console.log(error)
     }
@@ -118,7 +119,7 @@ const Admin = () => {
 
 
   return <>
-  {BasicBars()}
+  {ConnectionsStats({connectionAndSurveyStats})}
   </>
 }
 
