@@ -9,7 +9,7 @@ export default function SurveysStats({connectionAndSurveyStats}) {
   const chartSetting = {
     yAxis: [
       {
-        label: 'rainfall (mm)',
+        label: 'count (per user)',
       },
     ],
     width: 500,

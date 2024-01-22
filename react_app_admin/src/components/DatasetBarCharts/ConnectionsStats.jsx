@@ -9,7 +9,7 @@ export default function ConnectionsStats({connectionAndSurveyStats}) {
   const chartSetting = {
     yAxis: [
       {
-        label: 'rainfall (mm)',
+        label: 'count (per request)',
       },
     ],
     width: 500,
@@ -27,7 +27,7 @@ export default function ConnectionsStats({connectionAndSurveyStats}) {
       disconnected_connections: connectionAndSurveyStats['disconnected_connections'],
       pending_connections: connectionAndSurveyStats['pending_connections'],
       rejected_connections: connectionAndSurveyStats['rejected_connections'],
-      month: 'Users Connection Requests',
+      month: "Users' Connection Requests Status",
     },
   ];
 
