@@ -42,7 +42,7 @@ const Users = () => {
                 username={user[1]['username']}
                 user_id={user[1]['id']}
                 email={user[1]['email']}
-                deletad_at={user[1]['deleted_at'] ?? 'null'}/>
+                deleted_at={user[1]['deleted_at'] ?? 'null'}/>
             }
               
           </div>

@@ -2,10 +2,9 @@ import { useState } from "react"
 import "./UserData.css"
 import send_request from "../../configurations/request_function"
 
-const UserData = ({username, user_id, email, deletad_at}) => {
+const UserData = ({username, user_id, email, deleted_at}) => {
 
-const [deleteUserResponseMessage, setDeleteUserResponseMessage] = useState('')
-
+const [deletedUser, setDeletedUser] = useState(deleted_at)
 
 const handle_delete_user = async (email) => {
       try {
@@ -16,12 +15,7 @@ const handle_delete_user = async (email) => {
         method: "POST",
         headerValue: `Bearer ${token}`
       })
-      if (response.data['status'] === "rejected"){
-        setDeleteUserResponseMessage(response.data.message)
-      } else if (response.data['status'] === "success") {
-        setDeleteUserResponseMessage("User deleted successfuly")
-      }
-      console.log(response.data)
+      setDeletedUser('deleted')
     } catch (error) {
       console.log(error.response)
     }
@@ -37,11 +31,7 @@ const handle_restore_user = async (email) => {
         method: "POST",
         headerValue: `Bearer ${token}`
       })
-      if (response.data['status'] === "rejected"){
-        setDeleteUserResponseMessage(response.data.message)
-      } else if (response.data['status'] === "success") {
-        setDeleteUserResponseMessage("User restored successfuly")
-      }
+      setDeletedUser('null')
       console.log(response.data)
     } catch (error) {
       console.log(error.response)
@@ -51,11 +41,10 @@ const handle_restore_user = async (email) => {
 
   return <>
     <div className="user-data-container">
-        <div className="user-data-with-buttons">
+        <div className="user-data-with-buttons" style={{ backgroundColor: deletedUser === "null" ? "white" : "var(--red)"}}>
             <div className="user-data-container-cards">
-                <p>Name: {username}</p>
-                <p>Email: {email}</p>
-                <p>{deletad_at === "null" ? "" : "DELETED"}</p>
+                <p style={{ color : deletedUser === "null" ? "var(--darkGrey)" : "white"}}>Name: {username}</p>
+                <p style={{ color : deletedUser === "null" ? "var(--darkGrey)" : "white"}}>Email: {email}</p>
             </div>
             <div className="user-data-buttons">
               <img className="arrow" src="images/back-arrow.png" alt="arrow" onClick={() => handle_restore_user(email)}/>
