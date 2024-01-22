@@ -14,16 +14,43 @@
   padding: 10px;
 }
 
+.survey-responses-cards > p:first-of-type{
+  color: var(--darkGrey);
+  font-size: 25px;
+  font-weight: 700;
+}
+
 .survey-questions{
   height: 100%;
   width: 100%;
-  background-color: var(--darkGrey);
+  /* background-color: #757575; */
   border-radius: 15px;
-  color: white;
+  /* color: white; */
+  color: var(--darkGrey);
+  outline: 1px solid var(--darkGrey);
   font-weight: 600;
   padding: 15px;
 }
 
+.span-question{
+  font-weight: 800;
+  font-size: 17px;
+  color: var(--red); 
+}
+
 .survey-questions > p:first-of-type{
   padding-bottom: 8px;
+}
+
+.span-option{
+  /* font-weight: 800; */
+  font-size: 15px;
+}
+
+.option-number{
+  padding-left: 10px;
+}
+
+.number-span{
+  font-weight: 700;
 }
