@@ -20,7 +20,7 @@ const Users = () => {
 
   useEffect(() => {
     try {
-      get_all_users().then((value) => setListOfUsers(value))
+      get_all_users().then((value) => setListOfUsers(value.data.users))
     } catch (error) {
       console.log(error)
     }
@@ -33,7 +33,18 @@ const Users = () => {
     {<SideBar />}
     <div className='admin-handle-user-cards'>
         <p>Users</p>
-      <div className='delete-user'>
+        {listOfUsers &&
+        Object.entries(listOfUsers).map((user) => (
+          <div key={user.id}>
+            <p>User Name: {user[1]['username']}</p>
+            <p>User Id: {user[1]['id']}</p>
+            <p>Email: {user[1]['email']}</p>
+            <p>Deleted At: {user[1]['deleted_at'] ?? 'null'}</p>
+          </div>
+        ))}
+
+        {/* {listOfUsers && } */}
+      {/* <div className='delete-user'>
           {HandleUsersCard({
             buttonText: "Delete",
             boxTitle: "Delete User's Account",
@@ -45,7 +56,7 @@ const Users = () => {
             buttonText: "Restore",
             boxTitle: "Restore User's Account"
             })}
-      </div>
+      </div> */}
 
     </div>
   </div>
