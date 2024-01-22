@@ -44,7 +44,16 @@
   padding: 20px;
   outline: 1px solid var(--darkGrey);
   font-weight: 700;
+  font-size: 22px;
+  text-align: center;
   color: var(--darkGrey);
+}
+
+.number-of-users > img, 
+.number-of-answered-surveys > img,
+.number-of-connections > img{
+  height: 50px;
+  margin-bottom: 10px;
 }
 
 .admin-graphs{

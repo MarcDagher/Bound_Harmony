@@ -130,6 +130,7 @@ const Admin = () => {
   <div className='admin-stat-cards'>
 
     <div className='number-of-users'>
+      <img src="/user.png" alt="" />
       <p>Number of Users</p>
       <p>{usersAgeRange['total_users']}</p>
     </div>
