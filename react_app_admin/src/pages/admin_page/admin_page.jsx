@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import './admin_page.css';
 import send_request from "../../configurations/request_function";
-import BarsDataset from '../../components/BarChart/BarChart';
+import BarsDataset from '../../components/DatasetBarChart/DatasetBarChart';
+import { BarChart } from '@mui/x-charts';
+import BasicBars from '../../components/BasicBarchart/BasicBarChart';
 
 const Admin = () => {
 
@@ -9,9 +11,9 @@ const Admin = () => {
     all_survey_responses : 0,
     couple_survey_responses : 0,
     personal_survey_responses : 0,
+    number_of_connections : 0,
     accepted_connections : 0,
     disconnected_connections : 0,
-    number_of_connections : 0,
     pending_connections : 0,
     rejected_connections : 0
   })
@@ -52,7 +54,7 @@ const Admin = () => {
       route: '/number_of_chosen_responses', 
       headerValue: `Bearer ${token}`, 
       method: "GET"}).then((value) => {
-        
+        // console.log(value)
         setnumberOfChosenResponses(value.data['Number of chosen responses'])
       })
   }
@@ -116,7 +118,7 @@ const Admin = () => {
 
 
   return <>
-  {BarsDataset()}
+  {BasicBars()}
   </>
 }
 
