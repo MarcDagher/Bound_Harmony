@@ -3,6 +3,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  gap: 25px;
 }
 
 .admin-header{
@@ -19,6 +20,31 @@
   letter-spacing: 5px;
   word-spacing: 5px;
   margin-bottom: 20px;
+}
+
+.admin-stat-cards{
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0 auto;
+  gap: 15px;
+}
+
+.number-of-users, 
+.number-of-answered-surveys,
+.number-of-connections{
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  padding: 20px;
+  outline: 1px solid var(--darkGrey);
+  font-weight: 700;
+  color: var(--darkGrey);
 }
 
 .admin-graphs{

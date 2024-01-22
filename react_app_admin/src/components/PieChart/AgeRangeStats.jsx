@@ -17,7 +17,7 @@ export default function AgeRangeStats({usersAgeRange}) {
         },
       ]}
       width={400}
-      height={200}
+      height={160}
     />
   );
 }
