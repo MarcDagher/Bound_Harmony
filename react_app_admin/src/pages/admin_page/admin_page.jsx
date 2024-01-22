@@ -127,10 +127,34 @@ const Admin = () => {
         <p>Admin's Page</p>
     </div>
 
+  <div className='admin-stat-cards'>
+
+    <div className='number-of-users'>
+
+    </div>
+
+    <div className='number-of-answered-surveys'>
+
+    </div>
+
+    <div className='number-of-connections'>
+
+    </div>
+
+  </div>
+
+
     <div className='admin-graphs'>
       <div className='admin-bar-charts'>
-        {ConnectionsStats({connectionAndSurveyStats})}
-        {SurveysStats({connectionAndSurveyStats})}
+
+        {/* /// trying to put graohs in card */}
+        {/* <div className='bar-chart-connections'> */}
+            {ConnectionsStats({connectionAndSurveyStats})}
+        {/* </div> */}
+        {/* <div className='bar-chart-surveys'> */}
+            {SurveysStats({connectionAndSurveyStats})}
+        {/* </div> */}
+        
       </div>
         {AgeRangeStats({usersAgeRange})}
     </div>

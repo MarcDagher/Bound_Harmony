@@ -12,7 +12,7 @@ export default function ConnectionsStats({connectionAndSurveyStats}) {
         label: 'count (per request)',
       },
     ],
-    width: 500,
+    width: 600,
     height: 300,
     sx: {
       [`.${axisClasses.left} .${axisClasses.label}`]: {
@@ -27,7 +27,7 @@ export default function ConnectionsStats({connectionAndSurveyStats}) {
       disconnected_connections: connectionAndSurveyStats['disconnected_connections'],
       pending_connections: connectionAndSurveyStats['pending_connections'],
       rejected_connections: connectionAndSurveyStats['rejected_connections'],
-      month: "Users' Connection Requests Status",
+      month: "Status of Users' Connection Requests",
     },
   ];
 
