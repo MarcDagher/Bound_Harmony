@@ -1,0 +1,10 @@
+.admin-handle-user-cards{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.delete-user,
+.restore-user{
+  width: 100%;
+}
