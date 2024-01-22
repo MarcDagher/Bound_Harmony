@@ -23,25 +23,21 @@ export default function SurveysStats({connectionAndSurveyStats}) {
 
   const dataset = [
     {
-      accepted_connections: connectionAndSurveyStats['accepted_connections'],
-      disconnected_connections: connectionAndSurveyStats['disconnected_connections'],
-      pending_connections: connectionAndSurveyStats['pending_connections'],
-      rejected_connections: connectionAndSurveyStats['rejected_connections'],
-      month: 'Surveys',
+      couple_survey_responses: connectionAndSurveyStats['couple_survey_responses'],
+      personal_survey_responses: connectionAndSurveyStats['personal_survey_responses'],
+      month: 'Completed Surveys',
     },
   ];
 
-  // console.log("Inside function")
-  // console.log(connectionAndSurveyStats)
+  console.log("Inside function")
+  console.log(connectionAndSurveyStats)
   return (
     <BarChart
       dataset={dataset}
       xAxis={[{ scaleType: 'band', dataKey: 'month' }]}
       series={[
-        { dataKey: 'accepted_connections', label: 'Accepted', valueFormatter },
-        { dataKey: 'disconnected_connections', label: 'Disconnected', valueFormatter },
-        { dataKey: 'pending_connections', label: 'Pending', valueFormatter },
-        { dataKey: 'rejected_connections', label: 'Rejected', valueFormatter },
+        { dataKey: 'couple_survey_responses', label: "Couple's Surveys", valueFormatter },
+        { dataKey: 'personal_survey_responses', label: 'Personal Surveys', valueFormatter },
       ]}
       {...chartSetting}
     />

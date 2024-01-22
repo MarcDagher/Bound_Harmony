@@ -5,6 +5,7 @@ import BarsDataset from '../../components/DatasetBarCharts/ConnectionsStats';
 import { BarChart } from '@mui/x-charts';
 import BasicBars from '../../components/BasicBarchart/BasicBarChart';
 import ConnectionsStats from '../../components/DatasetBarCharts/ConnectionsStats';
+import SurveysStats from '../../components/DatasetBarCharts/SurveysStats';
 
 const Admin = () => {
 
@@ -120,7 +121,7 @@ const Admin = () => {
 
   return <>
   {ConnectionsStats({connectionAndSurveyStats})}
-  
+  {SurveysStats({connectionAndSurveyStats})}
   </>
 }
 
