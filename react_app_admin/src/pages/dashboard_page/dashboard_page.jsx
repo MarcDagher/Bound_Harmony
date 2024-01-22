@@ -18,7 +18,6 @@ const Dashboard = () => {
     pending_connections : 0,
     rejected_connections : 0
   })
-  const [numberOfChosenResponses, setnumberOfChosenResponses] = useState()
   const [usersAgeRange, setUsersAgeRange] = useState({
     above_35 : 0,
     below_18 : 0,
@@ -49,16 +48,6 @@ const Dashboard = () => {
     })
   }
 
-  const getNumberOfChosenResponses = async () => {
-    await send_request({
-      body: {}, 
-      route: '/number_of_chosen_responses', 
-      headerValue: `Bearer ${token}`, 
-      method: "GET"}).then((value) => {
-        // console.log(value)
-        setnumberOfChosenResponses(value.data['Number of chosen responses'])
-      })
-  }
   
   const getUsersAgeRange = async () => {
     await send_request({
@@ -80,6 +69,7 @@ const Dashboard = () => {
   }
   
   const token = localStorage.getItem('token')
+  
   ///connection_and_surveys_stats
   useEffect(() => {
     try {
@@ -91,17 +81,6 @@ const Dashboard = () => {
     // console.log(connectionAndSurveyStats)
   } ,[token])
 
-  // number_of_chosen_responses
-  useEffect(()  => {
-    try {
-      getNumberOfChosenResponses()
-      // console.log("in numberOfChosenResponses")
-    } catch (error) {
-      console.log(error)
-    }
-    // console.log(numberOfChosenResponses)
-    
-  }, [token])
  
   // user age range
   useEffect( () => {
@@ -115,7 +94,7 @@ const Dashboard = () => {
   },[token])
 
 
-  console.log(numberOfChosenResponses)
+  // console.log(numberOfChosenResponses)
 
   return <>
   <div className='admin-wrapper'>
