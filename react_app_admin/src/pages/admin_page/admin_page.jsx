@@ -5,14 +5,14 @@ import send_request from "../../configurations/request_function";
 const Admin = () => {
 
   const [connectionAndSurveyStats, setconnectionAndSurveyStats] = useState({
-    all_survey_responses : '',
-    couple_survey_responses : '',
-    personal_survey_responses : '',
-    accepted_connections : '',
-    disconnected_connections : '',
-    number_of_connections : '',
-    pending_connections : '',
-    rejected_connections : ''
+    all_survey_responses : 0,
+    couple_survey_responses : 0,
+    personal_survey_responses : 0,
+    accepted_connections : 0,
+    disconnected_connections : 0,
+    number_of_connections : 0,
+    pending_connections : 0,
+    rejected_connections : 0
   })
   const [numberOfChosenResponses, setnumberOfChosenResponses] = useState()
   const [usersAgeRange, setUsersAgeRange] = useState({
@@ -81,10 +81,10 @@ const Admin = () => {
     try {
       getConnectionAndSurveyStats()
       console.log("in connectionAndSurveyStats")
-      console.log(connectionAndSurveyStats)
     } catch (error) {
       console.log(error)
     }
+    console.log(connectionAndSurveyStats)
   } ,[token])
 
   // number_of_chosen_responses
@@ -92,10 +92,10 @@ const Admin = () => {
     try {
       getNumberOfChosenResponses()
       console.log("in numberOfChosenResponses")
-      console.log(numberOfChosenResponses)
     } catch (error) {
       console.log(error)
     }
+    console.log(numberOfChosenResponses)
     
   }, [token])
  
@@ -104,10 +104,10 @@ const Admin = () => {
     try {
       getUsersAgeRange()
       console.log("in user age range")
-      console.log(usersAgeRange)
     } catch (error) {
       console.log(error)
     }
+    console.log(usersAgeRange)
   },[token])
 
   return <>
