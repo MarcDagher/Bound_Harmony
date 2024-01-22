@@ -2,7 +2,7 @@ import { useState } from "react"
 import "./HandleUserCard.css"
 import send_request from "../../configurations/request_function"
 
-const HandleUsersCard = ({buttonText, boxTitle, handle_submit}) => {
+const HandleUsersCard = ({buttonText, boxTitle}) => {
 
   const [formEmail, setFormEmail] = useState("")
   const [deleteUserResponseMessage, setDeleteUserResponseMessage] = useState('')
@@ -10,7 +10,8 @@ const HandleUsersCard = ({buttonText, boxTitle, handle_submit}) => {
   const handle_change = (value) => {
     setFormEmail(value)
   }
-  const handle_delete_user_submit = async (email) => {
+
+  const handle_delete_user = async (email) => {
 
     const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -44,7 +45,39 @@ const HandleUsersCard = ({buttonText, boxTitle, handle_submit}) => {
     }
     
   }
-  // console.log(formEmail)
+
+  const handle_restore_user = async (email) => {
+    const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+    if (email === ""){
+      setDeleteUserResponseMessage('All fileds are required')
+    } 
+    else if (!email_regex.test(email)) {
+      setDeleteUserResponseMessage("Invalid email format");
+    } 
+    else {
+        try {
+        const token = localStorage.getItem('token')
+        const response = await send_request({
+          route: "/restore_deleted_user",
+          body: {"email" : email},
+          method: "POST",
+          headerValue: `Bearer ${token}`
+        })
+        if (response.data['status'] === "rejected"){
+          setDeleteUserResponseMessage(response.data.message)
+        } else if (response.data['status'] === "success") {
+          setDeleteUserResponseMessage("User restored successfuly")
+        }
+        console.log(response.data['status'])
+        // setDeleteUserResponseMessage('success')
+      } catch (error) {
+        console.log(error.response)
+        // setDeleteUserResponseMessage('error')
+      }
+    }
+  }
+  
 
   return <>
     <div className="admin-box-container">
@@ -52,9 +85,10 @@ const HandleUsersCard = ({buttonText, boxTitle, handle_submit}) => {
             <div className="admin-input-container">
               <input type="text" name="email" id="email" placeholder="email" onChange={(e) => handle_change(e.target.value)} required/>
               {setDeleteUserResponseMessage !== "" ? <p className="error_message">{deleteUserResponseMessage}</p>  : null}
-              {/* {successMessage !== "" ? <p className="error_message">{successMessage}</p>  : null} */}
             </div>
-            <button type="button" onClick={() => {handle_delete_user_submit(formEmail)}}>{buttonText}</button>
+            <button type="button" onClick={() => {
+              buttonText === "Delete User" ? handle_delete_user(formEmail) : handle_restore_user(formEmail)
+              }}>{buttonText}</button>
     </div>
   </>
 }

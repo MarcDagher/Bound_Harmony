@@ -51,14 +51,14 @@ class AdminController extends Controller
 
             return response() -> json([
                 'status' => 'success',
-                'message' => "user deleted successfully",
+                'message' => "User deleted successfully",
                 'user' => $user
             ]);
 
         } else {
             return response() -> json([
                 'status' => 'rejected',
-                'message' => "user doesn't exist"
+                'message' => "User doesn't exist"
             ]);
         }
     }
@@ -75,14 +75,14 @@ class AdminController extends Controller
 
             return response() -> json([
                 'status' => 'success',
-                'message' => "user restored successfully",
+                'message' => "User restored successfully",
                 'user' => $user
             ]);
 
         } else {
             return response() -> json([
                 'status' => 'rejected',
-                'message' => "user doesn't exist"
+                'message' => "User doesn't exist"
             ]);
         }
     }

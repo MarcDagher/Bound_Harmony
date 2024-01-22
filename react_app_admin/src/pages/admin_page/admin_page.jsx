@@ -135,7 +135,7 @@ const Admin = () => {
   //   }
   // }
 
-  // console.log(numberOfChosenResponses)
+  console.log(numberOfChosenResponses)
 
   return <>
   <div className='admin-wrapper'>
