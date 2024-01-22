@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import HandleUsersCard from "../../components/HandleUserCard/HandleUserCard"
+import HandleUsersCard from "../../components/UserData/UserData"
 import SideBar from "../../components/SideBar/SideBar"
 import "./UsersPage.css"
 import send_request from "../../configurations/request_function"
@@ -35,28 +35,19 @@ const Users = () => {
         <p>Users</p>
         {listOfUsers &&
         Object.entries(listOfUsers).map((user) => (
-          <div key={user.id}>
-            <p>User Name: {user[1]['username']}</p>
-            <p>User Id: {user[1]['id']}</p>
-            <p>Email: {user[1]['email']}</p>
-            <p>Deleted At: {user[1]['deleted_at'] ?? 'null'}</p>
+
+          <div key={user.id} className='delete-user'>
+            {<HandleUsersCard  
+                username={user[1]['username']}
+                user_id={user[1]['id']}
+                email={user[1]['email']}
+                deletad_at={user[1]['deleted_at'] ?? 'null'}
+                buttonText="Delete"
+                boxTitle="Delete User's Account"/>
+            }
+              
           </div>
         ))}
-
-        {/* {listOfUsers && } */}
-      {/* <div className='delete-user'>
-          {HandleUsersCard({
-            buttonText: "Delete",
-            boxTitle: "Delete User's Account",
-            })}
-      </div>
-
-      <div className='restore-user'>
-          {HandleUsersCard({
-            buttonText: "Restore",
-            boxTitle: "Restore User's Account"
-            })}
-      </div> */}
 
     </div>
   </div>
