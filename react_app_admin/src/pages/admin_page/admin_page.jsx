@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './admin_page.css';
 import send_request from "../../configurations/request_function";
+import BarsDataset from '../../components/BarChart/BarChart';
 
 const Admin = () => {
 
@@ -110,8 +111,12 @@ const Admin = () => {
     console.log(usersAgeRange)
   },[token])
 
+  // const Bar = BarsDataset()
+
+
+
   return <>
-    <p>Hello</p>
+  {BarsDataset()}
   </>
 }
 
