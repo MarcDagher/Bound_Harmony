@@ -29,8 +29,8 @@ export default function SurveysStats({connectionAndSurveyStats}) {
     },
   ];
 
-  console.log("Inside function")
-  console.log(connectionAndSurveyStats)
+  // console.log("Inside function")
+  // console.log(connectionAndSurveyStats)
   return (
     <BarChart
       dataset={dataset}

@@ -6,6 +6,7 @@ import { BarChart } from '@mui/x-charts';
 import BasicBars from '../../components/BasicBarchart/BasicBarChart';
 import ConnectionsStats from '../../components/DatasetBarCharts/ConnectionsStats';
 import SurveysStats from '../../components/DatasetBarCharts/SurveysStats';
+import AgeRangeStats from '../../components/PieChart/AgeRangeStats';
 
 const Admin = () => {
 
@@ -122,6 +123,7 @@ const Admin = () => {
   return <>
   {ConnectionsStats({connectionAndSurveyStats})}
   {SurveysStats({connectionAndSurveyStats})}
+  {AgeRangeStats()}
   </>
 }
 
