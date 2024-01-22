@@ -13,7 +13,6 @@ const SurveyResponses = () => {
       route: '/number_of_chosen_responses', 
       headerValue: `Bearer ${token}`, 
       method: "GET"}).then((value) => {
-        // console.log(value)
         setnumberOfChosenResponses(value.data['Number of chosen responses'])
       })
   }
@@ -22,21 +21,49 @@ const SurveyResponses = () => {
   useEffect(()  => {
     try {
       getNumberOfChosenResponses()
-      // console.log("in numberOfChosenResponses")
     } catch (error) {
       console.log(error)
     }
-    // console.log(numberOfChosenResponses)
-    
+
   }, [])
 
-  console.log("IN survey responses")
-  console.log(numberOfChosenResponses)
+  // console.log("IN survey responses")
+  // console.log(numberOfChosenResponses)
+  // if (numberOfChosenResponses){
+  //   for (const [key, value] of Object.entries(numberOfChosenResponses)){
+  //     const value_obj = value
+  //     console.log(`Key: ${key}, ${value}`)
+  //     for (const [obj_key, obj_value] of Object.entries(value_obj)){
+  //       console.log(`obj_key: ${obj_key}, ${obj_value}`)
+  //     }
+  //   }
+  // }
   
   return <>
   <div className="survey-reponses-wrapper">
     {<SideBar />}
     <div className="survey-responses-cards">
+
+
+      {numberOfChosenResponses &&
+          Object.entries(numberOfChosenResponses).map(([key, value]) => (
+            <div key={key} className="survey-questions">
+
+              <p>{`Question: ${key}`}</p>
+              <p>Options:</p>
+              <div className="survey-question-responses">
+
+                  {Object.entries(value).map(([obj_key, obj_value]) => (
+                    
+                    <p key={obj_key}>{`${obj_key}: ${obj_value}`}</p>
+
+                  ))}
+
+              </div>
+
+            </div>
+          ))}
+
 
     </div>
   </div>
