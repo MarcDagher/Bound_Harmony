@@ -119,40 +119,44 @@ const Dashboard = () => {
   return <>
   <div className='admin-wrapper'>
     
-    <div className='admin-header'>
-        <p>Admin's Dashboard</p>
+    <div className='admin-sidebar'>
+        
     </div>
 
-  <div className='admin-stat-cards'>
+    <div className="admin-stats-col-container">
 
-    <div className='number-of-users'>
-      <img src="/images/user.png" alt="user" />
-      <p>Number of Users</p>
-      <p>{usersAgeRange['total_users']}</p>
-    </div>
+      <div className='admin-stat-cards'>
 
-    <div className='number-of-answered-surveys'>
-      <img src="/images/carousel.png" alt="survey" />
-      <p>Number of Surveys Answered</p>
-      <p>{connectionAndSurveyStats['all_survey_responses']}</p>
-    </div>
+        <div className='number-of-users'>
+          <img src="/images/user.png" alt="user" />
+          <p>Number of Users</p>
+          <p>{usersAgeRange['total_users']}</p>
+        </div>
 
-    <div className='number-of-connections'>
-      <img src="/images/friend-request.png" alt="request" />
-      <p>Number of Connection Requests</p>
-      <p>{connectionAndSurveyStats['number_of_connections']}</p>
-    </div>
+        <div className='number-of-answered-surveys'>
+          <img src="/images/carousel.png" alt="survey" />
+          <p>Number of Surveys Answered</p>
+          <p>{connectionAndSurveyStats['all_survey_responses']}</p>
+        </div>
 
-  </div>
+        <div className='number-of-connections'>
+          <img src="/images/friend-request.png" alt="request" />
+          <p>Number of Connection Requests</p>
+          <p>{connectionAndSurveyStats['number_of_connections']}</p>
+        </div>
 
-
-    <div className='admin-graphs'>
-      <div className='admin-bar-charts'>
-        {ConnectionsStats({connectionAndSurveyStats})}
-        {SurveysStats({connectionAndSurveyStats})}
       </div>
-        {/* {AgeRangeStats({usersAgeRange})} */}
+
+        <div className='admin-graphs'>
+          <div className='admin-bar-charts'>
+            {ConnectionsStats({connectionAndSurveyStats})}
+            {SurveysStats({connectionAndSurveyStats})}
+          </div>
+            {/* {AgeRangeStats({usersAgeRange})} */}
+        </div>
+
     </div>
+
 
   </div>
   </>
