@@ -11,20 +11,32 @@ const HandleUsersCard = ({buttonText, boxTitle, handle_submit}) => {
     setFormEmail(value)
   }
   const handle_delete_user_submit = async (email) => {
+
+    const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
     if (email === ""){
       setDeleteUserResponseMessage('All fileds are required')
-    } else {
+    } 
+    else if (!email_regex.test(email)) {
+      setDeleteUserResponseMessage("Invalid email format");
+    } 
+    else {
+      console.log(email)
         try {
         const token = localStorage.getItem('token')
         const response = await send_request({
           route: "/delete_user",
-          body: email,
+          body: {"email" : email},
           method: "POST",
           headerValue: `Bearer ${token}`
         })
-        console.log(response.data)
+        if (response.data['status'] === "rejected"){
+          setDeleteUserResponseMessage(response.data.message)
+        } else if (response.data['status'] === "success") {
+          setDeleteUserResponseMessage("User deleted successfuly")
+        }
+        console.log(response.data['status'])
         // setDeleteUserResponseMessage('success')
-    
       } catch (error) {
         console.log(error.response)
         // setDeleteUserResponseMessage('error')
