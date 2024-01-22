@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import './admin_page.css';
 import send_request from "../../configurations/request_function";
-import BarsDataset from '../../components/DatasetBarChart/ConnectionsStats';
+import BarsDataset from '../../components/DatasetBarCharts/ConnectionsStats';
 import { BarChart } from '@mui/x-charts';
 import BasicBars from '../../components/BasicBarchart/BasicBarChart';
-import ConnectionsStats from '../../components/DatasetBarChart/ConnectionsStats';
+import ConnectionsStats from '../../components/DatasetBarCharts/ConnectionsStats';
 
 const Admin = () => {
 
@@ -88,7 +88,7 @@ const Admin = () => {
     } catch (error) {
       console.log(error)
     }
-    console.log(connectionAndSurveyStats)
+    // console.log(connectionAndSurveyStats)
   } ,[token])
 
   // number_of_chosen_responses
@@ -99,7 +99,7 @@ const Admin = () => {
     } catch (error) {
       console.log(error)
     }
-    console.log(numberOfChosenResponses)
+    // console.log(numberOfChosenResponses)
     
   }, [token])
  
@@ -111,7 +111,7 @@ const Admin = () => {
     } catch (error) {
       console.log(error)
     }
-    console.log(usersAgeRange)
+    // console.log(usersAgeRange)
   },[token])
 
   // const Bar = BarsDataset()
@@ -120,6 +120,7 @@ const Admin = () => {
 
   return <>
   {ConnectionsStats({connectionAndSurveyStats})}
+  
   </>
 }
 
