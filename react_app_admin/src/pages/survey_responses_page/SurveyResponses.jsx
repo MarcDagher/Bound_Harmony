@@ -6,6 +6,9 @@ const SurveyResponses = () => {
   return <>
   <div className="survey-reponses-wrapper">
     {<SideBar />}
+    <div className="survey-responses-cards">
+      
+    </div>
   </div>
   </>
 }
