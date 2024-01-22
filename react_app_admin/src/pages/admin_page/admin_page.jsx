@@ -121,11 +121,16 @@ const Admin = () => {
 
 
   return <>
-  <div className='graphs'>
-    {ConnectionsStats({connectionAndSurveyStats})}
-    {SurveysStats({connectionAndSurveyStats})}
+  <div className='wrapper'>
+    <div className='header'>
+        <p>Admin's Page</p>
+    </div>
+    <div className='graphs'>
+      {ConnectionsStats({connectionAndSurveyStats})}
+      {SurveysStats({connectionAndSurveyStats})}
+    </div>
+      {AgeRangeStats({usersAgeRange})}
   </div>
-  {AgeRangeStats({usersAgeRange})}
   </>
 }
 
