@@ -44,7 +44,6 @@ const SurveyResponses = () => {
                   {Object.entries(value).map(([obj_key, obj_value]) => (
                     
                     <p className="option-number" key={obj_key}>{`${obj_key}: `} <span className="number-span">{`${obj_value}`}</span></p>
-
                   ))}
 
               </div>
