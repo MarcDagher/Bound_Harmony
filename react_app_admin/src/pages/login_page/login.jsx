@@ -28,7 +28,7 @@ const handle_submit = async (email, password) => {
       method: "POST"
     })
 
-    if (formData['email'] !== "admin123@hotmail.com"){
+    if (formData['email'] !== "admin123@hotmail.com"){ // validate returned response not htis
       setSuccessMessage('')
       setErrorMessage('Invalid Entry')
     } else {

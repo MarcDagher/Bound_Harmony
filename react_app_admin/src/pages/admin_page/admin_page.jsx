@@ -117,19 +117,23 @@ const Admin = () => {
     // console.log(usersAgeRange)
   },[token])
 
-  const handle_delete_user_submit = ({email}) => {
-    try {
-      const response = send_request({
-        route: "/delete_user",
-        body: email,
-        method: "POST",
-        headerValue: `Bearer ${token}`
-      })
-      console.log(response)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  // const handle_delete_user_submit = async (email) => {
+  //   try {
+  //     const response = await send_request({
+  //       route: "/delete_user",
+  //       body: email,
+  //       method: "POST",
+  //       headerValue: `Bearer ${token}`
+  //     })
+  //     // console.log(response)
+  //     // setDeleteUserResponseMessage('success')
+  //     return response.data
+  //   } catch (error) {
+  //     // console.log(error)
+  //     // setDeleteUserResponseMessage('error')
+  //     return error.data
+  //   }
+  // }
 
   // console.log(numberOfChosenResponses)
 
@@ -184,7 +188,7 @@ const Admin = () => {
             {HandleUsersCard({
               buttonText: "Delete User",
               boxTitle: "Enter User's Email",
-              handle_submit: handle_delete_user_submit
+              // handle_submit: handle_delete_user_submit
               })}
         </div>
 
