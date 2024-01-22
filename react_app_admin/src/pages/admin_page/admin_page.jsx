@@ -136,12 +136,13 @@ const Admin = () => {
     </div>
 
     <div className='number-of-answered-surveys'>
-      <img src="/carousel.png" alt="" />
+      <img src="/carousel.png" alt="survey" />
       <p>Number of Surveys Answered</p>
       <p>{connectionAndSurveyStats['all_survey_responses']}</p>
     </div>
 
     <div className='number-of-connections'>
+      <img src="/friend-request.png" alt="request" />
       <p>Number of Connection Requests</p>
       <p>{connectionAndSurveyStats['number_of_connections']}</p>
     </div>
