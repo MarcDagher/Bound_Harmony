@@ -26,3 +26,16 @@
   padding: 15px;
 }
 
+.user-data-buttons{
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.arrow{
+  height: 25px;
+}
+
+.trash{
+  height: 27px;
+}
