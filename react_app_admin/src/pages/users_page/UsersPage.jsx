@@ -26,7 +26,7 @@ const Users = () => {
     }
   },[])
 
-  console.log(listOfUsers)
+  // console.log(listOfUsers)
 
   return <>
   <div className="users-wrapper">
@@ -38,12 +38,11 @@ const Users = () => {
 
           <div key={user.id} className='user-data-cards'>
             {<HandleUsersCard  
+                
                 username={user[1]['username']}
                 user_id={user[1]['id']}
                 email={user[1]['email']}
-                deletad_at={user[1]['deleted_at'] ?? 'null'}
-                buttonText="Delete"
-                boxTitle="Delete User's Account"/>
+                deletad_at={user[1]['deleted_at'] ?? 'null'}/>
             }
               
           </div>

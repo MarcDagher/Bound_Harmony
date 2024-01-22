@@ -2,27 +2,12 @@ import { useState } from "react"
 import "./UserData.css"
 import send_request from "../../configurations/request_function"
 
-const UserData = ({buttonText, boxTitle,username, user_id, email, deletad_at}) => {
+const UserData = ({username, user_id, email, deletad_at}) => {
 
-const [formEmail, setFormEmail] = useState("")
 const [deleteUserResponseMessage, setDeleteUserResponseMessage] = useState('')
 
-const handle_change = (value) => {
-  setFormEmail(value)
-}
 
 const handle_delete_user = async (email) => {
-
-  const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
-  if (email === ""){
-    setDeleteUserResponseMessage('All fileds are required')
-  } 
-  else if (!email_regex.test(email)) {
-    setDeleteUserResponseMessage("Invalid email format");
-  } 
-  else {
-    console.log(email)
       try {
       const token = localStorage.getItem('token')
       const response = await send_request({
@@ -36,28 +21,14 @@ const handle_delete_user = async (email) => {
       } else if (response.data['status'] === "success") {
         setDeleteUserResponseMessage("User deleted successfuly")
       }
-      console.log(response.data['status'])
-      // setDeleteUserResponseMessage('success')
+      console.log(response.data)
     } catch (error) {
       console.log(error.response)
-      // setDeleteUserResponseMessage('error')
     }
-  }
-  
 }
 
-
-
 const handle_restore_user = async (email) => {
-  const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-  if (email === ""){
-    setDeleteUserResponseMessage('All fileds are required')
-  } 
-  else if (!email_regex.test(email)) {
-    setDeleteUserResponseMessage("Invalid email format");
-  } 
-  else {
       try {
       const token = localStorage.getItem('token')
       const response = await send_request({
@@ -71,13 +42,11 @@ const handle_restore_user = async (email) => {
       } else if (response.data['status'] === "success") {
         setDeleteUserResponseMessage("User restored successfuly")
       }
-      console.log(response.data['status'])
-      // setDeleteUserResponseMessage('success')
+      console.log(response.data)
     } catch (error) {
       console.log(error.response)
-      // setDeleteUserResponseMessage('error')
     }
-  }
+  
 }
 
   return <>
@@ -89,8 +58,8 @@ const handle_restore_user = async (email) => {
                 <p>{deletad_at === "null" ? "" : "DELETED"}</p>
             </div>
             <div className="user-data-buttons">
-              <img className="arrow" src="images/back-arrow.png" alt="" />
-              <img className="trash" src="images/trash.png" alt="trash" />
+              <img className="arrow" src="images/back-arrow.png" alt="arrow" onClick={() => handle_restore_user(email)}/>
+              <img className="trash" src="images/trash.png" alt="trash" onClick={() => handle_delete_user(email)} />
             </div>
         </div>
 
