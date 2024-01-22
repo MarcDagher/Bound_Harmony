@@ -31,7 +31,7 @@ const SurveyResponses = () => {
   <div className="survey-reponses-wrapper">
     {<SideBar />}
     <div className="survey-responses-cards">
-      <p>Survey Responses</p>
+      <p>Survey Responses {"(Number of times each option was chosen)"}</p>
 
       {numberOfChosenResponses &&
           Object.entries(numberOfChosenResponses).map(([key, value]) => (
