@@ -1,12 +1,8 @@
 import { useEffect, useState } from 'react';
 import './admin_page.css';
 import send_request from "../../configurations/request_function";
-// import BarsDataset from '../../components/DatasetBarCharts/ConnectionsStats';
-// import { BarChart } from '@mui/x-charts';
-// import BasicBars from '../../components/BasicBarchart/BasicBarChart';
 import ConnectionsStats from '../../components/DatasetBarCharts/ConnectionsStats';
 import SurveysStats from '../../components/DatasetBarCharts/SurveysStats';
-// import AgeRangeStats from '../../components/PieChart/AgeRangeStats';
 import HandleUsersCard from '../../components/HandleUserCard/HandleUserCard';
 
 const Admin = () => {
@@ -117,23 +113,6 @@ const Admin = () => {
     // console.log(usersAgeRange)
   },[token])
 
-  // const handle_delete_user_submit = async (email) => {
-  //   try {
-  //     const response = await send_request({
-  //       route: "/delete_user",
-  //       body: email,
-  //       method: "POST",
-  //       headerValue: `Bearer ${token}`
-  //     })
-  //     // console.log(response)
-  //     // setDeleteUserResponseMessage('success')
-  //     return response.data
-  //   } catch (error) {
-  //     // console.log(error)
-  //     // setDeleteUserResponseMessage('error')
-  //     return error.data
-  //   }
-  // }
 
   console.log(numberOfChosenResponses)
 
@@ -169,15 +148,8 @@ const Admin = () => {
 
     <div className='admin-graphs'>
       <div className='admin-bar-charts'>
-
-        {/* /// trying to put graohs in card */}
-        {/* <div className='bar-chart-connections'> */}
-            {ConnectionsStats({connectionAndSurveyStats})}
-        {/* </div> */}
-        {/* <div className='bar-chart-surveys'> */}
-            {SurveysStats({connectionAndSurveyStats})}
-        {/* </div> */}
-        
+        {ConnectionsStats({connectionAndSurveyStats})}
+        {SurveysStats({connectionAndSurveyStats})}
       </div>
         {/* {AgeRangeStats({usersAgeRange})} */}
     </div>
@@ -188,7 +160,6 @@ const Admin = () => {
             {HandleUsersCard({
               buttonText: "Delete User",
               boxTitle: "Enter User's Email",
-              // handle_submit: handle_delete_user_submit
               })}
         </div>
 
