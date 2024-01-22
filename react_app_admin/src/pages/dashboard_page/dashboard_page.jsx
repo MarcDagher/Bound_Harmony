@@ -34,7 +34,6 @@ const Dashboard = () => {
       headerValue: `Bearer ${token}`
     })
     .then((value) => {
-      // console.log(value.data)
       setconnectionAndSurveyStats({
         number_of_connections : value.data['number of connections'] ,
         accepted_connections : value.data['accepted connections'],
@@ -56,7 +55,6 @@ const Dashboard = () => {
       method: 'GET',
       headerValue: `Bearer ${token}`
     }).then((value) => {
-      // console.log(value.data)
       setUsersAgeRange({
         above_35 : value.data['above_35'],
         below_18 : value.data['below_18'],
@@ -74,11 +72,10 @@ const Dashboard = () => {
   useEffect(() => {
     try {
       getConnectionAndSurveyStats()
-      // console.log("in connectionAndSurveyStats")
+    
     } catch (error) {
-      console.log(error)
+      // console.log(error)
     }
-    // console.log(connectionAndSurveyStats)
   } ,[token])
 
  
@@ -86,15 +83,11 @@ const Dashboard = () => {
   useEffect( () => {
     try {
       getUsersAgeRange()
-      // console.log("in user age range")
     } catch (error) {
-      console.log(error)
+      // console.log(error)
     }
-    // console.log(usersAgeRange)
   },[token])
 
-
-  // console.log(numberOfChosenResponses)
 
   return <>
   <div className='admin-wrapper'>
@@ -125,10 +118,13 @@ const Dashboard = () => {
 
         <div className='admin-graphs'>
           <div className='admin-bar-charts'>
-            {ConnectionsStats({connectionAndSurveyStats})}
-            {SurveysStats({connectionAndSurveyStats})}
+            <div className="admin-bar-chart">
+                {ConnectionsStats({connectionAndSurveyStats})}
+            </div>
+            <div className="admin-bar-chart">
+                {SurveysStats({connectionAndSurveyStats})}
+            </div>
           </div>
-            {/* {AgeRangeStats({usersAgeRange})} */}
         </div>
 
     </div>

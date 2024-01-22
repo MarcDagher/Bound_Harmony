@@ -12,14 +12,21 @@ export default function SurveysStats({connectionAndSurveyStats}) {
         label: 'count (per user)',
       },
     ],
-    width: 600,
+    width: 585,
     height: 300,
     sx: {
       [`.${axisClasses.left} .${axisClasses.label}`]: {
-        transform: 'translate(-20px, 0)',
+        transform: 'translate(0px, 0)',
       },
     },
   };
+    // Media query for medium screens
+    // const mediumScreenQuery = '@media (min-width: 768px)';
+    // chartSetting.width = 400; // Adjust width for medium screens
+  
+    // // Media query for large screens
+    // const largeScreenQuery = '@media (min-width: 1024px)';
+    // chartSetting.width = 500; // Adjust width for large screens
 
   const dataset = [
     {
@@ -29,8 +36,6 @@ export default function SurveysStats({connectionAndSurveyStats}) {
     },
   ];
 
-  // console.log("Inside function")
-  // console.log(connectionAndSurveyStats)
   return (
     <BarChart
       dataset={dataset}

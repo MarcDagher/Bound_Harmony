@@ -12,11 +12,11 @@ export default function ConnectionsStats({connectionAndSurveyStats}) {
         label: 'count (per request)',
       },
     ],
-    width: 600,
+    width: 585,
     height: 300,
     sx: {
       [`.${axisClasses.left} .${axisClasses.label}`]: {
-        transform: 'translate(-20px, 0)',
+        transform: 'translate(-0px, 0)',
       },
     },
   };

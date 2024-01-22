@@ -1,6 +1,6 @@
 .admin-sidebar{
   width: 100%;
-  max-width: 140px;
+  max-width: 150px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -18,5 +18,5 @@
 .users:hover,
 .survey-responses:hover{
   cursor: pointer;
-  color: #2e2e2e;
+  color: #cccccc;
 }
