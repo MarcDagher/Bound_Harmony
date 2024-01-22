@@ -130,19 +130,19 @@ const Admin = () => {
   <div className='admin-stat-cards'>
 
     <div className='number-of-users'>
-      <img src="/user.png" alt="user" />
+      <img src="/images/user.png" alt="user" />
       <p>Number of Users</p>
       <p>{usersAgeRange['total_users']}</p>
     </div>
 
     <div className='number-of-answered-surveys'>
-      <img src="/carousel.png" alt="survey" />
+      <img src="/images/carousel.png" alt="survey" />
       <p>Number of Surveys Answered</p>
       <p>{connectionAndSurveyStats['all_survey_responses']}</p>
     </div>
 
     <div className='number-of-connections'>
-      <img src="/friend-request.png" alt="request" />
+      <img src="/images/friend-request.png" alt="request" />
       <p>Number of Connection Requests</p>
       <p>{connectionAndSurveyStats['number_of_connections']}</p>
     </div>
