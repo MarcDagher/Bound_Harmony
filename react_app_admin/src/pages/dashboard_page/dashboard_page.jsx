@@ -124,7 +124,7 @@ const Dashboard = () => {
     </div>
 
     <div className="admin-stats-col-container">
-
+      <p>Dashboard</p>
       <div className='admin-stat-cards'>
 
         <div className='number-of-users'>
