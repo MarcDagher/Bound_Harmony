@@ -117,7 +117,19 @@ const Admin = () => {
     // console.log(usersAgeRange)
   },[token])
 
-  
+  const handle_submit_delete_user = (email) => {
+    try {
+      const response = send_request({
+        route: "/delete_user",
+        body: email,
+        method: "POST",
+        headerValue: `Bearer ${token}`
+      })
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   // console.log(numberOfChosenResponses)
 
