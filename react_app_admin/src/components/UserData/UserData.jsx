@@ -89,8 +89,8 @@ const handle_restore_user = async (email) => {
                 <p>{deletad_at === "null" ? "" : "DELETED"}</p>
             </div>
             <div className="user-data-buttons">
-              <img src="" alt="" />
-              <img src="" alt="" />
+              <img src="images/trash.png" alt="trash" />
+              <img src="images/back-arrow.png" alt="" />
             </div>
         </div>
 
