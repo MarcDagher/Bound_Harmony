@@ -15,6 +15,9 @@ const SideBar = () => {
         <div className="survey-responses">
             <span onClick={() => navigate('/survey_responses')}>Survey Responses</span>
         </div>
+        <div className="logout">
+            <span onClick={() => navigate('/')}>Logout</span>
+        </div>
     </div>
   </>
 }

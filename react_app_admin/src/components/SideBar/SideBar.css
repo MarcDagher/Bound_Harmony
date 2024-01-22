@@ -16,7 +16,8 @@
 
 .dashboard:hover,
 .users:hover,
-.survey-responses:hover{
+.survey-responses:hover,
+.logout:hover{
   cursor: pointer;
   color: #cccccc;
 }
