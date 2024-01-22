@@ -123,7 +123,7 @@ const Admin = () => {
   return <>
   {ConnectionsStats({connectionAndSurveyStats})}
   {SurveysStats({connectionAndSurveyStats})}
-  {AgeRangeStats()}
+  {AgeRangeStats({usersAgeRange})}
   </>
 }
 
