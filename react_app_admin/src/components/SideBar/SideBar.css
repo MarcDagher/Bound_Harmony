@@ -16,3 +16,10 @@
   letter-spacing: 2px;
   /* word-spacing: 5px;  */
 }
+
+.dashboard:hover,
+.users:hover,
+.survey-responses:hover{
+  cursor: pointer;
+  color: #2e2e2e;
+}
