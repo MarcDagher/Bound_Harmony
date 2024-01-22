@@ -43,11 +43,14 @@ const handle_restore_user = async (email) => {
     <div className="user-data-container">
         <div className="user-data-with-buttons" style={{ backgroundColor: deletedUser === "null" ? "white" : "var(--red)"}}>
             <div className="user-data-container-cards">
-                <p style={{ color : deletedUser === "null" ? "var(--darkGrey)" : "white"}}>Name: {username}</p>
-                <p style={{ color : deletedUser === "null" ? "var(--darkGrey)" : "white"}}>Email: {email}</p>
+                <p style={{ color : deletedUser === "null" ? "var(--darkGrey)" : "white"}}>
+                 <span className="user-data-name">Name: </span>{username}</p>
+
+                <p style={{ color : deletedUser === "null" ? "var(--darkGrey)" : "white"}}>
+                 <span className="user-data-email">Email: </span>{email}</p>
             </div>
             <div className="user-data-buttons">
-              <img className="arrow" src="images/back-arrow.png" alt="arrow" onClick={() => handle_restore_user(email)}/>
+              <img className="arrow" src="images/add-user.png" alt="arrow" onClick={() => handle_restore_user(email)}/>
               <img className="trash" src="images/trash.png" alt="trash" onClick={() => handle_delete_user(email)} />
             </div>
         </div>

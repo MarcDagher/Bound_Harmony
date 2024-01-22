@@ -26,7 +26,6 @@ const Users = () => {
     }
   },[])
 
-  // console.log(listOfUsers)
 
   return <>
   <div className="users-wrapper">
