@@ -7,6 +7,7 @@ import BasicBars from '../../components/BasicBarchart/BasicBarChart';
 import ConnectionsStats from '../../components/DatasetBarCharts/ConnectionsStats';
 import SurveysStats from '../../components/DatasetBarCharts/SurveysStats';
 import AgeRangeStats from '../../components/PieChart/AgeRangeStats';
+import HandleUsersCard from '../../components/HandleUserCard/HandleUserCard';
 
 const Admin = () => {
 
@@ -168,11 +169,11 @@ const Admin = () => {
     <div className='admin-handle-user-cards'>
 
         <div className='delete-user'>
-
+            {HandleUsersCard()}
         </div>
 
         <div className='restore-user'>
-
+            {HandleUsersCard()}
         </div>
 
     </div>
