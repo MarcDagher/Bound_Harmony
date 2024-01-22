@@ -87,7 +87,7 @@ const HandleUsersCard = ({buttonText, boxTitle}) => {
               {setDeleteUserResponseMessage !== "" ? <p className="error_message">{deleteUserResponseMessage}</p>  : null}
             </div>
             <button type="button" onClick={() => {
-              buttonText === "Delete User" ? handle_delete_user(formEmail) : handle_restore_user(formEmail)
+              buttonText === "Delete" ? handle_delete_user(formEmail) : handle_restore_user(formEmail)
               }}>{buttonText}</button>
     </div>
   </>
