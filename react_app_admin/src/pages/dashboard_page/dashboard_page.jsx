@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import './admin_page.css';
+import './dashboard_page.css';
 import send_request from "../../configurations/request_function";
 import ConnectionsStats from '../../components/DatasetBarCharts/ConnectionsStats';
 import SurveysStats from '../../components/DatasetBarCharts/SurveysStats';
 import HandleUsersCard from '../../components/HandleUserCard/HandleUserCard';
 
-const Admin = () => {
+const Dashboard = () => {
 
   const [connectionAndSurveyStats, setconnectionAndSurveyStats] = useState({
     all_survey_responses : 0,
@@ -176,4 +176,4 @@ const Admin = () => {
   </>
 }
 
-export default Admin;
+export default Dashboard;

@@ -36,7 +36,7 @@ const handle_submit = async (email, password) => {
       setSuccessMessage('success')
       localStorage.setItem('token', response.data['authorisation']['token'])
       localStorage.setItem('user_data', response.data['user'])
-      navigate('/admin')
+      navigate('/dashboard')
     }
     
     // console.log(response)
