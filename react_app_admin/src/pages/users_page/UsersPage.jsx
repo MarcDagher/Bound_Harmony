@@ -36,7 +36,7 @@ const Users = () => {
         {listOfUsers &&
         Object.entries(listOfUsers).map((user) => (
 
-          <div key={user.id} className='delete-user'>
+          <div key={user.id} className='user-data-cards'>
             {<HandleUsersCard  
                 username={user[1]['username']}
                 user_id={user[1]['id']}

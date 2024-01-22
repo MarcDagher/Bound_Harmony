@@ -81,11 +81,18 @@ const handle_restore_user = async (email) => {
 }
 
   return <>
-    <div className="admin-box-container">
-            <p>{boxTitle}</p>
-            <div className="admin-input-container">
-
+    <div className="user-data-container">
+        <div className="user-data-with-buttons">
+            <div className="user-data-container-cards">
+                <p>Name: {username}</p>
+                <p>Email: {email}</p>
+                <p>{deletad_at === "null" ? "" : "DELETED"}</p>
             </div>
+            <div className="user-data-buttons">
+              
+            </div>
+        </div>
+
     </div>
   </>
 }
