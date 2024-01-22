@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import './admin_page.css';
 import send_request from "../../configurations/request_function";
-import BarsDataset from '../../components/DatasetBarCharts/ConnectionsStats';
-import { BarChart } from '@mui/x-charts';
-import BasicBars from '../../components/BasicBarchart/BasicBarChart';
+// import BarsDataset from '../../components/DatasetBarCharts/ConnectionsStats';
+// import { BarChart } from '@mui/x-charts';
+// import BasicBars from '../../components/BasicBarchart/BasicBarChart';
 import ConnectionsStats from '../../components/DatasetBarCharts/ConnectionsStats';
 import SurveysStats from '../../components/DatasetBarCharts/SurveysStats';
-import AgeRangeStats from '../../components/PieChart/AgeRangeStats';
+// import AgeRangeStats from '../../components/PieChart/AgeRangeStats';
 import HandleUsersCard from '../../components/HandleUserCard/HandleUserCard';
 
 const Admin = () => {
@@ -117,7 +117,7 @@ const Admin = () => {
     // console.log(usersAgeRange)
   },[token])
 
-  const handle_submit_delete_user = (email) => {
+  const handle_delete_user_submit = ({email}) => {
     try {
       const response = send_request({
         route: "/delete_user",
@@ -183,7 +183,8 @@ const Admin = () => {
         <div className='delete-user'>
             {HandleUsersCard({
               buttonText: "Delete User",
-              boxTitle: "Enter User's Email"
+              boxTitle: "Enter User's Email",
+              handle_submit: handle_delete_user_submit
               })}
         </div>
 

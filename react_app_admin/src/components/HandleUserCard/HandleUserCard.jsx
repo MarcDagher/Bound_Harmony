@@ -1,14 +1,14 @@
 import { useState } from "react"
 import "./HandleUserCard.css"
 
-const HandleUsersCard = ({buttonText, boxTitle}) => {
+const HandleUsersCard = ({buttonText, boxTitle, handle_submit}) => {
 
   const [formEmail, setFormEmail] = useState("")
 
   const handle_change = (value) => {
     setFormEmail(value)
   }
-  console.log(formEmail)
+  // console.log(formEmail)
 
   return <>
     <div className="admin-box-container">
@@ -18,7 +18,7 @@ const HandleUsersCard = ({buttonText, boxTitle}) => {
               {/* {errorMessage !== "" ? <p className="error_message">{errorMessage}</p>  : null} */}
               {/* {successMessage !== "" ? <p className="error_message">{successMessage}</p>  : null} */}
             </div>
-            <button type="button" >{buttonText}</button>
+            <button type="button" onClick={() => handle_submit({email: formEmail})}>{buttonText}</button>
     </div>
   </>
 }
