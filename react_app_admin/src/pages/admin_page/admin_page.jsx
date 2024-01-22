@@ -117,9 +117,9 @@ const Admin = () => {
     // console.log(usersAgeRange)
   },[token])
 
-  // const Bar = BarsDataset()
+  
 
-  console.log(numberOfChosenResponses)
+  // console.log(numberOfChosenResponses)
 
   return <>
   <div className='admin-wrapper'>
