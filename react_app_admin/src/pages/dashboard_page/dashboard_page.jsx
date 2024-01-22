@@ -3,7 +3,8 @@ import './dashboard_page.css';
 import send_request from "../../configurations/request_function";
 import ConnectionsStats from '../../components/DatasetBarCharts/ConnectionsStats';
 import SurveysStats from '../../components/DatasetBarCharts/SurveysStats';
-import HandleUsersCard from '../../components/HandleUserCard/HandleUserCard';
+import SideBar from '../../components/SideBar/SideBar';
+
 
 const Dashboard = () => {
 
@@ -118,19 +119,7 @@ const Dashboard = () => {
 
   return <>
   <div className='admin-wrapper'>
-    
-    <div className='admin-sidebar'>
-        <div className="dashboard">
-            <span>Dashboard</span>
-        </div>
-        <div className="users">
-            <span>Users</span>
-        </div>
-        <div className="survey-responses">
-            <span>Survey Responses</span>
-        </div>
-    </div>
-
+    {<SideBar/>}
     <div className="admin-stats-col-container">
       <p>Dashboard</p>
       <div className='admin-stat-cards'>
