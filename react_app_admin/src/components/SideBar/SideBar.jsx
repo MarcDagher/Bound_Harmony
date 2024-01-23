@@ -26,15 +26,24 @@ const SideBar = () => {
   return <>
       <div className='admin-sidebar'>
 
-        <div className="dashboard" style={{backgroundColor: currentLocation === "dashboard" ? "rgb(56, 56, 56)" : null}}>
+        <div className="dashboard" style={{
+          backgroundColor: currentLocation === "dashboard" ? "rgb(56, 56, 56)" : null,
+          color:  currentLocation === "dashboard" ? "#cccccc" : null
+          }}>
             <span onClick={() => {navigate('/dashboard')}  }>Dashboard</span>
         </div>
 
-        <div className="users" style={{backgroundColor: currentLocation === "users" ? "rgb(56, 56, 56)" : null}}>
+        <div className="users" style={{
+          backgroundColor: currentLocation === "users" ? "rgb(56, 56, 56)" : null,
+          color:  currentLocation === "users" ? "#cccccc" : null
+          }}>
             <span onClick={() => navigate('/users')}>Users</span>
         </div>
 
-        <div className="survey-responses" style={{backgroundColor: currentLocation === "survey_responses" ? "rgb(56, 56, 56)" : null}}>
+        <div className="survey-responses" style={{
+          backgroundColor: currentLocation === "survey_responses" ? "rgb(56, 56, 56)" : null,
+          color:  currentLocation === "survey_responses" ? "#cccccc" : null
+          }}>
             <span onClick={() => navigate('/survey_responses')}>Survey Responses</span>
         </div>
 
