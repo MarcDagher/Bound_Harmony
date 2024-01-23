@@ -6,6 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 50px;
 }
 
 .box-container{
@@ -100,3 +101,4 @@
   color: rgb(228, 63, 57);
   padding-top: 5px;
 }
+

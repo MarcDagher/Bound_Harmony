@@ -52,8 +52,8 @@ const handle_submit = async (email, password) => {
             <p>Welcome Back</p>
           </div>
           <div className="input-container">
-            <input type="text" name="email" id="email" placeholder="email" onChange={(e) => {handle_change("email", e.target.value)}}/>
-            <input type="password" name="password" id="password" placeholder="password" onChange={(e) => {handle_change("password", e.target.value)}}/>
+            <input type="text" name="email" id="email" placeholder="Email" onChange={(e) => {handle_change("email", e.target.value)}}/>
+            <input type="password" name="password" id="password" placeholder="Password" onChange={(e) => {handle_change("password", e.target.value)}}/>
             {errorMessage !== "" ? <p className="error_message">{errorMessage}</p>  : null}
             {successMessage !== "" ? <p className="error_message">{successMessage}</p>  : null}
           </div>
