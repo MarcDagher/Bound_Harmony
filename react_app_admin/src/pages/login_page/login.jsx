@@ -18,38 +18,30 @@ const handle_change = (name, value) => {
 
 const handle_submit = async (email, password) => {
   
-  try {
-    const response = await send_request({
-      route: "/login",
-      body: {
-        'email' : email,
-        'password' : password
-      },
-      method: "POST"
-    })
-
-    if (formData['email'] !== "admin123@hotmail.com"){ // validate returned response not htis
-      setSuccessMessage('')
-      setErrorMessage('Invalid Entry')
-    } else {
-      setErrorMessage('')
-      setSuccessMessage('success')
-      localStorage.setItem('token', response.data['authorisation']['token'])
-      localStorage.setItem('user_data', response.data['user'])
-      navigate('/dashboard')
-    }
-    
-    // console.log(response)
-    
-  } catch (error) {
+  if (formData['password'] === "" || formData['email'] === "") {
+    setErrorMessage('All fields are required')
     setSuccessMessage('')
-    if (formData['password'] === "" || formData['email'] === "") {
-      setErrorMessage('All fields are required')
-    } else {
+  } else {
+    try {
+      const response = await send_request({
+        route: "/signin",
+        body: {
+          'email' : email,
+          'password' : password
+        },
+        method: "POST"
+      })
+      setErrorMessage('')
+      setSuccessMessage('Success')
+      localStorage.setItem('token', response.data['token'])
+      navigate('/dashboard')
+    } catch (error) {
+      setSuccessMessage('')
       setErrorMessage('Wrong credentials')
+      // console.log(`error in handle_submit ${error}`)
     }
-    console.log(`error in handle_submit ${error}`)
   }
+
 }
 
   return <>
