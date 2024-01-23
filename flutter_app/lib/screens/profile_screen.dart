@@ -33,7 +33,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       body: SafeArea(
         child: AnnotatedRegion(
-          value: const SystemUiOverlayStyle(statusBarColor: Colors.white),
+          value: SystemUiOverlayStyle(
+              systemNavigationBarDividerColor: Colors.blue,
+              statusBarColor: Theme.of(context).primaryColor),
           child: SingleChildScrollView(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             padding: const EdgeInsets.symmetric(horizontal: 25),

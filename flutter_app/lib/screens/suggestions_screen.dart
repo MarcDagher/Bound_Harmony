@@ -1,6 +1,7 @@
 import 'package:bound_harmony/providers/suggestions_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/navigation_box.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 

@@ -34,7 +34,8 @@ class _LogInScreenState extends State<LogInScreen> {
 
     return Scaffold(
       body: AnnotatedRegion(
-        value: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+        value: SystemUiOverlayStyle(
+            statusBarColor: Theme.of(context).primaryColor),
         child: SafeArea(
             child: SizedBox(
           height: MediaQuery.of(context).size.height,
