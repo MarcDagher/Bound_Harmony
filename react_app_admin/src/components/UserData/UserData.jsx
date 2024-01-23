@@ -40,29 +40,32 @@ const handle_restore_user = async (email) => {
 }
 
   return <>
-    {/* <div className="user-data-container"> */}
-        {/* <div className="user-data-with-buttons" style={{ backgroundColor: deletedUser === "null" ? "white" : "var(--red)"}}> */}
+          <td style={{ 
+            color : deletedUser === "null" ? "var(--darkGrey)" : "var(--red)",
+            // backgroundColor : deletedUser === "null" ?  null : "var(--darkGrey)" 
+            }}>{user_id}</td> 
 
-            {/* <div className="user-data-container-cards"> */}
-              <td>{user_id}</td> 
+          <td style={{ 
+            color : deletedUser === "null" ? "var(--darkGrey)" : "var(--red)",
+            // backgroundColor : deletedUser === "null" ?  null : "var(--darkGrey)" 
+            }}>{username}</td>
 
-              <td style={{ color : deletedUser === "null" ? "var(--darkGrey)" : "white"}}>
-                <span className="user-data-name"></span>{username}</td>
+          <div className="email-button-row">
+            <td style={{
+                color : deletedUser === "null" ? "var(--darkGrey)" : "var(--red)",
+              //  backgroundColor : deletedUser === "null" ?  null : "var(--darkGrey)" 
+                }}>{email}</td>
 
-              <td style={{ color : deletedUser === "null" ? "var(--darkGrey)" : "white"}}>
-                <span className="user-data-email"></span>{email}</td>
-            {/* </div> */}
+            {deletedUser !== "null" ?
+              <img className="arrow" src="images/add-user.png" alt="arrow" 
+                onClick={() => handle_restore_user(email)} 
+              /> : null}
 
-            <div className="user-data-buttons">
-              {deletedUser !== "null" ? <img className="arrow" src="images/add-user.png" alt="arrow" 
-              onClick={() => handle_restore_user(email)}/> : null}
-              
-              {deletedUser === "null" ? <img className="trash" src="images/trash.png" alt="trash" 
-              onClick={() => handle_delete_user(email)} /> : null}
-            </div>
-
-        {/* </div> */}
-    {/* </div> */}
+            {deletedUser === "null" ? 
+              <img className="trash" src="images/trash.png" alt="trash" 
+                onClick={() => handle_delete_user(email)} 
+                /> : null}
+          </div>
   </>
 }
 

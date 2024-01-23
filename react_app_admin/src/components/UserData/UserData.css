@@ -2,49 +2,16 @@ td{
   color: var(--darkGrey);
   font-weight: 400;
   padding: 10px;
-}
-
-
-/* .user-data-container{
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.user-data-container-cards{
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  gap: 15px;
-}
-
-.user-data-with-buttons{
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  border-radius: 5px ;
-  padding: 15px;
-  margin-bottom: 5px;
-  box-shadow:  0 1px 5px ;
-}
-
-.user-data-buttons{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 15px;
-}
-
-
-.user-data-email,
-.user-data-name{
   font-weight: 600;
-} */
+}
+
+.email-button-row{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 10px;
+}
 
 .arrow{
   height: 25px;
