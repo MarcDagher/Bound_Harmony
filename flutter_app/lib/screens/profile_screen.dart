@@ -386,7 +386,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ///
                 TextButton.icon(
                     onPressed: () async {
-                      await context.read<UserProvider>().remove_image();
+                      await context.read<UserProvider>().removeImage();
                       _image = null;
                     },
                     icon: const Icon(Icons.highlight_remove_sharp,

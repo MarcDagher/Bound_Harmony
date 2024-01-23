@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:bound_harmony/configurations/request.configuration.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -95,7 +94,7 @@ class UserProvider extends ChangeNotifier {
     }
   }
 
-  Future remove_image() async {
+  Future removeImage() async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
     final SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -108,9 +107,8 @@ class UserProvider extends ChangeNotifier {
         image = "";
         notifyListeners();
       }
-      print("In remove_image: ${response}");
     } catch (error) {
-      print("In remove_image: ${error}");
+      // print("In remove_image: ${error}");
     }
   }
 
@@ -120,5 +118,7 @@ class UserProvider extends ChangeNotifier {
 
     newDefaultLocation = "";
     newLocationSuccess = false;
+
+    image = "";
   }
 }
