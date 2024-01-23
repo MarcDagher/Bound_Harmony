@@ -40,32 +40,24 @@ const handle_restore_user = async (email) => {
 }
 
   return <>
-          <td style={{ 
-            color : deletedUser === "null" ? "var(--darkGrey)" : "var(--red)",
-            // backgroundColor : deletedUser === "null" ?  null : "var(--darkGrey)" 
-            }}>{user_id}</td> 
+    {/* user id */}
+    <td style={{ 
+      color : deletedUser === "null" ? "var(--darkGrey)" : "var(--red)"}}>{user_id}</td> 
 
-          <td style={{ 
-            color : deletedUser === "null" ? "var(--darkGrey)" : "var(--red)",
-            // backgroundColor : deletedUser === "null" ?  null : "var(--darkGrey)" 
-            }}>{username}</td>
+    {/* username */}
+    <td style={{ 
+      color : deletedUser === "null" ? "var(--darkGrey)" : "var(--red)"}}>{username}</td>
+      
+    {/* email */}
+    <div className="email-button-row">
+      <td style={{color : deletedUser === "null" ? "var(--darkGrey)" : "var(--red)"}}>{email}</td>
 
-          <div className="email-button-row">
-            <td style={{
-                color : deletedUser === "null" ? "var(--darkGrey)" : "var(--red)",
-              //  backgroundColor : deletedUser === "null" ?  null : "var(--darkGrey)" 
-                }}>{email}</td>
+      {deletedUser !== "null" ?
+        <img className="arrow" src="images/add-user.png" alt="arrow" onClick={() => handle_restore_user(email)} /> : null}
 
-            {deletedUser !== "null" ?
-              <img className="arrow" src="images/add-user.png" alt="arrow" 
-                onClick={() => handle_restore_user(email)} 
-              /> : null}
-
-            {deletedUser === "null" ? 
-              <img className="trash" src="images/trash.png" alt="trash" 
-                onClick={() => handle_delete_user(email)} 
-                /> : null}
-          </div>
+      {deletedUser === "null" ? 
+        <img className="trash" src="images/trash.png" alt="trash" onClick={() => handle_delete_user(email)} /> : null}
+    </div>
   </>
 }
 
