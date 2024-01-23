@@ -68,6 +68,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  gap: 5px;
 }
 
 .admin-bar-chart{
@@ -109,7 +110,7 @@
   }
 }
 
-@media (max-width: 990px){
+@media (max-width: 1096px){
 
   .admin-wrapper{
     width: 100%;
