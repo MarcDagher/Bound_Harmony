@@ -9,7 +9,7 @@ const [deletedUser, setDeletedUser] = useState(deleted_at)
 const handle_delete_user = async (email) => {
       try {
       const token = localStorage.getItem('token')
-      const response = await send_request({
+      await send_request({
         route: "/delete_user",
         body: {"email" : email},
         method: "POST",
@@ -47,7 +47,7 @@ const handle_restore_user = async (email) => {
     {/* username */}
     <td style={{ 
       color : deletedUser === "null" ? "var(--darkGrey)" : "var(--red)"}}>{username}</td>
-      
+
     {/* email */}
     <div className="email-button-row">
       <td style={{color : deletedUser === "null" ? "var(--darkGrey)" : "var(--red)"}}>{email}</td>

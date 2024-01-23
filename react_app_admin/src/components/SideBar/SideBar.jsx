@@ -4,6 +4,8 @@ import send_request from "../../configurations/request_function"
 const SideBar = () => {
 
   const navigate = useNavigate()
+  
+  // background-color: rgb(56, 56, 56);
 
   const logout = async () => {
     const token = localStorage.getItem('token')
@@ -20,10 +22,11 @@ const SideBar = () => {
       // console.log(error)
     }
   }
+
   return <>
       <div className='admin-sidebar'>
         <div className="dashboard">
-            <span onClick={() => navigate('/dashboard')}>Dashboard</span>
+            <span onClick={() => {navigate('/dashboard')}  }>Dashboard</span>
         </div>
         <div className="users">
             <span onClick={() => navigate('/users')}>Users</span>
