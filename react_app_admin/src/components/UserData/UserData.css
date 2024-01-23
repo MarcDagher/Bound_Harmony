@@ -1,3 +1,10 @@
+td{
+  color: var(--darkGrey);
+  font-weight: 400;
+  padding: 10px;
+}
+
+
 /* .user-data-container{
   height: 100%;
   width: 100%;

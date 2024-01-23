@@ -30,7 +30,7 @@ const Users = () => {
   return <>
   <div className="users-wrapper">
     {<SideBar />}
-    <div className='admin-handle-user-cards'>
+    <div className='admin-table-container'>
         <p>Users</p>
         <table>
           <tr>
@@ -41,7 +41,7 @@ const Users = () => {
 
           {listOfUsers &&
           Object.entries(listOfUsers).map((user) => (
-            <tr key={user.id} className='user-data-cards'>
+            <tr key={user.id}>
               {<UserData  
                   username={user[1]['username']}
                   user_id={user[1]['id']}
