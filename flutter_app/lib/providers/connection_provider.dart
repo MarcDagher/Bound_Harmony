@@ -77,8 +77,8 @@ class ConnectionProvider extends ChangeNotifier {
         currentPartner = true;
       }
     } on DioException catch (error) {
-      print(
-          "in provider displayIncomingRequests: ${error.response!.statusCode}");
+      // print(
+      //     "in provider displayIncomingRequests: ${error.response!.statusCode}");
     }
 
     notifyListeners();
@@ -111,8 +111,7 @@ class ConnectionProvider extends ChangeNotifier {
         notifyListeners();
       }
     } on DioException catch (error) {
-      /// When i got error status 302,i'm not sure what the error is. I refresh cntrl + s in connection provider and it works
-      print("In respondToRequest: $error");
+      // print("In respondToRequest: $error");
       if (error.response?.statusCode == 302) {
         sendResponseFail = true;
         failedResponseMessage =
@@ -145,7 +144,7 @@ class ConnectionProvider extends ChangeNotifier {
       }
       // print(response.data["connections"][0]["status"]);
     } on DioException catch (error) {
-      print("In getPartners provider: $error");
+      // print("In getPartners provider: $error");
     }
 
     notifyListeners();
@@ -171,7 +170,7 @@ class ConnectionProvider extends ChangeNotifier {
         notifyListeners();
       }
     } on DioException catch (error) {
-      print("Error: $error");
+      // print("Error: $error");
     }
   }
 

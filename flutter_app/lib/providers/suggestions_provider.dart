@@ -59,11 +59,9 @@ class SuggestionsProvider extends ChangeNotifier {
           }
           notifyListeners();
         }
-
-        print(response.data);
       }
     } on DioException catch (error) {
-      print("In suggestions provider error: ${error}");
+      // print("In suggestions provider error: ${error}");
     }
   }
 

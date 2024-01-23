@@ -115,19 +115,3 @@ class SuggestionsScreen extends StatelessWidget {
     );
   }
 }
-//////// ON CLICK - GO TO Date Bonding Activities
-                // buildSuggestionBox(
-                //     'Bonding Activities',
-                //     const Color.fromARGB(255, 241, 214, 174),
-                //     const Color.fromARGB(255, 236, 55, 70),
-                //     'Bonding Activities',
-                //     context),
-                // const SizedBox(height: 15),
-
-                // //////// ON CLICK - GO TO Date Bonding Activities
-                // buildSuggestionBox(
-                //     'Gift Ideas',
-                //     const Color.fromARGB(255, 150, 200, 180),
-                //     const Color.fromARGB(255, 50, 120, 150),
-                //     'Gift Ideas',
-                //     context),

@@ -41,7 +41,7 @@ class MessagesProvider extends ChangeNotifier {
         notifyListeners();
       }
     } on DioException catch (error) {
-      print("In getConversation: $error");
+      // print("In getConversation: $error");
     }
   }
 
@@ -67,7 +67,7 @@ class MessagesProvider extends ChangeNotifier {
         notifyListeners();
       }
     } on DioException catch (error) {
-      print("In sendMessage() error: $error");
+      // print("In sendMessage() error: $error");
       conversation.remove(userMessage);
       somethingWentWrong = "Something went worng, please try sending again";
       notifyListeners();

@@ -117,7 +117,7 @@ class AuthProvider extends ChangeNotifier {
           options: Options(headers: {"authorization": "Bearer $token"}));
       clearAuthProviderVariables();
     } on DioException catch (error) {
-      print(error);
+      // print(error);
     }
   }
 

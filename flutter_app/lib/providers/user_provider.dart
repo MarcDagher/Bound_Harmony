@@ -27,7 +27,7 @@ class UserProvider extends ChangeNotifier {
         notifyListeners();
       }
     } catch (e) {
-      print(e);
+      // print(e);
     }
   }
 
@@ -45,7 +45,7 @@ class UserProvider extends ChangeNotifier {
         notifyListeners();
       }
     } catch (e) {
-      print(e);
+      // print(e);
     }
   }
 
@@ -69,7 +69,7 @@ class UserProvider extends ChangeNotifier {
             },
           ));
     } catch (e) {
-      print("In saveImage error: $e");
+      // print("In saveImage error: $e");
     }
   }
 
@@ -78,19 +78,19 @@ class UserProvider extends ChangeNotifier {
     final dio = Dio();
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     final token = preferences.get('token');
-    print("WE'RE INSIDE GET IMAGE");
+    // print("WE'RE INSIDE GET IMAGE");
     try {
       final response = await dio.get("$baseUrl/get_profile_photo",
           options: Options(
               headers: {"authorization": "Bearer $token"},
               contentType: "application/json"));
 
-      print("in getImage response: ${response.data}");
+      // print("in getImage response: ${response.data}");
 
       final image = base64Decode(response.data["image"]);
-      print(image);
+      // print(image);
     } on DioException catch (error) {
-      print("in getImage: ${error}");
+      // print("in getImage: ${error}");
     }
   }
 

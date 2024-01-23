@@ -51,7 +51,7 @@ class SurveysProvider extends ChangeNotifier {
         couplesSurveyRejected = true;
         notifyListeners();
       }
-      print("In getSurvey error: $error");
+      // print("In getSurvey error: $error");
     }
   }
 
@@ -80,7 +80,7 @@ class SurveysProvider extends ChangeNotifier {
         notifyListeners();
       }
     } on DioException catch (error) {
-      print(error);
+      // print(error);
     }
   }
 
@@ -117,7 +117,7 @@ class SurveysProvider extends ChangeNotifier {
       successSavingCouplesSurveyResponse = true;
       notifyListeners();
     } on DioException catch (error) {
-      print("In provider, error: $error");
+      // print("In provider, error: $error");
     }
   }
 
