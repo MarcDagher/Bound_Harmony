@@ -22,7 +22,7 @@ const Users = () => {
     try {
       get_all_users().then((value) => setListOfUsers(value.data.users))
     } catch (error) {
-      console.log(error)
+      // console.log(error)
     }
   },[])
 

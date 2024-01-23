@@ -35,11 +35,12 @@ th{
 }
 
 table > tr:nth-child(odd){
-  background-color: rgba(240, 240, 240, 0.555);
+  background-color: rgb(226, 226, 226);
+  box-shadow: 0 2px 2px;
 }
 
 table > tr:nth-child(even){
-  background-color: rgba(240, 240, 240, 0.151);
+  background-color: rgba(240, 240, 240, 0.699);
 }
 
 table > tr:hover{

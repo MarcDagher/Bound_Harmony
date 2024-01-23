@@ -25,16 +25,15 @@ const handle_restore_user = async (email) => {
 
       try {
       const token = localStorage.getItem('token')
-      const response = await send_request({
+      await send_request({
         route: "/restore_deleted_user",
         body: {"email" : email},
         method: "POST",
         headerValue: `Bearer ${token}`
       })
       setDeletedUser('null')
-      console.log(response.data)
     } catch (error) {
-      console.log(error.response)
+      // console.log(error.response)
     }
   
 }
