@@ -1,6 +1,6 @@
 .admin-wrapper{
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: row;
 }
@@ -73,4 +73,38 @@
 .admin-bar-chart{
   border-radius: 5px;
   box-shadow: 0 2px 5px;
+}
+
+@media (max-width: 1350px) {
+
+  .admin-stats-col-container > p:first-of-type{
+    display: none;
+  }
+  
+  .admin-stats-col-container{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+  }
+  .admin-bar-charts{
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 40px;
+  }
+  .admin-stat-cards{
+    flex-direction: column;
+    width: 100%;
+    gap: 0px;
+    justify-content: flex-start;
+  }
+
+.number-of-users, 
+.number-of-answered-surveys,
+.number-of-connections{
+  width: 100%;
+  min-height: 210px;
+  font-size: 22px;
+  margin-bottom: 5px;
+  padding: 10px;
+}
 }
