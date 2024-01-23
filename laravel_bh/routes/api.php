@@ -37,6 +37,7 @@ Route::controller(ProfileController::class)->group(function () {
     Route::post('change_location', 'change_location');
     Route::post('/edit_image', 'edit_image');
     Route::get('/get_profile_photo', 'get_profile_photo');
+    Route::post('/remove_profile_photo', 'remove_profile_photo');
 });
 
 // Incoming Requests - My Partners pages

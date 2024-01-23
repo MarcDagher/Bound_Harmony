@@ -103,4 +103,18 @@ class ProfileController extends Controller
                 ]);
             }
     }
+
+    public function remove_profile_photo(){
+        $user = Auth::user();
+
+        $user_in_db = User::find($user -> id);
+        if($user_in_db){
+            $user_in_db -> profile_pic_url = "no image";
+            // $user_in_db -> save();
+            return response() -> json([
+                "status" => "success",
+                "users_profile_pic" => $user_in_db -> profile_pic_url 
+            ]);
+        }
+    }
 }
