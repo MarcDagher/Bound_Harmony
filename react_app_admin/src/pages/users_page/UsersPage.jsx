@@ -18,6 +18,10 @@ const Users = () => {
     return response
   } 
 
+  const get_profile_photo = async () =>{
+    const response = await send_request({body:{}, })
+  }
+
   useEffect(() => {
     try {
       get_all_users().then((value) => setListOfUsers(value.data.users))

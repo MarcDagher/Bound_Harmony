@@ -258,4 +258,13 @@ class AdminController extends Controller
             ]);
         }
     }
+
+    public function get_user_profile_photo(Request $request){
+        $request -> validate([
+            'user_id' => 'required|integer'
+        ]);
+
+        $user = User::find($request -> id);
+        return $user;
+    }
 }
