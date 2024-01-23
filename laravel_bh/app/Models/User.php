@@ -29,7 +29,8 @@ class User extends Authenticatable implements JWTSubject
         'profile_pic_url',
         'connection_status',
         'couple_survey_status',
-        'personal_survey_status'
+        'personal_survey_status',
+        'first_login'
     ];
 
     
@@ -95,7 +96,8 @@ class User extends Authenticatable implements JWTSubject
             'location'=> $this -> location,
             'image' => $this -> image,
             'connection status' => $this -> connection_status,
-            'couple survey status' => $this -> couple_survey_status
+            'couple survey status' => $this -> couple_survey_status,
+            'first_login' => $this -> first_login
         ];
     }
 
