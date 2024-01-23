@@ -121,7 +121,7 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  void clearAuthProviderVariables() async {
+  Future clearAuthProviderVariables() async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.clear();
     successSignUp = false;

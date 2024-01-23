@@ -174,4 +174,19 @@ class ConnectionProvider extends ChangeNotifier {
       print("Error: $error");
     }
   }
+
+  // Clear all variables on logout
+  void clearConnectionsProviderVariables() {
+    messageSendRequest = "";
+    successSendRequest = null;
+    messageDisplayRequests = "";
+    listOfRequests = null;
+    successDisplayRequests = null;
+    noRequests = null;
+    sendResponseFail = false;
+    failedResponseMessage = "";
+    listOfPartners = [];
+    currentPartner = false;
+    disconnectMessage = "";
+  }
 }
