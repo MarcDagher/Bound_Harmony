@@ -66,4 +66,11 @@ class SuggestionsProvider extends ChangeNotifier {
       print("In suggestions provider error: ${error}");
     }
   }
+
+  void clearSuggestionsProviderVariables() {
+    status = null;
+    failedMessage = null;
+    bondingActivities = [];
+    dates = [];
+  }
 }
