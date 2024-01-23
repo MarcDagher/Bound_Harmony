@@ -52,3 +52,12 @@
 .number-span{
   font-weight: 700;
 }
+
+@media (max-width: 990px){
+  .survey-reponses-wrapper{
+    flex-direction: column;
+  }
+  .survey-responses-cards > p:first-of-type{
+    display: none;
+  }
+}
