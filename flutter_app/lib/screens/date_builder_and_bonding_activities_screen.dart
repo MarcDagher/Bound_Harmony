@@ -114,7 +114,22 @@ class DateBuilderAndBondingActivitiesScreen extends StatelessWidget {
                                   index == value.bondingActivities.length - 1 ||
                               type != "bonding" &&
                                   index == value.dates.length - 1)
-                            Button(text: 'Load More', handlePressed: () {})
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              child: Button(
+                                text: 'Load More',
+                                handlePressed: () async {
+                                  if (type == "date") {
+                                    await getSuggestions("date");
+                                  } else {
+                                    await getSuggestions("bonding");
+                                  }
+                                },
+                                borderAndTextColor:
+                                    Theme.of(context).primaryColor,
+                                color: Colors.white,
+                              ),
+                            )
                         ],
                       );
                     }));
