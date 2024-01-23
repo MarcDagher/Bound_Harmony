@@ -62,16 +62,16 @@ class SuggestionsScreen extends StatelessWidget {
                 ),
 
                 // //////// ON CLICK - GO TO Gift Ideas
-                Expanded(
-                  child: NavigationBox(
-                      navigationButtonColor: Colors.white,
-                      textAndButtonColor: Theme.of(context).hintColor,
-                      handlePressed: () {
-                        context.goNamed('Gift Ideas');
-                      },
-                      imagePath: "assets/wallpaper 10.jpg",
-                      title: "Go To Gift Ideas"),
-                ),
+                // Expanded(
+                //   child: NavigationBox(
+                //       navigationButtonColor: Colors.white,
+                //       textAndButtonColor: Theme.of(context).hintColor,
+                //       handlePressed: () {
+                //         context.goNamed('Gift Ideas');
+                //       },
+                //       imagePath: "assets/wallpaper 10.jpg",
+                //       title: "Go To Gift Ideas"),
+                // ),
               ],
             ),
           )

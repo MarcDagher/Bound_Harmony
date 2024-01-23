@@ -153,6 +153,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                       true ||
                                                   value.newUsernameSuccess ==
                                                       true) {
+                                                // ignore: use_build_context_synchronously
                                                 Navigator.of(context).pop();
                                               }
                                             }
@@ -384,6 +385,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         final SharedPreferences preferences =
                             await SharedPreferences.getInstance();
                         final token = preferences.get('token');
+                        // ignore: use_build_context_synchronously
                         await context
                             .read<UserProvider>()
                             .saveImage(token, _image);
