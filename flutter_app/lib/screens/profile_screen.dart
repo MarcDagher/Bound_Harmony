@@ -384,6 +384,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 TextButton.icon(
                     onPressed: () async {
+                      // await cameraImagePicker();
+                    },
+                    icon: const Icon(Icons.highlight_remove_sharp,
+                        color: Colors.white),
+                    label: const Text(
+                      "Remove",
+                      style: TextStyle(color: Colors.white),
+                    )),
+                TextButton.icon(
+                    onPressed: () async {
                       await cameraImagePicker();
                     },
                     icon: const Icon(Icons.camera, color: Colors.white),
