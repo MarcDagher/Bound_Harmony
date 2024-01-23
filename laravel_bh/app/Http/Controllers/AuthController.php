@@ -103,10 +103,15 @@ class AuthController extends Controller
 
     public function logout()
     {
+        $user = Auth::user();
+        $user_in_db = User::find($user->id);
+        $user_in_db -> first_login = false;
+        $user_in_db -> save();
         Auth::logout();
         return response()->json([
             'status' => 'success',
             'message' => 'Successfully logged out',
+            'user' => $user_in_db
         ]);
     }
 

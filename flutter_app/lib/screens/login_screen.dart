@@ -21,26 +21,9 @@ class _LogInScreenState extends State<LogInScreen> {
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  // late TextEditingController inputController;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   inputController = TextEditingController();
-  //   print("init");
-  // }
-
-  // @override
-  // void dispose() {
-  //   print("dispose");
-  //   inputController.dispose();
-  //   super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
-    // final isKeyboard = MediaQuery.of(context).viewInsets.bottom !=
-    //     0; // check if keyboard is in the UI
     Future getConversation() async {
       await context.read<MessagesProvider>().getConversation();
     }
@@ -51,7 +34,7 @@ class _LogInScreenState extends State<LogInScreen> {
 
     return Scaffold(
       body: AnnotatedRegion(
-        value: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+        value: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
         child: SafeArea(
             child: SizedBox(
           height: MediaQuery.of(context).size.height,
@@ -152,15 +135,16 @@ class _LogInScreenState extends State<LogInScreen> {
                                 value.wrongCredentials = false;
                                 final SharedPreferences preferences =
                                     await SharedPreferences.getInstance();
-                                final role_id = preferences.get('role_id');
+                                final roleId = preferences.get('role_id');
                                 emailController.clear();
                                 passwordController.clear();
-                                if (role_id == 2) {
+                                if (roleId == 2 && value.firstLogin == true) {
                                   getConversation();
                                   getPhoto();
                                   context.goNamed('Connection Setup');
-                                } else if (role_id == 1) {
-                                  context.goNamed('Admin');
+                                } else if (roleId == 2 &&
+                                    value.firstLogin == false) {
+                                  context.goNamed('Suggestions');
                                 }
                               }
                             }
