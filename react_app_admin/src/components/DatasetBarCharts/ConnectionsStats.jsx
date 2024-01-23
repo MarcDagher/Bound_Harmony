@@ -33,13 +33,12 @@ export default function ConnectionsStats({connectionAndSurveyStats}) {
 
 
   const seriesColors = [ '#FF7F80', '#B52022', '#F03E3F', '#F45A5C'];
-
   return (
     <BarChart
       dataset={dataset}
       xAxis={[{ scaleType: 'band', dataKey: 'month' }]}
       series={[
-        { dataKey: 'accepted_connections', label: 'Accepted', valueFormatter, color: seriesColors[0] },
+        { dataKey: 'accepted_connections', label: 'Accepted', valueFormatter, color: seriesColors[0],},
         { dataKey: 'disconnected_connections', label: 'Disconnected', valueFormatter, color: seriesColors[1]},
         { dataKey: 'pending_connections', label: 'Pending', valueFormatter, color: seriesColors[2]},
         { dataKey: 'rejected_connections', label: 'Rejected', valueFormatter, color: seriesColors[3]},
