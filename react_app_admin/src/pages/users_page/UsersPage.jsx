@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import HandleUsersCard from "../../components/UserData/UserData"
+import UserData from "../../components/UserData/UserData"
 import SideBar from "../../components/SideBar/SideBar"
 import "./UsersPage.css"
 import send_request from "../../configurations/request_function"
@@ -32,20 +32,26 @@ const Users = () => {
     {<SideBar />}
     <div className='admin-handle-user-cards'>
         <p>Users</p>
-        {listOfUsers &&
-        Object.entries(listOfUsers).map((user) => (
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
 
-          <div key={user.id} className='user-data-cards'>
-            {<HandleUsersCard  
-                
-                username={user[1]['username']}
-                user_id={user[1]['id']}
-                email={user[1]['email']}
-                deleted_at={user[1]['deleted_at'] ?? 'null'}/>
-            }
-              
-          </div>
-        ))}
+          {listOfUsers &&
+          Object.entries(listOfUsers).map((user) => (
+            <tr key={user.id} className='user-data-cards'>
+              {<UserData  
+                  username={user[1]['username']}
+                  user_id={user[1]['id']}
+                  email={user[1]['email']}
+                  deleted_at={user[1]['deleted_at'] ?? 'null'}/>
+              }
+
+            </tr>
+          ))}
+        </table>
 
     </div>
   </div>

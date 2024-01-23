@@ -40,22 +40,29 @@ const handle_restore_user = async (email) => {
 }
 
   return <>
-    <div className="user-data-container">
-        <div className="user-data-with-buttons" style={{ backgroundColor: deletedUser === "null" ? "white" : "var(--red)"}}>
-            <div className="user-data-container-cards">
-                <p style={{ color : deletedUser === "null" ? "var(--darkGrey)" : "white"}}>
-                 <span className="user-data-name">Name: </span>{username}</p>
+    {/* <div className="user-data-container"> */}
+        {/* <div className="user-data-with-buttons" style={{ backgroundColor: deletedUser === "null" ? "white" : "var(--red)"}}> */}
 
-                <p style={{ color : deletedUser === "null" ? "var(--darkGrey)" : "white"}}>
-                 <span className="user-data-email">Email: </span>{email}</p>
-            </div>
+            {/* <div className="user-data-container-cards"> */}
+              <td>{user_id}</td> 
+
+              <td style={{ color : deletedUser === "null" ? "var(--darkGrey)" : "white"}}>
+                <span className="user-data-name"></span>{username}</td>
+
+              <td style={{ color : deletedUser === "null" ? "var(--darkGrey)" : "white"}}>
+                <span className="user-data-email"></span>{email}</td>
+            {/* </div> */}
+
             <div className="user-data-buttons">
-              {deletedUser !== "null" ? <img className="arrow" src="images/add-user.png" alt="arrow" onClick={() => handle_restore_user(email)}/> : null}
-              {deletedUser === "null" ? <img className="trash" src="images/trash.png" alt="trash" onClick={() => handle_delete_user(email)} /> : null}
+              {deletedUser !== "null" ? <img className="arrow" src="images/add-user.png" alt="arrow" 
+              onClick={() => handle_restore_user(email)}/> : null}
+              
+              {deletedUser === "null" ? <img className="trash" src="images/trash.png" alt="trash" 
+              onClick={() => handle_delete_user(email)} /> : null}
             </div>
-        </div>
 
-    </div>
+        {/* </div> */}
+    {/* </div> */}
   </>
 }
 
