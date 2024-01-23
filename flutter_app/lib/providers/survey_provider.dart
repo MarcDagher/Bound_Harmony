@@ -121,4 +121,11 @@ class SurveysProvider extends ChangeNotifier {
       print("In provider, error: $error");
     }
   }
+
+  void clearSurveyProviderVariables() {
+    questions = [];
+    couplesSurveyRejected = false;
+    successSavingPersonalSurveyResponse = false;
+    successSavingCouplesSurveyResponse = false;
+  }
 }
