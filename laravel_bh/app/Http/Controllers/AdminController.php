@@ -263,8 +263,18 @@ class AdminController extends Controller
         $request -> validate([
             'user_id' => 'required|integer'
         ]);
-
-        $user = User::find($request -> id);
-        return $user;
+        
+        $user = User::find($request -> user_id);
+        if ($user && $user -> id == 2) {
+            return response() -> json([
+                "status" => "success",
+                "image_url" => $user -> profile_pic_url 
+            ]); 
+        } else {
+            return response() -> json([
+                "status" => "failed",
+                "message" =>  "user not found"
+            ]); 
+        }
     }
 }
