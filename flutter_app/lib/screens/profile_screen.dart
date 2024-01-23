@@ -413,17 +413,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     onPressed: () async {
                       await galleryImagePicker();
 
-                      /// Attempt to send File to DB
-                      /// //////////////////////////
-                      if (_image != null) {
-                        final SharedPreferences preferences =
-                            await SharedPreferences.getInstance();
-                        final token = preferences.get('token');
-                        // ignore: use_build_context_synchronously
-                        await context
-                            .read<UserProvider>()
-                            .saveImage(token, _image);
-                      }
+                      // if (_image != null) {
+                      final SharedPreferences preferences =
+                          await SharedPreferences.getInstance();
+                      final token = preferences.get('token');
+                      // ignore: use_build_context_synchronously
+                      await context
+                          .read<UserProvider>()
+                          .saveImage(token, _image);
+                      // }
                     },
                     icon: const Icon(Icons.image, color: Colors.white),
                     label: const Text("Gallery",

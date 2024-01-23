@@ -77,6 +77,7 @@ class ProfileController extends Controller
             return response()->json([
                 "status" => "success",
                 "message" => "Image changed successfully",
+                "image_path" => $image_path
                 // "profile_pic_url" => base64_encode($imageFile)
                 //   NOTE: convert to base64 and return image for the frontend
             ]);

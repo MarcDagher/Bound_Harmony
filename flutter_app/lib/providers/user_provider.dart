@@ -15,7 +15,7 @@ class UserProvider extends ChangeNotifier {
   // used in get_image
   String image = "";
 
-  changeUsername(token, String newUsername) async {
+  Future changeUsername(token, String newUsername) async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
 
@@ -33,7 +33,7 @@ class UserProvider extends ChangeNotifier {
     }
   }
 
-  changeLocation(token, newLocation) async {
+  Future changeLocation(token, newLocation) async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
 
@@ -51,7 +51,7 @@ class UserProvider extends ChangeNotifier {
     }
   }
 
-  saveImage(token, imageFile) async {
+  Future saveImage(token, imageFile) async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
     // An XFile is a cross-platform file
@@ -70,12 +70,14 @@ class UserProvider extends ChangeNotifier {
               "authorization": "Bearer $token",
             },
           ));
+      image = response.data['image_path'];
+      notifyListeners();
     } catch (e) {
       // print("In saveImage error: $e");
     }
   }
 
-  getImage() async {
+  Future getImage() async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
     final SharedPreferences preferences = await SharedPreferences.getInstance();
