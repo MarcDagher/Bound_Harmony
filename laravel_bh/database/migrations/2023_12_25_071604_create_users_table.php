@@ -24,6 +24,7 @@ return new class extends Migration
             $table->enum('connection_status', ['true', 'false'])->default('false');
             $table->enum('couple_survey_status', ['complete', 'incomplete'])->default('incomplete');
             $table->enum('personal_survey_status', ['complete', 'incomplete'])->default('incomplete');
+            $table->boolean('first_login')->default(true);
             $table->timestamps();
             $table->softDeletes();
             
