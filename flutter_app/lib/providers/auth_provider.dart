@@ -120,4 +120,13 @@ class AuthProvider extends ChangeNotifier {
       print(error);
     }
   }
+
+  void clearAuthProviderVariables() async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.clear();
+    successSignUp = false;
+    emailTaken = false;
+    successLogin = false;
+    wrongCredentials = false;
+  }
 }
