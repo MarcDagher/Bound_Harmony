@@ -386,7 +386,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ///
                 TextButton.icon(
                     onPressed: () async {
-                      // await cameraImagePicker();
+                      await context.read<UserProvider>().remove_image();
+                      _image = null;
                     },
                     icon: const Icon(Icons.highlight_remove_sharp,
                         color: Colors.white),

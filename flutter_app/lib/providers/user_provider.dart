@@ -90,9 +90,27 @@ class UserProvider extends ChangeNotifier {
 
       image = response.data['img_path'];
       notifyListeners();
-      print(image);
     } on DioException catch (error) {
       // print("in getImage: ${error}");
+    }
+  }
+
+  Future remove_image() async {
+    final baseUrl = Requests.baseUrl;
+    final dio = Dio();
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    final token = preferences.get('token');
+    try {
+      final response = await dio.post("$baseUrl/remove_profile_photo",
+          options: Options(headers: {"authorization": "Bearer $token"}));
+
+      if (response.data['status'] == "success") {
+        image = "";
+        notifyListeners();
+      }
+      print("In remove_image: ${response}");
+    } catch (error) {
+      print("In remove_image: ${error}");
     }
   }
 
