@@ -382,6 +382,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               const SizedBox(height: 20),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                //// Remove
+                ///
                 TextButton.icon(
                     onPressed: () async {
                       // await cameraImagePicker();
@@ -392,6 +394,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       "Remove",
                       style: TextStyle(color: Colors.white),
                     )),
+
+                /// Camera
+                ///
                 TextButton.icon(
                     onPressed: () async {
                       await cameraImagePicker();
@@ -401,6 +406,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       "Camera",
                       style: TextStyle(color: Colors.white),
                     )),
+
+                /// Gallery
                 TextButton.icon(
                     onPressed: () async {
                       await galleryImagePicker();
