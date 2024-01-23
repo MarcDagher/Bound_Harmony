@@ -2,7 +2,7 @@ import { useState } from "react"
 import "./UserData.css"
 import send_request from "../../configurations/request_function"
 
-const UserData = ({username, user_id, email, deleted_at}) => {
+const UserData = ({username, user_id, email, deleted_at, profile_pic_url}) => {
 
 const [deletedUser, setDeletedUser] = useState(deleted_at)
 
@@ -38,7 +38,6 @@ const handle_restore_user = async (email) => {
     }
   
 }
-
   return <>
     {/* user id */}
     <td style={{ 

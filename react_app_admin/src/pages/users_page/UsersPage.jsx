@@ -26,7 +26,6 @@ const Users = () => {
     }
   },[])
 
-
   return <>
   <div className="users-wrapper">
     {<SideBar />}
@@ -46,7 +45,9 @@ const Users = () => {
                   username={user[1]['username']}
                   user_id={user[1]['id']}
                   email={user[1]['email']}
-                  deleted_at={user[1]['deleted_at'] ?? 'null'}/>
+                  deleted_at={user[1]['deleted_at'] ?? 'null'}
+                  profile_pic_url={user[1]['profile_pic_url']}
+                  />
               }
 
             </tr>
