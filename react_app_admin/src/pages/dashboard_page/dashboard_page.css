@@ -110,6 +110,25 @@
 }
 
 @media (max-width: 990px){
+
+  .admin-wrapper{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .admin-sidebar{
+    width: 100%;
+    max-width: 2000px !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    color: var(--mainWhite);
+    padding: 10px !important;
+    background-color: #242424;
+    text-align: center !important;
+  }
+
   .number-of-users > img{
     height: 45px;
     margin-bottom: 5px;
@@ -129,4 +148,21 @@
     font-weight: 600;
     font-size: 18px;
   }
+}
+
+@media (max-width: 850px){
+
+  .admin-stats-col-container{
+    flex-direction: column;
+  }
+
+  .number-of-users, 
+  .number-of-answered-surveys,
+  .number-of-connections{
+    width: 100%;
+    
+    font-weight: 600;
+    font-size: 18px;
+  }
+
 }
