@@ -46,13 +46,17 @@ class AdminController extends Controller
 
         $user = User::where('email', $request -> email) -> first();
 
-        if($user){
-            $connections = Connection::where('requester', $user->id) -> orWhere('responder', $user -> id) -> get();
+        if($user && $user -> role_id == 2){
+            // find all connections related to this user
+            $connections = Connection::where('requester', $user->id) -> orWhere('responder', $user -> id) -> get(); 
+
             foreach($connections as $connection){
+                // if accepted => change connection status to disconnected then delete connection  
                 if ($connection -> status == "accepted"){
                     $connection -> status = "disconnected";
                     $connection -> delete();
-    
+                    
+                    // find partner - change connection status to false - change couple survey status to incomplete
                     if ($user -> id == $connection -> requester){
                         $partner = User::find($connection -> responder);
                         $partner -> connection_status = "false";
@@ -65,11 +69,15 @@ class AdminController extends Controller
                         $partner -> couple_survey_status = "incomplete";
                         $partner -> save();
                     }
+                
+                // Change connection status to rejected - delete connection
                 } else if ($connection -> status == "pending"){
                     $connection -> status = "rejected";
                     $connection -> delete();
                 }
             }     
+
+            // after deleting all connections related to the user, delete user
             $user -> delete();
             return response() -> json([
                 'status' => 'success',
