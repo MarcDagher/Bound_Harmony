@@ -53,7 +53,7 @@ const handle_restore_user = async (email) => {
       <td style={{color : deletedUser === "null" ? "var(--darkGrey)" : "var(--red)"}}>{email}</td>
 
       {deletedUser !== "null" ?
-        <img className="arrow" src="images/add-user.png" alt="arrow" onClick={() => handle_restore_user(email)} /> : null}
+        <img className="arrow" src="images/upload.png" alt="arrow" onClick={() => handle_restore_user(email)} /> : null}
 
       {deletedUser === "null" ? 
         <img className="trash" src="images/trash.png" alt="trash" onClick={() => handle_delete_user(email)} /> : null}
