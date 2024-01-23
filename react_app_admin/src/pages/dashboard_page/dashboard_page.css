@@ -98,13 +98,35 @@
     justify-content: flex-start;
   }
 
-.number-of-users, 
-.number-of-answered-surveys,
-.number-of-connections{
-  width: 100%;
-  min-height: 210px;
-  font-size: 22px;
-  margin-bottom: 5px;
-  padding: 10px;
+  .number-of-users, 
+  .number-of-answered-surveys,
+  .number-of-connections{
+    width: 100%;
+    height: 210px;
+    font-size: 22px;
+    margin-bottom: 5px;
+    padding: 10px;
+  }
 }
+
+@media (max-width: 990px){
+  .number-of-users > img{
+    height: 45px;
+    margin-bottom: 5px;
+  } 
+  .number-of-answered-surveys > img{
+    height: 60px;
+    margin-bottom: 5px;
+  }
+  .number-of-connections > img{
+    height: 50px;
+    margin-bottom: 5px;
+  }
+
+  .number-of-users, 
+  .number-of-answered-surveys,
+  .number-of-connections{
+    font-weight: 600;
+    font-size: 18px;
+  }
 }
