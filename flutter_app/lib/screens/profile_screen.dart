@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:bound_harmony/configurations/request.configuration.dart';
 import 'package:bound_harmony/providers/auth_provider.dart';
 import 'package:bound_harmony/providers/connection_provider.dart';
 import 'package:bound_harmony/providers/messages_provider.dart';
@@ -41,21 +42,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ////// Circle Avatar + Add Image Icon + Edit Info Icon
                 Consumer<UserProvider>(
                   builder: (context, value, child) => Stack(children: [
-                    // value.image != "" ?
-                    // NetworkImage('')
-                    _image != null
+                    value.image != ""
                         ? Padding(
-                            padding: const EdgeInsets.only(bottom: 5),
+                            padding: const EdgeInsets.only(bottom: 10, top: 10),
                             child: CircleAvatar(
                               radius: 90,
-                              backgroundImage: FileImage(File(_image!.path)),
+                              backgroundImage: NetworkImage(
+                                  '${Requests.imageBaseUrl}/${value.image}'),
                             ),
                           )
-                        : Icon(
-                            color: Theme.of(context).hintColor,
-                            Icons.account_circle,
-                            size: 200,
-                          ),
+                        : _image != null
+                            ? Padding(
+                                padding:
+                                    const EdgeInsets.only(bottom: 10, top: 10),
+                                child: CircleAvatar(
+                                  radius: 90,
+                                  backgroundImage:
+                                      FileImage(File(_image!.path)),
+                                ),
+                              )
+                            : Icon(
+                                color: Theme.of(context).hintColor,
+                                Icons.account_circle,
+                                size: 200,
+                              ),
 
                     /// Add image icon: on click open bottom sheet
                     ///
