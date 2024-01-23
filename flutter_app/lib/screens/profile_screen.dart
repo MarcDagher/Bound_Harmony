@@ -46,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ? Padding(
                             padding: const EdgeInsets.only(bottom: 10, top: 10),
                             child: CircleAvatar(
-                              radius: 90,
+                              radius: 95,
                               backgroundImage: NetworkImage(
                                   '${Requests.imageBaseUrl}/${value.image}'),
                             ),
@@ -56,7 +56,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 padding:
                                     const EdgeInsets.only(bottom: 10, top: 10),
                                 child: CircleAvatar(
-                                  radius: 90,
+                                  radius: 95,
                                   backgroundImage:
                                       FileImage(File(_image!.path)),
                                 ),
@@ -186,7 +186,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                 /// edit image Text Button
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
+                  padding: const EdgeInsets.only(bottom: 20, top: 5),
                   child: InkWell(
                     child: Text(
                       'Edit Image',
