@@ -45,14 +45,35 @@ class AdminController extends Controller
         ]);
 
         $user = User::where('email', $request -> email) -> first();
+
         if($user){
-
+            $connections = Connection::where('requester', $user->id) -> orWhere('responder', $user -> id) -> get();
+            foreach($connections as $connection){
+                if ($connection -> status == "accepted"){
+                    $connection -> status = "disconnected";
+                    $connection -> delete();
+    
+                    if ($user -> id == $connection -> requester){
+                        $partner = User::find($connection -> responder);
+                        $partner -> connection_status = "false";
+                        $partner -> couple_survey_status = "incomplete";
+                        $partner -> save();
+    
+                    } else if ($user -> id == $connection -> responder){
+                        $partner = User::find($connection -> requester);
+                        $partner -> connection_status = "false";
+                        $partner -> couple_survey_status = "incomplete";
+                        $partner -> save();
+                    }
+                } else if ($connection -> status == "pending"){
+                    $connection -> status = "rejected";
+                    $connection -> delete();
+                }
+            }     
             $user -> delete();
-
             return response() -> json([
                 'status' => 'success',
                 'message' => "User deleted successfully",
-                'user' => $user
             ]);
 
         } else {
