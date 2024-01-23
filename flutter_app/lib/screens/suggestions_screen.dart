@@ -1,12 +1,20 @@
+import 'package:bound_harmony/providers/suggestions_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/navigation_box.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class SuggestionsScreen extends StatelessWidget {
   const SuggestionsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Future getSuggestions(String type) async {
+      final suggestions =
+          await context.read<SuggestionsProvider>().getSuggestions(type);
+      return suggestions;
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Padding(
@@ -33,6 +41,7 @@ class SuggestionsScreen extends StatelessWidget {
                       navigationButtonColor: Colors.white,
                       textAndButtonColor: Theme.of(context).hintColor,
                       handlePressed: () {
+                        getSuggestions('date');
                         context.goNamed('Date Builder and Bonding Activities',
                             pathParameters: {'type': 'date'});
                       },
@@ -50,6 +59,7 @@ class SuggestionsScreen extends StatelessWidget {
                       navigationButtonColor: Colors.white,
                       textAndButtonColor: Theme.of(context).hintColor,
                       handlePressed: () {
+                        getSuggestions('bonding');
                         context.goNamed('Date Builder and Bonding Activities',
                             pathParameters: {'type': 'bonding'});
                       },

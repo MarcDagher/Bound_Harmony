@@ -19,12 +19,6 @@ class DateBuilderAndBondingActivitiesScreen extends StatelessWidget {
       return suggestions;
     }
 
-    if (type == "date") {
-      // getSuggestions("date");
-    } else {
-      // getSuggestions("bonding");
-    }
-
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(color: Theme.of(context).hintColor),
