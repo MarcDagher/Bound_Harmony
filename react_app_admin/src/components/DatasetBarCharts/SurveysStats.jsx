@@ -28,21 +28,23 @@ export default function SurveysStats({connectionAndSurveyStats}) {
     // const largeScreenQuery = '@media (min-width: 1024px)';
     // chartSetting.width = 500; // Adjust width for large screens
 
-  const dataset = [
-    {
-      couple_survey_responses: connectionAndSurveyStats['couple_survey_responses'],
-      personal_survey_responses: connectionAndSurveyStats['personal_survey_responses'],
-      month: 'Completed Surveys',
-    },
-  ];
+    const dataset = [
+      {
+        couple_survey_responses: connectionAndSurveyStats['couple_survey_responses'],
+        personal_survey_responses: connectionAndSurveyStats['personal_survey_responses'],
+        month: 'Completed Surveys',
+      },
+    ];
+  
+    const seriesColors = [ '#FF7F80', '#F03E3F'];
 
   return (
     <BarChart
       dataset={dataset}
       xAxis={[{ scaleType: 'band', dataKey: 'month' }]}
       series={[
-        { dataKey: 'couple_survey_responses', label: "Couple's Surveys", valueFormatter },
-        { dataKey: 'personal_survey_responses', label: 'Personal Surveys', valueFormatter },
+        { dataKey: 'couple_survey_responses', label: "Couple's Surveys", valueFormatter, color:  seriesColors[0]},
+        { dataKey: 'personal_survey_responses', label: 'Personal Surveys', valueFormatter, color:  seriesColors[1] },
       ]}
       {...chartSetting}
     />
