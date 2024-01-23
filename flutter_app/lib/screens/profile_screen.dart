@@ -354,14 +354,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
-  Future<void> cameraImagePicker() async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? selectedImage =
-        await picker.pickImage(source: ImageSource.camera);
-    setState(() {
-      _image = selectedImage;
-    });
-  }
+  // Future<void> cameraImagePicker() async {
+  //   final ImagePicker picker = ImagePicker();
+  //   final XFile? selectedImage =
+  //       await picker.pickImage(source: ImageSource.camera);
+  //   setState(() {
+  //     _image = selectedImage;
+  //   });
+  // }
 
   buildBottomSheet(context) {
     return showModalBottomSheet(
@@ -396,24 +396,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       style: TextStyle(color: Colors.white),
                     )),
 
-                /// Camera
-                ///
-                TextButton.icon(
-                    onPressed: () async {
-                      await cameraImagePicker();
-                    },
-                    icon: const Icon(Icons.camera, color: Colors.white),
-                    label: const Text(
-                      "Camera",
-                      style: TextStyle(color: Colors.white),
-                    )),
+                // /// Camera
+                // ///
+                // TextButton.icon(
+                //     onPressed: () async {
+                //       await cameraImagePicker();
+                //       final SharedPreferences preferences =
+                //           await SharedPreferences.getInstance();
+                //       final token = preferences.get('token');
+                //       // ignore: use_build_context_synchronously
+                //       await context
+                //           .read<UserProvider>()
+                //           .saveImage(token, _image);
+                //     },
+                //     icon: const Icon(Icons.camera, color: Colors.white),
+                //     label: const Text(
+                //       "Camera",
+                //       style: TextStyle(color: Colors.white),
+                //     )),
 
                 /// Gallery
                 TextButton.icon(
                     onPressed: () async {
                       await galleryImagePicker();
 
-                      // if (_image != null) {
                       final SharedPreferences preferences =
                           await SharedPreferences.getInstance();
                       final token = preferences.get('token');
@@ -421,7 +427,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       await context
                           .read<UserProvider>()
                           .saveImage(token, _image);
-                      // }
                     },
                     icon: const Icon(Icons.image, color: Colors.white),
                     label: const Text("Gallery",

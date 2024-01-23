@@ -51,7 +51,7 @@ class SuggestionsScreen extends StatelessWidget {
                 ),
 
                 const SizedBox(
-                  height: 5,
+                  height: 10,
                 ),
 
                 //////// ON CLICK - GO TO Date Bonding Activities
@@ -73,18 +73,6 @@ class SuggestionsScreen extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-
-                // //////// ON CLICK - GO TO Gift Ideas
-                // Expanded(
-                //   child: NavigationBox(
-                //       navigationButtonColor: Colors.white,
-                //       textAndButtonColor: Theme.of(context).hintColor,
-                //       handlePressed: () {
-                //         context.goNamed('Gift Ideas');
-                //       },
-                //       imagePath: "assets/wallpaper 10.jpg",
-                //       title: "Go To Gift Ideas"),
-                // ),
               ],
             ),
           )

@@ -4,7 +4,6 @@ import 'package:bound_harmony/screens/advice_screen.dart';
 import 'package:bound_harmony/screens/connection_setup_screen.dart';
 import 'package:bound_harmony/screens/couple_survey_screen.dart';
 import 'package:bound_harmony/screens/date_builder_and_bonding_activities_screen.dart';
-import 'package:bound_harmony/screens/gift_ideas_screen.dart';
 import 'package:bound_harmony/screens/incoming_requests_screen.dart';
 import 'package:bound_harmony/screens/login_screen.dart';
 import 'package:bound_harmony/screens/my_partners_screen.dart';
@@ -137,18 +136,6 @@ class AppNavigation {
                               );
                             },
                           ),
-
-                          /// Suggestions sub-route Gift Ideas
-                          ///
-                          GoRoute(
-                            path: 'giftIdeas',
-                            name: 'Gift Ideas',
-                            builder: (context, state) {
-                              return GiftIdeasScreen(
-                                key: state.pageKey,
-                              );
-                            },
-                          ),
                         ]),
                   ]),
 
@@ -267,41 +254,3 @@ class AppNavigation {
             ])
       ]);
 }
-
-// final GoRouter boundHarmonyRouter = GoRouter(routes: <RouteBase>[
-//   /// Profile Screen
-//   ///
-//   GoRoute(
-//     path: '/',
-//     builder: (BuildContext context, GoRouterState state) {
-//       return const ProfileScreen();
-//     },
-//   ),
-
-//   /// Advice Screen
-//   ///
-//   GoRoute(
-//     path: '/advice',
-//     builder: (BuildContext context, GoRouterState state) {
-//       return const AdviceScreen();
-//     },
-//   ),
-
-//   /// Suggestions Screen
-//   ///
-//   GoRoute(
-//     path: '/suggestions',
-//     builder: (BuildContext context, GoRouterState state) {
-//       return const SuggestionsScreen();
-//     },
-//   ),
-
-//   /// Surveys Screen
-//   ///
-//   GoRoute(
-//     path: '/surveys',
-//     builder: (BuildContext context, GoRouterState state) {
-//       return const SurveysScreen();
-//     },
-//   ),
-// ]);
