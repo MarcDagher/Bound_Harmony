@@ -1,4 +1,5 @@
 import 'package:bound_harmony/providers/suggestions_provider.dart';
+import 'package:bound_harmony/reusable%20widgets/button.dart';
 import 'package:bound_harmony/widgets%20for%20conditional%20UI/connection_status_false.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -19,9 +20,9 @@ class DateBuilderAndBondingActivitiesScreen extends StatelessWidget {
     }
 
     if (type == "date") {
-      getSuggestions("date");
+      // getSuggestions("date");
     } else {
-      getSuggestions("bonding");
+      // getSuggestions("bonding");
     }
 
     return Scaffold(
@@ -60,51 +61,61 @@ class DateBuilderAndBondingActivitiesScreen extends StatelessWidget {
 
                       /////// CARD BUILDER METHOD
                       ///
-                      return cardBuilder(
-                        context: context,
-                        businessStatus: type == "bonding"
-                            ? value.bondingActivities[index].businessStatus
-                            : value.dates[index].businessStatus,
-                        ////////////////////////////////////
-                        name: type == "bonding"
-                            ? value.bondingActivities[index].name
-                            : value.dates[index].name,
-                        ////////////////////////////////////
-                        openingHours: type == "bonding"
-                            ? value.bondingActivities[index].openingHours
-                            : value.dates[index].openingHours,
-                        ////////////////////////////////////
-                        photos: type == "bonding"
-                            ? value.bondingActivities[index].photos
-                            : value.dates[index].photos,
-                        ////////////////////////////////////
-                        placeId: type == "bonding"
-                            ? value.bondingActivities[index].placeId
-                            : value.dates[index].placeId,
-                        ////////////////////////////////////
-                        plusCode: type == "bonding"
-                            ? value.bondingActivities[index].plusCode
-                            : value.dates[index].plusCode,
-                        ////////////////////////////////////
-                        rating: type == "bonding"
-                            ? value.bondingActivities[index].rating
-                            : value.dates[index].rating,
-                        ////////////////////////////////////
-                        types: type == "bonding"
-                            ? value.bondingActivities[index].types
-                            : value.dates[index].types,
-                        ////////////////////////////////////
-                        userRatingsTotal: type == "bonding"
-                            ? value.bondingActivities[index].userRatingsTotal
-                            : value.dates[index].userRatingsTotal,
-                        ////////////////////////////////////
-                        vicinity: type == "bonding"
-                            ? value.bondingActivities[index].vicinity
-                            : value.dates[index].vicinity,
-                        ////////////////////////////////////
-                        queryType: type == "bonding"
-                            ? value.bondingActivities[index].queryType
-                            : value.dates[index].queryType,
+                      return Column(
+                        children: [
+                          cardBuilder(
+                            context: context,
+                            businessStatus: type == "bonding"
+                                ? value.bondingActivities[index].businessStatus
+                                : value.dates[index].businessStatus,
+                            ////////////////////////////////////
+                            name: type == "bonding"
+                                ? value.bondingActivities[index].name
+                                : value.dates[index].name,
+                            ////////////////////////////////////
+                            openingHours: type == "bonding"
+                                ? value.bondingActivities[index].openingHours
+                                : value.dates[index].openingHours,
+                            ////////////////////////////////////
+                            photos: type == "bonding"
+                                ? value.bondingActivities[index].photos
+                                : value.dates[index].photos,
+                            ////////////////////////////////////
+                            placeId: type == "bonding"
+                                ? value.bondingActivities[index].placeId
+                                : value.dates[index].placeId,
+                            ////////////////////////////////////
+                            plusCode: type == "bonding"
+                                ? value.bondingActivities[index].plusCode
+                                : value.dates[index].plusCode,
+                            ////////////////////////////////////
+                            rating: type == "bonding"
+                                ? value.bondingActivities[index].rating
+                                : value.dates[index].rating,
+                            ////////////////////////////////////
+                            types: type == "bonding"
+                                ? value.bondingActivities[index].types
+                                : value.dates[index].types,
+                            ////////////////////////////////////
+                            userRatingsTotal: type == "bonding"
+                                ? value
+                                    .bondingActivities[index].userRatingsTotal
+                                : value.dates[index].userRatingsTotal,
+                            ////////////////////////////////////
+                            vicinity: type == "bonding"
+                                ? value.bondingActivities[index].vicinity
+                                : value.dates[index].vicinity,
+                            ////////////////////////////////////
+                            queryType: type == "bonding"
+                                ? value.bondingActivities[index].queryType
+                                : value.dates[index].queryType,
+                          ),
+                          if (type == "bonding" &&
+                                  index == value.bondingActivities.length - 1 ||
+                              type != "bonding" &&
+                                  index == value.dates.length - 1)
+                            Button(text: 'Load More', handlePressed: () {})
+                        ],
                       );
                     }));
           } else {
@@ -117,7 +128,7 @@ class DateBuilderAndBondingActivitiesScreen extends StatelessWidget {
 
   //////// CARD BUILDER METHOD
   ///
-  cardBuilder({
+  Widget cardBuilder({
     required BuildContext context,
     required String name, // used
     required String businessStatus, // used
@@ -275,31 +286,8 @@ class DateBuilderAndBondingActivitiesScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-              // Padding(
-              //   padding: const EdgeInsets.only(top: 15),
-              //   child: Wrap(
-              //     alignment: WrapAlignment.spaceEvenly,
-              //     spacing: 7,
-              //     runSpacing: 2,
-              //     children: [
-              //       for (String type in types)
-              //         Text(
-              //           type,
-              //           style: TextStyle(
-              //               color: Theme.of(context).hintColor,
-              //               fontWeight: FontWeight.w600),
-              //           overflow: TextOverflow.ellipsis,
-              //         )
-              //     ],
-              //   ),
-              // )
             ]),
       ),
     );
   }
 }
-
-// openingHours: {open_now: true}
-// plusCode: {compound_code: 4M42+PW Byblos, Lebanon, global_code: 8G6Q4M42+PW}
-// photos: [{height: 2848, html_attributions: [<a href="https://maps.google.com/maps/contrib/118096579659904185522">Victory Byblos Hotel &amp; Spa</a>], photo_reference: AWU5eFgY5q91xs3FEJBESwx-1dHaJlNcEsPeNIGFKo8qfU8whpBnN_jMbPrgLsvWCF0azknvgwHoa2XA9xDe_WWk3j_EQOm9vjFbsUqgF0_VdPGLADiU69uHq3jk1-FwKUR9BQacH9v1Y7Gi5UJ3VHLtWgYG30oZ81_dg1z51ARLN-LGhVHW, width: 4288}]
-// types: [night_club, parking, bar, lodging, spa, point_of_interest, establishment]
