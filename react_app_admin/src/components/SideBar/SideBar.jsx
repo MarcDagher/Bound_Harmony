@@ -1,12 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom"
 import "./SideBar.css" 
 import send_request from "../../configurations/request_function"
-import { useState } from "react"
 const SideBar = () => {
 
   const navigate = useNavigate()
   const location = useLocation()
-  // background-color: rgb(56, 56, 56);
   const currentLocation = location.pathname.split('/')[1]
 
   const logout = async () => {
@@ -24,9 +22,6 @@ const SideBar = () => {
       // console.log(error)
     }
   }
-
-  
-  console.log(currentLocation)
 
   return <>
       <div className='admin-sidebar'>
