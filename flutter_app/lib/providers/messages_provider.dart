@@ -45,6 +45,7 @@ class MessagesProvider extends ChangeNotifier {
     }
   }
 
+  // save message in DB and return AI response
   Future sendMessage(Message userMessage) async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     final token = preferences.get('token');
@@ -71,5 +72,17 @@ class MessagesProvider extends ChangeNotifier {
       somethingWentWrong = "Something went worng, please try sending again";
       notifyListeners();
     }
+  }
+
+  // Clear all variables on logout
+  void clearMessagesProviderVariables() {
+    somethingWentWrong = "";
+    conversation = [
+      Message(
+          text:
+              "Talk to me about anything. I'm here to listen and i'm here to guide you!",
+          date: DateTime.now(),
+          isSentByMe: false)
+    ];
   }
 }
