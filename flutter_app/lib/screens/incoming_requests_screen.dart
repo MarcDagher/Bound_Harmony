@@ -22,6 +22,7 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
     /// fetch user's incoming pending requests (Changes requests to the current pending list)
     getdata() async {
       final token = await context.read<AuthProvider>().getToken();
+      // ignore: use_build_context_synchronously
       await context.read<ConnectionProvider>().displayIncomingRequests(token);
     }
 
@@ -50,7 +51,7 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(0),
-              color: Color.fromARGB(255, 134, 133, 133),
+              color: const Color.fromARGB(255, 134, 133, 133),
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -213,6 +214,7 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
       case 'Accept':
 
         /// change user's currentPartner to true and notify listeners
+        // ignore: use_build_context_synchronously
         await context
             .read<ConnectionProvider>()
             .respondToRequest(token, requestID, 'accepted');
@@ -220,6 +222,7 @@ class _IncomingRequestsScreenState extends State<IncomingRequestsScreen> {
       case 'Reject':
 
         /// Remove the rejected request by listening to the listOfRequests in provider
+        // ignore: use_build_context_synchronously
         await context
             .read<ConnectionProvider>()
             .respondToRequest(token, requestID, 'rejected');

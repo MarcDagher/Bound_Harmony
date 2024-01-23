@@ -24,7 +24,7 @@ class NavigationBox extends StatelessWidget {
             image: DecorationImage(
                 colorFilter: ColorFilter.mode(
                     Colors.black.withOpacity(0.2), BlendMode.darken),
-                image: AssetImage("${imagePath}"),
+                image: AssetImage(imagePath),
                 fit: BoxFit.cover)),
         child: Align(
           alignment: Alignment.bottomCenter,

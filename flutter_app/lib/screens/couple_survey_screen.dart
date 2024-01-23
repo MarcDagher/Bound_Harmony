@@ -6,7 +6,6 @@ import 'package:bound_harmony/reusable%20widgets/navigation_button.dart';
 import 'package:bound_harmony/reusable%20widgets/text_input.dart';
 import 'package:bound_harmony/widgets%20for%20conditional%20UI/connection_status_false.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -80,6 +79,7 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
       final SharedPreferences preferences =
           await SharedPreferences.getInstance();
       final token = preferences.get('token');
+      // ignore: use_build_context_synchronously
       await context.read<SurveysProvider>().getSurvey(id, token);
     }
 
@@ -108,7 +108,7 @@ class _CouplesSurveyScreenState extends State<CouplesSurveyScreen> {
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(0),
-              color: Color.fromARGB(255, 134, 133, 133),
+              color: const Color.fromARGB(255, 134, 133, 133),
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),

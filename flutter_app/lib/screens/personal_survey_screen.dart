@@ -67,6 +67,7 @@ class _PersonalSurveyScreenState extends State<PersonalSurveyScreen> {
       final SharedPreferences preferences =
           await SharedPreferences.getInstance();
       final token = preferences.get('token');
+      // ignore: use_build_context_synchronously
       await context.read<SurveysProvider>().getSurvey(id, token);
     }
 

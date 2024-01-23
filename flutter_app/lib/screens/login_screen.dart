@@ -141,6 +141,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                 if (roleId == 2 && value.firstLogin == true) {
                                   emailController.clear();
                                   passwordController.clear();
+                                  // ignore: use_build_context_synchronously
                                   context.goNamed('Connection Setup');
                                 } else if (roleId == 2 &&
                                     value.firstLogin == false) {
@@ -148,6 +149,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                   passwordController.clear();
                                   await getConversation();
                                   await getPhoto();
+                                  // ignore: use_build_context_synchronously
                                   context.goNamed('Suggestions');
                                 }
                               }

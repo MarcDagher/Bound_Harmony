@@ -11,8 +11,6 @@ class ConnectionSetupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final isKeyboard = MediaQuery.of(context).viewInsets.bottom !=
-    //     0; // check if keyboard is in the UI
     final emailController = TextEditingController();
     final formKey = GlobalKey<FormState>();
 
