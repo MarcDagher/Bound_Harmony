@@ -2,6 +2,9 @@ import 'dart:io';
 
 import 'package:bound_harmony/providers/auth_provider.dart';
 import 'package:bound_harmony/providers/connection_provider.dart';
+import 'package:bound_harmony/providers/messages_provider.dart';
+import 'package:bound_harmony/providers/suggestions_provider.dart';
+import 'package:bound_harmony/providers/survey_provider.dart';
 import 'package:bound_harmony/providers/user_provider.dart';
 import 'package:bound_harmony/reusable%20widgets/button.dart';
 import 'package:bound_harmony/reusable%20widgets/display_box.dart';
@@ -289,6 +292,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       await SharedPreferences.getInstance();
                                   final token = preferences.get('token');
                                   await value.logout(token);
+                                  // ignore: use_build_context_synchronously
+                                  context
+                                      .read<ConnectionProvider>()
+                                      .clearConnectionsProviderVariables();
+                                  // ignore: use_build_context_synchronously
+                                  context
+                                      .read<MessagesProvider>()
+                                      .clearMessagesProviderVariables();
+                                  // ignore: use_build_context_synchronously
+                                  context
+                                      .read<SuggestionsProvider>()
+                                      .clearSuggestionsProviderVariables();
+                                  // ignore: use_build_context_synchronously
+                                  context
+                                      .read<SurveysProvider>()
+                                      .clearSurveyProviderVariables();
+                                  // ignore: use_build_context_synchronously
+                                  context
+                                      .read<UserProvider>()
+                                      .clearUserProviderVariables();
+                                  // ignore: use_build_context_synchronously
                                   context.goNamed("Log In");
                                 },
                                 color: const Color.fromARGB(255, 95, 95, 95),
