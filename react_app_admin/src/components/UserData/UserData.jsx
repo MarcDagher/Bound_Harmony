@@ -43,6 +43,11 @@ const handle_restore_user = async (email) => {
     <td style={{ 
       color : deletedUser === "null" ? "var(--darkGrey)" : "var(--red)"}}>{user_id}</td> 
 
+    {/* <td style={{ 
+      color : deletedUser === "null" ? "var(--darkGrey)" : "var(--red)"}}>{
+          profile_pic_url === "no image" ? <img className="profile-pic" src="/images/user (1).png" alt="pic"/> : "hello"}
+    </td>  */}
+
     {/* username */}
     <td style={{ 
       color : deletedUser === "null" ? "var(--darkGrey)" : "var(--red)"}}>{username}</td>

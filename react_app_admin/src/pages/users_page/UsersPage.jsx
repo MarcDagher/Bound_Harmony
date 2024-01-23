@@ -34,6 +34,7 @@ const Users = () => {
         <table>
           <tr>
             <th>ID</th>
+            {/* <th>Profile Image</th> */}
             <th>Name</th>
             <th>Email</th>
           </tr>
