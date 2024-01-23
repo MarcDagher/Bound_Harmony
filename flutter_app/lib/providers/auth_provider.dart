@@ -13,8 +13,7 @@ class AuthProvider extends ChangeNotifier {
   // LogIn Variables
   bool successLogin = false;
   bool wrongCredentials = false;
-
-  // Shared preferences variables
+  bool? firstLogin;
   SharedPreferences? preferences;
 
   // Get an instance of preferences
@@ -25,14 +24,12 @@ class AuthProvider extends ChangeNotifier {
     return preferences;
   }
 
-  // Retreive Token
   Future getToken() async {
     await initializePreferences();
     final String? token = preferences?.getString('token');
     return token;
   }
 
-  // Send Sign Up request
   Future signUpRequest(
       {required String formUsername,
       required String formEmail,
@@ -63,7 +60,6 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Send Log In request
   Future logInRequest(email, password) async {
     final baseUrl = Requests.baseUrl;
 
@@ -80,7 +76,6 @@ class AuthProvider extends ChangeNotifier {
         wrongCredentials = false;
         final token =
             JwtDecoder.decode(response.data['authorisation']['token']);
-
         await initializePreferences();
         // adding token payload to the Preferences
         preferences?.setString(
@@ -97,6 +92,12 @@ class AuthProvider extends ChangeNotifier {
           preferences?.setString('location', 'n/a');
         } else {
           preferences?.setString('location', token['location']);
+        }
+
+        if (token['first_login'] == 0) {
+          firstLogin = false;
+        } else if (token['first_login'] == 1) {
+          firstLogin = true;
         }
       }
     } on DioException catch (error) {
