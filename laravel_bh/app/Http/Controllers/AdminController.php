@@ -246,7 +246,7 @@ class AdminController extends Controller
 
     public function get_all_users(){
         try{
-            $users = User::withTrashed() -> where('role_id', 2) -> get(['id', 'username', 'email','deleted_at']);
+            $users = User::withTrashed() -> where('role_id', 2) -> get(['id', 'username', 'email','deleted_at', 'profile_pic_url']);
             return response() -> json([
                 "status" => "success",
                 "users" => $users
