@@ -41,6 +41,7 @@ class SuggestionsScreen extends StatelessWidget {
                       navigationButtonColor: Colors.white,
                       textAndButtonColor: Theme.of(context).hintColor,
                       handlePressed: () {
+                        context.read<SuggestionsProvider>().dates = [];
                         getSuggestions('date');
                         context.goNamed('Date Builder and Bonding Activities',
                             pathParameters: {'type': 'date'});
@@ -59,6 +60,8 @@ class SuggestionsScreen extends StatelessWidget {
                       navigationButtonColor: Colors.white,
                       textAndButtonColor: Theme.of(context).hintColor,
                       handlePressed: () {
+                        context.read<SuggestionsProvider>().bondingActivities =
+                            [];
                         getSuggestions('bonding');
                         context.goNamed('Date Builder and Bonding Activities',
                             pathParameters: {'type': 'bonding'});
