@@ -17,7 +17,7 @@ const handle_delete_user = async (email) => {
       })
       setDeletedUser('deleted')
     } catch (error) {
-      console.log(error.response)
+      // console.log(error.response)
     }
 }
 
@@ -50,8 +50,8 @@ const handle_restore_user = async (email) => {
                  <span className="user-data-email">Email: </span>{email}</p>
             </div>
             <div className="user-data-buttons">
-              <img className="arrow" src="images/add-user.png" alt="arrow" onClick={() => handle_restore_user(email)}/>
-              <img className="trash" src="images/trash.png" alt="trash" onClick={() => handle_delete_user(email)} />
+              {deletedUser !== "null" ? <img className="arrow" src="images/add-user.png" alt="arrow" onClick={() => handle_restore_user(email)}/> : null}
+              {deletedUser === "null" ? <img className="trash" src="images/trash.png" alt="trash" onClick={() => handle_delete_user(email)} /> : null}
             </div>
         </div>
 
