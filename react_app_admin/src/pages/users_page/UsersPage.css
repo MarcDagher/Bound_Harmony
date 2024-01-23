@@ -47,3 +47,11 @@ table > tr:hover{
   cursor: default;
 }
 
+@media (max-width: 990px){
+  .users-wrapper{
+    flex-direction: column;
+  }
+  .admin-table-container > p:first-of-type{
+    display: none;
+  }
+}
