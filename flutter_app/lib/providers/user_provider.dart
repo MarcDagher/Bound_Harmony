@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
-
 import 'package:bound_harmony/configurations/request.configuration.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -94,5 +92,13 @@ class UserProvider extends ChangeNotifier {
     } on DioException catch (error) {
       print("in getImage: ${error}");
     }
+  }
+
+  void clearUserProviderVariables() {
+    newDefaultUsername = "";
+    newUsernameSuccess = false;
+
+    newDefaultLocation = "";
+    newLocationSuccess = false;
   }
 }
