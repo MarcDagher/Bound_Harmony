@@ -14,6 +14,7 @@ use App\Http\Middleware\AuthMiddleware;
 // LogIn and Register Pages
 Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login');
+    Route::post('/signin', 'signin');
     Route::post('/register', 'register');
     Route::post('/logout', 'logout');
     Route::post('/refresh', 'refresh');

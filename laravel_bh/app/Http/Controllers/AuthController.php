@@ -12,7 +12,7 @@ class AuthController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','register']]);
+        $this->middleware('auth:api', ['except' => ['login','register', 'signin']]);
     }
 
     public function register(Request $request){
@@ -70,6 +70,36 @@ class AuthController extends Controller
             ]);
     }
 
+    public function signin(Request $request){
+        $request -> validate([
+            'email' => "required|email",
+            'password' => "required"
+        ]);
+
+        $credentials = $request -> only('email', 'password');
+        $token = Auth::attempt($credentials);
+
+        if($token){
+            $user = Auth::user();
+            if($user -> role_id == 1){
+                return response() -> json([
+                    "status" => "success",
+                    "token" => $token
+                ]);
+            } else {
+                return response() -> json([
+                    "status" => "failed",
+                    "message" => "Wrong credentials"
+                ], 401);    
+            }
+
+        } else {
+            return response() -> json([
+                "status" => "failed",
+                "message" => "Wrong credentials"
+            ], 401);
+        }
+    }
 
     public function logout()
     {
