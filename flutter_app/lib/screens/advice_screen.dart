@@ -118,11 +118,14 @@ class _AdviceScreenState extends State<AdviceScreen> {
             Consumer<MessagesProvider>(
               builder: (context, value, child) {
                 if (value.somethingWentWrong.isNotEmpty) {
-                  return Text(
-                    value.somethingWentWrong,
-                    style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.w800),
+                  return Padding(
+                    padding:
+                        const EdgeInsets.only(top: 4, bottom: 4, right: 35),
+                    child: Text(
+                      value.somethingWentWrong,
+                      style: const TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.w800),
+                    ),
                   );
                 } else {
                   return const SizedBox(

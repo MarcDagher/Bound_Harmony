@@ -65,11 +65,14 @@ class MessagesProvider extends ChangeNotifier {
             date: DateTime.now(),
             isSentByMe: false));
         notifyListeners();
+      } else if (response.data["status"] == "failed") {
+        somethingWentWrong = "Something went wrong, please try sending again";
+        conversation.remove(userMessage);
+        notifyListeners();
       }
     } on DioException catch (error) {
-      // print("In sendMessage() error: $error");
       conversation.remove(userMessage);
-      somethingWentWrong = "Something went worng, please try sending again";
+      somethingWentWrong = "Something went wrong, please try sending again";
       notifyListeners();
     }
   }

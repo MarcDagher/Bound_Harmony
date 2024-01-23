@@ -120,7 +120,7 @@ class DateBuilderAndBondingActivitiesScreen extends StatelessWidget {
                                   }
                                 },
                                 borderAndTextColor:
-                                    Theme.of(context).primaryColor,
+                                    const Color.fromARGB(255, 255, 87, 57),
                                 color: Colors.white,
                               ),
                             )
