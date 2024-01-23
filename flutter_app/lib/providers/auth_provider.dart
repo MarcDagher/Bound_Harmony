@@ -115,7 +115,7 @@ class AuthProvider extends ChangeNotifier {
     try {
       await dio.post("$baseUrl/logout",
           options: Options(headers: {"authorization": "Bearer $token"}));
-      preferences!.clear();
+      clearAuthProviderVariables();
     } on DioException catch (error) {
       print(error);
     }

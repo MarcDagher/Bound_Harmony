@@ -106,18 +106,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             });
                                           },
                                         ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 5),
-                                          child: TextInputField(
-                                            placeholder: "New Location",
-                                            handleChange: (text) {
-                                              setState(() {
-                                                formData[1] = text;
-                                              });
-                                            },
-                                          ),
-                                        ),
+                                        // Padding(
+                                        //   padding:
+                                        //       const EdgeInsets.only(top: 5),
+                                        //   child: TextInputField(
+                                        //     placeholder: "New Location",
+                                        //     handleChange: (text) {
+                                        //       setState(() {
+                                        //         formData[1] = text;
+                                        //       });
+                                        //     },
+                                        //   ),
+                                        // ),
                                       ],
                                     ),
 
@@ -164,6 +164,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ]),
 
+                /// edit image Text Button
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10),
                   child: InkWell(
@@ -220,16 +221,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               "Birthdate: ${context.read<AuthProvider>().preferences!.getString('birthdate')}"),
                     ),
 
-                    /// Location display: to change click on icon
-                    Consumer<UserProvider>(
-                      builder: (context, value, child) => Padding(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: DisplayBox(
-                            text: value.newDefaultLocation == ""
-                                ? "Country: ${context.read<AuthProvider>().preferences!.getString('location')}"
-                                : "Country: ${value.newDefaultLocation}",
-                          )),
-                    ),
+                    // /// Location display: to change click on icon
+                    // Consumer<UserProvider>(
+                    //   builder: (context, value, child) => Padding(
+                    //       padding: const EdgeInsets.only(bottom: 8),
+                    //       child: DisplayBox(
+                    //         text: value.newDefaultLocation == ""
+                    //             ? "Country: ${context.read<AuthProvider>().preferences!.getString('location')}"
+                    //             : "Country: ${value.newDefaultLocation}",
+                    //       )),
+                    // ),
 
                     // Incoming Requests Navigation Button
                     MaterialButton(
