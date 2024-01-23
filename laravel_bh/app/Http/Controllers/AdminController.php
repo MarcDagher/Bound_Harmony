@@ -259,6 +259,7 @@ class AdminController extends Controller
         }
     }
 
+    //// CAUTION - NOT USED - INTENDED TO BE USED IN ADMIN USERS LIST
     public function get_user_profile_photo(Request $request){
         $request -> validate([
             'user_id' => 'required|integer'

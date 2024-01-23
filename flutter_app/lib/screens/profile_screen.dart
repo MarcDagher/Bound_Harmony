@@ -39,134 +39,140 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Column(
               children: [
                 ////// Circle Avatar + Add Image Icon + Edit Info Icon
-                Stack(children: [
-                  _image != null
-                      ? Padding(
-                          padding: const EdgeInsets.only(bottom: 5),
-                          child: CircleAvatar(
-                            radius: 95,
-                            backgroundImage: FileImage(File(_image!.path)),
-                          ),
-                        )
-                      : Icon(
-                          color: Theme.of(context).hintColor,
-                          Icons.account_circle,
-                          size: 200,
-                        ),
-
-                  /// Add image icon: on click open bottom sheet
-                  ///
-                  Consumer<UserProvider>(
-                    builder: (context, value, child) => Positioned(
-                        right: 0,
-                        child: InkWell(
-                          child: Icon(
-                            Icons.edit_note_sharp,
+                Consumer<UserProvider>(
+                  builder: (context, value, child) => Stack(children: [
+                    // value.image != "" ?
+                    // NetworkImage('')
+                    _image != null
+                        ? Padding(
+                            padding: const EdgeInsets.only(bottom: 5),
+                            child: CircleAvatar(
+                              radius: 90,
+                              backgroundImage: FileImage(File(_image!.path)),
+                            ),
+                          )
+                        : Icon(
                             color: Theme.of(context).hintColor,
-                            size: 30,
+                            Icons.account_circle,
+                            size: 200,
                           ),
-                          onTap: () {
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  List formData = ["", ""];
-                                  Color buttonColor =
-                                      Theme.of(context).primaryColor;
-                                  return AlertDialog(
-                                    //// Styling Alert Diolog
-                                    ///
-                                    backgroundColor: Colors.white,
-                                    surfaceTintColor: Colors.white,
-                                    shadowColor: Colors.black,
-                                    contentPadding: const EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 20),
-                                    actionsPadding: const EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 20),
-                                    titlePadding: const EdgeInsets.only(
-                                        left: 10, right: 10, top: 20),
 
-                                    /// Alert Dialog Title
-                                    ///
-                                    title: Text(
-                                      "Edit Profile Info",
-                                      style: TextStyle(
-                                          color: Theme.of(context).hintColor,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-
-                                    /// Alert Dialog Content
-                                    ///
-                                    content: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        TextInputField(
-                                          placeholder: "New Username",
-                                          handleChange: (text) {
-                                            setState(() {
-                                              formData[0] = text;
-                                            });
-                                          },
-                                        ),
-                                        // Padding(
-                                        //   padding:
-                                        //       const EdgeInsets.only(top: 5),
-                                        //   child: TextInputField(
-                                        //     placeholder: "New Location",
-                                        //     handleChange: (text) {
-                                        //       setState(() {
-                                        //         formData[1] = text;
-                                        //       });
-                                        //     },
-                                        //   ),
-                                        // ),
-                                      ],
-                                    ),
-
-                                    /// Alert Dialog actions
-                                    ///
-                                    actions: [
-                                      ///// Alert Submit Button
+                    /// Add image icon: on click open bottom sheet
+                    ///
+                    Consumer<UserProvider>(
+                      builder: (context, value, child) => Positioned(
+                          right: 0,
+                          child: InkWell(
+                            child: Icon(
+                              Icons.edit_note_sharp,
+                              color: Theme.of(context).hintColor,
+                              size: 30,
+                            ),
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    List formData = ["", ""];
+                                    Color buttonColor =
+                                        Theme.of(context).primaryColor;
+                                    return AlertDialog(
+                                      //// Styling Alert Diolog
                                       ///
-                                      Button(
-                                          text: "Submit",
-                                          color: buttonColor,
-                                          handlePressed: () async {
-                                            if (formData[0].isNotEmpty ||
-                                                formData[1].isNotEmpty) {
-                                              final SharedPreferences
-                                                  preferences =
-                                                  await SharedPreferences
-                                                      .getInstance();
-                                              final token =
-                                                  preferences.get('token');
-                                              if (formData[0].isNotEmpty) {
-                                                await value.changeUsername(
-                                                    token, formData[0]);
+                                      backgroundColor: Colors.white,
+                                      surfaceTintColor: Colors.white,
+                                      shadowColor: Colors.black,
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                              horizontal: 10, vertical: 20),
+                                      actionsPadding:
+                                          const EdgeInsets.symmetric(
+                                              horizontal: 10, vertical: 20),
+                                      titlePadding: const EdgeInsets.only(
+                                          left: 10, right: 10, top: 20),
+
+                                      /// Alert Dialog Title
+                                      ///
+                                      title: Text(
+                                        "Edit Profile Info",
+                                        style: TextStyle(
+                                            color: Theme.of(context).hintColor,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+
+                                      /// Alert Dialog Content
+                                      ///
+                                      content: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          TextInputField(
+                                            placeholder: "New Username",
+                                            handleChange: (text) {
+                                              setState(() {
+                                                formData[0] = text;
+                                              });
+                                            },
+                                          ),
+                                          // Padding(
+                                          //   padding:
+                                          //       const EdgeInsets.only(top: 5),
+                                          //   child: TextInputField(
+                                          //     placeholder: "New Location",
+                                          //     handleChange: (text) {
+                                          //       setState(() {
+                                          //         formData[1] = text;
+                                          //       });
+                                          //     },
+                                          //   ),
+                                          // ),
+                                        ],
+                                      ),
+
+                                      /// Alert Dialog actions
+                                      ///
+                                      actions: [
+                                        ///// Alert Submit Button
+                                        ///
+                                        Button(
+                                            text: "Submit",
+                                            color: buttonColor,
+                                            handlePressed: () async {
+                                              if (formData[0].isNotEmpty ||
+                                                  formData[1].isNotEmpty) {
+                                                final SharedPreferences
+                                                    preferences =
+                                                    await SharedPreferences
+                                                        .getInstance();
+                                                final token =
+                                                    preferences.get('token');
+                                                if (formData[0].isNotEmpty) {
+                                                  await value.changeUsername(
+                                                      token, formData[0]);
+                                                }
+                                                if (formData[1].isNotEmpty) {
+                                                  await value.changeLocation(
+                                                      token, formData[1]);
+                                                }
+                                                if (value.newLocationSuccess ==
+                                                        true ||
+                                                    value.newUsernameSuccess ==
+                                                        true) {
+                                                  // ignore: use_build_context_synchronously
+                                                  Navigator.of(context).pop();
+                                                }
                                               }
-                                              if (formData[1].isNotEmpty) {
-                                                await value.changeLocation(
-                                                    token, formData[1]);
-                                              }
-                                              if (value.newLocationSuccess ==
-                                                      true ||
-                                                  value.newUsernameSuccess ==
-                                                      true) {
-                                                // ignore: use_build_context_synchronously
-                                                Navigator.of(context).pop();
-                                              }
-                                            }
-                                          })
-                                    ],
-                                  );
-                                });
-                            ////// End of Dialog
-                            ///
-                          },
-                        )),
-                  ),
-                ]),
+                                            })
+                                      ],
+                                    );
+                                  });
+                              ////// End of Dialog
+                              ///
+                            },
+                          )),
+                    ),
+                  ]),
+                ),
 
                 /// edit image Text Button
                 Padding(

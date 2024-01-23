@@ -28,9 +28,7 @@ Route::middleware('auth.admin')->group(function () {
      Route::get('/number_of_chosen_responses', [AdminController::class, 'number_of_chosen_responses']);
      Route::get('/users_age_range', [AdminController::class, 'users_age_range']);
      Route::get('/get_all_users', [AdminController::class, 'get_all_users']);
-     Route::get('/get_user_profile_photo', [AdminController::class, 'get_user_profile_photo']);
-
-    //  Route::get('/count_of_connection_status_type', [AdminController::class, 'count_of_connection_status_type']);
+    //  Route::get('/get_user_profile_photo', [AdminController::class, 'get_user_profile_photo']); // intended to be used in admin users list
 });
 
 // Profile Page

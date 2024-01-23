@@ -88,26 +88,50 @@ class ProfileController extends Controller
         }
     }
 
+    // public function get_profile_photo(){
+    //         $user = Auth::user();
+    //         if ($user -> profile_pic_url == "no image") {
+    //             return response() -> json([
+    //                 "status" => "rejected",
+    //                 "message" => "no image"
+    //             ]);
+    //         } else {
+    //             $image_path = $user->profile_pic_url;
+    //             $full_path = storage_path('app/public/' . $image_path);
+    //             if(file_exists($full_path)){
+    //                 $file_content = file_get_contents($full_path);
+    //                 $base64_image = base64_encode($file_content);
+    //                 return response() -> json([
+    //                     "status" => "success",
+    //                     "image" => $base64_image
+    //                 ]);
+    //             } else {
+    //                 return response() -> json([
+    //                     "status" => "failed",
+    //                     "message" => "image not found"
+    //                 ]);
+    //             }
+    //         }
+    // }
     public function get_profile_photo(){
-
             $user = Auth::user();
-    
             if ($user -> profile_pic_url == "no image") {
                 return response() -> json([
                     "status" => "rejected",
                     "message" => "no image"
                 ]);
             } else {
-
                 $image_path = $user->profile_pic_url;
+                
                 $full_path = storage_path('app/public/' . $image_path);
-
                 if(file_exists($full_path)){
                     $file_content = file_get_contents($full_path);
                     $base64_image = base64_encode($file_content);
+
                     return response() -> json([
                         "status" => "success",
-                        "image" => $base64_image
+                        "img_path" => $image_path,
+                        // "image" => $base64_image
                     ]);
                 } else {
                     return response() -> json([
@@ -115,8 +139,6 @@ class ProfileController extends Controller
                         "message" => "image not found"
                     ]);
                 }
-
             }
-        
     }
 }

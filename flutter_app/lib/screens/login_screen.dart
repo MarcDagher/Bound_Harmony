@@ -133,17 +133,21 @@ class _LogInScreenState extends State<LogInScreen> {
                                 value.successLogin = false;
                                 value.successSignUp = false;
                                 value.wrongCredentials = false;
+                                ///////////////////////////////
                                 final SharedPreferences preferences =
                                     await SharedPreferences.getInstance();
                                 final roleId = preferences.get('role_id');
-                                emailController.clear();
-                                passwordController.clear();
+                                //////////////////////////////
                                 if (roleId == 2 && value.firstLogin == true) {
-                                  getConversation();
-                                  getPhoto();
+                                  emailController.clear();
+                                  passwordController.clear();
                                   context.goNamed('Connection Setup');
                                 } else if (roleId == 2 &&
                                     value.firstLogin == false) {
+                                  emailController.clear();
+                                  passwordController.clear();
+                                  await getConversation();
+                                  await getPhoto();
                                   context.goNamed('Suggestions');
                                 }
                               }

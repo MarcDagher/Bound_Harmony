@@ -13,6 +13,9 @@ class UserProvider extends ChangeNotifier {
   String newDefaultLocation = "";
   bool newLocationSuccess = false;
 
+  // used in get_image
+  String image = "";
+
   changeUsername(token, String newUsername) async {
     final baseUrl = Requests.baseUrl;
     final dio = Dio();
@@ -78,17 +81,16 @@ class UserProvider extends ChangeNotifier {
     final dio = Dio();
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     final token = preferences.get('token');
-    // print("WE'RE INSIDE GET IMAGE");
+
     try {
       final response = await dio.get("$baseUrl/get_profile_photo",
           options: Options(
               headers: {"authorization": "Bearer $token"},
               contentType: "application/json"));
 
-      // print("in getImage response: ${response.data}");
-
-      final image = base64Decode(response.data["image"]);
-      // print(image);
+      image = response.data['img_path'];
+      notifyListeners();
+      print(image);
     } on DioException catch (error) {
       // print("in getImage: ${error}");
     }
