@@ -38,7 +38,7 @@ const SurveyResponses = () => {
             <div key={key} className="survey-questions">
 
               <p><span className="span-question">Question: </span> {`${key}`}</p>
-              <p className="span-option">Options:</p>
+              <p className="span-option">Answers:</p>
               <div className="survey-question-responses">
 
                   {Object.entries(value).map(([obj_key, obj_value]) => (

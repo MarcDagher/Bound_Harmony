@@ -12,7 +12,7 @@ export default function SurveysStats({connectionAndSurveyStats}) {
         label: 'count (per user)',
       },
     ],
-    width: 585,
+    width: 570,
     height: 300,
     sx: {
       [`.${axisClasses.left} .${axisClasses.label}`]: {

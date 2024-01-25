@@ -23,24 +23,28 @@ table{
   width: 100%;
   height: 100%;
   border-spacing: 0;
-  box-shadow: 0 1px 9px ;
 }
 
 th{
   text-align: left;
-  padding: 10px 10px;
+  padding: 15px 0px 15px 20px;
   background-color: rgb(255, 74, 74);
   font-weight: 700;
   color: rgba(255, 255, 255, 0.849);
 }
 
+table > td{
+  padding: 13px;
+}
+
 table > tr:nth-child(odd){
   background-color: rgb(226, 226, 226);
-  box-shadow: 0 2px 2px;
+  box-shadow: 0 1px 1px;
 }
 
 table > tr:nth-child(even){
   background-color: rgba(240, 240, 240, 0.699);
+  box-shadow: 0 1px 1px;
 }
 
 table > tr:hover{
@@ -48,7 +52,7 @@ table > tr:hover{
   cursor: default;
 }
 
-@media (max-width: 990px){
+@media (max-width: 1096px){
   .users-wrapper{
     flex-direction: column;
   }
