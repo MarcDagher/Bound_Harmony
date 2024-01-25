@@ -72,7 +72,7 @@ class _LogInScreenState extends State<LogInScreen> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 60),
+                            padding: const EdgeInsets.only(top: 55),
                             child: TextInputField(
                               handleChangeController: emailController,
                               placeholder: 'Email',
@@ -85,7 +85,7 @@ class _LogInScreenState extends State<LogInScreen> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 5, bottom: 20),
+                            padding: const EdgeInsets.only(top: 15, bottom: 20),
                             child: TextInputField(
                               handleChangeController: passwordController,
                               placeholder: 'Password',
