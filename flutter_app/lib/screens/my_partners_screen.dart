@@ -245,17 +245,6 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                         ActionPane(motion: const BehindMotion(), children: [
                       SlidableAction(
                         onPressed: (context) async {
-                          final token =
-                              await context.read<AuthProvider>().getToken();
-                          int? index;
-                          for (int i = 0;
-                              i < value.listOfPartners.length;
-                              i++) {
-                            if (value.listOfPartners[i]['status'] ==
-                                'accepted') {
-                              index = i;
-                            }
-                          }
                           // ignore: use_build_context_synchronously
                           showDialog(
                               context: context,
@@ -263,7 +252,29 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                                     title: const Text(
                                         'Are you sure you want to disconnect from your partner?'),
                                     actions: [
-                                      Button(text: 'Yes', handlePressed: () {}),
+                                      Button(
+                                          text: 'Yes',
+                                          handlePressed: () async {
+                                            final token = await context
+                                                .read<AuthProvider>()
+                                                .getToken();
+                                            int? index;
+                                            for (int i = 0;
+                                                i < value.listOfPartners.length;
+                                                i++) {
+                                              if (value.listOfPartners[i]
+                                                      ['status'] ==
+                                                  'accepted') {
+                                                index = i;
+                                              }
+                                            }
+                                            await value.disconnect(
+                                                token,
+                                                value.listOfPartners[index!]
+                                                    ["id"]);
+                                            // ignore: use_build_context_synchronously
+                                            Navigator.pop(context);
+                                          }),
                                       const SizedBox(
                                         height: 10,
                                       ),
@@ -274,8 +285,6 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                                           })
                                     ],
                                   ));
-                          // await value.disconnect(
-                          //     token, value.listOfPartners[index!]["id"]);
                         },
                         backgroundColor: Colors.red,
                         icon: Icons.cancel,
