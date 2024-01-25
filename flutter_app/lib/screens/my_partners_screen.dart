@@ -256,8 +256,26 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                               index = i;
                             }
                           }
-                          await value.disconnect(
-                              token, value.listOfPartners[index!]["id"]);
+                          // ignore: use_build_context_synchronously
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    title: const Text(
+                                        'Are you sure you want to disconnect from your partner?'),
+                                    actions: [
+                                      Button(text: 'Yes', handlePressed: () {}),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Button(
+                                          text: 'No',
+                                          handlePressed: () {
+                                            Navigator.pop(context);
+                                          })
+                                    ],
+                                  ));
+                          // await value.disconnect(
+                          //     token, value.listOfPartners[index!]["id"]);
                         },
                         backgroundColor: Colors.red,
                         icon: Icons.cancel,
