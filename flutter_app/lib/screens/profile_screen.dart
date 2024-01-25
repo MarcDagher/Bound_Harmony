@@ -34,7 +34,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: SafeArea(
         child: AnnotatedRegion(
           value: SystemUiOverlayStyle(
-              systemNavigationBarDividerColor: Colors.blue,
+              systemNavigationBarDividerColor: Colors.transparent,
               statusBarColor: Theme.of(context).primaryColor),
           child: SingleChildScrollView(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -48,7 +48,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ? Padding(
                             padding: const EdgeInsets.only(bottom: 10, top: 10),
                             child: CircleAvatar(
-                              radius: 95,
+                              radius: 90,
                               backgroundImage: NetworkImage(
                                   '${Requests.imageBaseUrl}/${value.image}'),
                             ),
@@ -58,7 +58,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 padding:
                                     const EdgeInsets.only(bottom: 10, top: 10),
                                 child: CircleAvatar(
-                                  radius: 95,
+                                  radius: 90,
                                   backgroundImage:
                                       FileImage(File(_image!.path)),
                                 ),
