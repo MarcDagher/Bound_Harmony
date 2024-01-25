@@ -249,8 +249,18 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                           showDialog(
                               context: context,
                               builder: (context) => AlertDialog(
-                                    title: const Text(
-                                        'Are you sure you want to disconnect from your partner?'),
+                                    backgroundColor: Colors.white,
+                                    surfaceTintColor: Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5)),
+                                    title: Text(
+                                      'Are you sure you want to disconnect from your partner?',
+                                      style: TextStyle(
+                                          color: Theme.of(context).hintColor,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w800),
+                                      textAlign: TextAlign.center,
+                                    ),
                                     actions: [
                                       Button(
                                           text: 'Yes',
@@ -280,6 +290,7 @@ class _MyPartnersScreenState extends State<MyPartnersScreen> {
                                       ),
                                       Button(
                                           text: 'No',
+                                          color: Theme.of(context).hintColor,
                                           handlePressed: () {
                                             Navigator.pop(context);
                                           })
