@@ -39,7 +39,7 @@ class SurveysScreen extends StatelessWidget {
                             .successSavingPersonalSurveyResponse = false;
                         context.goNamed("Personal Survey");
                       },
-                      imagePath: "assets/wallpaper 12.jpg"),
+                      imagePath: "assets/wallpaper 16.jpg"),
                 ),
                 const SizedBox(height: 10),
 
@@ -55,7 +55,7 @@ class SurveysScreen extends StatelessWidget {
                             .successSavingCouplesSurveyResponse = false;
                         context.goNamed("Couples Survey");
                       },
-                      imagePath: "assets/wallpaper 13.jpg"),
+                      imagePath: "assets/wallpaper 17.jpg"),
                 ),
               ],
             ),
