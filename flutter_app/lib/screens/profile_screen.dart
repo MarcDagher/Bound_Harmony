@@ -84,7 +84,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               showDialog(
                                   context: context,
                                   builder: (context) {
-                                    List formData = ["", ""];
+                                    String formData = "";
                                     Color buttonColor =
                                         Theme.of(context).primaryColor;
                                     return AlertDialog(
@@ -93,14 +93,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       backgroundColor: Colors.white,
                                       surfaceTintColor: Colors.white,
                                       shadowColor: Colors.black,
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              horizontal: 10, vertical: 20),
-                                      actionsPadding:
-                                          const EdgeInsets.symmetric(
-                                              horizontal: 10, vertical: 20),
-                                      titlePadding: const EdgeInsets.only(
-                                          left: 10, right: 10, top: 20),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
 
                                       /// Alert Dialog Title
                                       ///
@@ -122,22 +117,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             placeholder: "New Username",
                                             handleChange: (text) {
                                               setState(() {
-                                                formData[0] = text;
+                                                formData = text;
                                               });
                                             },
                                           ),
-                                          // Padding(
-                                          //   padding:
-                                          //       const EdgeInsets.only(top: 5),
-                                          //   child: TextInputField(
-                                          //     placeholder: "New Location",
-                                          //     handleChange: (text) {
-                                          //       setState(() {
-                                          //         formData[1] = text;
-                                          //       });
-                                          //     },
-                                          //   ),
-                                          // ),
                                         ],
                                       ),
 
@@ -150,26 +133,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             text: "Submit",
                                             color: buttonColor,
                                             handlePressed: () async {
-                                              if (formData[0].isNotEmpty ||
-                                                  formData[1].isNotEmpty) {
+                                              if (formData.isNotEmpty) {
                                                 final SharedPreferences
                                                     preferences =
                                                     await SharedPreferences
                                                         .getInstance();
                                                 final token =
                                                     preferences.get('token');
-                                                if (formData[0].isNotEmpty) {
+                                                if (formData.isNotEmpty) {
                                                   await value.changeUsername(
-                                                      token, formData[0]);
+                                                      token, formData);
                                                 }
-                                                if (formData[1].isNotEmpty) {
-                                                  await value.changeLocation(
-                                                      token, formData[1]);
-                                                }
-                                                if (value.newLocationSuccess ==
-                                                        true ||
-                                                    value.newUsernameSuccess ==
-                                                        true) {
+                                                if (value.newUsernameSuccess ==
+                                                    true) {
                                                   // ignore: use_build_context_synchronously
                                                   Navigator.of(context).pop();
                                                 }
@@ -242,17 +218,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           text:
                               "Birthdate: ${context.read<AuthProvider>().preferences!.getString('birthdate')}"),
                     ),
-
-                    // /// Location display: to change click on icon
-                    // Consumer<UserProvider>(
-                    //   builder: (context, value, child) => Padding(
-                    //       padding: const EdgeInsets.only(bottom: 8),
-                    //       child: DisplayBox(
-                    //         text: value.newDefaultLocation == ""
-                    //             ? "Country: ${context.read<AuthProvider>().preferences!.getString('location')}"
-                    //             : "Country: ${value.newDefaultLocation}",
-                    //       )),
-                    // ),
 
                     // Incoming Requests Navigation Button
                     MaterialButton(
