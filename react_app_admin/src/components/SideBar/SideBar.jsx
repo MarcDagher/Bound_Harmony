@@ -26,6 +26,11 @@ const SideBar = () => {
   return <>
       <div className='admin-sidebar'>
 
+        <div className="sidebar-header">
+          <img src="images/Logo2.png" alt="logo"/>
+          <p>Bound Harmony</p>
+        </div>
+
         <div className="dashboard" style={{
           backgroundColor: currentLocation === "dashboard" ? "rgb(56, 56, 56)" : null,
           color:  currentLocation === "dashboard" ? "#cccccc" : null

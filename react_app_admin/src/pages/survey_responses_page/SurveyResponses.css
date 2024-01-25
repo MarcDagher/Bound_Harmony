@@ -53,7 +53,7 @@
   font-weight: 700;
 }
 
-@media (max-width: 1096px){
+@media (max-width: 1155px){
   .survey-reponses-wrapper{
     flex-direction: column;
   }

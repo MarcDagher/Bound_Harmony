@@ -52,7 +52,11 @@ table > tr:hover{
   cursor: default;
 }
 
-@media (max-width: 1096px){
+@media (max-width: 1155px){
+  .sidebar-header{
+    display: none;
+  }
+  
   .users-wrapper{
     flex-direction: column;
   }
