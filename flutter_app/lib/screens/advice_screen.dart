@@ -175,7 +175,7 @@ class _AdviceScreenState extends State<AdviceScreen> {
                         // side: const BorderSide(
                         //     color: Color.fromARGB(255, 119, 118, 118),
                         //     width: 0.5),
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(50),
                       ),
                       height: 48,
                       minWidth: 0,
