@@ -46,14 +46,14 @@
 | OnBoarding Screen | Login screen  | Register screen | Setup screen |
 | ---| ---| ---| ---|
 | ![Landing](./readme/screenshots/OnBoarding.jpeg) | ![Landing](./readme/screenshots/LogIn.jpeg) | ![fsdaf](./readme/screenshots/SignUp.jpeg) | ![fsdaf](./readme/screenshot/Suggestions.jpeg) |
-| Suggestion screen (Landing) | Date Builder Screen | Bonding Activities Screen | Suggestions Screen error 1 |
+| Suggestion screen (Landing) | Date Builder Screen | Bonding Activities Screen | Suggestions Screen alert 1 |
 | ![fsdaf](./readme/screenshots/Suggestions.jpeg) | ![fsdaf](./readme/screenshots/DateBuilder.jpeg) | ![fsdaf](./readme/screenshots/BondingActivities.jpeg) | ![fsdaf](./readme/screenshots/Datebuilder-connected-and-personal-survey.jpeg) |
-| Suggestions Screen error 2 | Surveys Screen | Personal Survey Screen | Couples Survey Screen |
+| Suggestions Screen alert 2 | Surveys Screen | Personal Survey Screen | Couples Survey Screen |
 | ![fsdaf](./readme/screenshots/Date-Builder-partner's-CS.jpeg) | ![fsdaf](./readme/screenshots/Surveys.jpeg) | ![fsdaf](./readme/screenshots/Personal-survey.jpeg) | ![fsdaf](./readme/screenshots/CouplesSurvey.jpeg) |
-| Personal Survey complete | Couples Survey complete | Advice | Profile |
+| Personal Survey complete | Couples Survey complete | Advice screen | Profile screen |
 | ![fsdaf](./readme/screenshots/PersonalSurvey-responses-saved.jpeg) | ![fsdaf](./readme/screenshots/CS-responses-saved.jpeg) | ![fsdaf](./readme/screenshots/Advice.jpeg) | ![fsdaf](./readme/screenshots/Profile.jpeg) |
-| Advice screen | Couples Survey complete | Couples Survey error 1 | Couples Survey error 2 |
-| ![fsdaf](./readme/screenshots/Advice.jpeg) | ![fsdaf](./readme/screenshots/CS-responses-saved.jpeg) | ![fsdaf](./readme/screenshots/Personal-surve.jpeg) | ![fsdaf](./readme/screenshots/CouplesSurve.jpeg) |
+| Incoming Requests alert 1 | Incoming Requests screen | Incoming Requests alert 2 | My Partners screen (single) |
+| ![fsdaf](./readme/screenshots/Incoming-NoPartner.jpeg) | ![fsdaf](./readme/screenshots/Incoming-Requests-with-req.jpeg) | ![fsdaf](./readme/screenshots/Incoming-request-in-a-real.jpeg) | ![fsdaf](./readme/screenshots/MyPartners-history-with-no-current.jpeg) |
 
 ### Admin Screens (Web)
 | Login screen  | Register screen |  Landing screen |
