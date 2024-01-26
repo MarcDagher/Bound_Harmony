@@ -47,13 +47,15 @@
 > Using the wireframes and mockups as a guide, I implemented the Bound Harmony app with it's features. Here is an overview of what the user will have in the app:
 
 ### User Screens (Mobile)
-| Login-Setup | Profile Customization  | Date Suggestions | 
+| Sign Up | Login-Setup | Profile Customization | 
 | --- | --- | --- |
-| <img src="./readme/gifs/login_Setup.gif" width="230" height="450"> | <img src="./readme/gifs/ProfileCustomization.gif" width="230" height="450"> | <img src="./readme/gifs/dates.gif" width="230" height="450"> | 
-| Bonding Activities Suggestions | Incoming Requests | Couple's Survey |
-<img src="./readme/gifs/bonding.gif" width="230" height="450"> | <img src="./readme/gifs/IncomingRequests.gif" width="230" height="450"> | <img src="./readme/gifs/CoupleSurvey.gif" width="230" height="450"> |
-| Personalized Advice | Disconnect from Partner | Personal Survey |
-| <img src="./readme/gifs/advice.gif" width="230" height="450"> | <img src="./readme/gifs/disconnect.gif" width="230" height="450"> | <img src="./readme/gifs/PersonalSurvey.gif" width="230" height="450"> | 
+| | <img src="./readme/gifs/login_Setup.gif" width="230" height="450"> | <img src="./readme/gifs/ProfileCustomization.gif" width="230" height="450">
+| Incoming Requests | Personal Survey | Couple's Survey |
+| <img src="./readme/gifs/IncomingRequests.gif" width="230" height="450"> | <img src="./readme/gifs/PersonalSurvey.gif" width="230" height="450"> | <img src="./readme/gifs/CoupleSurvey.gif" width="230" height="450"> | 
+| Date Suggestions | Bonding Activities Suggestions | Personalized Advice |
+| <img src="./readme/gifs/dates.gif" width="230" height="450"> | <img src="./readme/gifs/bonding.gif" width="230" height="450"> | <img src="./readme/gifs/advice.gif" width="230" height="450"> |
+| Disconnect from Partner |
+| <img src="./readme/gifs/disconnect.gif" width="230" height="450"> |
 
 ### Admin Screens (Web)
 | Login screen  | Register screen |  Landing screen |
