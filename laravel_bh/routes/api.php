@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ConnectionsController;
 use App\Http\Controllers\MessagesController;
+use App\Http\Controllers\PredictionsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SuggestionsController;
 use App\Http\Controllers\SurveysController;
@@ -72,3 +73,4 @@ Route::controller(SurveysController::class)->group(function (){
     Route::post('/save_responses', 'save_responses');
 });
 
+Route::get('/get_prediction', [PredictionsController::class, 'get_prediction']);
