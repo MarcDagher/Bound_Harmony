@@ -47,14 +47,13 @@
 > Using the wireframes and mockups as a guide, I implemented the Bound Harmony app with the following features:
 
 ### User Screens (Mobile)
-| Login | Login | Login | Login |
+| Login | Login | Login | 
 | --- | --- | --- | --- |
-| <img src="./readme/gifs/login_Setup.gif" width="200" height="450"> | <img src="./readme/gifs/disconnect.gif" width="200" height="450"> | <img src="./readme/gifs/dates.gif" width="200" height="450"> | <img src="./readme/gifs/bonding.gif" width="200" height="450"> |
-| Login | Login | Login | Login |
-| <img src="./readme/gifs/advice.gif" width="200" height="450"> | <img src="./readme/gifs/ProfileCustomization.gif" width="200" height="450"> | <img src="./readme/gifs/PersonalSurvey.gif" width="200" height="450"> | <img src="./readme/gifs/IncomingRequests.gif" width="200" height="450"> |
-| Login |
-| <img src="./readme/gifs/CoupleSurvey.gif" width="230" height="450"> |
-
+| <img src="./readme/gifs/login_Setup.gif" width="200" height="450"> | <img src="./readme/gifs/disconnect.gif" width="200" height="450"> | <img src="./readme/gifs/dates.gif" width="200" height="450"> | 
+| Login | Login | Login |
+<img src="./readme/gifs/bonding.gif" width="200" height="450"> | <img src="./readme/gifs/IncomingRequests.gif" width="200" height="450"> | <img src="./readme/gifs/CoupleSurvey.gif" width="230" height="450"> |
+| Login | Login | Login |
+| <img src="./readme/gifs/advice.gif" width="200" height="450"> | <img src="./readme/gifs/ProfileCustomization.gif" width="200" height="450"> | <img src="./readme/gifs/PersonalSurvey.gif" width="200" height="450"> | 
 
 ### Admin Screens (Web)
 | Login screen  | Register screen |  Landing screen |
