@@ -45,17 +45,17 @@
 ### User Screens (Mobile)
 | OnBoarding Screen | Login screen  | Register screen | Setup screen |
 | ---| ---| ---| ---|
-| ![Landing](./readme/screenshots/OnBoarding.jpeg) | ![Landing](./readme/screenshots/LogIn.jpeg) | ![fsdaf](./readme/screenshots/SignUp.jpeg) | ![fsdaf](./readme/screenshot/Setup.jpeg) |
+| ![Landing](./readme/screenshots/OnBoarding.jpeg) | ![Landing](./readme/screenshots/LogIn.jpeg) | ![Landing](./readme/screenshots/SignUp.jpeg) | ![Landing](./readme/screenshot/Setup.jpeg) |
 | Suggestion screen (Landing) | Date Builder Screen | Bonding Activities Screen | Suggestions Screen alert 1 |
-| ![fsdaf](./readme/screenshots/Suggestions.jpeg) | ![fsdaf](./readme/screenshots/DateBuilder.jpeg) | ![fsdaf](./readme/screenshots/BondingActivities.jpeg) | ![fsdaf](./readme/screenshots/Datebuilder-connected-and-personal-survey.jpeg) |
+| ![Landing](./readme/screenshots/Suggestions.jpeg) | ![Landing](./readme/screenshots/DateBuilder.jpeg) | ![Landing](./readme/screenshots/BondingActivities.jpeg) | ![Landing](./readme/screenshots/Datebuilder-connected-and-personal-survey.jpeg) |
 | Suggestions Screen alert 2 | Surveys Screen | Personal Survey Screen | Couples Survey Screen |
-| ![fsdaf](./readme/screenshots/Date-Builder-partner's-CS.jpeg) | ![fsdaf](./readme/screenshots/Surveys.jpeg) | ![fsdaf](./readme/screenshots/Personal-survey.jpeg) | ![fsdaf](./readme/screenshots/CouplesSurvey.jpeg) |
+| ![Landing](./readme/screenshots/Date-Builder-partner's-CS.jpeg) | ![Landing](./readme/screenshots/Surveys.jpeg) | ![Landing](./readme/screenshots/Personal-survey.jpeg) | ![Landing](./readme/screenshots/CouplesSurvey.jpeg) |
 | Personal Survey complete | Couples Survey complete | Advice screen | Profile screen |
-| ![fsdaf](./readme/screenshots/PersonalSurvey-responses-saved.jpeg) | ![fsdaf](./readme/screenshots/CS-responses-saved.jpeg) | ![fsdaf](./readme/screenshots/Advice.jpeg) | ![fsdaf](./readme/screenshots/Profile.jpeg) |
+| ![Landing](./readme/screenshots/PersonalSurvey-responses-saved.jpeg) | ![Landing](./readme/screenshots/CS-responses-saved.jpeg) | ![Landing](./readme/screenshots/Advice.jpeg) | ![Landing](./readme/screenshots/Profile.jpeg) |
 | Incoming Requests alert 1 | Incoming Requests screen | Incoming Requests alert 2 | My Partners screen (single) |
-| ![fsdaf](./readme/screenshots/Incoming-NoPartner.jpeg) | ![fsdaf](./readme/screenshots/Incoming-Requests-with-req.jpeg) | ![fsdaf](./readme/screenshots/Incoming-request-in-a-real.jpeg) | ![fsdaf](./readme/screenshots/MyPartners-history-with-no-current.jpeg) |
+| ![Landing](./readme/screenshots/Incoming-NoPartner.jpeg) | ![Landing](./readme/screenshots/Incoming-Requests-with-req.jpeg) | ![Landing](./readme/screenshots/Incoming-request-in-a-real.jpeg) | ![Landing](./readme/screenshots/MyPartners-history-with-no-current.jpeg) |
 | My Partners (in a relationship) | My Partners (single + no history) |
-| ![fsdaf](./readme/screenshots/MyPartnersEmpty.jpeg) | 
+| ![Landing](./readme/screenshots/MyPartnersEmpty.jpeg) | 
 
 ### Admin Screens (Web)
 | Login screen  | Register screen |  Landing screen |
