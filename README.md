@@ -45,7 +45,7 @@
 ### User Screens (Mobile)
 | OnBoarding Screen | Login screen  | Register screen | Landing screen |
 | ---| ---| ---| ---|
-| ![Landing](./readme/screenshots/OnBoarding.jpeg) | ![Landing](./readme/screenshots/LogIn.jpeg) | ![fsdaf](./readme/screenshots/SignUp.jpeg) | ![fsdaf](https://placehold.co/900x1600) |
+| ![Landing](./readme/screenshots/OnBoarding.jpeg) | ![Landing](./readme/screenshots/LogIn.jpeg) | ![fsdaf](./readme/screenshots/SignUp.jpeg) | ![fsdaf](./readme/screenshots/Suggestions.jpeg) |
 | Home screen  | Menu Screen | Order Screen | Checkout Screen |
 | ![Landing](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
 
