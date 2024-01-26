@@ -32,7 +32,7 @@ class SurveysScreen extends StatelessWidget {
                   child: NavigationBox(
                       navigationButtonColor: Colors.white,
                       textAndButtonColor: Theme.of(context).hintColor,
-                      title: "Go To Personal Survey",
+                      title: "Go to Personal Survey",
                       handlePressed: () {
                         context
                             .read<SurveysProvider>()
@@ -48,7 +48,7 @@ class SurveysScreen extends StatelessWidget {
                   child: NavigationBox(
                       navigationButtonColor: Colors.white,
                       textAndButtonColor: Theme.of(context).hintColor,
-                      title: "Go To Couples Survey",
+                      title: "Go to Couples Survey",
                       handlePressed: () {
                         context
                             .read<SurveysProvider>()

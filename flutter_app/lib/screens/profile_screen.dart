@@ -30,12 +30,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: AnnotatedRegion(
-          value: SystemUiOverlayStyle(
-              systemNavigationBarDividerColor: Colors.transparent,
-              statusBarColor: Theme.of(context).primaryColor),
+    return AnnotatedRegion(
+      value: const SystemUiOverlayStyle(
+          statusBarIconBrightness: Brightness.dark,
+          statusBarColor: Colors.transparent),
+      child: Scaffold(
+        body: SafeArea(
           child: SingleChildScrollView(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             padding: const EdgeInsets.symmetric(horizontal: 25),
