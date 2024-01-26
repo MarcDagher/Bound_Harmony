@@ -135,6 +135,27 @@ class _AdviceScreenState extends State<AdviceScreen> {
               },
             ),
 
+            // If waiting for response
+            Consumer<MessagesProvider>(
+              builder: (context, value, child) {
+                if (value.waiting == true) {
+                  return Padding(
+                    padding:
+                        const EdgeInsets.only(top: 4, bottom: 4, right: 35),
+                    child: Text(
+                      "waiting",
+                      style: const TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.w800),
+                    ),
+                  );
+                } else {
+                  return const SizedBox(
+                    height: 5,
+                  );
+                }
+              },
+            ),
+
             /// Styling input field
             ///
             Padding(

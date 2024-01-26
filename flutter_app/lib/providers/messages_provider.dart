@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class MessagesProvider extends ChangeNotifier {
   final _dio = Dio();
   String somethingWentWrong = "";
+  bool? waiting;
 
   List<Message> conversation = [
     Message(
@@ -47,6 +48,7 @@ class MessagesProvider extends ChangeNotifier {
 
   // save message in DB and return AI response
   Future sendMessage(Message userMessage) async {
+    waiting = true;
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     final token = preferences.get('token');
     try {
@@ -64,6 +66,7 @@ class MessagesProvider extends ChangeNotifier {
             text: response.data["ai_response"],
             date: DateTime.now(),
             isSentByMe: false));
+        waiting = null;
         notifyListeners();
       } else if (response.data["status"] == "failed") {
         somethingWentWrong = "Something went wrong, please try sending again";
@@ -71,6 +74,7 @@ class MessagesProvider extends ChangeNotifier {
         notifyListeners();
       }
     } on DioException catch (error) {
+      waiting = null;
       conversation.remove(userMessage);
       somethingWentWrong = "Something went wrong, please try sending again";
       notifyListeners();
