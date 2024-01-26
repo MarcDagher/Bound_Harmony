@@ -61,7 +61,7 @@
 
 ### Admin Screens (Web)
 | Login screen  | Dashboard Screen |
-| ---| ---| ---|
+| ---| ---|
 | ![Landing](./readme/screenshots/admin_signin.png) | ![fsdaf](./readme/screenshots/dashboard.png) | 
 | Users Screen | Survey Responses |
 | ![Landing](./readme/screenshots/users.png) | ![fsdaf](./readme/screenshots/surveyResponses.png) |
