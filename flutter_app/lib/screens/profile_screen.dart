@@ -38,7 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         body: SafeArea(
           child: SingleChildScrollView(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            padding: const EdgeInsets.symmetric(horizontal: 25),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
                 ////// Circle Avatar + Add Image Icon + Edit Info Icon
@@ -164,7 +164,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                 /// edit image Text Button
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 20, top: 5),
+                  padding: const EdgeInsets.only(bottom: 5, top: 5),
                   child: InkWell(
                     child: Text(
                       'Edit Image',
@@ -186,56 +186,63 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     /// Username display: to change click on icon
                     Consumer<UserProvider>(
-                      builder: (context, value, child) => Padding(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: DisplayBox(
-                            text: value.newDefaultUsername == ""
-                                ? "Username: ${context.read<AuthProvider>().preferences!.getString('username')}"
-                                : "Username: ${value.newDefaultUsername}",
-                          )),
-                    ),
-
-                    /// Email display
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            ////// email
-                            child: DisplayBox(
-                              text:
-                                  "Email: ${context.read<AuthProvider>().preferences!.getString('email')}",
-                            ),
-                          ),
-                        ],
+                      builder: (context, value, child) => DisplayBox(
+                        title: "Username: ",
+                        text: value.newDefaultUsername == ""
+                            ? "${context.read<AuthProvider>().preferences!.getString('username')}"
+                            : value.newDefaultUsername,
                       ),
                     ),
 
-                    /// Birthdate display
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: DisplayBox(
-                          text:
-                              "Birthdate: ${context.read<AuthProvider>().preferences!.getString('birthdate')}"),
+                    /// Email display
+                    Row(
+                      children: [
+                        Expanded(
+                          ////// email
+                          child: DisplayBox(
+                            title: "Email : ",
+                            text:
+                                "${context.read<AuthProvider>().preferences!.getString('email')}",
+                          ),
+                        ),
+                      ],
                     ),
+
+                    /// Birthdate display
+                    DisplayBox(
+                        title: "Birthdate: ",
+                        text:
+                            "${context.read<AuthProvider>().preferences!.getString('birthdate')}"),
 
                     // Incoming Requests Navigation Button
                     MaterialButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            side: BorderSide(
-                                color: Theme.of(context).hintColor, width: 2)),
+                        shape: const Border(
+                            bottom: BorderSide(
+                                width: 1,
+                                color: Color.fromARGB(255, 235, 235, 235))),
                         padding: const EdgeInsets.symmetric(
-                            vertical: 18, horizontal: 15),
+                            vertical: 23, horizontal: 5),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              'Incoming Requests',
-                              style: TextStyle(
-                                  fontSize: 16,
+                            Row(
+                              children: [
+                                Icon(
+                                  shadows: const [Shadow(blurRadius: 0.2)],
+                                  Icons.record_voice_over_rounded,
                                   color: Theme.of(context).hintColor,
-                                  fontWeight: FontWeight.w800),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  'Incoming Requests',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: Theme.of(context).hintColor,
+                                      fontWeight: FontWeight.w800),
+                                ),
+                              ],
                             ),
                             Icon(
                               Icons.navigate_next,
@@ -247,14 +254,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           context.goNamed("Incoming Requests");
                         }),
 
-                    const SizedBox(height: 8),
+                    // const SizedBox(height: 10),
 
-                    // My Partners Navigation Button
-                    NavigationButton(
-                        text: "My Partners",
-                        textAndRightIconColor: Colors.white,
-                        buttonColor: Theme.of(context).primaryColor,
-                        handlePressed: () {
+                    MaterialButton(
+                        shape: const Border(
+                            bottom: BorderSide(
+                                width: 1,
+                                color: Color.fromARGB(255, 235, 235, 235))),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 23, horizontal: 5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.favorite,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  'My Partners',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: Theme.of(context).primaryColor,
+                                      fontWeight: FontWeight.w800),
+                                ),
+                              ],
+                            ),
+                            Icon(
+                              Icons.navigate_next,
+                              color: Theme.of(context).primaryColor,
+                            )
+                          ],
+                        ),
+                        onPressed: () {
                           context
                               .read<ConnectionProvider>()
                               .successSendRequest = false;
@@ -264,44 +300,73 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                           context.goNamed('My Partners');
                         }),
-
                     // Logout button
                     Consumer<AuthProvider>(
-                        builder: (context, value, child) => Padding(
-                              padding: const EdgeInsets.only(top: 8),
-                              child: Button(
-                                text: "Logout",
-                                handlePressed: () async {
-                                  final preferences =
-                                      await SharedPreferences.getInstance();
-                                  final token = preferences.get('token');
-                                  await value.logout(token);
-                                  // ignore: use_build_context_synchronously
-                                  context
-                                      .read<ConnectionProvider>()
-                                      .clearConnectionsProviderVariables();
-                                  // ignore: use_build_context_synchronously
-                                  context
-                                      .read<MessagesProvider>()
-                                      .clearMessagesProviderVariables();
-                                  // ignore: use_build_context_synchronously
-                                  context
-                                      .read<SuggestionsProvider>()
-                                      .clearSuggestionsProviderVariables();
-                                  // ignore: use_build_context_synchronously
-                                  context
-                                      .read<SurveysProvider>()
-                                      .clearSurveyProviderVariables();
-                                  // ignore: use_build_context_synchronously
-                                  context
-                                      .read<UserProvider>()
-                                      .clearUserProviderVariables();
-                                  // ignore: use_build_context_synchronously
-                                  context.goNamed("Log In");
-                                },
-                                color: const Color.fromARGB(255, 95, 95, 95),
-                              ),
-                            )),
+                      builder: (context, value, child) => MaterialButton(
+                        shape: const Border(
+                            bottom: BorderSide(
+                                width: 1,
+                                color: Color.fromARGB(255, 235, 235, 235))),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 22, horizontal: 5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  shadows: const [Shadow(blurRadius: 0.2)],
+                                  Icons.logout,
+                                  color: Theme.of(context).hintColor,
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  'Logout',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: Theme.of(context).hintColor,
+                                      fontWeight: FontWeight.w800),
+                                ),
+                              ],
+                            ),
+                            Icon(
+                              Icons.navigate_next,
+                              color: Theme.of(context).hintColor,
+                            )
+                          ],
+                        ),
+                        onPressed: () async {
+                          final preferences =
+                              await SharedPreferences.getInstance();
+                          final token = preferences.get('token');
+                          await value.logout(token);
+                          // ignore: use_build_context_synchronously
+                          context
+                              .read<ConnectionProvider>()
+                              .clearConnectionsProviderVariables();
+                          // ignore: use_build_context_synchronously
+                          context
+                              .read<MessagesProvider>()
+                              .clearMessagesProviderVariables();
+                          // ignore: use_build_context_synchronously
+                          context
+                              .read<SuggestionsProvider>()
+                              .clearSuggestionsProviderVariables();
+                          // ignore: use_build_context_synchronously
+                          context
+                              .read<SurveysProvider>()
+                              .clearSurveyProviderVariables();
+                          // ignore: use_build_context_synchronously
+                          context
+                              .read<UserProvider>()
+                              .clearUserProviderVariables();
+                          // ignore: use_build_context_synchronously
+                          context.goNamed("Log In");
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -320,15 +385,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       _image = selectedImage;
     });
   }
-
-  // Future<void> cameraImagePicker() async {
-  //   final ImagePicker picker = ImagePicker();
-  //   final XFile? selectedImage =
-  //       await picker.pickImage(source: ImageSource.camera);
-  //   setState(() {
-  //     _image = selectedImage;
-  //   });
-  // }
 
   buildBottomSheet(context) {
     return showModalBottomSheet(
@@ -362,25 +418,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       "Remove",
                       style: TextStyle(color: Colors.white),
                     )),
-
-                // /// Camera
-                // ///
-                // TextButton.icon(
-                //     onPressed: () async {
-                //       await cameraImagePicker();
-                //       final SharedPreferences preferences =
-                //           await SharedPreferences.getInstance();
-                //       final token = preferences.get('token');
-                //       // ignore: use_build_context_synchronously
-                //       await context
-                //           .read<UserProvider>()
-                //           .saveImage(token, _image);
-                //     },
-                //     icon: const Icon(Icons.camera, color: Colors.white),
-                //     label: const Text(
-                //       "Camera",
-                //       style: TextStyle(color: Colors.white),
-                //     )),
 
                 /// Gallery
                 TextButton.icon(
