@@ -50,8 +50,8 @@
 | ![fsdaf](./readme/screenshots/Suggestions.jpeg) | ![fsdaf](./readme/screenshots/DateBuilder.jpeg) | ![fsdaf](./readme/screenshots/BondingActivities.jpeg) | ![fsdaf](./readme/screenshots/Datebuilder-connected-and-personal-survey.jpeg) |
 | Suggestions Screen error 2 | Surveys Screen | Personal Survey Screen | Couples Survey Screen |
 | ![fsdaf](./readme/screenshots/Date-Builder-partner's-CS.jpeg) | ![fsdaf](./readme/screenshots/Surveys.jpeg) | ![fsdaf](./readme/screenshots/Personal-survey.jpeg) | ![fsdaf](./readme/screenshots/CouplesSurvey.jpeg) |
-| Personal Survey complete | Couples Survey complete | Advice | Couples Survey error 2 |
-| ![fsdaf](./readme/screenshots/PersonalSurvey-responses-saved.jpeg) | ![fsdaf](./readme/screenshots/CS-responses-saved.jpeg) | ![fsdaf](./readme/screenshots/Advice.jpeg) | ![fsdaf](./readme/screenshots/CouplesSurve.jpeg) |
+| Personal Survey complete | Couples Survey complete | Advice | Profile |
+| ![fsdaf](./readme/screenshots/PersonalSurvey-responses-saved.jpeg) | ![fsdaf](./readme/screenshots/CS-responses-saved.jpeg) | ![fsdaf](./readme/screenshots/Advice.jpeg) | ![fsdaf](./readme/screenshots/Profile.jpeg) |
 | Advice screen | Couples Survey complete | Couples Survey error 1 | Couples Survey error 2 |
 | ![fsdaf](./readme/screenshots/Advice.jpeg) | ![fsdaf](./readme/screenshots/CS-responses-saved.jpeg) | ![fsdaf](./readme/screenshots/Personal-surve.jpeg) | ![fsdaf](./readme/screenshots/CouplesSurve.jpeg) |
 
