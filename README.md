@@ -7,7 +7,7 @@
 
 > A mobile app for connecting lovers together and assisting them through a fun and harmonious relationship.
 >
-> Bound Harmony first requires the users, who probably are in a relationship, to connect their accounts and fill a survey. To make their relationship smoother, Bound Harmony will provide the couple with date suggestions, bonding activities and gift ideas. To make it even better, our cupid will be ready to give advice at any time!
+> Bound Harmony first requires the users, who probably are in a relationship, to connect their accounts and fill a survey. To make their relationship smoother, Bound Harmony will provide the couple with date suggestions and bonding activities. To make it even better, our cupid will be ready to give advice at any time!
 
 ### User Stories
 
