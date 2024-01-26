@@ -74,11 +74,11 @@
 
 - This project uses the [Flutter app development framework](https://flutter.dev/). Flutter is a cross-platform hybrid app development platform which allows us to use a single codebase for apps on mobile, desktop, and the web.
 - The admin panel is done using [React.js](https://react.dev/). React.js is a JavaScript library for building single-page applications out of individual pieces called components.
-- The backend is handled using [Laravel](https://laravel.com/) and MySql. Laravel is a PHP web application framework that follows the Model-View-Controller (MVC) architectural pattern. Laravel simplifies common tasks such as routing and authentication making it easier for developers to create scalable and maintainable web applications. With features like Eloquent ORM and artisan command-line tools, Laravel facilitates rapid development and supports the creation of modern, feature-rich web applications.
+- The backend is handled using [Laravel](https://laravel.com/) and [MySql](https://www.mysql.com/). Laravel is a PHP web application framework that follows the Model-View-Controller (MVC) architectural pattern. Laravel simplifies common tasks such as routing and authentication making it easier for developers to create scalable and maintainable web applications. With features like Eloquent ORM and artisan command-line tools, Laravel facilitates rapid development and supports the creation of modern, feature-rich web applications.
 For managing the database schemas and establishing relational connections between tables, I used MySQL, a relational database management system. 
-- The app uses openAi in the Advice section. In order to make the advice personalized, survey responses are handled and are summarized before being sent to openAi.
-- Google's Google Places Api is used to get the places relative to the user's interests, based on the responses given in the surveys and in relation to the user's partner's interests as well.
-- The app uses the font ["Nunito"]([https://fonts.google.com/specimen/Work+Sans]) as its main font, and the design of the app adheres to the material design guidelines.
+- The app uses [openAi](https://platform.openai.com/docs/introduction) in the Advice section. In order to make the advice personalized, survey responses are handled and are summarized before being sent to api. I also used [Laravel's OpenAi Library](https://github.com/openai-php/laravel), which is open source and helps with handling the openAi api.
+- I used Google's [Google Places Api](https://developers.google.com/maps/documentation/places/web-service/search-nearby) to get the places relative to the user's interests, and based on the responses given in the surveys and in relation to the user's partner's interests.
+- The app uses the font ["Nunito"](https://fonts.google.com/specimen/Work+Sans) as its main font, and the design of the app adheres to the material design guidelines.
 
 <br><br>
 
@@ -100,7 +100,7 @@ For managing the database schemas and establishing relational connections betwee
    ```sh
    git clone https://github.com/MarcDagher/Bound-Harmony.git
    ```
-2. Install Composer
+2. Install [Composer](https://getcomposer.org/)
    ```sh
    composer install
    ```
