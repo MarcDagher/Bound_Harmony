@@ -54,6 +54,8 @@
 | ![fsdaf](./readme/screenshots/PersonalSurvey-responses-saved.jpeg) | ![fsdaf](./readme/screenshots/CS-responses-saved.jpeg) | ![fsdaf](./readme/screenshots/Advice.jpeg) | ![fsdaf](./readme/screenshots/Profile.jpeg) |
 | Incoming Requests alert 1 | Incoming Requests screen | Incoming Requests alert 2 | My Partners screen (single) |
 | ![fsdaf](./readme/screenshots/Incoming-NoPartner.jpeg) | ![fsdaf](./readme/screenshots/Incoming-Requests-with-req.jpeg) | ![fsdaf](./readme/screenshots/Incoming-request-in-a-real.jpeg) | ![fsdaf](./readme/screenshots/MyPartners-history-with-no-current.jpeg) |
+| My Partners (in a relationship) |
+| ![fsdaf](./readme/screenshots/MyPartners-with-current.jpeg) | 
 
 ### Admin Screens (Web)
 | Login screen  | Register screen |  Landing screen |
