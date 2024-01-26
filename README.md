@@ -49,11 +49,12 @@
 ### User Screens (Mobile)
 | Login | Login | Login | Login |
 | --- | --- | --- | --- |
-| ![LoginGIF](./readme/gifs/login_Setup.gif) | ![LoginGIF](./readme/gifs/disconnect.gif) | ![LoginGIF](./readme/gifs/dates.gif) | ![LoginGIF](./readme/gifs/bonding.gif) |
+| <img src="./readme/gifs/login_Setup.gif" width="200" height="300"> | <img src="./readme/gifs/disconnect.gif" width="200" height="300"> | <img src="./readme/gifs/dates.gif" width="200" height="300"> | <img src="./readme/gifs/bonding.gif" width="200" height="300"> |
 | Login | Login | Login | Login |
-| ![LoginGIF](./readme/gifs/advice.gif) | ![LoginGIF](./readme/gifs/ProfileCustomization.gif) | ![LoginGIF](./readme/gifs/PersonalSurvey.gif) | ![LoginGIF](./readme/gifs/IncomingRequests.gif) |
+| <img src="./readme/gifs/advice.gif" width="200" height="300"> | <img src="./readme/gifs/ProfileCustomization.gif" width="200" height="300"> | <img src="./readme/gifs/PersonalSurvey.gif" width="200" height="300"> | <img src="./readme/gifs/IncomingRequests.gif" width="200" height="300"> |
 | Login |
-| ![LoginGIF](./readme/gifs/CoupleSurvey.gif) |
+| <img src="./readme/gifs/CoupleSurvey.gif" width="200" height="300"> |
+
 
 ### Admin Screens (Web)
 | Login screen  | Register screen |  Landing screen |
