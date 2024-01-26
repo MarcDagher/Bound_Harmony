@@ -105,37 +105,48 @@ For managing the database schemas and establishing relational connections betwee
    ```sh
    git clone https://github.com/MarcDagher/Bound-Harmony.git
    ```
+<br><br>
 2. Install [Composer](https://getcomposer.org/)
    ```sh
    composer install
    ```
+<br><br>
 3. Rename your '.env.example' file to '.env'
+<br><br>
 4. Open your new .env file and make the necessary changes (App name, app key, database name...)
+<br><br>
 5. Generate an application key:
    ```sh
    php artisan key:generate
    ```
+<br><br>
 6. Get Migrations
    ```sh
    php artisan migrate
    ```
+<br><br>
 7. Seed Database
    ```sh
    php artisan db:seed
    ```
+<br><br>
 8. Install NPM packages
    ```sh
    npm install
    ```
+<br><br>
 9. Install [Flutter SDK](https://docs.flutter.dev/get-started/install)
+<br><br>
 10. Go to flutter_app directory
    ```sh
    cd flutter_app
    ```
+<br><br>
 11. Install pub packages
    ```sh
    flutter pub get
    ```
+<br><br>
 12. Run flutter_app 
    ```sh
    flutter run
