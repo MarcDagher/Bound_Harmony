@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class AdviceScreen extends StatefulWidget {
   const AdviceScreen({super.key});
@@ -139,14 +140,14 @@ class _AdviceScreenState extends State<AdviceScreen> {
             Consumer<MessagesProvider>(
               builder: (context, value, child) {
                 if (value.waiting == true) {
-                  return Padding(
-                    padding:
-                        const EdgeInsets.only(top: 4, bottom: 4, right: 35),
-                    child: Text(
-                      "waiting",
-                      style: const TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.w800),
-                    ),
+                  return const Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(left: 15),
+                        child: SpinKitThreeInOut(color: Colors.white, size: 25),
+                      ),
+                    ],
                   );
                 } else {
                   return const SizedBox(
