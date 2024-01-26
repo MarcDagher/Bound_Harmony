@@ -58,6 +58,7 @@ class SuggestionsScreen extends StatelessWidget {
                 //////// ON CLICK - GO TO Date Bonding Activities
                 Expanded(
                   child: NavigationBox(
+                      overlayColor: Colors.black,
                       navigationButtonColor: Colors.white,
                       textAndButtonColor: Theme.of(context).hintColor,
                       handlePressed: () {

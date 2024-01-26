@@ -6,15 +6,16 @@ class NavigationBox extends StatelessWidget {
   final String title;
   final Color? textAndButtonColor;
   final Color? navigationButtonColor;
+  final Color? overlayColor;
 
-  const NavigationBox({
-    super.key,
-    required this.handlePressed,
-    required this.imagePath,
-    required this.title,
-    required this.textAndButtonColor,
-    required this.navigationButtonColor,
-  });
+  const NavigationBox(
+      {super.key,
+      required this.handlePressed,
+      required this.imagePath,
+      required this.title,
+      required this.textAndButtonColor,
+      required this.navigationButtonColor,
+      this.overlayColor});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,10 @@ class NavigationBox extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             image: DecorationImage(
                 colorFilter: ColorFilter.mode(
-                    Colors.black.withOpacity(0.2), BlendMode.darken),
+                    overlayColor != null
+                        ? overlayColor!.withOpacity(0.2)
+                        : Colors.black.withOpacity(0.1),
+                    BlendMode.darken),
                 image: AssetImage(imagePath),
                 fit: BoxFit.cover)),
         child: Align(

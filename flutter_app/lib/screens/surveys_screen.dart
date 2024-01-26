@@ -46,6 +46,7 @@ class SurveysScreen extends StatelessWidget {
                 //////// Couples SURVEY - ON CLICK - GO TO QUESTIONS
                 Expanded(
                   child: NavigationBox(
+                      overlayColor: Colors.red,
                       navigationButtonColor: Colors.white,
                       textAndButtonColor: Theme.of(context).hintColor,
                       title: "Go to Couples Survey",
