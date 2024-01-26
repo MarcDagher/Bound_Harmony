@@ -46,8 +46,8 @@
 | OnBoarding Screen | Login screen  | Register screen | Setup screen |
 | ---| ---| ---| ---|
 | ![Landing](./readme/screenshots/OnBoarding.jpeg) | ![Landing](./readme/screenshots/LogIn.jpeg) | ![Landing](./readme/screenshots/SignUp.jpeg) | ![Landing](./readme/screenshots/Setup.jpeg) |  
-| Date Builder Screen | Bonding Activities Screen | Suggestions Screen alert 1 | Successful Setup screen |
-| ![Landing](./readme/screenshots/DateBuilder.jpeg) | ![Landing](./readme/screenshots/BondingActivities.jpeg) | ![Landing](./readme/screenshots/Datebuilder-connected-and-personal-survey.jpeg) | ![Landing](./readme/screenshots/SetupSucess.jpeg) |
+| Successful Setup screen | Date Builder Screen | Bonding Activities Screen | Suggestions Screen alert 1 |
+| ![Landing](./readme/screenshots/SetupSucess.jpeg) | ![Landing](./readme/screenshots/DateBuilder.jpeg) | ![Landing](./readme/screenshots/BondingActivities.jpeg) | ![Landing](./readme/screenshots/Datebuilder-connected-and-personal-survey.jpeg) | 
 | Suggestions Screen alert 2 | Surveys Screen | Personal Survey Screen | Couples Survey Screen |
 | ![Landing](./readme/screenshots/Date-Builder-partner's-CS.jpeg) | ![Landing](./readme/screenshots/Surveys.jpeg) | ![Landing](./readme/screenshots/Personal-survey.jpeg) | ![Landing](./readme/screenshots/CouplesSurvey.jpeg) |
 | Personal Survey complete | Couples Survey complete | Advice screen | Profile screen |
