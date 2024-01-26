@@ -44,16 +44,16 @@
 <!-- Implementation -->
 <img src="./readme/title4.svg"/>
 
-> Using the wireframes and mockups as a guide, I implemented the Bound Harmony app with the following features:
+> Using the wireframes and mockups as a guide, I implemented the Bound Harmony app with it's features. Here is an overview of what the user will have in the app:
 
 ### User Screens (Mobile)
-| Login | Login | Login | 
+| Login-Setup | Disconnect from Partner | Date Suggestions | 
 | --- | --- | --- |
-| <img src="./readme/gifs/login_Setup.gif" width="200" height="450"> | <img src="./readme/gifs/disconnect.gif" width="200" height="450"> | <img src="./readme/gifs/dates.gif" width="200" height="450"> | 
-| Login | Login | Login |
-<img src="./readme/gifs/bonding.gif" width="200" height="450"> | <img src="./readme/gifs/IncomingRequests.gif" width="200" height="450"> | <img src="./readme/gifs/CoupleSurvey.gif" width="230" height="450"> |
-| Login | Login | Login |
-| <img src="./readme/gifs/advice.gif" width="200" height="450"> | <img src="./readme/gifs/ProfileCustomization.gif" width="200" height="450"> | <img src="./readme/gifs/PersonalSurvey.gif" width="200" height="450"> | 
+| <img src="./readme/gifs/login_Setup.gif" width="230" height="450"> | <img src="./readme/gifs/disconnect.gif" width="230" height="450"> | <img src="./readme/gifs/dates.gif" width="230" height="450"> | 
+| Bonding Activities Suggestions | Incoming Requests | Couple's Survey |
+<img src="./readme/gifs/bonding.gif" width="230" height="450"> | <img src="./readme/gifs/IncomingRequests.gif" width="230" height="450"> | <img src="./readme/gifs/CoupleSurvey.gif" width="230" height="450"> |
+| Personalized Advice | Profile Customization | Personal Survey |
+| <img src="./readme/gifs/advice.gif" width="230" height="450"> | <img src="./readme/gifs/ProfileCustomization.gif" width="230" height="450"> | <img src="./readme/gifs/PersonalSurvey.gif" width="230" height="450"> | 
 
 ### Admin Screens (Web)
 | Login screen  | Register screen |  Landing screen |
