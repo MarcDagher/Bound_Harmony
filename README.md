@@ -22,27 +22,8 @@
 
 <!-- Prototyping -->
 <img src="./readme/title3.svg"/>
-
 > I designed Bound Harmony using wireframes and mockups, iterating on the design until I reached the ideal layout for easy navigation and a seamless user experience.
 
-### Wireframes
-| Login screen  | Register screen |  Landing screen |
-| ---| ---| ---|
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
-
-### Mockups
-| Home screen  | Menu Screen | Order Screen |
-| ---| ---| ---|
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
-
-<br><br>
-
-<!-- Implementation -->
-<img src="./readme/title4.svg"/>
-
-> Using the wireframes and mockups as a guide, I implemented the Bound Harmony app with the following features:
-
-### User Screens (Mobile)
 | OnBoarding Screen | Login screen  | Register screen | Setup screen |
 | ---| ---| ---| ---|
 | ![OnBoarding](./readme/screenshots/OnBoarding.jpeg) | ![Login](./readme/screenshots/LogIn.jpeg) | ![Register](./readme/screenshots/SignUp.jpeg) | ![Setup](./readme/screenshots/Setup.jpeg) |
@@ -56,6 +37,15 @@
 | ![Profile](./readme/screenshots/Profile.jpeg) | ![IncomingRequestsAlert1](./readme/screenshots/Incoming-NoPartner.jpeg) | ![IncomingRequestsScreen](./readme/screenshots/Incoming-Requests-with-req.jpeg) | ![SuggestionsAlert2](./readme/screenshots/Incoming-request-in-a-real.jpeg) |
 | My Partners screen (single) | My Partners (in a relationship) | My Partners (single + no history) |
 | ![MyPartnersSingle](./readme/screenshots/MyPartners-history-with-no-current.jpeg) | ![MyPartnersInRelationship](./readme/screenshots/MyPartners-with-current.jpeg) | ![MyPartnersSingleNoHistory](./readme/screenshots/MyPartnersEmpty.jpeg) |
+
+<br><br>
+
+<!-- Implementation -->
+<img src="./readme/title4.svg"/>
+
+> Using the wireframes and mockups as a guide, I implemented the Bound Harmony app with the following features:
+
+### User Screens (Mobile)
 
 
 
