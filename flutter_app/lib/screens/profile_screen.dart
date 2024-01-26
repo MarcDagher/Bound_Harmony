@@ -164,7 +164,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                 /// edit image Text Button
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 5, top: 5),
+                  padding: const EdgeInsets.only(bottom: 10, top: 5),
                   child: InkWell(
                     child: Text(
                       'Edit Image',

@@ -47,7 +47,7 @@ class SuggestionsScreen extends StatelessWidget {
                         context.goNamed('Date Builder and Bonding Activities',
                             pathParameters: {'type': 'date'});
                       },
-                      imagePath: "assets/wallpaper 8.jpg",
+                      imagePath: "assets/wallpaper 18.jpg",
                       title: "Date Builder"),
                 ),
 
@@ -67,7 +67,7 @@ class SuggestionsScreen extends StatelessWidget {
                         context.goNamed('Date Builder and Bonding Activities',
                             pathParameters: {'type': 'bonding'});
                       },
-                      imagePath: "assets/wallpaper 7.jpg",
+                      imagePath: "assets/wallpaper 19.jpg",
                       title: "Bonding Activities"),
                 ),
 
