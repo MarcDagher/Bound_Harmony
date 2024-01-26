@@ -43,11 +43,11 @@
 > Using the wireframes and mockups as a guide, I implemented the Bound Harmony app with the following features:
 
 ### User Screens (Mobile)
-| OnBoarding Screen | Login screen  | Register screen | Landing screen |
+| OnBoarding Screen | Login screen  | Register screen | Setup screen |
 | ---| ---| ---| ---|
 | ![Landing](./readme/screenshots/OnBoarding.jpeg) | ![Landing](./readme/screenshots/LogIn.jpeg) | ![fsdaf](./readme/screenshots/SignUp.jpeg) | ![fsdaf](./readme/screenshots/Suggestions.jpeg) |
-| Home screen  | Menu Screen | Order Screen | Checkout Screen |
-| ![Landing](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
+| Landing screen  | Menu Screen | Order Screen | Checkout Screen |
+| ![fsdaf](./readme/screenshots/Suggestions.jpeg) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
 
 ### Admin Screens (Web)
 | Login screen  | Register screen |  Landing screen |
