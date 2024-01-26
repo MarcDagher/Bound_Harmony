@@ -46,9 +46,10 @@
 | OnBoarding Screen | Login screen  | Register screen | Setup screen |
 | ---| ---| ---| ---|
 | ![Landing](./readme/screenshots/OnBoarding.jpeg) | ![Landing](./readme/screenshots/LogIn.jpeg) | ![fsdaf](./readme/screenshots/SignUp.jpeg) | ![fsdaf](./readme/screenshots/Suggestions.jpeg) |
-| Suggestion screen (Landing) | Date Builder Screen | Bonding Activities Screen | Suggestions Screen error 1|
+| Suggestion screen (Landing) | Date Builder Screen | Bonding Activities Screen | Suggestions Screen error 1 |
 | ![fsdaf](./readme/screenshots/Suggestions.jpeg) | ![fsdaf](./readme/screenshots/DateBuilder.jpeg) | ![fsdaf](./readme/screenshots/BondingActivities.jpeg) | ![fsdaf](./readme/screenshots/Datebuilder-connected-and-personal-survey.jpeg) |
-
+| Suggestions Screen error 2 | Surveys Screen | Personal Survey Screen | Couples Survey Screen |
+| ![fsdaf](./readme/screenshots/Date-Builder-partner's-CS.jpeg.jpeg) | ![fsdaf](./readme/screenshots/Surveys.jpeg) | ![fsdaf](./readme/screenshots/Personal-survey.jpeg) | ![fsdaf](./readme/screenshots/CouplesSurvey.jpeg) |
 ### Admin Screens (Web)
 | Login screen  | Register screen |  Landing screen |
 | ---| ---| ---|
