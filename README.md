@@ -73,7 +73,7 @@
 ###  Bound Harmony is built using the following technologies:
 
 - This project uses the [Flutter app development framework](https://flutter.dev/). Flutter is a cross-platform hybrid app development platform which allows us to use a single codebase for apps on mobile, desktop, and the web.
-- The admin panel is done using [React.js](https://react.dev/). React.js is a JavaScript library for building user interfaces that enables developers to create interactive and dynamic web applications.
+- The admin panel is done using [React.js](https://react.dev/). React.js is a JavaScript library for building single-page applications out of individual pieces called components.
 - The backend is handled using [Laravel](https://laravel.com/) and MySql. Laravel is a PHP web application framework that follows the Model-View-Controller (MVC) architectural pattern. Laravel simplifies common tasks such as routing and authentication making it easier for developers to create scalable and maintainable web applications. With features like Eloquent ORM and artisan command-line tools, Laravel facilitates rapid development and supports the creation of modern, feature-rich web applications.
 For managing the database schemas and establishing relational connections between tables, I used MySQL, a relational database management system. 
 - The app uses openAi in the Advice section. In order to make the advice personalized, survey responses are handled and are summarized before being sent to openAi.
