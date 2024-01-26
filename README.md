@@ -49,7 +49,7 @@
 ### User Screens (Mobile)
 | Login | 
 | --- |
-| ![LoginGIF](./readme/gif/login_Setup.gif) |
+| ![LoginGIF](./readme/gifs/login_Setup.gif) |
 
 
 ### Admin Screens (Web)
