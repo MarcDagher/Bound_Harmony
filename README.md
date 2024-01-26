@@ -48,7 +48,7 @@
 
 ### User Screens (Mobile)
 | Login | 
-| ---| ---| ---| ---|
+| --- |
 | ![Login GIF](./readme/gif/login_Setup.gif) |
 
 
