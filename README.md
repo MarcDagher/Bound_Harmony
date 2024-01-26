@@ -47,7 +47,7 @@
 | ---| ---| ---| ---|
 | ![Landing](./readme/screenshots/OnBoarding.jpeg) | ![Landing](./readme/screenshots/LogIn.jpeg) | ![fsdaf](./readme/screenshots/SignUp.jpeg) | ![fsdaf](./readme/screenshots/Suggestions.jpeg) |
 | Suggestion screen (Landing) | Date Builder Screen | Bonding Activities Screen | Suggestions Screen error 1|
-| ![fsdaf](./readme/screenshots/Suggestions.jpeg) | ![fsdaf](./readme/screenshots/DateBuilder.jpeg) | ![fsdaf](./readme/screenshots/BondingActivities.jpeg) | ![fsdaf](https://placehold.co/900x1600) |
+| ![fsdaf](./readme/screenshots/Suggestions.jpeg) | ![fsdaf](./readme/screenshots/DateBuilder.jpeg) | ![fsdaf](./readme/screenshots/BondingActivities.jpeg) | ![fsdaf](./readme/screenshots/Datebuilder-connected-and-personal-survey.jpeg) |
 
 ### Admin Screens (Web)
 | Login screen  | Register screen |  Landing screen |
