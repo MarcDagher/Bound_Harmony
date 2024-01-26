@@ -49,7 +49,7 @@
 ### User Screens (Mobile)
 | Sign Up | Login-Setup | Profile Customization | 
 | --- | --- | --- |
-| | <img src="./readme/gifs/login_Setup.gif" width="230" height="450"> | <img src="./readme/gifs/ProfileCustomization.gif" width="230" height="450">
+| <img src="./readme/gifs/signUp.gif" width="230" height="450"> | <img src="./readme/gifs/login_Setup.gif" width="230" height="450"> | <img src="./readme/gifs/ProfileCustomization.gif" width="230" height="450">
 | Incoming Requests | Personal Survey | Couple's Survey |
 | <img src="./readme/gifs/IncomingRequests.gif" width="230" height="450"> | <img src="./readme/gifs/PersonalSurvey.gif" width="230" height="450"> | <img src="./readme/gifs/CoupleSurvey.gif" width="230" height="450"> | 
 | Date Suggestions | Bonding Activities Suggestions | Personalized Advice |
