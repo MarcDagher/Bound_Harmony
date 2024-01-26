@@ -48,7 +48,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ? Padding(
                             padding: const EdgeInsets.only(bottom: 10, top: 10),
                             child: CircleAvatar(
-                              radius: 90,
+                              radius: 93,
                               backgroundImage: NetworkImage(
                                   '${Requests.imageBaseUrl}/${value.image}'),
                             ),
@@ -58,7 +58,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 padding:
                                     const EdgeInsets.only(bottom: 10, top: 10),
                                 child: CircleAvatar(
-                                  radius: 90,
+                                  radius: 93,
                                   backgroundImage:
                                       FileImage(File(_image!.path)),
                                 ),
@@ -73,91 +73,91 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ///
                     Consumer<UserProvider>(
                       builder: (context, value, child) => Positioned(
-                          right: 0,
-                          child: InkWell(
-                            child: Icon(
-                              Icons.edit_note_sharp,
-                              color: Theme.of(context).hintColor,
-                              size: 30,
-                            ),
-                            onTap: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    String formData = "";
-                                    Color buttonColor =
-                                        Theme.of(context).primaryColor;
-                                    return AlertDialog(
-                                      //// Styling Alert Diolog
-                                      ///
-                                      backgroundColor: Colors.white,
-                                      surfaceTintColor: Colors.white,
-                                      shadowColor: Colors.black,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
+                        right: 0,
+                        child: InkWell(
+                          child: Icon(
+                            Icons.edit_note_sharp,
+                            color: Theme.of(context).hintColor,
+                            size: 30,
+                          ),
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  String formData = "";
+                                  Color buttonColor =
+                                      Theme.of(context).primaryColor;
+                                  return AlertDialog(
+                                    //// Styling Alert Diolog
+                                    ///
+                                    backgroundColor: Colors.white,
+                                    surfaceTintColor: Colors.white,
+                                    shadowColor: Colors.black,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5)),
 
-                                      /// Alert Dialog Title
-                                      ///
-                                      title: Text(
-                                        "Edit Profile Info",
-                                        style: TextStyle(
-                                            color: Theme.of(context).hintColor,
-                                            fontWeight: FontWeight.w600),
-                                      ),
+                                    /// Alert Dialog Title
+                                    ///
+                                    title: Text(
+                                      "Edit Profile Info",
+                                      style: TextStyle(
+                                          color: Theme.of(context).hintColor,
+                                          fontWeight: FontWeight.w600),
+                                    ),
 
-                                      /// Alert Dialog Content
-                                      ///
-                                      content: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          TextInputField(
-                                            placeholder: "New Username",
-                                            handleChange: (text) {
-                                              setState(() {
-                                                formData = text;
-                                              });
-                                            },
-                                          ),
-                                        ],
-                                      ),
-
-                                      /// Alert Dialog actions
-                                      ///
-                                      actions: [
-                                        ///// Alert Submit Button
-                                        ///
-                                        Button(
-                                            text: "Submit",
-                                            color: buttonColor,
-                                            handlePressed: () async {
-                                              if (formData.isNotEmpty) {
-                                                final SharedPreferences
-                                                    preferences =
-                                                    await SharedPreferences
-                                                        .getInstance();
-                                                final token =
-                                                    preferences.get('token');
-                                                if (formData.isNotEmpty) {
-                                                  await value.changeUsername(
-                                                      token, formData);
-                                                }
-                                                if (value.newUsernameSuccess ==
-                                                    true) {
-                                                  // ignore: use_build_context_synchronously
-                                                  Navigator.of(context).pop();
-                                                }
-                                              }
-                                            })
+                                    /// Alert Dialog Content
+                                    ///
+                                    content: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        TextInputField(
+                                          placeholder: "New Username",
+                                          handleChange: (text) {
+                                            setState(() {
+                                              formData = text;
+                                            });
+                                          },
+                                        ),
                                       ],
-                                    );
-                                  });
-                              ////// End of Dialog
-                              ///
-                            },
-                          )),
+                                    ),
+
+                                    /// Alert Dialog actions
+                                    ///
+                                    actions: [
+                                      ///// Alert Submit Button
+                                      ///
+                                      Button(
+                                          text: "Submit",
+                                          color: buttonColor,
+                                          handlePressed: () async {
+                                            if (formData.isNotEmpty) {
+                                              final SharedPreferences
+                                                  preferences =
+                                                  await SharedPreferences
+                                                      .getInstance();
+                                              final token =
+                                                  preferences.get('token');
+                                              if (formData.isNotEmpty) {
+                                                await value.changeUsername(
+                                                    token, formData);
+                                              }
+                                              if (value.newUsernameSuccess ==
+                                                  true) {
+                                                // ignore: use_build_context_synchronously
+                                                Navigator.of(context).pop();
+                                              }
+                                            }
+                                          })
+                                    ],
+                                  );
+                                });
+                            ////// End of Dialog
+                            ///
+                          },
+                        ),
+                      ),
                     ),
                   ]),
                 ),

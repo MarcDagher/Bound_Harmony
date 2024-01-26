@@ -187,5 +187,6 @@ class ConnectionProvider extends ChangeNotifier {
     listOfPartners = [];
     currentPartner = false;
     disconnectMessage = "";
+    notifyListeners();
   }
 }

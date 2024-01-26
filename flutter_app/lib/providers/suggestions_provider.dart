@@ -71,5 +71,6 @@ class SuggestionsProvider extends ChangeNotifier {
     failedMessage = null;
     bondingActivities = [];
     dates = [];
+    notifyListeners();
   }
 }

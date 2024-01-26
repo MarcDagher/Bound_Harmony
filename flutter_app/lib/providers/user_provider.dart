@@ -123,5 +123,6 @@ class UserProvider extends ChangeNotifier {
     newLocationSuccess = false;
 
     image = "";
+    notifyListeners();
   }
 }

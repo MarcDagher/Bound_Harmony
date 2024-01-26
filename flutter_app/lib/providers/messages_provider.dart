@@ -91,5 +91,6 @@ class MessagesProvider extends ChangeNotifier {
           date: DateTime.now(),
           isSentByMe: false)
     ];
+    notifyListeners();
   }
 }

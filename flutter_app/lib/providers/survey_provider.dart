@@ -126,5 +126,6 @@ class SurveysProvider extends ChangeNotifier {
     couplesSurveyRejected = false;
     successSavingPersonalSurveyResponse = false;
     successSavingCouplesSurveyResponse = false;
+    notifyListeners();
   }
 }

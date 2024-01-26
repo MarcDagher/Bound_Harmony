@@ -129,5 +129,6 @@ class AuthProvider extends ChangeNotifier {
     emailTaken = false;
     successLogin = false;
     wrongCredentials = false;
+    notifyListeners();
   }
 }
