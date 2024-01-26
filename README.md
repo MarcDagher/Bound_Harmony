@@ -57,13 +57,14 @@
 | Disconnect from Partner |
 | <img src="./readme/gifs/disconnect.gif" width="230" height="450"> |
 
-### Admin Screens (Web)
-| Login screen  | Register screen |  Landing screen |
-| ---| ---| ---|
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
-| Home screen  | Menu Screen | Order Screen |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+> To keep track of all the inputs coming into the app, the admin page displays a summary of the users' behavior and their responses to each survey. 
 
+### Admin Screens (Web)
+| Login screen  | Dashboard Screen |
+| ---| ---|
+| ![Landing](./readme/screenshots/admin_signin.png) | ![fsdaf](./readme/screenshots/dashboard.png) | 
+| Users Screen | Survey Responses |
+| ![Landing](./readme/screenshots/users.png) | ![fsdaf](./readme/screenshots/surveyResponses.png) |
 <br><br>
 
 <!-- Tech stack -->
