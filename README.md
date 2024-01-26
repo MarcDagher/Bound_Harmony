@@ -47,10 +47,13 @@
 > Using the wireframes and mockups as a guide, I implemented the Bound Harmony app with the following features:
 
 ### User Screens (Mobile)
-| Login | 
-| --- |
-| ![LoginGIF](./readme/gifs/login_Setup.gif) |
-
+| Login | Login | Login | Login |
+| --- | --- | --- | --- |
+| ![LoginGIF](./readme/gifs/login_Setup.gif) | ![LoginGIF](./readme/gifs/disconnect.gif) | ![LoginGIF](./readme/gifs/dates.gif) | ![LoginGIF](./readme/gifs/bonding.gif) |
+| Login | Login | Login | Login |
+| ![LoginGIF](./readme/gifs/advice.gif) | ![LoginGIF](./readme/gifs/ProfileCustomization.gif) | ![LoginGIF](./readme/gifs/PersonalSurvey.gif) | ![LoginGIF](./readme/gifs/IncomingRequests.gif) |
+| Login |
+| ![LoginGIF](./readme/gifs/CoupleSurvey.gif) |
 
 ### Admin Screens (Web)
 | Login screen  | Register screen |  Landing screen |
