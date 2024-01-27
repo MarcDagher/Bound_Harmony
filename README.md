@@ -19,12 +19,12 @@
 - As a user, I want to explore new hobbies or activities with my partner, so I'm looking for suggestions that join both our interests.
 - As a user, I want recommendations for fun and unique date night ideas to keep our relationship exciting.
 <br><br>
-
+<br><br>
 <!-- Prototyping -->
 <img src="./readme/title3.svg"/>
 > I designed Bound Harmony using wireframes and mockups, iterating on the design until I reached the ideal layout for easy navigation and a seamless user experience.
 <br><br>
-
+<br><br>
 | OnBoarding Screen | Login screen  | Register screen | Setup screen |
 | ---| ---| ---| ---|
 | ![OnBoarding](./readme/screenshots/OnBoarding.jpeg) | ![Login](./readme/screenshots/LogIn.jpeg) | ![Register](./readme/screenshots/SignUp.jpeg) | ![Setup](./readme/screenshots/Setup.jpeg) |
@@ -43,9 +43,9 @@
 
 <!-- Implementation -->
 <img src="./readme/title4.svg"/>
-
+<br><br>
 > Using the wireframes and mockups as a guide, I implemented the Bound Harmony app with it's features. Here is an overview of what the user will have in the app:
-
+<br><br>
 ### User Screens (Mobile)
 | Sign Up | Login-Setup | Profile Customization | 
 | --- | --- | --- |
@@ -56,9 +56,9 @@
 | <img src="./readme/gifs/dates.gif" width="230" height="450"> | <img src="./readme/gifs/bonding.gif" width="230" height="450"> | <img src="./readme/gifs/advice.gif" width="230" height="450"> |
 | Disconnect from Partner |
 | <img src="./readme/gifs/disconnect.gif" width="230" height="450"> |
-
+<br><br>
 > To keep track of all the inputs coming into the app, the admin page displays a summary of the users' behavior and their responses to each survey. 
-
+<br><br>
 ### Admin Screens (Web)
 | Login screen  | Dashboard Screen |
 | ---| ---|
@@ -132,16 +132,16 @@ For managing the database schemas and establishing relational connections betwee
 9. Install [Flutter SDK](https://docs.flutter.dev/get-started/install)
 <br><br>
 10. Go to flutter_app directory
-   ```sh
-   cd flutter_app
-   ```
+     ```sh
+     cd flutter_app
+     ```
 11. Install pub packages
-   ```sh
-   flutter pub get
-   ```
+     ```sh
+     flutter pub get
+     ```
 12. Run flutter_app 
-   ```sh
-   flutter run
-   ```
+     ```sh
+     flutter run
+     ```
 
-Now, you should be able to run Bound Harmony locally and explore its features.
+Now, you should be able to run Bound Harmony locally and explore its features :) :rocket:
