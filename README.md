@@ -23,8 +23,7 @@
 <!-- Prototyping -->
 <img src="./readme/title3.svg"/>
 > I designed Bound Harmony using wireframes and mockups, iterating on the design until I reached the ideal layout for easy navigation and a seamless user experience.
-<br><br>
-<br><br>
+
 | OnBoarding Screen | Login screen  | Register screen | Setup screen |
 | ---| ---| ---| ---|
 | ![OnBoarding](./readme/screenshots/OnBoarding.jpeg) | ![Login](./readme/screenshots/LogIn.jpeg) | ![Register](./readme/screenshots/SignUp.jpeg) | ![Setup](./readme/screenshots/Setup.jpeg) |
@@ -45,7 +44,7 @@
 <img src="./readme/title4.svg"/>
 <br><br>
 > Using the wireframes and mockups as a guide, I implemented the Bound Harmony app with it's features. Here is an overview of what the user will have in the app:
-<br><br>
+
 ### User Screens (Mobile)
 | Sign Up | Login-Setup | Profile Customization | 
 | --- | --- | --- |
@@ -56,9 +55,9 @@
 | <img src="./readme/gifs/dates.gif" width="230" height="450"> | <img src="./readme/gifs/bonding.gif" width="230" height="450"> | <img src="./readme/gifs/advice.gif" width="230" height="450"> |
 | Disconnect from Partner |
 | <img src="./readme/gifs/disconnect.gif" width="230" height="450"> |
-<br><br>
+
 > To keep track of all the inputs coming into the app, the admin page displays a summary of the users' behavior and their responses to each survey. 
-<br><br>
+
 ### Admin Screens (Web)
 | Login screen  | Dashboard Screen |
 | ---| ---|
