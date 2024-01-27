@@ -23,6 +23,7 @@
 <!-- Prototyping -->
 <img src="./readme/title3.svg"/>
 > I designed Bound Harmony using wireframes and mockups, iterating on the design until I reached the ideal layout for easy navigation and a seamless user experience.
+<br><br>
 
 | OnBoarding Screen | Login screen  | Register screen | Setup screen |
 | ---| ---| ---| ---|
