@@ -99,7 +99,7 @@
 | ![Landing](./readme/screenshots/users.png) | ![fsdaf](./readme/screenshots/surveyResponses.png) |
 
 <br><br>
-<br><br>
+
 <!-- Prompt Engineering -->
 <img src="./readme/templates/prompt_engineering.svg"/>
 
@@ -108,17 +108,17 @@
 To make the user's experience in the application more pleasant and entertaining, I used the data inputted from the surveys to make the responses personalized. Since the surveys are about interests, I created helper functions to summarize and label the user's interests. Then, I added the result into the AI's system prompt. 
 The system prompt is divided into 6 parts: 
 - Description: Describes the identity of the AI.
-- Purpose: Describes the goal of the AI and its functionaality.
+- Purpose: Describes the goal of the AI and its functionality.
 - Tone Of Speech: Describes the choice of words and their semantics.
 - End Statements: Describes how the AI will finish it's response.
 - Removals: Specifies what to remove from the response.
 - Our Interests or My Interests: Depending on whether the user is single or not, this final part is a list of keywords, derived by the summary of the user's survey responses, which is added to make sure the AI knows who the user is and what the user might want.
 
-Here is a screenshot of the base descritptions:
+Here is a screenshot of the base descriptions:
 
 <img src="./readme/prompt_engineering/base.png"/>
 
-This is what the final prompt will look like:
+Depending on the user's conditions, the prompt will slightly differ. This is what the final prompt of a user who's connected to a partner will look like:
 
 <img src="./readme/prompt_engineering/added.png"/>
   
