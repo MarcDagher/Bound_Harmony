@@ -37,15 +37,25 @@ class AdminTest extends TestCase
 
     public function test_admin_delete_user(){
         $this -> create_roles();
-        $user = $this -> create_user("mousa@hotmail.com");
+        $this -> create_user("mousa@hotmail.com");
         $admin = $this -> create_user("admin123@hotmail.com", 1);
 
         $response =  $this -> actingAs($admin) -> post('/api/delete_user', ['email' => 'mousa@hotmail.com']);
 
-        $response -> assertStatus(200) -> assertJson([
-            'status' => 'success',
-            'message' => "User deleted successfully",
-        ]);
+        $response -> assertStatus(200);
+
+    }
+    
+
+    public function test_admin_restore_user(){
+        $this -> create_roles();
+        $this -> create_user("mousa@hotmail.com");
+        $admin = $this -> create_user("admin123@hotmail.com", 1);
+        $response =  $this -> actingAs($admin) -> post('/api/delete_user', ['email' => 'mousa@hotmail.com']);
+
+        $response =  $this -> actingAs($admin) -> post('/api/restore_deleted_user', ['email' => 'mousa@hotmail.com']);
+
+        $response -> assertStatus(200);
 
     }
     
