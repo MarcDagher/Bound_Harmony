@@ -1,9 +1,9 @@
-<img src="./readme/title.svg"/>
+<img src="./readme/templates/title.svg"/>
 
 <br><br>
 
 <!-- project philosophy -->
-<img src="./readme/project_philosophy.svg"/>
+<img src="./readme/templates/project_philosophy.svg"/>
 
 > A mobile app for connecting lovers together and assisting them through a fun and harmonious relationship.
 >
@@ -21,7 +21,7 @@
 <br><br>
 
 <!-- Tech stack -->
-<img src="./readme/tech_stacks.svg"/>
+<img src="./readme/templates/tech_stacks.svg"/>
 
 ###  The following are the technologies I used to build Bound Harmony:
 
@@ -42,7 +42,7 @@
 
 ### Mockups
 <!-- UI UX -->
-<img src="./readme/UIUX.svg"/>
+<img src="./readme/templates/UIUX.svg"/>
 
 > I designed Bound Harmony using wireframes and mockups, iterating on the design until I reached the ideal layout for easy navigation and a seamless user experience.
 >
@@ -56,7 +56,7 @@
 <br><br>
 
 <!-- Database Design -->
-<img src="./readme/dbdesign.svg"/>
+<img src="./readme/templates/dbdesign.svg"/>
 
 ### Architecting Data Excellence: Innovative Database Design Strategies:
 
@@ -65,7 +65,7 @@
 <br><br>
 
 <!-- Implementation -->
-<img src="./readme/implementation.svg"/>
+<img src="./readme/templates/implementation.svg"/>
 
 ### User Screens (Mobile)
 
@@ -97,16 +97,35 @@
 | ![Landing](./readme/screenshots/admin_signin.png) | ![fsdaf](./readme/screenshots/dashboard.png) | 
 | Users Screen | Survey Responses |
 | ![Landing](./readme/screenshots/users.png) | ![fsdaf](./readme/screenshots/surveyResponses.png) |
+
 <br><br>
 
 <!-- Prompt Engineering -->
-<img src="./readme/prompt_engineering.svg"/>
+<img src="./readme/templates/prompt_engineering.svg"/>
+
 ###  Mastering AI Interaction:
-EXPLANATION
+
+To make the user's experience in the application more pleasant and entertaining, I used the data inputted from the surveys to make the responses personalized. Since the surveys are about interests, I created helper functions to summarize and label the user's interests. Then, I added the result into the AI's system prompt. 
+The system prompt is divided into 6 parts: 
+- Description: Describes the identity of the AI.
+- Purpose: Describes the goal of the AI and its functionality.
+- Tone Of Speech: Describes the choice of words and their semantics.
+- End Statements: Describes how the AI will finish it's response.
+- Removals: Specifies what to remove from the response.
+- Our Interests or My Interests: Depending on whether the user is single or not, this final part is a list of keywords, derived by the summary of the user's survey responses, which is added to make sure the AI knows who the user is and what the user might want.
+
+Here is a screenshot of the base descriptions:
+
+<img src="./readme/prompt_engineering/base.png"/>
+
+Depending on the user's conditions, the prompt will slightly differ. This is what the final prompt of a user who's connected to a partner will look like:
+
+<img src="./readme/prompt_engineering/added.png"/>
+  
 <br><br>
 
 <!-- AWS Deployment -->
-<img src="./readme/AWS.svg"/>
+<img src="./readme/templates/AWS.svg"/>
 ###  Efficient AI Deployment: Unleashing the Potential with AWS Integration:
 
 - This project leverages AWS deployment strategies to seamlessly integrate and deploy natural language processing models. With a focus on scalability, reliability, and performance, we ensure that AI applications powered by these models deliver robust and responsive solutions for diverse use cases.
@@ -114,13 +133,13 @@ EXPLANATION
 <br><br>
 
 <!-- Unit Testing -->
-<img src="./readme/unit_testing.svg"/>
+<img src="./readme/templates/unit_testing.svg"/>
 ###  Precision in Development: Harnessing the Power of Unit Testing:
 - This project employs rigorous unit testing methodologies to ensure the reliability and accuracy of code components. By systematically evaluating individual units of the software, we guarantee a robust foundation, identifying and addressing potential issues early in the development process.
 <br><br>
 
 <!-- How to run -->
-<img src="./readme/how_to_run.svg"/>
+<img src="./readme/templates/how_to_run.svg"/>
 
 > To set up Bound Harmony locally, follow these steps:
 
