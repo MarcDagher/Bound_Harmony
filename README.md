@@ -62,8 +62,12 @@
 
 ![Database](./readme/screenshots/database.png)
 
+<br><br>
+
 <!-- Implementation -->
 <img src="./readme/implementation.svg"/>
+
+### User Screens (Mobile)
 
 | OnBoarding Screen | Register screen | Setup screen | Succesful Setup screen  |
 | ---| ---| ---| ---|
@@ -77,16 +81,11 @@
 
 <br><br>
 
-### User Screens (Mobile)
-| Sign Up | Login-Setup | Profile Customization | 
+| Login-Setup | Incoming Requests | Couple's Survey |
 | --- | --- | --- |
-| <img src="./readme/gifs/signUp.gif" width="230" height="450"> | <img src="./readme/gifs/login_Setup.gif" width="230" height="450"> | <img src="./readme/gifs/ProfileCustomization.gif" width="230" height="450">
-| Incoming Requests | Personal Survey | Couple's Survey |
-| <img src="./readme/gifs/IncomingRequests.gif" width="230" height="450"> | <img src="./readme/gifs/PersonalSurvey.gif" width="230" height="450"> | <img src="./readme/gifs/CoupleSurvey.gif" width="230" height="450"> | 
-| Date Suggestions | Bonding Activities Suggestions | Personalized Advice |
-| <img src="./readme/gifs/dates.gif" width="230" height="450"> | <img src="./readme/gifs/bonding.gif" width="230" height="450"> | <img src="./readme/gifs/advice.gif" width="230" height="450"> |
-| Disconnect from Partner |
-| <img src="./readme/gifs/disconnect.gif" width="230" height="450"> |
+| <img src="./readme/gifs/login_Setup.gif" width="230" height="450">| <img src="./readme/gifs/IncomingRequests.gif" width="230" height="450"> | <img src="./readme/gifs/CoupleSurvey.gif" width="230" height="450"> | 
+| Date Suggestions | Personalized Advice | Disconnect from Partner |
+| <img src="./readme/gifs/dates.gif" width="230" height="450"> | <img src="./readme/gifs/advice.gif" width="230" height="450"> | <img src="./readme/gifs/disconnect.gif" width="230" height="450"> |
 
 > To keep track of all the inputs coming into the app, the admin page displays a summary of the users' behavior and their responses to each survey. 
 
