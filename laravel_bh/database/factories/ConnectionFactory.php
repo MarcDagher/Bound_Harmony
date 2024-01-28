@@ -17,8 +17,8 @@ class ConnectionFactory extends Factory
     public function definition(): array
     {
         return [
-            'requester' => 2,
-            'responder' => 3,
+            'requester' => 1,
+            'responder' => 2,
             'status' => 'pending'
         ];
     }
