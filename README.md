@@ -183,15 +183,15 @@ Install npm packages
    ```sh
    php artisan key:generate
    ```
-   <br><br>
-6. Inside your .env file add OPENAI_API_KEY and a GOOGLE_PLACES_API_KEY and insert your Keys.<br><br>Note: Advice Screen and Suggestions Screen need these 2 keys.
-   <br><br>
-7. Get Migrations
+
+5. Inside your .env file add OPENAI_API_KEY and a GOOGLE_PLACES_API_KEY and insert your Keys.<br><br>Note: Advice Screen and Suggestions Screen need these 2 keys.
+
+6. Get Migrations
 
    ```sh
    php artisan migrate
    ```
-8. Seed Database: You can go to database/seeders/DatabaseSeeder and uncomment the lines you want to seed in the order they are written. 
+7. Seed Database: You can go to database/seeders/DatabaseSeeder and uncomment the lines you want to seed in the order they are written. 
 
    ```sh
    php artisan db:seed
