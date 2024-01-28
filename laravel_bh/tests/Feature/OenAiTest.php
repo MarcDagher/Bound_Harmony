@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
@@ -16,7 +15,6 @@ class OenAiTest extends TestCase{
     {
         $this -> create_roles();
         $user = $this -> create_user('nancy@hotmail.com', 2);
-
 
         $response = $this -> actingAs($user) -> post('/api/save_user_prompt', ["prompt" => "This is the prompt"]);
 
