@@ -57,9 +57,10 @@
 
 <!-- Database Design -->
 <img src="./readme/dbdesign.svg"/>
+
 ### Architecting Data Excellence: Innovative Database Design Strategies:
 
-![OnBoarding](./readme/screenshots/OnBoarding.jpeg)
+![OnBoarding](./readme/screenshots/database.jpeg)
 
 <!-- Implementation -->
 <img src="./readme/implementation.svg"/>
