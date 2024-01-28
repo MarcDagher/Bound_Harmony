@@ -109,8 +109,8 @@ class MessagesController extends Controller
 
 
                 $our_interests = "This is my opinion on my current relationship: " . $user_summary_of_responses;
-                $our_interests .= " and this my partner's opinion of our current relationship: ". $partners_summary_of_responses;
-                $our_interests .= "Take our opinions of eachother into consideration, in order to guide us and support us more accurately. If I ever mention finding another partner or lover, you will strictly not support me. You will tell me to make things work with my partner and in only the hopeless cases, you will tell me to slightly consider searching for someone else. ";
+                $our_interests .= " and this my partner's opinion on our current relationship: ". $partners_summary_of_responses;
+                $our_interests .= "Take our opinions on eachother into consideration, in order to guide us and support us more accurately. If I ever mention finding another partner or lover, you will strictly not support me. You will tell me to make things work with my partner and in only the hopeless cases, you will tell me to slightly consider searching for someone else. ";
                 $system_config = $this -> description . $this -> end_statements  . $this -> purpose . $our_interests . $this -> tone_of_speech . $this -> removals;
                 
                 return $this -> send_to_open_ai_api($system_config, $user_prompt);
