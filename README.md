@@ -1,9 +1,9 @@
-<img src="./readme/title1.svg"/>
+<img src="./readme/title.svg"/>
 
 <br><br>
 
 <!-- project philosophy -->
-<img src="./readme/title2.svg"/>
+<img src="./readme/project_philosophy.svg"/>
 
 > A mobile app for connecting lovers together and assisting them through a fun and harmonious relationship.
 >
@@ -21,7 +21,7 @@
 <br><br>
 <br><br>
 <!-- Prototyping -->
-<img src="./readme/title3.svg"/>
+<img src="./readme/UIUX.svg"/>
 > I designed Bound Harmony using wireframes and mockups, iterating on the design until I reached the ideal layout for easy navigation and a seamless user experience.
 <br><br>
 
@@ -42,7 +42,7 @@
 <br><br>
 
 <!-- Implementation -->
-<img src="./readme/title4.svg"/>
+<img src="./readme/implementation.svg"/>
 <br><br>
 > Using the wireframes and mockups as a guide, I implemented the Bound Harmony app with it's features. Here is an overview of what the user will have in the app:
 
@@ -68,7 +68,7 @@
 <br><br>
 
 <!-- Tech stack -->
-<img src="./readme/title5.svg"/>
+<img src="./readme/tech_stacks.svg"/>
 
 ###  Bound Harmony is built using the following technologies:
 
@@ -88,7 +88,7 @@ For managing the database schemas and establishing relational connections betwee
 <br><br>
 
 <!-- How to run -->
-<img src="./readme/title6.svg"/>
+<img src="./readme/how_to_run.svg"/>
 
 > To set up Bound Harmony locally, follow these steps:
 
