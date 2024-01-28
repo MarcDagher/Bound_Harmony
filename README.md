@@ -40,6 +40,7 @@
 - The app uses the font ["Nunito"](https://fonts.google.com/specimen/Work+Sans) as its main font, and the design of the app adheres to the material design guidelines.
 <br><br>
 
+### Mockups
 <!-- UI UX -->
 <img src="./readme/UIUX.svg"/>
 
@@ -47,6 +48,18 @@
 >
 > Project Figma design [figma](https://www.figma.com/file/TSZRJHG6RUwk7BSmmw0xqp/Final-Project-WireFrame?type=design&node-id=20-6&mode=design&t=tO7JOSC5rfTelpo4-0)
 <br><br>
+
+| Survey Screen | Suggestions screen | Advice Screen | 
+| ---| ---| ---|
+
+
+<!-- Database Design -->
+<img src="./readme/dbdesign.svg"/>
+### Architecting Data Excellence: Innovative Database Design Strategies:
+ - Er Diagram !!!!!!!!!!!!!!
+
+<!-- Implementation -->
+<img src="./readme/implementation.svg"/>
 
 | OnBoarding Screen | Register screen | Setup screen | Succesful Setup screen  |
 | ---| ---| ---| ---|
@@ -59,11 +72,6 @@
 | ![PersonalSurveyComplete](./readme/screenshots/PersonalSurvey-responses-saved.jpeg) | ![MyPartnersSingleNoHistory](./readme/screenshots/MyPartnersEmpty.jpeg) | ![SuggestionsAlert2](./readme/screenshots/incomplete-survey.jpeg)| ![SuggestionsAlert2](./readme/screenshots/Incoming-request-in-a-real.jpeg)
 
 <br><br>
-
-<!-- Implementation -->
-<img src="./readme/implementation.svg"/>
-<br><br>
-> Using the wireframes and mockups as a guide, I implemented the Bound Harmony app with it's features. Here is an overview of what the user will have in the app:
 
 ### User Screens (Mobile)
 | Sign Up | Login-Setup | Profile Customization | 
