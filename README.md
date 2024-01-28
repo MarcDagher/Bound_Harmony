@@ -129,7 +129,7 @@ Depending on the user's conditions, the prompt will slightly differ. This is wha
 
 ###  Take Advantage of AWS' Integration:
 
-While developing Bound Harmony's Laravel server locally, I chose to enhance accessibility by hosting the APIs on AWS, making them publicly available. AWS is a cloud computing platform provided by Amazon that offers a diverse range of scalable cloud services. THe process of deployment included:
+While developing Bound Harmony's Laravel server locally, I chose to enhance accessibility by hosting the APIs on AWS, making them publicly available. AWS is a cloud computing platform provided by Amazon that offers a diverse range of scalable cloud services. The process of deployment included:
 - Creating and configuring an instance.
 - Installing Apache, MariaDb, and PHP.
 - Creating a Database and a User.
