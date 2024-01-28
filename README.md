@@ -51,7 +51,7 @@
 
 | Survey Screen | Suggestions screen | Advice Screen | 
 | ---| ---| ---|
-| ![Survey](./readme/screenshots/figma-survey.png) | ![Date](./readme/screenshots/figma-date.png) | ![Survey](./readme/screenshots/figma-advice.png.png) | 
+| ![Survey](./readme/screenshots/figma-survey.png) | ![Date](./readme/screenshots/figma-date.png) | ![Survey](./readme/screenshots/figma-advice.png) | 
 
 <!-- Database Design -->
 <img src="./readme/dbdesign.svg"/>
