@@ -79,13 +79,12 @@
 | Survey Complete | User Not Connected | Survey Not Complete | User Already Connected |
 | ![PersonalSurveyComplete](./readme/screenshots/PersonalSurvey-responses-saved.jpeg) | ![MyPartnersSingleNoHistory](./readme/screenshots/MyPartnersEmpty.jpeg) | ![SuggestionsAlert2](./readme/screenshots/incomplete-survey.jpeg)| ![SuggestionsAlert2](./readme/screenshots/Incoming-request-in-a-real.jpeg)
 
-<br><br>
 
 ### A Few Demos
 
 | Login-Setup | Incoming Requests | Couple's Survey |
 | --- | --- | --- |
-| <img src="./readme/gifs/login_Setup.gif" width="230" height="450">| <img src="./readme/gifs/IncomingRequests.gif" width="230" height="450"> | <img src="./readme/gifs/CoupleSurvey.gif" width="230" height="450"> | 
+| <img src="./readme/gifs/login_Setup.gif" width="230" height="450">| <img src="./readme/gifs/IncomingRequests.gif" width="230" height="450"> | <img src="./readme/gifs/survey_response.gif" width="230" height="450"> | 
 | Date Suggestions | Personalized Advice | Disconnect from Partner |
 | <img src="./readme/gifs/dates.gif" width="230" height="450"> | <img src="./readme/gifs/advice.gif" width="230" height="450"> | <img src="./readme/gifs/disconnect.gif" width="230" height="450"> |
 
