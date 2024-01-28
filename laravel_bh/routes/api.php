@@ -73,4 +73,4 @@ Route::controller(SurveysController::class)->group(function (){
     Route::post('/save_responses', 'save_responses');
 });
 
-Route::get('/get_prediction', [PredictionsController::class, 'get_prediction']);
+// Route::get('/get_prediction', [PredictionsController::class, 'get_prediction']);
