@@ -25,7 +25,7 @@
 
 ###  The following are the technologies I used to build Bound Harmony:
 
-- This project uses the [Flutter app development framework](https://flutter.dev/). Flutter is a cross-platform hybrid app development platform which allows us to use a single codebase for apps on mobile, desktop, and the web.
+- This project uses the [Flutter app development framework](https://flutter.dev/). Flutter is a cross-platform hybrid app development platform which allows us to use a single codebase for apps on mobile, desktop, and the web. As for managing the state of the app, I used Provider.
   <br><br>
 - The admin panel is done using [React.js](https://react.dev/). React.js is a JavaScript library for building single-page applications out of individual pieces called components.
 <br><br>
@@ -35,7 +35,7 @@
 <br><br>
 - In the Advice section, I integrated [openAi](https://platform.openai.com/docs/introduction). In order to make the advice personalized, survey responses are handled in the backend and are summarized before being sent to the api, you can read more about prompt handling in the Prompt Engineering section. I also used [Laravel's OpenAi Library](https://github.com/openai-php/laravel), which is open source and helps with handling the openAi api.
 <br><br>
-- In the Suggestions section, I used Google's [Google Places Api](https://developers.google.com/maps/documentation/places/web-service/search-nearby) nearby-search. The Google Places Api has a database with over 200 million places, categorized into types and sections. So, I took advantage of this categorization, in correlation with the user's survey responses, to get the places that best suites each user.   
+- In the Suggestions section, I used Google's [Google Places Api](https://developers.google.com/maps/documentation/places/web-service/search-nearby) nearby-search. The Google Places Api has a database with over 200 million places, categorized into types and sections. So, I took advantage of this categorization, in correlation with the user's survey responses, to dynamically get the places that best suites each user.   
 <br><br>
 - The app uses the font ["Nunito"](https://fonts.google.com/specimen/Work+Sans) as its main font, and the design of the app adheres to the material design guidelines.
 <br><br>
@@ -58,7 +58,7 @@
 <!-- Database Design -->
 <img src="./readme/templates/dbdesign.svg"/>
 
-### Architecting Data Excellence: Innovative Database Design Strategies:
+### Innovative Database Design Strategies:
 
 ![Database](./readme/screenshots/database.png)
 
@@ -103,7 +103,7 @@
 <!-- Prompt Engineering -->
 <img src="./readme/templates/prompt_engineering.svg"/>
 
-###  Mastering AI Interaction:
+###  OpenAi Prompt Configuration:
 
 To make the user's experience in the application more pleasant and entertaining, I used the data inputted from the surveys to make the responses personalized. Since the surveys are about interests, I created helper functions to summarize and label the user's interests. Then, I added the result into the AI's system prompt. 
 The system prompt is divided into 6 parts: 
@@ -126,15 +126,26 @@ Depending on the user's conditions, the prompt will slightly differ. This is wha
 
 <!-- AWS Deployment -->
 <img src="./readme/templates/AWS.svg"/>
-###  Efficient AI Deployment: Unleashing the Potential with AWS Integration:
 
-- This project leverages AWS deployment strategies to seamlessly integrate and deploy natural language processing models. With a focus on scalability, reliability, and performance, we ensure that AI applications powered by these models deliver robust and responsive solutions for diverse use cases.
-EXPLANATION
+###  Take Advantage of AWS' Integration:
+
+While developing Bound Harmony's Laravel server locally, I chose to enhance accessibility by hosting the APIs on AWS, making them publicly available. AWS is a cloud computing platform provided by Amazon that offers a diverse range of scalable cloud services. The process of deployment included:
+- Creating and configuring an instance.
+- Installing Apache, MariaDb, and PHP.
+- Creating a Database and a User.
+- Installing Composer and Git.
+- Cloning my Laravel server from my Github repo and downloading Laravel.
+- Granting user all access and change laravel's permission files.
+- Creating Laravel's environment (.env, generate key, change DB name, username, and password)
+- Creating an Apache configuration file that will point the server to serve the files provided by Laravel instead of the default Apache page.
+  
 <br><br>
 
 <!-- Unit Testing -->
 <img src="./readme/templates/unit_testing.svg"/>
+
 ###  Precision in Development: Harnessing the Power of Unit Testing:
+
 - This project employs rigorous unit testing methodologies to ensure the reliability and accuracy of code components. By systematically evaluating individual units of the software, we guarantee a robust foundation, identifying and addressing potential issues early in the development process.
 <br><br>
 
@@ -143,56 +154,67 @@ EXPLANATION
 
 > To set up Bound Harmony locally, follow these steps:
 
-### Prerequisites
-
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
-
-1. Clone the repo
+Clone the repo
+   
    ```sh
    git clone https://github.com/MarcDagher/Bound-Harmony.git
    ```
-2. Install [Composer](https://getcomposer.org/)
+### To Run the Admin Web App
+
+Install npm packages
+ 
+  ```sh
+  npm install
+  ```
+
+### To Start the Laravel Server on LocalHost
+
+1. Install [Composer](https://getcomposer.org/)
+ 
    ```sh
    composer install
    ```
-3. Rename your '.env.example' file to '.env'
+2. Rename your '.env.example' file to '.env'
 <br><br>
-4. Open your new .env file and make the necessary changes (App name, app key, database name...)
+3. Open your new .env file and make the necessary changes (App name, app key, database name...)
 <br><br>
-5. Generate an application key:
+4. Generate an application key:
+
    ```sh
    php artisan key:generate
    ```
+
+5. Inside your .env file add OPENAI_API_KEY and a GOOGLE_PLACES_API_KEY and insert your Keys.<br><br>Note: Advice Screen and Suggestions Screen need these 2 keys.
+
 6. Get Migrations
+
    ```sh
    php artisan migrate
    ```
-7. Seed Database
+7. Seed Database: You can go to database/seeders/DatabaseSeeder and uncomment the lines you want to seed in the order they are written. 
+
    ```sh
    php artisan db:seed
    ```
-8. Install NPM packages
-   ```sh
-   npm install
-   ```
-9. Install [Flutter SDK](https://docs.flutter.dev/get-started/install)
+## To Run the Flutter App
+
+1. Install [Flutter SDK](https://docs.flutter.dev/get-started/install)
 <br><br>
-10. Go to flutter_app directory
+2. Go to flutter_app directory
+
      ```sh
      cd flutter_app
      ```
-11. Install pub packages
+4. Install pub packages
+
      ```sh
      flutter pub get
      ```
-12. Run flutter_app 
+5. Run flutter_app
+
      ```sh
      flutter run
      ```
+Note: Inside your Flutter app, make sure your BaseUrl inside lib/configurations/request.configuration.dart is set to your current local host server.
 
 Now, you should be able to run Bound Harmony locally and explore its features :) :rocket:
