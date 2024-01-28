@@ -53,8 +53,8 @@
 | ![OnBoarding](./readme/screenshots/OnBoarding.jpeg) | ![Register](./readme/screenshots/SignUp.jpeg) | ![Setup](./readme/screenshots/Setup.jpeg) | ![SetupSuccess](./readme/screenshots/SetupSucess.jpeg) |
 | Surveys screen | Suggestion screen (Landing) | Advice Screen |  Profile Screen |
 | ![SetupSuccess](./readme/screenshots/Surveys.jpeg) | ![SuggestionLanding](./readme/screenshots/Suggestions.jpeg) | ![DateBuilder](./readme/screenshots/Advice.jpeg) | ![BondingActivities](./readme/screenshots/Profile.jpeg) |
-| Suggestions Screen alert 1 | Suggestions Screen alert 2 | Surveys Screen | Personal Survey Screen | 
-| ![SuggestionsAlert1](./readme/screenshots/Datebuilder-connected-and-personal-survey.jpeg) | ![SuggestionsAlert2](./readme/screenshots/Date-Builder-partner's-CS.jpeg) | ![Surveys](./readme/screenshots/Surveys.jpeg) | ![PersonalSurvey](./readme/screenshots/Personal-survey.jpeg) |
+| Inside Surveys | Inside Suggestions | Incoming Requests screen | My Partners screen | 
+| ![CouplesSurvey](./readme/screenshots/CouplesSurvey.jpeg) | ![Dates](./readme/screenshots/Date-Builder.jpeg) | ![IncomingRequestsScreen](./readme/screenshots/Incoming-Requests-with-req.jpeg) | ![MyPartnersInRelationship](./readme/screenshots/MyPartners-with-current.jpeg) |
 | Couples Survey Screen | Personal Survey complete | Couples Survey complete | Advice screen |
 | ![CouplesSurvey](./readme/screenshots/CouplesSurvey.jpeg) | ![PersonalSurveyComplete](./readme/screenshots/PersonalSurvey-responses-saved.jpeg) | ![CouplesSurveyComplete](./readme/screenshots/CS-responses-saved.jpeg) | ![Advice](./readme/screenshots/Advice.jpeg) |
 | Profile screen | Incoming Requests alert 1 | Incoming Requests screen | Suggestions Screen alert 2 |
