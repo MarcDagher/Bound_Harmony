@@ -2,14 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Http\Middleware\AuthMiddleware;
+
 use App\Models\Role;
 use App\Models\User;
-use Database\Factories\RoleFactory;
-use Database\Factories\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
