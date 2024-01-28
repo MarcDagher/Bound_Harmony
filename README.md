@@ -90,13 +90,33 @@
 
 ### Admin Screens (Web)
 
-> To keep track of all the inputs coming into the app, the admin page displays a summary of the users' behavior and their responses to each survey. 
+> To keep track of all incoming inputs, the admin page displays a summary of the users' behavior and the total number of times each survey response option was chosen. 
 
 | Login screen  | Dashboard Screen |
 | ---| ---|
 | ![Landing](./readme/screenshots/admin_signin.png) | ![fsdaf](./readme/screenshots/dashboard.png) | 
 | Users Screen | Survey Responses |
 | ![Landing](./readme/screenshots/users.png) | ![fsdaf](./readme/screenshots/surveyResponses.png) |
+<br><br>
+
+<!-- Prompt Engineering -->
+<img src="./readme/prompt_engineering.svg"/>
+###  Mastering AI Interaction:
+EXPLANATION
+<br><br>
+
+<!-- AWS Deployment -->
+<img src="./readme/AWS.svg"/>
+###  Efficient AI Deployment: Unleashing the Potential with AWS Integration:
+
+- This project leverages AWS deployment strategies to seamlessly integrate and deploy natural language processing models. With a focus on scalability, reliability, and performance, we ensure that AI applications powered by these models deliver robust and responsive solutions for diverse use cases.
+EXPLANATION
+<br><br>
+
+<!-- Unit Testing -->
+<img src="./readme/unit_testing.svg"/>
+###  Precision in Development: Harnessing the Power of Unit Testing:
+- This project employs rigorous unit testing methodologies to ensure the reliability and accuracy of code components. By systematically evaluating individual units of the software, we guarantee a robust foundation, identifying and addressing potential issues early in the development process.
 <br><br>
 
 <!-- How to run -->
