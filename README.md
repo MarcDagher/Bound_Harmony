@@ -54,7 +54,7 @@
 | Surveys screen | Suggestion screen (Landing) | Advice Screen |  Profile Screen |
 | ![SetupSuccess](./readme/screenshots/Surveys.jpeg) | ![SuggestionLanding](./readme/screenshots/Suggestions.jpeg) | ![DateBuilder](./readme/screenshots/Advice.jpeg) | ![BondingActivities](./readme/screenshots/Profile.jpeg) |
 | Inside Surveys | Inside Suggestions | Incoming Requests screen | My Partners screen | 
-| ![CouplesSurvey](./readme/screenshots/CouplesSurvey.jpeg) | ![Dates](./readme/screenshots/Date-Builder.jpeg) | ![IncomingRequestsScreen](./readme/screenshots/Incoming-Requests-with-req.jpeg) | ![MyPartnersInRelationship](./readme/screenshots/MyPartners-with-current.jpeg) |
+| ![CouplesSurvey](./readme/screenshots/CouplesSurvey.jpeg) | ![Dates](./readme/screenshots/DateBuilder.jpeg) | ![IncomingRequestsScreen](./readme/screenshots/Incoming-Requests-with-req.jpeg) | ![MyPartnersInRelationship](./readme/screenshots/MyPartners-with-current.jpeg) |
 | Couples Survey Screen | Personal Survey complete | Couples Survey complete | Advice screen |
 | ![CouplesSurvey](./readme/screenshots/CouplesSurvey.jpeg) | ![PersonalSurveyComplete](./readme/screenshots/PersonalSurvey-responses-saved.jpeg) | ![CouplesSurveyComplete](./readme/screenshots/CS-responses-saved.jpeg) | ![Advice](./readme/screenshots/Advice.jpeg) |
 | Profile screen | Incoming Requests alert 1 | Incoming Requests screen | Suggestions Screen alert 2 |
