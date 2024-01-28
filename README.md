@@ -149,7 +149,7 @@ While developing Bound Harmony's Laravel server locally, I chose to enhance acce
 - The number one reason for chaos and errors during development is insufficient testing. For this reason, Unit Testing has proven to be one of the best ways to address this issue. By adopting the AAA (Arrange - Act - Assert) approach, Unit Testing effectively minimizes the chances of encountering errors in our projects during development or after production. 
 The following screenchot illustrates a snippet of the test results implemented in my application.
 
-<img src="./readme/unit_testing/UnitTesting.png.svg"/>
+<img src="./readme/unit_testing/UnitTesting.png"/>
 
 <br><br>
 
