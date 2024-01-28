@@ -9,9 +9,7 @@ use Tests\TestCase;
 
 class CoupleConnectionTest extends TestCase {
     use RefreshDatabase;
-    /**
-     * A basic feature test example.
-     */
+    
     public function test_successful_send_connection_request(): void {
         HelperFunctions::create_roles();
         $user = HelperFunctions::create_user('mousa@hotmail.com');

@@ -2,11 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Models\Role;
-use App\Models\User;
 use Tests\Feature\HelperFunctions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class OenAiTest extends TestCase{
