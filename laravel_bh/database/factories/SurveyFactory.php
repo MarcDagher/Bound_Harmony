@@ -17,7 +17,7 @@ class SurveyFactory extends Factory
     public function definition(): array
     {
         return [
-            "survey_id" => 1
+            "title" => "Personal Survey"
         ];
     }
 }

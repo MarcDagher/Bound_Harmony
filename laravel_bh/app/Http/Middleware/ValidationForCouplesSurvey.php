@@ -18,8 +18,9 @@ class ValidationForCouplesSurvey
     {
 
         $request -> validate([
-            ["survey_id" => "required|integer|in:1,2"]
+            "survey_id" => "required|integer|in:1,2"
         ]);
+        
         $user = Auth::user();
         if ($user -> connection_status == "false" && $request->survey_id == 2){
             return response()->json([
