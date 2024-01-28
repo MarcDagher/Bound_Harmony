@@ -158,14 +158,14 @@ Clone the repo
    ```sh
    git clone https://github.com/MarcDagher/Bound-Harmony.git
    ```
-### Admin Web App
+### To Run the Admin Web App
 
 Install npm packages
   ```sh
   npm install
   ```
 
-### Laravel Server
+### To Start the Laravel Server on LocalHost
 
 1. Install [Composer](https://getcomposer.org/)
    ```sh
@@ -179,8 +179,9 @@ Install npm packages
    ```sh
    php artisan key:generate
    ```
-5. Inside your .env file add OPENAI_API_KEY and a GOOGLE_PLACES_API_KEY and insert your Keys.
-   Note: Advice Screen and Suggestions Screen need these 2 keys.  
+   <br><br>
+5. Inside your .env file add OPENAI_API_KEY and a GOOGLE_PLACES_API_KEY and insert your Keys.<br><br>Note: Advice Screen and Suggestions Screen need these 2 keys.
+   <br><br>
 6. Get Migrations
    ```sh
    php artisan migrate
@@ -189,7 +190,7 @@ Install npm packages
    ```sh
    php artisan db:seed
    ```
-## Flutter App
+## To Run the Flutter App
 
 1. Install [Flutter SDK](https://docs.flutter.dev/get-started/install)
 <br><br>
@@ -205,5 +206,6 @@ Install npm packages
      ```sh
      flutter run
      ```
+Note: Inside your Flutter app, make sure your BaseUrl inside lib/configurations/request.configuration.dart is set to your current local host server.
 
 Now, you should be able to run Bound Harmony locally and explore its features :) :rocket:
