@@ -20,7 +20,6 @@ class SuggestionsMiddleware
     {
 
         $user = Auth::user();
-
         // Check if user has a partner and if user completed couples survey
         if($user -> connection_status == "false" || $user -> couple_survey_status == "incomplete"){
             return response() -> json([
