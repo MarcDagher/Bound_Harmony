@@ -101,6 +101,7 @@
 
 <!-- Prompt Engineering -->
 <img src="./readme/templates/prompt_engineering.svg"/>
+
 ###  Mastering AI Interaction:
 
 To make the user's experience in the application more pleasant and entertaining, I used the data inputted from the surveys to make the responses personalized. Since the surveys are about interests, I created helper functions to summarize and label the user's interests. Then, I added the result into the AI's system prompt. 
