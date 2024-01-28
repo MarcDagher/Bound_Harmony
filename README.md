@@ -60,7 +60,7 @@
 
 ### Architecting Data Excellence: Innovative Database Design Strategies:
 
-![OnBoarding](./readme/screenshots/database.jpeg)
+![Database](./readme/screenshots/database.png)
 
 <!-- Implementation -->
 <img src="./readme/implementation.svg"/>
