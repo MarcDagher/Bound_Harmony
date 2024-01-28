@@ -20,6 +20,7 @@ class SurveyTest extends TestCase {
         $response -> assertStatus(200); 
     }
 
+
     public function test_failed_get_couple_survey(): void{
         Survey::factory()->create(["title" => 'Personal Survey']);
         Survey::factory()->create(["title" => "Couple's Survey"]);
@@ -29,5 +30,16 @@ class SurveyTest extends TestCase {
         $response = $this->actingAs($user)->getJson('/api/get_survey?survey_id=2');
 
         $response -> assertStatus(403); 
+    }
+
+    public function test_successful_get_couple_survey(): void{
+        Survey::factory()->create(["title" => 'Personal Survey']);
+        Survey::factory()->create(["title" => "Couple's Survey"]);
+        HelperFunctions::create_roles();
+        $user = HelperFunctions::create_user('nancy@hotmail.com', 2, "true");
+        
+        $response = $this->actingAs($user)->getJson('/api/get_survey?survey_id=2');
+
+        $response -> assertStatus(200); 
     }
 }
