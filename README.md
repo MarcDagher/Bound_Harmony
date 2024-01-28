@@ -103,7 +103,7 @@
 <!-- Prompt Engineering -->
 <img src="./readme/templates/prompt_engineering.svg"/>
 
-###  Mastering AI Interaction:
+###  OpenAi Prompt Configuration:
 
 To make the user's experience in the application more pleasant and entertaining, I used the data inputted from the surveys to make the responses personalized. Since the surveys are about interests, I created helper functions to summarize and label the user's interests. Then, I added the result into the AI's system prompt. 
 The system prompt is divided into 6 parts: 
@@ -126,15 +126,26 @@ Depending on the user's conditions, the prompt will slightly differ. This is wha
 
 <!-- AWS Deployment -->
 <img src="./readme/templates/AWS.svg"/>
-###  Efficient AI Deployment: Unleashing the Potential with AWS Integration:
 
-- This project leverages AWS deployment strategies to seamlessly integrate and deploy natural language processing models. With a focus on scalability, reliability, and performance, we ensure that AI applications powered by these models deliver robust and responsive solutions for diverse use cases.
-EXPLANATION
+###  Take Advantage of AWS' Integration:
+
+While developing Bound Harmony's Laravel server locally, I chose to enhance accessibility by hosting the APIs on AWS, making them publicly available. AWS is a cloud computing platform provided by Amazon that offers a diverse range of scalable cloud services. THe process of deployment included:
+- Creating and configuring an instance.
+- Installing Apache, MariaDb, and PHP.
+- Creating a Database and a User.
+- Installing Composer and Git.
+- Cloning my Laravel server from my Github repo and downloading Laravel.
+- Granting user all access and change laravel's permission files.
+- Creating Laravel's environment (.env, generate key, change DB name, username, and password)
+- Creating an Apache configuration file that will point the server to serve the files provided by Laravel instead of the default Apache page.
+  
 <br><br>
 
 <!-- Unit Testing -->
 <img src="./readme/templates/unit_testing.svg"/>
+
 ###  Precision in Development: Harnessing the Power of Unit Testing:
+
 - This project employs rigorous unit testing methodologies to ensure the reliability and accuracy of code components. By systematically evaluating individual units of the software, we guarantee a robust foundation, identifying and addressing potential issues early in the development process.
 <br><br>
 
