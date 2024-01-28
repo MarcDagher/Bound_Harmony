@@ -45,13 +45,12 @@
 
 > I designed Bound Harmony using wireframes and mockups, iterating on the design until I reached the ideal layout for easy navigation and a seamless user experience.
 >
-
 > Project Figma design [figma](https://www.figma.com/file/TSZRJHG6RUwk7BSmmw0xqp/Final-Project-WireFrame?type=design&node-id=20-6&mode=design&t=tO7JOSC5rfTelpo4-0)
 <br><br>
 
-| OnBoarding Screen | Login screen  | Register screen | Setup screen |
+| OnBoarding Screen | Register screen | Setup screen | Succesful Setup screen  |
 | ---| ---| ---| ---|
-| ![OnBoarding](./readme/screenshots/OnBoarding.jpeg) | ![Login](./readme/screenshots/LogIn.jpeg) | ![Register](./readme/screenshots/SignUp.jpeg) | ![Setup](./readme/screenshots/Setup.jpeg) |
+| ![OnBoarding](./readme/screenshots/OnBoarding.jpeg) | ![Register](./readme/screenshots/SignUp.jpeg) | ![Setup](./readme/screenshots/Setup.jpeg) | ![SetupSuccess](./readme/screenshots/SetupSucess.jpeg) |
 | Successful Setup screen | Suggestion screen (Landing) | Date Builder Screen |  Bonding Activities Screen |
 | ![SetupSuccess](./readme/screenshots/SetupSucess.jpeg) | ![SuggestionLanding](./readme/screenshots/Suggestions.jpeg) | ![DateBuilder](./readme/screenshots/DateBuilder.jpeg) | ![BondingActivities](./readme/screenshots/BondingActivities.jpeg) |
 | Suggestions Screen alert 1 | Suggestions Screen alert 2 | Surveys Screen | Personal Survey Screen | 
