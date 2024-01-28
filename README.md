@@ -14,6 +14,7 @@
 - As a user, I'd like suggestions for weekend getaways that align me and my partner's shared interests, creating memorable experiences for both of us.
 - As a user, I want personalized advice to enhance both my personal journey and my relationship.
 
+### Admin Stories
 - As an admin, I want to monitor users' behavior within the application to understand their preferences and interests.
 - As an admin, I want to be able to manage user accounts by deleting or restoring accounts.
 - As an admin, I want to see the most common responses to my surveys, so that I can use this data to enhance my app.
