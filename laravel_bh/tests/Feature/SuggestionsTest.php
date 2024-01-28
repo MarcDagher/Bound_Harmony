@@ -8,15 +8,13 @@ use Tests\TestCase;
 
 class SuggestionsTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
-    // public function test_failed_get_suggestion(): void{
+    
+    public function test_failed_get_suggestion(): void{
 
-    //     $response = $this->get('/get_suggestions');
+        $response = $this->get('/api/get_suggestions', ['place_type' => 'dates']);
 
-    //     $response->assertStatus(200);
-    // }
+        $response->assertStatus(200);
+    }
 
 
 

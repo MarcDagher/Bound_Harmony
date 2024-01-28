@@ -156,7 +156,7 @@ class SuggestionsController extends Controller
     public function get_suggestions(Request $request){ // request will be a string "bonding" - "date"
 
         $request->validate([
-            'place_type' => 'required|string',
+            'place_type' => 'required|string', // dates - bonding
         ]);
         
         $user = Auth::user();
