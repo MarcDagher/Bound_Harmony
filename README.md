@@ -154,54 +154,54 @@ While developing Bound Harmony's Laravel server locally, I chose to enhance acce
 
 > To set up Bound Harmony locally, follow these steps:
 
-### Prerequisites
-
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
-
-1. Clone the repo
+Clone the repo
    ```sh
    git clone https://github.com/MarcDagher/Bound-Harmony.git
    ```
-2. Install [Composer](https://getcomposer.org/)
+### Admin Web App
+
+Install npm packages
+  ```sh
+  npm install
+  ```
+
+### Laravel Server
+
+1. Install [Composer](https://getcomposer.org/)
    ```sh
    composer install
    ```
-3. Rename your '.env.example' file to '.env'
+2. Rename your '.env.example' file to '.env'
 <br><br>
-4. Open your new .env file and make the necessary changes (App name, app key, database name...)
+3. Open your new .env file and make the necessary changes (App name, app key, database name...)
 <br><br>
-5. Generate an application key:
+4. Generate an application key:
    ```sh
    php artisan key:generate
    ```
+5. Inside your .env file add OPENAI_API_KEY and a GOOGLE_PLACES_API_KEY and insert your Keys.
+   Note: Advice Screen and Suggestions Screen need these 2 keys.  
 6. Get Migrations
    ```sh
    php artisan migrate
    ```
-7. Seed Database
+7. Seed Database: You can go to database/seeders/DatabaseSeeder and uncomment the lines you want to seed in the order they are written. 
    ```sh
    php artisan db:seed
    ```
-8. Install NPM packages
-   ```sh
-   npm install
-   ```
-9. Install [Flutter SDK](https://docs.flutter.dev/get-started/install)
+## Flutter App
+
+1. Install [Flutter SDK](https://docs.flutter.dev/get-started/install)
 <br><br>
-10. Go to flutter_app directory
+2. Go to flutter_app directory
      ```sh
      cd flutter_app
      ```
-11. Install pub packages
+3. Install pub packages
      ```sh
      flutter pub get
      ```
-12. Run flutter_app 
+4. Run flutter_app 
      ```sh
      flutter run
      ```
