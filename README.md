@@ -10,14 +10,13 @@
 > Bound Harmony first requires the users, who probably are in a relationship, to connect their accounts and fill a survey. To make their relationship smoother, Bound Harmony will provide the couple with date suggestions and bonding activities. To make it even better, our cupid will be ready to give advice at any time!
 
 ### User Stories
-
-- As a user, I like to spend quality time with my partner. So, I want suggestions for places and activities that suit our interests.
-- As a user, I want recommendations for cozy cafes or quiet spots where my partner and I can have meaningful conversations.
-- As a user, I want to have access to good relationship and personal advice to help me in my self-development journey.
+- As a user, I want recommendations for fun and romantic date night ideas to keep our relationship exciting.
 - As a user, I'd like suggestions for weekend getaways that align me and my partner's shared interests, creating memorable experiences for both of us.
-- As a user, I want suggestions for nice and creative gifts, so that I will have a platform for inspiration.
-- As a user, I want to explore new hobbies or activities with my partner, so I'm looking for suggestions that join both our interests.
-- As a user, I want recommendations for fun and unique date night ideas to keep our relationship exciting.
+- As a user, I want personalized advice to enhance both my personal journey and my relationship.
+
+- As an admin, I want to monitor users' behavior within the application to understand their preferences and interests.
+- As an admin, I want to be able to manage user accounts by deleting or restoring accounts.
+- As an admin, I want to see the most common responses to my surveys, so that I can use this data to enhance my app.
 <br><br>
 <br><br>
 <!-- Prototyping -->
