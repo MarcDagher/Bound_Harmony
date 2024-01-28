@@ -19,7 +19,7 @@
 - As a user, I want to explore new hobbies or activities with my partner, so I'm looking for suggestions that join both our interests.
 - As a user, I want recommendations for fun and unique date night ideas to keep our relationship exciting.
 <br><br>
-
+<br><br>
 <!-- Prototyping -->
 <img src="./readme/title3.svg"/>
 > I designed Bound Harmony using wireframes and mockups, iterating on the design until I reached the ideal layout for easy navigation and a seamless user experience.
@@ -43,7 +43,7 @@
 
 <!-- Implementation -->
 <img src="./readme/title4.svg"/>
-
+<br><br>
 > Using the wireframes and mockups as a guide, I implemented the Bound Harmony app with it's features. Here is an overview of what the user will have in the app:
 
 ### User Screens (Mobile)
@@ -73,10 +73,17 @@
 ###  Bound Harmony is built using the following technologies:
 
 - This project uses the [Flutter app development framework](https://flutter.dev/). Flutter is a cross-platform hybrid app development platform which allows us to use a single codebase for apps on mobile, desktop, and the web.
-- For persistent storage (database), the app uses the [Hive](https://hivedb.dev/) package which allows the app to create a custom storage schema and save it to a local database.
-- To send local push notifications, the app uses the [flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications) package which supports Android, iOS, and macOS.
-  - 🚨 Currently, notifications aren't working on macOS. This is a known issue that we are working to resolve!
-- The app uses the font ["Work Sans"](https://fonts.google.com/specimen/Work+Sans) as its main font, and the design of the app adheres to the material design guidelines.
+  <br><br>
+- The admin panel is done using [React.js](https://react.dev/). React.js is a JavaScript library for building single-page applications out of individual pieces called components.
+<br><br>
+- The backend is handled using [Laravel](https://laravel.com/) and [MySql](https://www.mysql.com/). Laravel is a PHP web application framework that follows the Model-View-Controller (MVC) architectural pattern. Laravel simplifies common tasks such as routing and authentication making it easier for developers to create scalable and maintainable web applications. With features like Eloquent ORM and artisan command-line tools, Laravel facilitates rapid development and supports the creation of modern, feature-rich web applications.
+For managing the database schemas and establishing relational connections between tables, I used MySQL, a relational database management system. 
+<br><br>
+- The app uses [openAi](https://platform.openai.com/docs/introduction) in the Advice section. In order to make the advice personalized, survey responses are handled and are summarized before being sent to api. I also used [Laravel's OpenAi Library](https://github.com/openai-php/laravel), which is open source and helps with handling the openAi api.
+<br><br>
+- I used Google's [Google Places Api](https://developers.google.com/maps/documentation/places/web-service/search-nearby) to get the places relative to the user's interests, and based on the responses given in the surveys and in relation to the user's partner's interests.
+<br><br>
+- The app uses the font ["Nunito"](https://fonts.google.com/specimen/Work+Sans) as its main font, and the design of the app adheres to the material design guidelines.
 
 <br><br>
 
@@ -87,7 +94,6 @@
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
 * npm
   ```sh
   npm install npm@latest -g
@@ -95,20 +101,47 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/MarcDagher/Bound-Harmony.git
    ```
-3. Install NPM packages
+2. Install [Composer](https://getcomposer.org/)
+   ```sh
+   composer install
+   ```
+3. Rename your '.env.example' file to '.env'
+<br><br>
+4. Open your new .env file and make the necessary changes (App name, app key, database name...)
+<br><br>
+5. Generate an application key:
+   ```sh
+   php artisan key:generate
+   ```
+6. Get Migrations
+   ```sh
+   php artisan migrate
+   ```
+7. Seed Database
+   ```sh
+   php artisan db:seed
+   ```
+8. Install NPM packages
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+9. Install [Flutter SDK](https://docs.flutter.dev/get-started/install)
+<br><br>
+10. Go to flutter_app directory
+     ```sh
+     cd flutter_app
+     ```
+11. Install pub packages
+     ```sh
+     flutter pub get
+     ```
+12. Run flutter_app 
+     ```sh
+     flutter run
+     ```
 
-Now, you should be able to run Bound Harmony locally and explore its features.
+Now, you should be able to run Bound Harmony locally and explore its features :) :rocket:
