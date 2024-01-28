@@ -81,15 +81,18 @@
 
 <br><br>
 
+### A Few Demos
+
 | Login-Setup | Incoming Requests | Couple's Survey |
 | --- | --- | --- |
 | <img src="./readme/gifs/login_Setup.gif" width="230" height="450">| <img src="./readme/gifs/IncomingRequests.gif" width="230" height="450"> | <img src="./readme/gifs/CoupleSurvey.gif" width="230" height="450"> | 
 | Date Suggestions | Personalized Advice | Disconnect from Partner |
 | <img src="./readme/gifs/dates.gif" width="230" height="450"> | <img src="./readme/gifs/advice.gif" width="230" height="450"> | <img src="./readme/gifs/disconnect.gif" width="230" height="450"> |
 
+### Admin Screens (Web)
+
 > To keep track of all the inputs coming into the app, the admin page displays a summary of the users' behavior and their responses to each survey. 
 
-### Admin Screens (Web)
 | Login screen  | Dashboard Screen |
 | ---| ---|
 | ![Landing](./readme/screenshots/admin_signin.png) | ![fsdaf](./readme/screenshots/dashboard.png) | 
