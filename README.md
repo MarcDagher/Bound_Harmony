@@ -58,8 +58,6 @@
 <!-- Database Design -->
 <img src="./readme/templates/dbdesign.svg"/>
 
-### Innovative Database Design Strategies:
-
 ![Database](./readme/screenshots/database.png)
 
 <br><br>
