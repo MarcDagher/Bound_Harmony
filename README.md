@@ -226,7 +226,7 @@ Install npm packages
    php artisan key:generate
    ```
 
-5. Inside your .env file add OPENAI_API_KEY and a GOOGLE_PLACES_API_KEY and insert your Keys.<br><br>Note: Advice Screen and Suggestions Screen need these 2 keys.
+5. Inside your .env file add your OPENAI_API_KEY and GOOGLE_PLACES_API_KEY <br><br>Note: Advice Screen and Suggestions Screen need these 2 keys.
 
 6. Get Migrations
 
