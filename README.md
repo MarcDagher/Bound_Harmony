@@ -124,7 +124,7 @@ Depending on the user's conditions, the prompt will slightly differ. This is wha
 <!-- Machine Learning -->
 <img src="./readme/templates/machine_learning.svg"/>
 
-### Data Cleaning and Teaching Models:
+### Cleaning Data and Teaching Models:
 
 Since the theme of the app revolves around interests and relationships, I conducted a survey that received responses from 132 participants. The survey primarily targeted individual interests and perspectives on the respondents' relationships.
 
