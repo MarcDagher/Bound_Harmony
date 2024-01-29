@@ -157,6 +157,7 @@ We observe that the model accurately predicts the correct answer 58% of the time
 
 After interpreting the Decision Tree, it becomes evident that, based on the model's analysis, individuals who identify themselves as spiritual are more likely to be in a relationship. Following the paths, to the right of the root box and down to its end leaves, leads to a bright orange-colored box, symbolizing a person in a relationship. This path represents the correlation that the model identified between a user's interest and the likelihood of being in a relationship.
 
+<br><br>
 <!-- AWS Deployment -->
 <img src="./readme/templates/AWS.svg"/>
 
@@ -171,7 +172,8 @@ While developing Bound Harmony's Laravel server locally, I chose to enhance acce
 - Granting user all access and change laravel's permission files.
 - Creating Laravel's environment (.env, generate key, change DB name, username, and password)
 - Creating an Apache configuration file that will point the server to serve the files provided by Laravel instead of the default Apache page.
-  
+
+NOTE: To access Laravel's Server APIs, use the following IP address: 15.188.8.50/api
 <br><br>
 
 <!-- Unit Testing -->
