@@ -84,9 +84,9 @@
 
 | Login-Setup | Incoming Requests | Couple's Survey |
 | --- | --- | --- |
-| <img src="./readme/gifs/login_Setup.gif" width="230" height="450">| <img src="./readme/gifs/IncomingRequests.gif" width="230" height="450"> | <img src="./readme/gifs/survey_response.gif" width="230" height="450"> | 
+| <img src="./readme/gifs/login_Setup.gif" width="200" height="450">| <img src="./readme/gifs/IncomingRequests.gif" width="200" height="450"> | <img src="./readme/gifs/survey_response.gif" width="200" height="450"> | 
 | Date Suggestions | Personalized Advice | Disconnect from Partner |
-| <img src="./readme/gifs/dates.gif" width="230" height="450"> | <img src="./readme/gifs/advice.gif" width="230" height="450"> | <img src="./readme/gifs/disconnect.gif" width="230" height="450"> |
+| <img src="./readme/gifs/dates.gif" width="200" height="450"> | <img src="./readme/gifs/advice.gif" width="200" height="450"> | <img src="./readme/gifs/disconnect.gif" width="200" height="450"> |
 
 ### Admin Screens (Web)
 
