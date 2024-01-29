@@ -240,9 +240,9 @@ Install npm packages
    ```
  8. Run Server:
     
-   ```sh
-   php artisan serve
-   ```
+     ```sh
+     php artisan serve
+     ```
 
 ## To Run the Flutter App
 
