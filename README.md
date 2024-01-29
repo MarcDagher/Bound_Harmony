@@ -197,7 +197,7 @@ The following screenchot illustrates a snippet of the test results implemented i
 
 ### Prerequisites:
 
-1. Flutter: install [Flutter SDK](https://docs.flutter.dev/get-started/install)
+1. Install [Flutter SDK](https://docs.flutter.dev/get-started/install)
    
 2. Install [Composer](https://getcomposer.org/)
  
