@@ -1,0 +1,85 @@
+
+## Update Amazon Linux 2023 Packages
+  
+  sudo dnf update
+
+## Install LAMP Stack (Linux, Apache, MySQL, PHP)
+  
+  sudo dnf install httpd mariadb*-server php php-mysqlnd
+
+## Start and Enable the Apache and MariaDB Services
+
+  sudo systemctl enable --now httpd
+  sudo systemctl enable --now mariadb
+
+## LogIn to MySWL and CREATE Database
+
+  sudo mysql
+  CREATE DATABASE yourdb;
+  CREATE USER 'youruser'@'localhost' IDENTIFIED BY 'password';
+  GRANT ALL ON yourdb.* to 'youruser'@'localhost';
+  FLUSH PRIVILEGES;
+  quit;
+
+## Install PHP Composer for Laravel on Amazon Linux 2023
+
+  curl -sS https://getcomposer.org/installer | php
+  sudo mv composer.phar /usr/local/bin/composer
+  sudo chmod +x /usr/local/bin/composer
+
+## Clone the Laravel Framework Project
+
+  cd /var/www
+  sudo dnf install git -y
+  sudo git clone https://github.com/laravel/laravel.git
+
+## Give Permission to Your Current to Access the Laravel Folder
+
+  cd /var/www/RepoNameLaravel
+  sudo chown -R $USER /var/www/laravel
+
+## Install Laravel on Amazon Linux 2023
+
+  composer install
+  sudo chown -R apache.apache /var/www/laravel
+  sudo chmod -R 755 /var/www/laravel
+  sudo chmod -R 777 /var/www/laravel/storage
+
+## Create the Laravel Environment Configuration File
+
+  sudo cp .env.example .env
+  sudo php artisan key:generate
+  sudo nano .env
+
+## Go to the Database Section and Change the Values
+  Database Name
+  Database Username
+  Database Password 
+  Save the file using Ctrl+O, hit the Enter key, and then exit the file using Ctrl+X.
+
+## Apache Configuration for PHP Laravel App
+
+  sudo nano /etc/httpd/conf.d/laravel.conf
+
+## Add the Following Lines
+
+  <VirtualHost *:80>
+       ServerName laravel.example.com
+       DocumentRoot /var/www/laravel/public 
+
+       <Directory /var/www/laravel>
+              AllowOverride All
+       </Directory>
+  </VirtualHost>
+
+## Restart the Apache
+
+  sudo systemctl restart httpd
+
+## Get Access to Your IP
+
+  curl ipinfo.io
+
+  You will receive a list of deatails about your server, 
+  'ip' is the IP adress of your new server
+  You can access it on the url of your browser 
