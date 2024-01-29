@@ -196,21 +196,21 @@ The following screenchot illustrates a snippet of the test results implemented i
 
 ### Prerequisites:
 
-flutter
+1. flutter
 
-  ```sh
-  flutter upgrade
-  ```
-composer
+   ```sh
+   flutter upgrade
+   ```
+2. composer
 
-  ```sh
-  composer self-update
-  ```
-npm
+   ```sh
+   composer self-update
+   ```
+3. npm
 
-  ```sh
-  npm install npm@latest -g
-  ```
+   ```sh
+   npm install npm@latest -g
+   ```
 
 > To set up Bound Harmony locally, follow these steps:
 
