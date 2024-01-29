@@ -146,15 +146,15 @@ We observe that the model accurately predicts the correct answer 58% of the time
 - Refactoring the data's CSV file.
 - Selecting the classification label.
 - Dividing the dataset into a training set and a testing set.
-- Applying Sklearn methods to split and learn from the data using DecisionTreeClassifier.
+- Applying Sklearn methods to split and learn from the data.
 - Training the model using cross-validation, where the training set and the testing set were shuffled 10 times to enhance the model's learning diversity.
-- Using the DecisionTree algorithm to make the model come up with the predictions.
+- Using a DecisionTree algorithm to predict the classification label.
 - Plotting the result and exporting it as a graph.
-- The following image is a graph which represents the DecisionTree the model used to come up with the correct prediction.
+- The model was given a list of survey responses representing multiple users, and the following image is the graph which represents a DecisionTree the model used to come up with the correct predictions.
 
 <img src="./readme/machine_learning/model_1_100.png"/>
 
-After interpreting the Decision Tree, it becomes evident that, based on the model's analysis, individuals who identify themselves as spiritual are more likely to be in a relationship. Following the paths, to the right of the root box and down to its end leaves, leads to a bright orange-colored box, symbolizing a person in a relationship. This path represents the correlation that the model identified between a user's interest and the likelihood of being in a relationship.
+Based on the model's analysis, individuals who identify themselves as spiritual are more likely to be in a relationship. Following the paths, to the right of the root box and down to its end leaves, we see a number of bright orange-colored boxes, symbolizing a person in a relationship. This path represents the correlation that the model identified between a user's interest and the likelihood of them being in a relationship.
 
 <br><br>
 <!-- AWS Deployment -->
