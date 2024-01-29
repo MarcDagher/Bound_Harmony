@@ -51,7 +51,7 @@
 
 | Survey Screen | Suggestions screen | Advice Screen | 
 | ---| ---| ---|
-| ![Survey](./readme/screenshots/suggestions.png) | ![Date](./readme/screenshots/suggestions.png) | ![Survey](./readme/screenshots/advice.png) | 
+| ![Survey](./readme/screenshots/survey.png) | ![Date](./readme/screenshots/suggestions.png) | ![Survey](./readme/screenshots/advice.png) | 
 
 <br><br>
 
