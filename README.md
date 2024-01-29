@@ -139,6 +139,18 @@ Before moving on to data testing, it's noteworthy that the dataset shows nearly 
 
 <img src="./readme/machine_learning/model_1_weka_1.png"/>
 
+We can see that the model is accurately predicting the right answer 58% of the time, however it shows that the margin for error is 45%. Implementation of the model's training was done using Pandas, NumPy, and Sklearn. The technique used was a DecisionTree where the model will simplify its route to the correct answer by aking one choice at a time. In order to do that I followed the following steps:
+- Refactor the data's csv file.
+- Choose the Classification Label.
+- Divide the dataset into a training set and a testing set.
+- Apply, using Sklearn, metheds to split and learn from the data using DecisionTreeClassifier.
+- Train the model using cross-validation where the training set and the testing set will be shuffled 10 times to make the learning process more diverse for the model.
+- Predict the result using a DecisionTree.
+- Plot the result and export it as a graph.
+The following image is a graph which represents the DecisionTree the model used to come up with the correct prediction.
+
+<img src="./readme/machine_learning/model_1_100.png"/>
+
 <!-- AWS Deployment -->
 <img src="./readme/templates/AWS.svg"/>
 
