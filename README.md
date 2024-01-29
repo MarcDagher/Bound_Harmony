@@ -209,7 +209,7 @@ The following screenchot illustrates a snippet of the test results implemented i
    ```sh
    npm install npm@latest -g
    ```
-
+   <br></br>
 > To set up Bound Harmony locally, follow these steps:
 
 Clone the repo
