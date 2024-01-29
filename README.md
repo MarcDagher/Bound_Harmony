@@ -40,7 +40,7 @@
 - The app uses the font ["Nunito"](https://fonts.google.com/specimen/Work+Sans) as its main font, and the design of the app adheres to the material design guidelines.
 <br><br>
 
-### Mockups
+### Mockup Examples
 <!-- UI UX -->
 <img src="./readme/templates/UIUX.svg"/>
 
