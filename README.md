@@ -40,25 +40,24 @@
 - The app uses the font ["Nunito"](https://fonts.google.com/specimen/Work+Sans) as its main font, and the design of the app adheres to the material design guidelines.
 <br><br>
 
-### Mockups
+### Mockup Examples
 <!-- UI UX -->
 <img src="./readme/templates/UIUX.svg"/>
 
 > I designed Bound Harmony using wireframes and mockups, iterating on the design until I reached the ideal layout for easy navigation and a seamless user experience.
 >
-> Project Figma design [figma](https://www.figma.com/file/TSZRJHG6RUwk7BSmmw0xqp/Final-Project-WireFrame?type=design&node-id=20-6&mode=design&t=tO7JOSC5rfTelpo4-0)
 <br><br>
 
 | Survey Screen | Suggestions screen | Advice Screen | 
 | ---| ---| ---|
 | ![Survey](./readme/screenshots/survey.png) | ![Date](./readme/screenshots/suggestions.png) | ![Survey](./readme/screenshots/advice.png) | 
 
+
+Check more of my Mockups on [figma](https://www.figma.com/file/TSZRJHG6RUwk7BSmmw0xqp/Final-Project-WireFrame?type=design&node-id=20-6&mode=design&t=tO7JOSC5rfTelpo4-0).
 <br><br>
 
 <!-- Database Design -->
 <img src="./readme/templates/dbdesign.svg"/>
-
-### Innovative Database Design Strategies:
 
 ![Database](./readme/screenshots/database.png)
 
