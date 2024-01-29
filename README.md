@@ -228,7 +228,7 @@ Clone the repo
    ```sh
    npm install
    ```
-2. Run th react app
+2. Run the react app
 
    ```sh
    npm start
