@@ -1,32 +1,31 @@
 @RELATION "relation name"
-
 @ATTRIBUTE is_above_35 {0,1} 
 @ATTRIBUTE is_below_18 {0,1}
 @ATTRIBUTE is_between_25_and_35 {0,1}
 @ATTRIBUTE is_between_18_and_24 {0,1}
-@ATTRIBUTE enjoys_crowded {0,1}
-@ATTRIBUTE enjoys_nightlife {0,1}
-@ATTRIBUTE enjoys_outdoor {0,1}
-@ATTRIBUTE enjoys_nature {0,1}
-@ATTRIBUTE enjoys_museums_and_galleries {0,1}
-@ATTRIBUTE enjoys_culture_and_education {0,1}
-@ATTRIBUTE enjoys_books {0,1}
-@ATTRIBUTE is_religious {0,1}
-@ATTRIBUTE enjoys_calm {0,1}
-@ATTRIBUTE is_spritual {0,1}
-@ATTRIBUTE enjoys_self_care {0,1}
-@ATTRIBUTE enjoys_clothes_shopping {0,1}
-@ATTRIBUTE enjoys_physical_exercise {0,1}
-@ATTRIBUTE enjoys_sports {0,1}
-@ATTRIBUTE enjoys_restaurants {0,1}
-@ATTRIBUTE enjoys_grocery_shopping {0,1}
-@ATTRIBUTE hates_shopping {0,1}
-@ATTRIBUTE prefers_delivery {0,1}
-@ATTRIBUTE enjoys_movie_nights {0,1}
-@ATTRIBUTE likes_animals {0,1}
+@ATTRIBUTE enjoys_crowded {1,2,3,4,5}
+@ATTRIBUTE enjoys_nightlife {1,2,3,4,5}
+@ATTRIBUTE enjoys_outdoor {1,2,3,4,5}
+@ATTRIBUTE enjoys_nature {1,2,3,4,5}
+@ATTRIBUTE enjoys_museums_and_galleries {1,2,3,4,5}
+@ATTRIBUTE enjoys_culture_and_education {1,2,3,4,5}
+@ATTRIBUTE enjoys_books {1,2,3,4,5}
+@ATTRIBUTE is_religious {1,2,3,4,5}
+@ATTRIBUTE enjoys_calm {1,2,3,4,5}
+@ATTRIBUTE is_spritual {1,2,3,4,5}
+@ATTRIBUTE enjoys_self_care {1,2,3,4,5}
+@ATTRIBUTE enjoys_clothes_shopping {1,2,3,4,5}
+@ATTRIBUTE enjoys_physical_exercise {1,2,3,4,5}
+@ATTRIBUTE enjoys_sports {1,2,3,4,5}
+@ATTRIBUTE enjoys_restaurants {1,2,3,4,5}
+@ATTRIBUTE enjoys_grocery_shopping {1,2,3,4,5}
+@ATTRIBUTE hates_shopping {1,2,3,4,5}
+@ATTRIBUTE prefers_delivery {1,2,3,4,5}
+@ATTRIBUTE enjoys_movie_nights {1,2,3,4,5}
+@ATTRIBUTE likes_animals {1,2,3,4,5}
 @ATTRIBUTE in_relationship {0,1}
-@ATTRIBUTE is_open_top_partners_interests {0,1}
-@ATTRIBUTE discuss_future {0,1}
+@ATTRIBUTE is_open_top_partners_interests {1,2,3,4,5}
+@ATTRIBUTE discuss_future {1,2,3,4,5}
 @ATTRIBUTE partner_is_Thoughtful {0,1}
 @ATTRIBUTE partner_is_Compassionate {0,1}
 @ATTRIBUTE partner_is_Supportive {0,1}
@@ -75,7 +74,7 @@
 @ATTRIBUTE is_Every_once_in_a_while {0,1}
 @ATTRIBUTE is_very_busy {0,1}
 @ATTRIBUTE is_Every_day {0,1}
-@ATTRIBUTE relationship_status {0,1}
+@ATTRIBUTE relationship_status {0,1,2,3,4}
 
 @DATA
 0,0,0,1,4,5,4,5,2,3,1,5,3,3,4,2,4,4,4,3,4,3,5,5,1,4,5,1,0,1,1,0,0,1,0,0,0,0,0,0,1,0,1,0,1,1,0,0,0,0,0,1,0,0,1,0,1,0,1,0,0,1,0,0,1,1,1,0,0,1,0,1,0,0,0,3
