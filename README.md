@@ -130,9 +130,14 @@ Depending on the user's conditions, the prompt will slightly differ. This is wha
 Since the theme of the app is about interests and relationships, I decided to conduct a survey which received 132 respondants. The questions were mainly targetted towards individual interests and the person's perspective on their relationship. Machine learning is a subset of AI that involves the development of models that enable computers to learn from data, make predictions, and improve performance on a specific task without being explicitly programmed. To train the model I went through the following steps:
 
 - Cleaning, renaming, and reorganizing the survey's data using Pandas and NumPy. Pandas and NumPy are Python libraries used for data manipulation and analysis, providing data structures like Dataframes and offering support for large, multi-dimensional arrays.
-- Visualizing, assessing data cleanliness, and analyzing patterns that might have logical correlations. For this I used Weka. Weka is a versatile and user-friendly visual data mining and machine learning software. The following image shows the cleaned data before being given to the model for training.
+- Visualizing, assessing data cleanliness, and analyzing patterns that might have logical correlations. For this I used Weka. Weka is a versatile and user-friendly visual data mining and machine learning software. The following image shows the cleaned data before being given to the model for training. 
 
 <img src="./readme/machine_learning/model_1_weka_2.png"/>
+
+Before moving on to data testing, it's noteworthy that the dataset shows nearly equal distribution, with 50% of respondents falling on each side of the data spectrum.
+- To assess the capabilities of the data, a classification approach is adopted. Classification involves predicting the label, and in our case, the label is "in_a_relationship." This label signifies the likelihood that a user, based on their set of interests, is in a relationship. The following is a result of the trained  model on Weka to test the dataset.
+
+<img src="./readme/machine_learning/model_1_weka_1.png"/>
 
 <!-- AWS Deployment -->
 <img src="./readme/templates/AWS.svg"/>
