@@ -220,12 +220,18 @@ Clone the repo
 <br></br>
 ### To Run the Admin Web App
 
-1. Install npm packages
+1. Go to react_app_admin directory
+
+     ```sh
+     cd react_app_admin
+     ```
+<br><br>
+2. Install npm packages
 
    ```sh
    npm install
    ```
-2. Run the react app
+3. Run the react app
 
    ```sh
    npm start
@@ -234,29 +240,35 @@ Note: Inside your React app, make sure your BaseUrl, inside public/source/config
    <br></br>
 ### To Start the Laravel Server on LocalHost
 
-1. Rename your '.env.example' file to '.env'
+1. Go to laravel_bh directory
+
+     ```sh
+     cd laravel_bh
+     ```
 <br><br>
-2. Open your new .env file and make the necessary changes (App name, app key, database name...)
+2. Rename your '.env.example' file to '.env'
 <br><br>
-3. Generate an application key:
+3. Open your new .env file and make the necessary changes (App name, app key, database name...)
+<br><br>
+4. Generate an application key:
 
    ```sh
    php artisan key:generate
    ```
 
-4. Inside your .env file add your OPENAI_API_KEY and GOOGLE_PLACES_API_KEY <br><br>Note: Advice Screen and Suggestions Screen need these 2 keys.
+5. Inside your .env file add your OPENAI_API_KEY and GOOGLE_PLACES_API_KEY <br><br>Note: Advice Screen and Suggestions Screen need these 2 keys.
 
-5. Get Migrations
+6. Get Migrations
 
    ```sh
    php artisan migrate
    ```
-6. Seed Database: You can go to database/seeders/DatabaseSeeder and uncomment the lines you want to seed in the order they are written. 
+7. Seed Database: You can go to database/seeders/DatabaseSeeder and uncomment the lines you want to seed in the order they are written. 
 
    ```sh
    php artisan db:seed
    ```
-7. Run Server:
+8. Run Server:
     
      ```sh
      php artisan serve
