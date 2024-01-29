@@ -132,7 +132,7 @@ Since the theme of the app is about interests and relationships, I decided to co
 - Cleaning, renaming, and reorganizing the survey's data using Pandas and NumPy. Pandas and NumPy are Python libraries used for data manipulation and analysis, providing data structures like Dataframes and offering support for large, multi-dimensional arrays.
 - Visualizing, assessing data cleanliness, and analyzing patterns that might have logical correlations. For this I used Weka. Weka is a versatile and user-friendly visual data mining and machine learning software. The following image shows the cleaned data before being given to the model for training.
 
-<img src="./readme/machine_learning/model_1_weka_1.png"/>
+<img src="./readme/machine_learning/model_1_weka_2.png"/>
 
 <!-- AWS Deployment -->
 <img src="./readme/templates/AWS.svg"/>
