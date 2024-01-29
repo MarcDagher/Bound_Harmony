@@ -1,16 +1,13 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ConnectionsController;
 use App\Http\Controllers\MessagesController;
-use App\Http\Controllers\PredictionsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SuggestionsController;
 use App\Http\Controllers\SurveysController;
-use App\Http\Middleware\AuthMiddleware;
 
 // LogIn and Register Pages
 Route::controller(AuthController::class)->group(function () {
@@ -29,7 +26,6 @@ Route::middleware('auth.admin')->group(function () {
      Route::get('/number_of_chosen_responses', [AdminController::class, 'number_of_chosen_responses']);
      Route::get('/users_age_range', [AdminController::class, 'users_age_range']);
      Route::get('/get_all_users', [AdminController::class, 'get_all_users']);
-    //  Route::get('/get_user_profile_photo', [AdminController::class, 'get_user_profile_photo']); // intended to be used in admin users list
 });
 
 // Profile Page
@@ -72,5 +68,3 @@ Route::middleware('validate.for.couples.survey')->group(function(){
 Route::controller(SurveysController::class)->group(function (){
     Route::post('/save_responses', 'save_responses');
 });
-
-// Route::get('/get_prediction', [PredictionsController::class, 'get_prediction']);
