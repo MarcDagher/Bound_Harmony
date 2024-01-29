@@ -198,19 +198,19 @@ The following screenchot illustrates a snippet of the test results implemented i
 
 flutter
 
-    ```sh
-    flutter upgrade
-    ```
+  ```sh
+  flutter upgrade
+  ```
 composer
 
-    ```sh
-    composer self-update
-    ```
+  ```sh
+  composer self-update
+  ```
 npm
 
-    ```sh
-    npm install npm@latest -g
-    ```
+  ```sh
+  npm install npm@latest -g
+  ```
 
 > To set up Bound Harmony locally, follow these steps:
 
@@ -221,12 +221,16 @@ Clone the repo
    ```
 ### To Run the Admin Web App
 
-Install npm packages
- 
-  ```sh
-  npm install
-  ```
+1. Install npm packages
 
+   ```sh
+   npm install
+   ```
+2. Run th react app
+
+   ```sh
+   npm start
+   ```
 ### To Start the Laravel Server on LocalHost
 
 1. Install [Composer](https://getcomposer.org/)
