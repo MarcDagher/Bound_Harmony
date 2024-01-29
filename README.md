@@ -233,6 +233,7 @@ Clone the repo
    ```sh
    npm start
    ```
+Note: Inside your React app, make sure your BaseUrl, inside public/source/configurations/request_function.js, is set to your current local host server. By default, it is set to the AWS server.
    <br></br>
 ### To Start the Laravel Server on LocalHost
 
