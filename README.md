@@ -225,7 +225,6 @@ Clone the repo
      ```sh
      cd react_app_admin
      ```
-<br><br>
 
  2. Install npm packages
 
@@ -247,15 +246,9 @@ Note: Inside your React app, make sure your BaseUrl, inside public/source/config
      cd laravel_bh
      ```
 
-<br><br>
-
 2. Rename your '.env.example' file to '.env'
 
-<br><br>
-
 3. Open your new .env file and make the necessary changes (App name, app key, database name...)
-
-<br><br>
 
 4. Generate an application key:
 
