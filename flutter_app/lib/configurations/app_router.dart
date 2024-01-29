@@ -1,5 +1,4 @@
 import 'package:bound_harmony/main_view.dart';
-import 'package:bound_harmony/screens/admin_screen.dart';
 import 'package:bound_harmony/screens/advice_screen.dart';
 import 'package:bound_harmony/screens/connection_setup_screen.dart';
 import 'package:bound_harmony/screens/couple_survey_screen.dart';
@@ -241,15 +240,6 @@ class AppNavigation {
                         },
                       ),
                     ]),
-              ]),
-              StatefulShellBranch(navigatorKey: rootNavigatorAdmin, routes: [
-                GoRoute(
-                  path: '/admin',
-                  name: 'Admin',
-                  builder: (context, state) {
-                    return AdminScreen(key: state.pageKey);
-                  },
-                )
               ]),
             ])
       ]);

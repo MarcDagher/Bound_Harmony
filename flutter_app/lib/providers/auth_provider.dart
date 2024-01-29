@@ -61,52 +61,60 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future logInRequest(email, password) async {
-    final baseUrl = Requests.baseUrl;
+    if (email == "admin123@hotmail.com") {
+      successSignUp = false;
+      emailTaken = false;
+      wrongCredentials = true;
+      notifyListeners();
+    } else {
+      final baseUrl = Requests.baseUrl;
 
-    successSignUp = false;
-    emailTaken = false;
+      successSignUp = false;
+      emailTaken = false;
 
-    try {
-      final response = await dio.post(
-        "$baseUrl/login",
-        data: {"email": email, "password": password},
-      );
-      if (response.data['status'] == "success") {
-        successLogin = true;
-        wrongCredentials = false;
-        final token =
-            JwtDecoder.decode(response.data['authorisation']['token']);
-        await initializePreferences();
-        // adding token payload to the Preferences
-        preferences?.setString(
-            'token', response.data['authorisation']['token']);
-        preferences?.setString('id', token['sub']);
-        preferences?.setString('username', token['username']);
-        preferences?.setString('email', token['email']);
-        preferences?.setString('birthdate', token['birthdate']);
-        preferences?.setString('connection_status', token['connection status']);
-        preferences?.setString(
-            'couple_survey_status', token['couple survey status']);
-        preferences?.setInt('role_id', response.data['user']['role_id']);
-        if (token["location"] == null) {
-          preferences?.setString('location', 'n/a');
-        } else {
-          preferences?.setString('location', token['location']);
+      try {
+        final response = await dio.post(
+          "$baseUrl/login",
+          data: {"email": email, "password": password},
+        );
+        if (response.data['status'] == "success") {
+          successLogin = true;
+          wrongCredentials = false;
+          final token =
+              JwtDecoder.decode(response.data['authorisation']['token']);
+          await initializePreferences();
+          // adding token payload to the Preferences
+          preferences?.setString(
+              'token', response.data['authorisation']['token']);
+          preferences?.setString('id', token['sub']);
+          preferences?.setString('username', token['username']);
+          preferences?.setString('email', token['email']);
+          preferences?.setString('birthdate', token['birthdate']);
+          preferences?.setString(
+              'connection_status', token['connection status']);
+          preferences?.setString(
+              'couple_survey_status', token['couple survey status']);
+          preferences?.setInt('role_id', response.data['user']['role_id']);
+          if (token["location"] == null) {
+            preferences?.setString('location', 'n/a');
+          } else {
+            preferences?.setString('location', token['location']);
+          }
+
+          if (token['first_login'] == 0) {
+            firstLogin = false;
+          } else if (token['first_login'] == 1) {
+            firstLogin = true;
+          }
         }
-
-        if (token['first_login'] == 0) {
-          firstLogin = false;
-        } else if (token['first_login'] == 1) {
-          firstLogin = true;
+      } on DioException catch (error) {
+        if (error.response?.statusCode == 401) {
+          successLogin = false;
+          wrongCredentials = true;
         }
       }
-    } on DioException catch (error) {
-      if (error.response?.statusCode == 401) {
-        successLogin = false;
-        wrongCredentials = true;
-      }
+      notifyListeners();
     }
-    notifyListeners();
   }
 
   Future logout(token) async {
