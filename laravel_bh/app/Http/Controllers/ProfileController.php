@@ -72,14 +72,12 @@ class ProfileController extends Controller
             $image_path = $request->file('profile_pic_url')->store('images', 'public');
             $user->profile_pic_url = $image_path;
             $user->save();
-            //Use the File class to retrieve image file
-            // $imageFile = File::get(storage_path('app/public/'.$image_path));
+            
             return response()->json([
                 "status" => "success",
                 "message" => "Image changed successfully",
                 "image_path" => $image_path
-                // "profile_pic_url" => base64_encode($imageFile)
-                //   NOTE: convert to base64 and return image for the frontend
+
             ]);
         } else {
             return response()->json([

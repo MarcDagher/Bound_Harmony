@@ -28,18 +28,12 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'birthdate' => Carbon::createFromFormat('d-m-Y', $request->birthdate) -> format('Y-m-d') 
-            // Carbon is a class that handles date type
         ]);
 
-        // $token = Auth::login($user);
         return response()->json([
             'status' => 'success',
             'message' => 'User created successfully',
             'user' => $user,
-            // 'authorisation' => [
-            //     'token' => $token,
-            //     'type' => 'bearer',
-            // ]
         ]);
     }
 
