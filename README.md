@@ -172,6 +172,8 @@ While developing Bound Harmony's Laravel server locally, I chose to enhance acce
 - Creating Laravel's environment (.env, generate key, change DB name, username, and password)
 - Creating an Apache configuration file that will point the server to serve the files provided by Laravel instead of the default Apache page.
 
+You can check the 'AWS Deployment Commands' file to see the list commands I used to deploy. 
+
 NOTE: To access Laravel's Server APIs, use the following IP address: 15.188.8.50/api
 <br><br>
 
