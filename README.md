@@ -238,6 +238,11 @@ Install npm packages
    ```sh
    php artisan db:seed
    ```
+ 8. Run Server:
+    ```sh
+   php artisan serve
+   ```
+
 ## To Run the Flutter App
 
 1. Install [Flutter SDK](https://docs.flutter.dev/get-started/install)
