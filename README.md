@@ -194,7 +194,7 @@ The following screenchot illustrates a snippet of the test results implemented i
 <!-- How to run -->
 <img src="./readme/templates/how_to_run.svg"/>
 
-Prerequisites
+### Prerequisites
 
 flutter
 
