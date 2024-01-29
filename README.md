@@ -124,6 +124,9 @@ Depending on the user's conditions, the prompt will slightly differ. This is wha
   
 <br><br>
 
+<!-- Machine Learning -->
+<img src="./readme/templates/machine_learning.svg"/>
+
 <!-- AWS Deployment -->
 <img src="./readme/templates/AWS.svg"/>
 
