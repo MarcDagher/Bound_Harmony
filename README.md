@@ -111,7 +111,7 @@ The system prompt is divided into 6 parts:
 - Removals: Specifies what to remove from the response.
 - Our Interests or My Interests: Depending on whether the user is single or not, this final part is a list of keywords, derived by the summary of the user's survey responses, which is added to make sure the AI knows who the user is and what the user might want.
 
-Here is a screenshot of the base descriptions:
+Here is a screenshot of the Ai's basic configuration:
 
 <img src="./readme/prompt_engineering/base.png"/>
 
