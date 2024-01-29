@@ -5,7 +5,7 @@ import axios from "axios";
 const send_request = async ({route, method = "GET", body , headerValue}) => {
   try {
       const response = axios.request( {
-        url: `http://192.168.1.66:8000/api${route}`,
+        url: `http://http://15.188.8.50/api${route}`,
         method: method,
         data: body,
         headers: {"Content-Type" : "application/json", "Authorization" : headerValue}
