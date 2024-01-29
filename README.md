@@ -194,6 +194,24 @@ The following screenchot illustrates a snippet of the test results implemented i
 <!-- How to run -->
 <img src="./readme/templates/how_to_run.svg"/>
 
+Prerequisites
+
+flutter
+
+   ```sh
+   flutter upgrade
+   ```
+composer
+
+   ```sh
+   composer self-update
+   ```
+npm
+
+   ```sh
+   npm install npm@latest -g
+   ```
+
 > To set up Bound Harmony locally, follow these steps:
 
 Clone the repo
