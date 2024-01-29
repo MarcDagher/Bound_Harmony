@@ -209,7 +209,7 @@ The following screenchot illustrates a snippet of the test results implemented i
    ```sh
    npm install npm@latest -g
    ```
-<br></br>
+
 > To set up Bound Harmony locally, follow these steps:
 
 Clone the repo
@@ -217,7 +217,7 @@ Clone the repo
    ```sh
    git clone https://github.com/MarcDagher/Bound-Harmony.git
    ```
-<br></br>
+
 ### To Run the Admin Web App
 
 1. Go to react_app_admin directory
