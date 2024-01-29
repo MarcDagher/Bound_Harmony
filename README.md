@@ -239,7 +239,7 @@ Install npm packages
    php artisan db:seed
    ```
  8. Run Server:
-    ```sh
+   ```sh
    php artisan serve
    ```
 
