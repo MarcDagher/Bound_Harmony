@@ -197,15 +197,12 @@ The following screenchot illustrates a snippet of the test results implemented i
 
 ### Prerequisites:
 
-1. flutter
-
+1. Flutter: install [Flutter SDK](https://docs.flutter.dev/get-started/install)
+   
+2. Install [Composer](https://getcomposer.org/)
+ 
    ```sh
-   flutter upgrade
-   ```
-2. composer
-
-   ```sh
-   composer self-update
+   composer install
    ```
 3. npm
 
@@ -237,34 +234,29 @@ Note: Inside your React app, make sure your BaseUrl, inside public/source/config
    <br></br>
 ### To Start the Laravel Server on LocalHost
 
-1. Install [Composer](https://getcomposer.org/)
- 
-   ```sh
-   composer install
-   ```
-2. Rename your '.env.example' file to '.env'
+1. Rename your '.env.example' file to '.env'
 <br><br>
-3. Open your new .env file and make the necessary changes (App name, app key, database name...)
+2. Open your new .env file and make the necessary changes (App name, app key, database name...)
 <br><br>
-4. Generate an application key:
+3. Generate an application key:
 
    ```sh
    php artisan key:generate
    ```
 
-5. Inside your .env file add your OPENAI_API_KEY and GOOGLE_PLACES_API_KEY <br><br>Note: Advice Screen and Suggestions Screen need these 2 keys.
+4. Inside your .env file add your OPENAI_API_KEY and GOOGLE_PLACES_API_KEY <br><br>Note: Advice Screen and Suggestions Screen need these 2 keys.
 
-6. Get Migrations
+5. Get Migrations
 
    ```sh
    php artisan migrate
    ```
-7. Seed Database: You can go to database/seeders/DatabaseSeeder and uncomment the lines you want to seed in the order they are written. 
+6. Seed Database: You can go to database/seeders/DatabaseSeeder and uncomment the lines you want to seed in the order they are written. 
 
    ```sh
    php artisan db:seed
    ```
- 8. Run Server:
+7. Run Server:
     
      ```sh
      php artisan serve
@@ -272,19 +264,17 @@ Note: Inside your React app, make sure your BaseUrl, inside public/source/config
 <br></br>
 ## To Run the Flutter App
 
-1. Install [Flutter SDK](https://docs.flutter.dev/get-started/install)
-<br><br>
-2. Go to flutter_app directory
+1. Go to flutter_app directory
 
      ```sh
      cd flutter_app
      ```
-4. Install pub packages
+2. Install pub packages
 
      ```sh
      flutter pub get
      ```
-5. Run flutter_app
+3. Run flutter_app
 
      ```sh
      flutter run
