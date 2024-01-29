@@ -60,10 +60,7 @@ class SuggestionsController extends Controller
             case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 4:  return "campground"; break; // nature
             case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 5:  return ["museum", "art gallery"]; break; // art
             case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 6:  return ["tourist_attraction", "museum"]; break; // culture
-            // case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 7:  return "book"; break; // books
-            // case $interest['option_id'] % 2 != 0 && $interest['question_id'] == 8:  return "religion"; break; // religion
-            // case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 9:  return "calm"; break; // calm
-            // case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 10:  return "spiritual"; break; // spiritual
+            
             case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 11:  return ["spa", "beauty_salon"]; break; // self-care
             case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 12:  return ["shopping_mall", "clothing_store"]; break; // shopping clothes
             case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 13:  return "gym"; break; // exercise
@@ -71,7 +68,7 @@ class SuggestionsController extends Controller
             case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 15:  return ["shopping_mall", "department_store"]; break; // shopping grocery
             case $interest['option_id'] % 2 != 0 && $interest['question_id'] == 16:  return "shopping_mall"; break; // shopping in general
             case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 17:  return "gym"; break; // sports
-            // case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 18:  return "home activities"; break; // places that are not crowded
+            
             case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 19:  return "movie_theater"; break;  // movies
             case $interest['option_id'] % 2 == 0 && $interest['question_id'] == 20:  return "zoo"; break;   // animals
             }
