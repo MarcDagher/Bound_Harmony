@@ -155,6 +155,8 @@ We observe that the model accurately predicts the correct answer 58% of the time
 
 <img src="./readme/machine_learning/model_1_100.png"/>
 
+After interpreting the Decision Tree, it becomes evident that, based on the model's analysis, individuals who identify themselves as spiritual are more likely to be in a relationship. Following the paths, to the right of the root box and down to its end leaves, leads to a bright orange-colored box, symbolizing a person in a relationship. This path represents the correlation that the model identified between a user's interest and the likelihood of being in a relationship.
+
 <!-- AWS Deployment -->
 <img src="./readme/templates/AWS.svg"/>
 
