@@ -127,27 +127,31 @@ Depending on the user's conditions, the prompt will slightly differ. This is wha
 <!-- Machine Learning -->
 <img src="./readme/templates/machine_learning.svg"/>
 
-Since the theme of the app is about interests and relationships, I decided to conduct a survey which received 132 respondants. The questions were mainly targetted towards individual interests and the person's perspective on their relationship. Machine learning is a subset of AI that involves the development of models that enable computers to learn from data, make predictions, and improve performance on a specific task without being explicitly programmed. To train the model I went through the following steps:
+Since the theme of the app revolves around interests and relationships, I conducted a survey that received responses from 132 participants. The survey primarily targeted individual interests and perspectives on the respondents' relationships.
 
-- Cleaning, renaming, and reorganizing the survey's data using Pandas and NumPy. Pandas and NumPy are Python libraries used for data manipulation and analysis, providing data structures like Dataframes and offering support for large, multi-dimensional arrays.
-- Visualizing, assessing data cleanliness, and analyzing patterns that might have logical correlations. For this I used Weka. Weka is a versatile and user-friendly visual data mining and machine learning software. The following image shows the cleaned data before being given to the model for training. 
+Machine learning, a subset of AI, involves developing models that enable computers to learn from data, make predictions, and enhance performance on specific tasks without explicit programming. To train the model, I followed these steps:
+
+- Cleaned, renamed, and reorganized the survey data using Pandas and NumPy. Pandas and NumPy are Python libraries employed for data manipulation and analysis, providing data structures like DataFrames and supporting large, multi-dimensional arrays.
+- Visualized, assessed data cleanliness, and analyzed patterns with potential logical correlations. For this task, I utilized Weka, a versatile and user-friendly visual data mining and machine learning software. The image below displays the cleaned data before feeding it into the model for training.
 
 <img src="./readme/machine_learning/model_1_weka_2.png"/>
 
-Before moving on to data testing, it's noteworthy that the dataset shows nearly equal distribution, with 50% of respondents falling on each side of the data spectrum.
-- To assess the capabilities of the data, a classification approach is adopted. Classification involves predicting the label, and in our case, the label is "in_a_relationship." This label signifies the likelihood that a user, based on their set of interests, is in a relationship. The following is a result of the trained  model on Weka to test the dataset.
+Before moving on to data testing, it's noteworthy that the dataset shows nearly equal distribution, with 50% of respondents falling on each side of the data spectrum, making it a relatively balanced dataset.
+- To assess the data's capabilities, a classification approach is adopted. Classification involves specifying the label to be predicted, and in our case, the label is "in_a_relationship." This label represents the likelihood that a user, based on their set of interests, is in a relationship.
+- The model is then automatically trained on Weka using cross-validation. Cross-validation is a training technique which repeats a set of attributes multiple times and in a randomized way, in order to make the model's learning more diverse.
+The following results are from the trained model on Weka:
 
 <img src="./readme/machine_learning/model_1_weka_1.png"/>
 
-We can see that the model is accurately predicting the right answer 58% of the time, however it shows that the margin for error is 45%. Implementation of the model's training was done using Pandas, NumPy, and Sklearn. The technique used was a DecisionTree where the model will simplify its route to the correct answer by aking one choice at a time. In order to do that I followed the following steps:
-- Refactor the data's csv file.
-- Choose the Classification Label.
-- Divide the dataset into a training set and a testing set.
-- Apply, using Sklearn, metheds to split and learn from the data using DecisionTreeClassifier.
-- Train the model using cross-validation where the training set and the testing set will be shuffled 10 times to make the learning process more diverse for the model.
-- Predict the result using a DecisionTree.
-- Plot the result and export it as a graph.
-The following image is a graph which represents the DecisionTree the model used to come up with the correct prediction.
+We observe that the model accurately predicts the correct answer 58% of the time, but also shows errors 45% of the time. The model's training implementation involved Pandas, NumPy, and Sklearn. A DecisionTree technique was used, enabling the model to navigate its path to the correct answer by making one choice at a time. The process of training involved the following steps:
+- Refactoring the data's CSV file.
+- Selecting the classification label.
+- Dividing the dataset into a training set and a testing set.
+- Applying Sklearn methods to split and learn from the data using DecisionTreeClassifier.
+- Training the model using cross-validation, where the training set and the testing set were shuffled 10 times to enhance the model's learning diversity.
+- Using the DecisionTree algorithm to make the model come up with the predictions.
+- Plotting the result and exporting it as a graph.
+- The following image is a graph which represents the DecisionTree the model used to come up with the correct prediction.
 
 <img src="./readme/machine_learning/model_1_100.png"/>
 
