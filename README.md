@@ -288,6 +288,6 @@ Clone the repo
      ```sh
      flutter run
      ```
-Note: Inside your Flutter app, make sure your BaseUrl inside lib/configurations/request.configuration.dart is set to your current local host server.
+Note: Inside your Flutter app, make sure your BaseUrl, inside lib/configurations/request.configuration.dart, is set to your current local host server. By default, it is set to the AWS server.
 
 Now, you should be able to run Bound Harmony locally and explore its features :) :rocket:
