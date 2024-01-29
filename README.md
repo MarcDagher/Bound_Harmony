@@ -55,6 +55,7 @@ Check more of my Mockups on [figma](https://www.figma.com/file/TSZRJHG6RUwk7BSmm
 <br><br>
 
 <!-- Database Design -->
+
 <img src="./readme/templates/dbdesign.svg"/>
 
 ![Database](./readme/screenshots/database.png)
@@ -134,16 +135,16 @@ Machine learning, a subset of AI, involves developing models that enable compute
 
 - Cleaned, renamed, and reorganized the survey data using Pandas and NumPy. Pandas and NumPy are Python libraries employed for data manipulation and analysis, providing data structures like DataFrames and supporting large, multi-dimensional arrays.
 - Visualized, assessed data cleanliness, and analyzed patterns with potential logical correlations. For this task, I utilized Weka, a versatile and user-friendly visual data mining and machine learning software. The image below displays the cleaned data before feeding it into the model for training.
-
+<br></br>
 <img src="./readme/machine_learning/model_1_weka_2.png"/>
-
+<br></br>
 Before moving on to data testing, it's noteworthy that the dataset shows nearly equal distribution, with 50% of respondents falling on each side of the data spectrum, making it a relatively balanced dataset.
 - To assess the data's capabilities, a classification approach is adopted. Classification involves specifying the label to be predicted, and in our case, the label is "in_a_relationship." This label represents the likelihood that a user, based on their set of interests, is in a relationship.
 - The model is then automatically trained on Weka using cross-validation. Cross-validation is a training technique which repeats a set of attributes multiple times and in a randomized way, in order to make the model's learning more diverse.
 The following results are from the trained model on Weka:
-
+<br></br>
 <img src="./readme/machine_learning/model_1_weka_1.png"/>
-
+<br></br>
 We observe that the model accurately predicts the correct answer 58% of the time, but also shows errors 45% of the time. The model's training implementation involved Pandas, NumPy, and Sklearn. A DecisionTree technique was used, enabling the model to navigate its path to the correct answer by making one choice at a time. The process of training involved the following steps:
 - Refactoring the data's CSV file.
 - Selecting the classification label.
@@ -153,7 +154,7 @@ We observe that the model accurately predicts the correct answer 58% of the time
 - Using a DecisionTree algorithm to predict the classification label.
 - Plotting the result and exporting it as a graph.
 - The model was given a list of survey responses representing multiple users, and the following image is the graph which represents a DecisionTree the model used to come up with the correct predictions.
-
+<br></br>
 <img src="./readme/machine_learning/model_1_100.png"/>
 
 Based on the model's analysis, individuals who identify themselves as spiritual are more likely to be in a relationship. Following the paths, to the right of the root box and down to its end leaves, we see a number of bright orange-colored boxes, symbolizing a person in a relationship. This path represents the correlation that the model identified between a user's interest and the likelihood of them being in a relationship.
@@ -211,7 +212,7 @@ The following screenchot illustrates a snippet of the test results implemented i
    ```sh
    npm install npm@latest -g
    ```
-
+<br></br>
 > To set up Bound Harmony locally, follow these steps:
 
 Clone the repo
@@ -219,6 +220,7 @@ Clone the repo
    ```sh
    git clone https://github.com/MarcDagher/Bound-Harmony.git
    ```
+<br></br>
 ### To Run the Admin Web App
 
 1. Install npm packages
@@ -231,6 +233,7 @@ Clone the repo
    ```sh
    npm start
    ```
+   <br></br>
 ### To Start the Laravel Server on LocalHost
 
 1. Install [Composer](https://getcomposer.org/)
@@ -265,7 +268,7 @@ Clone the repo
      ```sh
      php artisan serve
      ```
-
+<br></br>
 ## To Run the Flutter App
 
 1. Install [Flutter SDK](https://docs.flutter.dev/get-started/install)
