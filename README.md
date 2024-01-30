@@ -98,12 +98,8 @@ Check more of my Mockups on [figma](https://www.figma.com/file/TSZRJHG6RUwk7BSmm
 
 <br><br>
 
-### Walkthrough Demo
+### React Admin  
 
-| Flutter App  |
-| ---| 
-|    |
-| React Admin |
 https://github.com/MarcDagher/Bound-Harmony/assets/120271000/ce09dbe9-84bf-4235-994d-bbfb34eb0e97   
 
 <br><br>
