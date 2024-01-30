@@ -82,9 +82,9 @@ Check more of my Mockups on [figma](https://www.figma.com/file/TSZRJHG6RUwk7BSmm
 
 | Login-Setup | Incoming Requests | Couple's Survey |
 | --- | --- | --- |
-| <img src="./readme/gifs/login_Setup.gif">| <img src="./readme/gifs/IncomingRequests.gif"> | <img src="./readme/gifs/survey_response.gif"> | 
+| <img src="./readme/gifs/login_Setup.gif" width="200" height="450">| <img src="./readme/gifs/IncomingRequests.gif" width="200" height="450"> | <img src="./readme/gifs/survey_response.gif" width="200" height="450"> | 
 | Date Suggestions | Personalized Advice | Disconnect from Partner |
-| <img src="./readme/gifs/dates.gif"> | <img src="./readme/gifs/advice.gif"> | <img src="./readme/gifs/disconnect.gif"> |
+| <img src="./readme/gifs/dates.gif" width="200" height="450"> | <img src="./readme/gifs/advice.gif" width="200" height="450"> | <img src="./readme/gifs/disconnect.gif" width="200" height="450"> |
 
 ### Admin Screens (Web)
 
@@ -129,7 +129,7 @@ Depending on the user's conditions, the prompt will slightly differ. This is wha
 
 Since the theme of the app revolves around interests and relationships, I conducted a survey that received responses from 132 participants. The survey primarily targeted individual interests and perspectives on the respondents' relationships.
 
-<img src="./readme/screenshots/google_survey.png"/>
+<img src="./readme/screenshots/google_survey.png" height="200"/>
 <br></br>
 Machine learning, a subset of AI, involves developing models that enable computers to learn from data, make predictions, and enhance performance on specific tasks without explicit programming. To train the model, I followed these steps:
 
