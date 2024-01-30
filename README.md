@@ -156,10 +156,6 @@ The following results are from the trained model on Weka:
 <img src="./readme/machine_learning/model_1_weka_1.png"/>
 <br></br>
 
-- To train the model using python, I specified to the model what it should use as attributes and what it will be predicting, the classification label. The following snippet shows the code representing the description, to the model, of the attributes and the class label.
-
-<img src="./readme/machine_learning/attributes.png"/>
-
 We observe that the model accurately predicts the correct answer 58% of the time, but also shows errors 45% of the time. The model's training implementation involved Pandas, NumPy, and Sklearn. A DecisionTree technique was used, enabling the model to navigate its path to the correct answer by making one choice at a time. The process of training involved the following steps:
 
 - Refactoring the data's CSV file.
@@ -170,6 +166,11 @@ We observe that the model accurately predicts the correct answer 58% of the time
 - Using a DecisionTree algorithm to predict the classification label.
 - Plotting the result and exporting it as a graph.
 - The model was given a list of survey responses representing multiple users, and the following image is the graph which represents a DecisionTree the model used to come up with the correct predictions.
+
+- To train the model using python, I specified to the model what it should use as attributes and what it will be predicting, the classification label. The following snippet shows the code representing the description, to the model, of the attributes and the class label.
+
+<img src="./readme/machine_learning/attributes.png"/>
+
 <br></br>
 <img src="./readme/machine_learning/model_1_100.png"/>
 
