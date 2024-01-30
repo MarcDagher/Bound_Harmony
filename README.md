@@ -134,9 +134,10 @@ Since the theme of the app revolves around interests and relationships, I conduc
 Machine learning, a subset of AI, involves developing models that enable computers to learn from data, make predictions, and enhance performance on specific tasks without explicit programming. To train the model, I followed these steps:
 
 - Cleaned, renamed, and reorganized the survey data using Pandas and NumPy. Pandas and NumPy are Python libraries employed for data manipulation and analysis, providing data structures like DataFrames and supporting large, multi-dimensional arrays.
-Below is a snippet of the first few columns in the new and cleaned dataframe:
+Below is a snippet of the first few columns of the new and cleaned dataframe:
 
 <img src="./readme/machine_learning/dataframe.png"/>
+<img src="./readme/machine_learning/attributes.png"/>
   
 - Visualized, assessed data cleanliness, and analyzed patterns with potential logical correlations. For this task, I utilized Weka, a versatile and user-friendly visual data mining and machine learning software. The image below displays the cleaned data before feeding it into the model for training.
 <br></br>
