@@ -156,22 +156,27 @@ The following results are from the trained model on Weka:
 <img src="./readme/machine_learning/model_1_weka_1.png"/>
 <br></br>
 
-We observe that the model accurately predicts the correct answer 58% of the time, but also shows errors 45% of the time. The model's training implementation involved Pandas, NumPy, and Sklearn. A DecisionTree technique was used, enabling the model to navigate its path to the correct answer by making one choice at a time. The process of training involved the following steps:
-
-- Refactoring the data's CSV file.
-- Selecting the classification label.
-- Dividing the dataset into a training set and a testing set.
-- Applying Sklearn methods to split and learn from the data.
-- Training the model using cross-validation, where the training set and the testing set were shuffled 10 times to enhance the model's learning diversity.
-- Using a DecisionTree algorithm to predict the classification label.
-- Plotting the result and exporting it as a graph.
-- The model was given a list of survey responses representing multiple users, and the following image is the graph which represents a DecisionTree the model used to come up with the correct predictions.
+We observe that the model accurately predicts the correct answer 58% of the time, but also shows errors 45% of the time. The model's training implementation involved Pandas, NumPy, and Sklearn. A DecisionTree technique was used, enabling the model to navigate its path to the correct answer by making one choice at a time. 
 
 - To train the model using python, I specified to the model what it should use as attributes and what it will be predicting, the classification label. The following snippet shows the code representing the description, to the model, of the attributes and the class label.
 
 <img src="./readme/machine_learning/attributes.png"/>
-
 <br></br>
+
+- Applying Sklearn methods to split and learn from the data and dividing it into a training set and a testing set. The following snippet shows the method which extracts 20% of the datframe as a testing set. 
+
+<img src="./readme/machine_learning/splitting.png"/>
+<br></br>
+
+- Training the model using cross-validation, where the training set and the testing set were shuffled 10 times to enhance the model's learning diversity.
+- Using a DecisionTree algorithm to predict the classification label.
+- Giving the model a list of survey responses representing multiple users, and the following image is the graph which represents a DecisionTree the model used to come up with the   correct predictions.
+- Plotting the result and exporting it as a graph.
+
+<img src="./readme/machine_learning/training.png"/>
+<br></br>
+
+
 <img src="./readme/machine_learning/model_1_100.png"/>
 
 Based on the model's analysis, individuals who identify themselves as spiritual are more likely to be in a relationship. Following the paths, to the right of the root box and down to its end leaves, we see a number of bright orange-colored boxes, symbolizing a person in a relationship. This path represents the correlation that the model identified between a user's interest and the likelihood of them being in a relationship.
