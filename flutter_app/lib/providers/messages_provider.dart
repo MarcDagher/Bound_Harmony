@@ -69,6 +69,7 @@ class MessagesProvider extends ChangeNotifier {
         waiting = null;
         notifyListeners();
       } else if (response.data["status"] == "failed") {
+        waiting = null;
         somethingWentWrong = "Something went wrong, please try sending again";
         conversation.remove(userMessage);
         notifyListeners();
