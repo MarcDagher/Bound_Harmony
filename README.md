@@ -205,11 +205,11 @@ Here are the AWS deployment commands I used to deploy my Laravel server:
    ```
  5. Install PHP Composer for Laravel on Amazon Linux 2023:
 
-   ```sh
-   curl -sS https://getcomposer.org/installer | php
-   sudo mv composer.phar /usr/local/bin/composer
-   sudo chmod +x /usr/local/bin/composer
-   ```
+    ```sh
+    curl -sS https://getcomposer.org/installer | php
+    sudo mv composer.phar /usr/local/bin/composer
+    sudo chmod +x /usr/local/bin/composer
+    ```
 6. Clone the Laravel Project:
 
    ```sh
@@ -219,10 +219,10 @@ Here are the AWS deployment commands I used to deploy my Laravel server:
    ```
  7. Give Permission to Your Current to Access the Laravel Folder:
 
-   ```sh
-   cd /var/www/RepoNameLaravel
-   sudo chown -R $USER /var/www/laravel
-   ```
+    ```sh
+    cd /var/www/RepoNameLaravel
+    sudo chown -R $USER /var/www/laravel
+    ```
 8. Install Laravel on Amazon Linux 2023:
 
    ```sh
@@ -233,42 +233,42 @@ Here are the AWS deployment commands I used to deploy my Laravel server:
    ```
  9. Create the Laravel Environment Configuration File:
 
-   ```sh
-   sudo cp .env.example .env
-   sudo php artisan key:generate
-   sudo nano .env
-   ```
+    ```sh
+    sudo cp .env.example .env
+    sudo php artisan key:generate
+    sudo nano .env
+    ```
 10. Go to the Database Section and Change the Values:
 
-   ```sh
-   Database Name
-   Database Username
-   Database Password 
-   Save the file using Ctrl+O, hit the Enter key, and then exit the file using Ctrl+X.
-   ```
-10. Apache Configuration for PHP Laravel App:
+    ```sh
+    Database Name
+    Database Username
+    Database Password 
+    Save the file using Ctrl+O, hit the Enter key, and then exit the file using Ctrl+X.
+    ```
+11. Apache Configuration for PHP Laravel App:
 
-   ```sh
-   sudo nano /etc/httpd/conf.d/laravel.conf
-   ```
-11. Add the Following Lines:
+    ```sh
+    sudo nano /etc/httpd/conf.d/laravel.conf
+    ```
+12. Add the Following Lines:
    
-   ```sh
-   <VirtualHost *:80>
-       ServerName laravel.example.com
-       DocumentRoot /var/www/laravel/public 
+```sh
+     <VirtualHost *:80>
+        ServerName laravel.example.com
+        DocumentRoot /var/www/laravel/public 
 
-       <Directory /var/www/laravel>
-              AllowOverride All
-       </Directory>
-  </VirtualHost>
-  ```
-12. Restart the Apache:
+        <Directory /var/www/laravel>
+               AllowOverride All
+        </Directory>
+     </VirtualHost>
+   ```
+13. Restart the Apache:
 
     ```sh
     sudo systemctl restart httpd
     ```
-13. Get Access to Your IP:
+14. Get Access to Your IP:
     ```sh
     curl ipinfo.io
     ```
