@@ -176,10 +176,11 @@ We observe that the model accurately predicts the correct answer 58% of the time
 <img src="./readme/machine_learning/training.png"/>
 <br></br>
 
+- In the previous snippet, the model was given 4 lists of answers. The 2 values shown at the end the snippet below the code, represent the Model's prediction for each list of answers and the val_score, which is the average success for of the model's answers.  
 
 <img src="./readme/machine_learning/model_1_100.png"/>
 
-Based on the model's analysis, individuals who identify themselves as spiritual are more likely to be in a relationship. Following the paths, to the right of the root box and down to its end leaves, we see a number of bright orange-colored boxes, symbolizing a person in a relationship. This path represents the correlation that the model identified between a user's interest and the likelihood of them being in a relationship.
+- Based on the model's analysis, individuals who identify themselves as spiritual are more likely to be in a relationship. Following the paths, to the right of the root box and down to its end leaves, we see a number of bright orange-colored boxes, symbolizing a person in a relationship. This path represents the correlation that the model identified between a user's interest and the likelihood of them being in a relationship.
 
 <br><br>
 <!-- AWS Deployment -->
