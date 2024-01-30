@@ -176,7 +176,7 @@ We observe that the model accurately predicts the correct answer 58% of the time
 <img src="./readme/machine_learning/training.png"/>
 <br></br>
 
-- In the previous snippet, the model was given 4 lists of answers. The 2 values shown at the end of the snippet, below the code, represent the Model's prediction for each list of answers and the val_score, which is the average success for of the model's answers. The following image is the graph which represents a DecisionTree the model used to come up with the   correct predictions.
+- In the previous snippet, the model was given 4 lists of answers. The 2 values shown at the end of the snippet, below the code, represent the Model's prediction for each list of answers and the val_score, which is the average success for of the model's answers. According to the val_score, this model correctly predicts the relationship status of the user 52% of the time. The following image is the graph which represents a DecisionTree the model used to come up with the   correct predictions.
 
 <img src="./readme/machine_learning/model_1_100.png"/>
 
