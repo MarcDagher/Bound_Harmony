@@ -298,6 +298,7 @@ Here are the AWS deployment commands I used to deploy my Laravel server:
     You will receive a list of details about your server. 'ip' is the IP adress of your new server. You can access it in the url of your browser.
 
 NOTE: To access Laravel's Server APIs, use the following IP address: 15.188.8.50/api
+NOTE: In Advice screen and Suggestions screen, you might not receive the desired response because they depend on OpenAi's api key and Google Places' api key, which might be deactivated by the time you test the api end-points. 
 <br><br>
 
 <!-- Unit Testing -->
