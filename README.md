@@ -272,7 +272,7 @@ Here are the AWS deployment commands I used to deploy my Laravel server:
     ```sh
     curl ipinfo.io
     ```
-    You will receive a list of deatails about your server, 'ip' is the IP adress of your new serverYou can access it on the url of your browser
+    You will receive a list of details about your server. 'ip' is the IP adress of your new server. You can access it in the url of your browser.
 
 NOTE: To access Laravel's Server APIs, use the following IP address: 15.188.8.50/api
 <br><br>
