@@ -171,12 +171,12 @@ We observe that the model accurately predicts the correct answer 58% of the time
 - Training the model using cross-validation, where the training set and the testing set were shuffled 10 times to enhance the model's learning diversity.
 - Using a DecisionTree algorithm to predict the classification label.
 - Giving the model a list of survey responses representing multiple users.
-- Plotting the result and exporting it as a graph. The following image is the graph which represents a DecisionTree the model used to come up with the   correct predictions.
+- Plotting the result and exporting it as a graph.
 
 <img src="./readme/machine_learning/training.png"/>
 <br></br>
 
-- In the previous snippet, the model was given 4 lists of answers. The 2 values shown at the end the snippet below the code, represent the Model's prediction for each list of answers and the val_score, which is the average success for of the model's answers.  
+- In the previous snippet, the model was given 4 lists of answers. The 2 values shown at the end of the snippet, below the code, represent the Model's prediction for each list of answers and the val_score, which is the average success for of the model's answers. The following image is the graph which represents a DecisionTree the model used to come up with the   correct predictions.
 
 <img src="./readme/machine_learning/model_1_100.png"/>
 
