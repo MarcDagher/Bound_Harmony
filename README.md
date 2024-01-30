@@ -147,15 +147,16 @@ The image below displays the cleaned data before feeding it into the model for t
 
 - Before moving on to data testing, it's noteworthy that the dataset shows nearly equal distribution, with 50% of respondents falling on each side of the data spectrum, making it a relatively balanced dataset.
   
-- To assess the data's capabilities, a classification approach is adopted. Classification involves specifying the label to be predicted, and in our case, the label is "in_a_relationship." This label represents the likelihood that a user, based on their set of interests, is in a relationship.
+- To assess the data's capabilities, a classification approach is adopted. Classification involves, stating to the model the label to be predicted, "in_a_relationship.". This label represents the likelihood that a user, based on their set of interests, is in a relationship.
 
 - The model is then automatically trained on Weka using cross-validation. Cross-validation is a training technique which repeats a set of attributes multiple times and in a randomized way, in order to make the model's learning more diverse.
 The following results are from the trained model on Weka:
+
 <br></br>
 <img src="./readme/machine_learning/model_1_weka_1.png"/>
 <br></br>
 
-- Specified to the model what it should use as attributes and what it will be predicting, the classification label. The following snippet shows that code representing the description, to the model, of the attributes and the class label.
+- To train the model using python, I specified to the model what it should use as attributes and what it will be predicting, the classification label. The following snippet shows the code representing the description, to the model, of the attributes and the class label.
 
 <img src="./readme/machine_learning/attributes.png"/>
 
