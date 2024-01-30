@@ -136,7 +136,7 @@ Machine learning, a subset of AI, involves developing models that enable compute
 - Cleaned, renamed, and reorganized the survey data using Pandas and NumPy. Pandas and NumPy are Python libraries employed for data manipulation and analysis, providing data structures like DataFrames and supporting large, multi-dimensional arrays.
 Below is a snippet of the first few columns in the new and cleaned dataframe:
 
-<img src="./readme/screenshots/dataframe.png"/>
+<img src="./readme/machine_learning/dataframe.png"/>
   
 - Visualized, assessed data cleanliness, and analyzed patterns with potential logical correlations. For this task, I utilized Weka, a versatile and user-friendly visual data mining and machine learning software. The image below displays the cleaned data before feeding it into the model for training.
 <br></br>
