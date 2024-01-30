@@ -137,9 +137,11 @@ Machine learning, a subset of AI, involves developing models that enable compute
 Below is a snippet of the first few columns of the new and cleaned dataframe:
 
 <img src="./readme/machine_learning/dataframe.png"/>
-<img src="./readme/machine_learning/attributes.png"/>
+
+- Specified the attributes of the dataframe and the classification label. The classification label is the value to be predicted. In our case the classification label is "in_a_relationship", which is the very last column of the table. Attributes are the list of data (or the columns) which will be used by the model to make the correlation and predict the classification label.
   
-- Visualized, assessed data cleanliness, and analyzed patterns with potential logical correlations. For this task, I utilized Weka, a versatile and user-friendly visual data mining and machine learning software. The image below displays the cleaned data before feeding it into the model for training.
+- Visualized, assessed data cleanliness, and analyzed patterns with potential logical correlations. For this task, I utilized Weka, a versatile and user-friendly visual data mining and machine learning software.
+The image below displays the cleaned data before feeding it into the model for training.
 <br></br>
 <img src="./readme/machine_learning/model_1_weka_2.png"/>
 
@@ -152,7 +154,13 @@ The following results are from the trained model on Weka:
 <br></br>
 <img src="./readme/machine_learning/model_1_weka_1.png"/>
 <br></br>
+
+- Specified to the model what it should use as attributes and what it will be predicting, the classification label. The following snippet shows that code representing the description, to the model, of the attributes and the class label.
+
+<img src="./readme/machine_learning/attributes.png"/>
+
 We observe that the model accurately predicts the correct answer 58% of the time, but also shows errors 45% of the time. The model's training implementation involved Pandas, NumPy, and Sklearn. A DecisionTree technique was used, enabling the model to navigate its path to the correct answer by making one choice at a time. The process of training involved the following steps:
+
 - Refactoring the data's CSV file.
 - Selecting the classification label.
 - Dividing the dataset into a training set and a testing set.
