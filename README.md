@@ -100,7 +100,7 @@ Check more of my Mockups on [figma](https://www.figma.com/file/TSZRJHG6RUwk7BSmm
 
 ### Flutter App
 
-<div align="center"> <video src="https://github.com/MarcDagher/Bound-Harmony/assets/120271000/5e24ff97-ed39-429a-b542-ffdb2b55c0ff" width="400" height="250" /> </div>
+<div align="center"> <video src="https://github.com/MarcDagher/Bound-Harmony/assets/120271000/5e24ff97-ed39-429a-b542-ffdb2b55c0ff" width="300" height="200" /> </div>
 
 
 ### React Admin
