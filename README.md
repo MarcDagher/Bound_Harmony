@@ -163,7 +163,7 @@ We observe that the model accurately predicts the correct answer 58% of the time
 <img src="./readme/machine_learning/attributes.png"/>
 <br></br>
 
-- Applying Sklearn methods to split and learn from the data and dividing it into a training set and a testing set. The following snippet shows the method which extracts 20% of the datframe as a testing set. 
+- Using Sklearn to split the data and divide it into a training set and a testing set. The following snippet shows the method which extracts 20% of the datframe as a testing set. 
 
 <img src="./readme/machine_learning/splitting.png"/>
 <br></br>
