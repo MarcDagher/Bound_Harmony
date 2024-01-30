@@ -129,17 +129,22 @@ Depending on the user's conditions, the prompt will slightly differ. This is wha
 
 Since the theme of the app revolves around interests and relationships, I conducted a survey that received responses from 132 participants. The survey primarily targeted individual interests and perspectives on the respondents' relationships.
 
-<img src="./readme/screenshots/google_survey.png" width="100%" height="200"/>
+<img src="./readme/screenshots/google_survey.png" width="100%" height="300"/>
 <br></br>
 Machine learning, a subset of AI, involves developing models that enable computers to learn from data, make predictions, and enhance performance on specific tasks without explicit programming. To train the model, I followed these steps:
 
 - Cleaned, renamed, and reorganized the survey data using Pandas and NumPy. Pandas and NumPy are Python libraries employed for data manipulation and analysis, providing data structures like DataFrames and supporting large, multi-dimensional arrays.
+
+EXCEL IMAGE ###########################
+  
 - Visualized, assessed data cleanliness, and analyzed patterns with potential logical correlations. For this task, I utilized Weka, a versatile and user-friendly visual data mining and machine learning software. The image below displays the cleaned data before feeding it into the model for training.
 <br></br>
 <img src="./readme/machine_learning/model_1_weka_2.png"/>
-<br></br>
-Before moving on to data testing, it's noteworthy that the dataset shows nearly equal distribution, with 50% of respondents falling on each side of the data spectrum, making it a relatively balanced dataset.
+
+- Before moving on to data testing, it's noteworthy that the dataset shows nearly equal distribution, with 50% of respondents falling on each side of the data spectrum, making it a relatively balanced dataset.
+  
 - To assess the data's capabilities, a classification approach is adopted. Classification involves specifying the label to be predicted, and in our case, the label is "in_a_relationship." This label represents the likelihood that a user, based on their set of interests, is in a relationship.
+
 - The model is then automatically trained on Weka using cross-validation. Cross-validation is a training technique which repeats a set of attributes multiple times and in a randomized way, in order to make the model's learning more diverse.
 The following results are from the trained model on Weka:
 <br></br>
