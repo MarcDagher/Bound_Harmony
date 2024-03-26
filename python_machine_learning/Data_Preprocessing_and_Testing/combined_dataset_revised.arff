@@ -1,30 +1,30 @@
-@RELATION "relationship status"
+@RELATION "relation name"
 
-@ATTRIBUTE is_above_35 {0,1}
-@ATTRIBUTE is_below_18 {0,1}
-@ATTRIBUTE is_between_25_and_35 {0,1}
-@ATTRIBUTE is_between_18_and_24 {0,1}
-@ATTRIBUTE enjoys_crowded {1,2,3,4,5}
-@ATTRIBUTE enjoys_nightlife  {1,2,3,4,5}
-@ATTRIBUTE enjoys_outdoor {1,2,3,4,5}
-@ATTRIBUTE enjoys_nature {1,2,3,4,5}
-@ATTRIBUTE enjoys_museums_and_galleries {1,2,3,4,5}
-@ATTRIBUTE enjoys_culture_and_education {1,2,3,4,5}
-@ATTRIBUTE enjoys_books {1,2,3,4,5}
-@ATTRIBUTE is_religious {1,2,3,4,5}
-@ATTRIBUTE enjoys_calm {1,2,3,4,5}
-@ATTRIBUTE is_spritual {1,2,3,4,5}
-@ATTRIBUTE enjoys_self_care {1,2,3,4,5}
-@ATTRIBUTE enjoys_clothes_shopping {1,2,3,4,5}
-@ATTRIBUTE enjoys_physical_exercise {1,2,3,4,5}
-@ATTRIBUTE enjoys_sports {1,2,3,4,5}
-@ATTRIBUTE enjoys_restaurants {1,2,3,4,5}
-@ATTRIBUTE enjoys_grocery_shopping {1,2,3,4,5}
-@ATTRIBUTE hates_shopping {1,2,3,4,5}
-@ATTRIBUTE prefers_delivery {1,2,3,4,5}
-@ATTRIBUTE enjoys_movie_nights {1,2,3,4,5}
-@ATTRIBUTE likes_animals {1,2,3,4,5}
-@ATTRIBUTE in_a_relationship {0,1}
+@ATTRIBUTE is_Above_35 NUMERIC
+@ATTRIBUTE is_Below_18 NUMERIC
+@ATTRIBUTE is_Between_25_and_35 NUMERIC
+@ATTRIBUTE is_Between_18_and_24 NUMERIC
+@ATTRIBUTE "I enjoy places that are crowded with people" NUMERIC
+@ATTRIBUTE "I enjoy nightlife " NUMERIC
+@ATTRIBUTE "I can't wait for my next outdoor activity" NUMERIC
+@ATTRIBUTE "I find spending time in nature to be relaxing " NUMERIC
+@ATTRIBUTE "I like to go to museums and art galleries " NUMERIC
+@ATTRIBUTE "I find cultural and educational topics interesting " NUMERIC
+@ATTRIBUTE "In my free time, you will find me reading a book" NUMERIC
+@ATTRIBUTE "I am not a religious person" NUMERIC
+@ATTRIBUTE "I enjoy places that are calm and not too crowded with people" NUMERIC
+@ATTRIBUTE "I consider myself a spiritual person" NUMERIC
+@ATTRIBUTE "I enjoy spending some time on self-care and personal services" NUMERIC
+@ATTRIBUTE "I enjoy shopping for clothes" NUMERIC
+@ATTRIBUTE "I enjoy physical exercise " NUMERIC
+@ATTRIBUTE "I like to practice sports" NUMERIC
+@ATTRIBUTE "I enjoy dining in restaurants" NUMERIC
+@ATTRIBUTE "I find grocery shopping fun" NUMERIC
+@ATTRIBUTE "I absolutely hate shopping in general" NUMERIC
+@ATTRIBUTE "I prefer take-away and delivery over dining in a restaurant" NUMERIC
+@ATTRIBUTE "Sometimes a movie night is what I need" NUMERIC
+@ATTRIBUTE "I like animals" NUMERIC
+@ATTRIBUTE in_a_relationship NUMERIC
 
 @DATA
 0,0,0,1,4,5,4,5,2,3,1,5,3,3,4,2,4,4,4,3,4,3,5,5,1
