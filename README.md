@@ -5,9 +5,9 @@
 <!-- project philosophy -->
 <img src="./readme/templates/project_philosophy.svg"/>
 
-> A mobile app for connecting lovers together and assisting them through a fun and harmonious relationship.
+> A mobile app for connecting couples together and assisting them through a fun and harmonious relationship.
 >
-> Bound Harmony first requires the users, who probably are in a relationship, to connect their accounts and fill a survey. To make their relationship smoother, Bound Harmony will provide the couple with date suggestions and bonding activities. To make it even better, our cupid will be ready to give advice at any time!
+> Bound Harmony first requires the users to connect their accounts and fill a survey. To make their relationship smoother, Bound Harmony will provide the couple with date suggestions and bonding activities. To make it even better, our cupid (chatbot using openAI) will be ready to give the users personalized advice at any time!
 
 ### User Stories
 - As a user, I want recommendations for fun and romantic date night ideas to keep our relationship exciting.
@@ -50,8 +50,6 @@
 | ---| ---| ---|
 | ![Survey](./readme/screenshots/survey.png) | ![Date](./readme/screenshots/suggestions.png) | ![Survey](./readme/screenshots/advice.png) | 
 
-
-Check more of my Mockups on [figma](https://www.figma.com/file/TSZRJHG6RUwk7BSmmw0xqp/Final-Project-WireFrame?type=design&node-id=20-6&mode=design&t=tO7JOSC5rfTelpo4-0).
 <br><br>
 
 <!-- Database Design -->
